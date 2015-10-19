@@ -46,9 +46,6 @@ install:
   # Install ImageMagick for installing Image::Magick.
   - bash build-image-magick.sh
 
-  # Class::C3@0.29 cannot be installed with Perl 5.8.
-  - cpanm -L ./local Class::C3@0.28
-
   # Instal CPAN modules.
   - travis_retry cpanm Carton
   - travis_retry carton install
