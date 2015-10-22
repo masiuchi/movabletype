@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/masiuchi/movabletype.svg?branch=master)](https://travis-ci.org/masiuchi/movabletype)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 Welcome to Movable Type
 =============
 
