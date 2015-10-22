@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/masiuchi/movabletype.svg?branch=master)](https://travis-ci.org/masiuchi/movabletype)
+
 Welcome to Movable Type
 =============
 
