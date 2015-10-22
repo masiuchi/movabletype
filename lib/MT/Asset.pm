@@ -450,12 +450,12 @@ sub extensions {
 # This property is a meta-property.
 sub file_path {
     my $asset = shift;
-    my $path  = $asset->SUPER::file_path(@_);
+    my $path  = $asset->column('file_path', @_);
     return $path if defined($path) && ( $path !~ m!^\$! ) && ( -f $path );
 
     $path = $asset->cache_property(
         sub {
-            my $path = $asset->SUPER::file_path();
+            my $path = $asset->column('file_path');
             if ( $path && ( $path =~ m!^\%([ras])! ) ) {
                 my $blog = $asset->blog;
                 my $root
@@ -475,13 +475,13 @@ sub file_path {
 
 sub url {
     my $asset = shift;
-    my $url   = $asset->SUPER::url(@_);
+    my $url   = $asset->column('url', @_);
     return $url
         if defined($url) && ( $url !~ m!^\%! ) && ( $url =~ m!^https?://! );
 
     $url = $asset->cache_property(
         sub {
-            my $url = $asset->SUPER::url();
+            my $url = $asset->column('url');
             if ( $url =~ m!^\%([ras])! ) {
                 my $blog = $asset->blog;
                 my $root
@@ -705,7 +705,7 @@ sub thumbnail_url {
     if ( my ( $thumbnail_file, $w, $h ) = $asset->thumbnail_file(@_) ) {
         return $asset->stock_icon_url(@_) if !defined $thumbnail_file;
         my $file            = File::Basename::basename($thumbnail_file);
-        my $asset_file_path = $asset->SUPER::file_path();
+        my $asset_file_path = $asset->column('file_path');
         my $site_url;
         my $blog = $asset->blog;
         if ( !$blog ) {
@@ -828,7 +828,7 @@ sub _make_cache_path {
         $path = $merge_path if $merge_path;
     }
 
-    my $asset_file_path = $asset->SUPER::file_path();
+    my $asset_file_path = $asset->column('file_path');
     my $format;
     my $root_path;
     if ( !$blog ) {
