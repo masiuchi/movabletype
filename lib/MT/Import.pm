@@ -31,7 +31,7 @@ sub importer {
     my $mt = shift;
     my ($importer) = @_;
     init() unless %Importers;
-    return $Importers{$importer};
+    return $importer ? $Importers{$importer} : undef;
 }
 
 sub init {
