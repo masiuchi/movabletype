@@ -165,7 +165,7 @@ subtest 'mode = delete' => sub {
     ok( $out, "Request: delete" );
     ok( $out =~ m!Invalid Request!i, "delete by admin" );
 
-    my $place = MT::Test::Permission->make_placement(
+    $place = MT::Test::Permission->make_placement(
         blog_id => $blog->id,
         category_id      => 1,
         entry_id         => 1,
