@@ -151,14 +151,14 @@ ok( $expr->( { 2 => 1, 28 => 1 } ), "$cat_filter: expr true for 2 AND 28" );
 
 
 $cat_filter = "a(b)";
-@cats = ( @cats_hash{29} );
+@cats = ( $cats_hash{29} );
 $expr = $ctx->compile_category_filter($cat_filter, \@cats);
 is_deeply([map $_->id, @cats], [29], "$cat_filter: nothing else was added");
 ok( $expr->( { 29 => 1 } ), "$cat_filter: expr true for 29" );
 
 
 $cat_filter = "a/b";
-@cats = ( @cats_hash{30} );
+@cats = ( $cats_hash{30} );
 $expr = $ctx->compile_category_filter($cat_filter, \@cats);
 is_deeply([map $_->id, @cats], [30], "$cat_filter: nothing else was added");
 ok( $expr->( { 30 => 1 } ), "$cat_filter: expr true for 30" );
