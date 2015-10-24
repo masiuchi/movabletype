@@ -1,7 +1,11 @@
 package URI::file::Base;
 
 use strict;
+use warnings;
+
 use URI::Escape qw();
+
+our $VERSION = "1.69";
 
 sub new
 {
