@@ -65,7 +65,6 @@ before_script:
   - rm t/34-sqlite.t
   - rm t/90-podcoverage.t
 
-  - rm t/04-config.t
   - rm t/08-util.t
   - rm t/110-cms-permission-addressbook.t
   - rm t/110-cms-permission-category.t
