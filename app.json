@@ -1,0 +1,10 @@
+{
+  "name": "Movable Type",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/masiuchi/heroku-buildpack-mt.git#php-5.4.x"
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
+

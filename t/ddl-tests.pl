@@ -670,7 +670,7 @@ sub multikey_unique : Tests(1) {
         : defined $ret ? $dbh->errstr
         :                $@;
     ok( !$ret, q{Duplicate multikey instance wouldn't insert} );
-    diag( 'Saving error: ', $err ) if !$ret;
+    note( 'Saving error: ', $err ) if !$ret;
 }
 
 sub invalid_type : Tests(3) {
