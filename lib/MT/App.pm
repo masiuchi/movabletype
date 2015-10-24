@@ -1818,7 +1818,7 @@ sub _get_options_tmpl {
     }
     else {    # no spaces in $tmpl; must be a filename...
         if ( my $plugin = $authenticator->{plugin} ) {
-            return $plugin->load_tmpl($tmpl) or die $plugin->errstr;
+            return $plugin->load_tmpl($tmpl) || die $plugin->errstr;
         }
         else {
             return MT->instance->load_tmpl($tmpl);

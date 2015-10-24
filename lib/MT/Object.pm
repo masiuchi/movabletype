@@ -855,6 +855,12 @@ sub has_column {
     return;
 }
 
+sub column {
+    my $obj = shift;
+    my $col = shift or return;
+    $obj->is_meta_column($col) ? $obj->meta($col, @_) : $obj->SUPER::column($col, @_);
+}
+
 sub _post_save_save_metadata {
     my $obj = shift;
     my ($orig_obj) = @_;
@@ -1160,7 +1166,7 @@ sub modified_by {
     my ($user_id) = @_;
     if ($user_id) {
         if ( $obj->properties->{audit} ) {
-            my $res = $obj->SUPER::modified_by($user_id);
+            my $res = $obj->column('modified_by', $user_id);
 
             my $blog_id;
             if ( $obj->has_column('blog_id') ) {
@@ -1173,7 +1179,7 @@ sub modified_by {
             return $res;
         }
     }
-    return $obj->SUPER::modified_by(@_);
+    return $obj->column('modified_by', @_);
 }
 
 # D::OD uses Class::Trigger. Map the call_trigger calls to also invoke
@@ -2863,6 +2869,11 @@ Returns an arrayref of column names that are of the requested type.
 
 Returns a boolean as to whether the column C<$name> is defined for
 this class.
+
+=item * Class->column($name, [$value])
+
+Returns the value of $obj's column (including meta columns) $name.
+If $value is specified, column() sets the first.
 
 =item * Class->table_name()
 
