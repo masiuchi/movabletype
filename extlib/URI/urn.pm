@@ -1,12 +1,15 @@
 package URI::urn;  # RFC 2141
 
-require URI;
-@ISA=qw(URI);
-
 use strict;
+use warnings;
+
+our $VERSION = "1.69";
+
+use parent 'URI';
+
 use Carp qw(carp);
 
-use vars qw(%implementor);
+my %implementor;
 
 sub _init {
     my $class = shift;

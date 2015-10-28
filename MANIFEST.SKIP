@@ -226,5 +226,8 @@ build-language-stamp
 # Travis CI
 ^\.travis.yml
 
+# CircleCI
+^circle\.yml
+
 # Heroku Button
 ^app\.json

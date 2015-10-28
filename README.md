@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/masiuchi/movabletype.svg?branch=master)](https://travis-ci.org/masiuchi/movabletype)
+[![Circle CI](https://circleci.com/gh/masiuchi/movabletype.svg?style=svg)](https://circleci.com/gh/masiuchi/movabletype)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
