@@ -33,7 +33,7 @@ RUN eval "$(plenv init -)" &&\
  cpanm Alien::ImageMagick
 
 WORKDIR /root
-run wget https://raw.githubusercontent.com/movabletype/movabletype/master/t/cpanfile &&\
+RUN wget https://raw.githubusercontent.com/movabletype/movabletype/master/t/cpanfile &&\
  eval "$(plenv init -)" &&\
  cpanm --installdeps . &&\
  rm -rf cpanfile /root/.cpanm/
