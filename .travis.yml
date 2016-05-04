@@ -26,6 +26,7 @@ addons:
     - php5-mysql
     - php5-gd
     - php5-memcache
+    - libjpeg-dev
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
