@@ -26,22 +26,20 @@ addons:
     - php5-mysql
     - php5-gd
     - php5-memcache
-    # - libjpeg-dev
     # For installing Image::Magick.
     - libperl-dev
-    - libmagick-dev
-    - libmagick++-dev
-    - libmagickcore-dev
-    - libimage-magick-perl
-    - perlmagick
-    - imagemagick
-    - imagemagick-common
     # For installing GD.
     - libgd2-xpm-dev
 
 before_install:
-  - cpanm https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/ExtUtils-ParseXS-2.2206.tar.gz
-  - cpanm https://cpan.metacpan.org/authors/id/J/JC/JCRISTY/PerlMagick-6.71.tar.gz -v -f
+  - mkdir imagemagick
+  - cd imagemagick
+  - wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+  - tar xzvf ImageMagick.tar.gz
+  - cd ImageMagick-*
+  - ./configure --prefix=${HOME}/image-magick --with-perl=${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin/perl
+  - make
+  - make install
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
