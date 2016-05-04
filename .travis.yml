@@ -28,6 +28,16 @@ addons:
     - php5-memcache
     - libjpeg-dev
 
+before_install:
+  - mkdir imagemagick
+  - cd imagemagick
+  - wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+  - tar xzvf ImageMagick.tar.gz
+  - cd ImageMagick-*
+  - ./configure --prefix=${HOME}/imagemagick --with-perl=${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin/perl
+  - make
+  - make install
+
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
   - mysql -uroot -e "grant all privileges on mt_test.* to mt@localhost;"
