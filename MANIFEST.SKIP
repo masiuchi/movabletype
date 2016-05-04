@@ -244,4 +244,5 @@ Dockerfile
 
 # Travis CI
 ^cpanfile
+\.travis\.yml
 

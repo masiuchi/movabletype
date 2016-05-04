@@ -10,7 +10,7 @@ if [[ -f $dir/$archive_file ]]; then
 fi
 
 if [[ ! -d $dir ]]; then
-  mkdir $dir
+  mkdir -p $dir
 fi
 
 pushd $dir
