@@ -20,6 +20,12 @@ addons:
     - libdb-dev
     # For Imager manipulating GIF.
     - libgif-dev
+    # For dynamic publishing.
+    - php5
+    - php5-cli
+    - php5-mysql
+    - php5-gd
+    - php5-memcache
 
 before_script:
   - mysql -e "create database mt_test;"
