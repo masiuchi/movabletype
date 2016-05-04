@@ -39,6 +39,7 @@ requires 'Server::Starter';
 on 'test' => sub {
     requires 'Test::Base';
     requires 'Test::Class';
+    requires 'Test::LeakTrace';
     requires 'Test::MockObject';
 };
 
