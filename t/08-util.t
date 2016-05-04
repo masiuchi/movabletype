@@ -160,7 +160,7 @@ is(MT::Util::to_json({'foo' => 'hoge'}), '{"foo":"hoge"}');
 is(MT::Util::to_json({'foo' => 'ho1ge'}), '{"foo":"ho1ge"}');
 is(MT::Util::to_json(['foo', 'bar', 'baz']), '["foo","bar","baz"]');
 is(MT::Util::to_json(['foo', 1, 'bar', 2, 3, 4]), '["foo",1,"bar",2,3,4]');
-is(MT::Util::to_json(['foo', 1, 'bar', { hoge => 1, moge => 'a' }]), '["foo",1,"bar",{"hoge":1,"moge":"a"}]');
+is(MT::Util::to_json(['foo', 1, 'bar', { hoge => 1, moge => 'a' }], { canonical => 1 }), '["foo",1,"bar",{"hoge":1,"moge":"a"}]');
 
 ### start_end_*
 is(start_end_day('19770908153005'), '19770908000000', 'Want to get a scalar value from start_end_day()');
