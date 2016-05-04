@@ -241,3 +241,7 @@ build-language-stamp
 
 # Jenkins
 Dockerfile
+
+# Travis CI
+^cpanfile
+
