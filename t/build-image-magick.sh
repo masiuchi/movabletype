@@ -1,9 +1,11 @@
 #!/bin/bash
 
-dir=$1
-archive_file=https://www.imagemagick.org/download/ImageMagick.tar.gz
+archive_file=ImageMagick.tar.gz
+archive_url=https://www.imagemagick.org/download/$archive_file
 
-if [[ -f $dir/ImageMagick.tar.gz]]; then
+dir=$1
+
+if [[ -f $dir/$archive_file ]]; then
   exit 0
 fi
 
@@ -13,7 +15,7 @@ fi
 
 pushd $dir
 
-wget $archive_file
+wget $archive_url
 tar xzvf $archive_file
 mv ImageMagick-* ImageMagick
 cd ImageMagick
