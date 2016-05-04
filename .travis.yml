@@ -42,6 +42,10 @@ before_install:
   - make install
   - cd ../../
 
+install:
+  - travis_retry cpanm Carton
+  - travis_retry carton install
+
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
   - mysql -uroot -e "grant all privileges on mt_test.* to mt@localhost;"
@@ -90,5 +94,5 @@ before_script:
   - rm t/54-usersgroupsroles.t
 
 script:
-  - PERL_HASH_SEED=0 prove t plugins/*/t
+  - PERL_HASH_SEED=0 carton exec prove t plugins/*/t
 
