@@ -27,6 +27,11 @@ addons:
     - php5-gd
     - php5-memcache
     - libjpeg-dev
+    # For installing Image::Magick.
+    - libperl-dev
+
+before_install:
+  - cpanm https://cpan.metacpan.org/authors/id/J/JC/JCRISTY/PerlMagick-6.71.tar.gz
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
