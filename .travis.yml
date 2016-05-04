@@ -1,3 +1,7 @@
+addons:
+  apt_packages:
+    - libdb-dev
+
 matrix:
   include:
     - language: perl
