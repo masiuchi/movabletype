@@ -29,6 +29,9 @@ addons:
     - libjpeg-dev
     # For installing Image::Magick.
     - libperl-dev
+    - libmagick-dev
+    - libmagick++-dev
+    - libmagickcore-dev
 
 before_install:
   - cpanm https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/ExtUtils-ParseXS-2.2206.tar.gz
