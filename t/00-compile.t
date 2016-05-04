@@ -131,6 +131,13 @@ use_ok('MT::FileMgr');
 use_ok('MT::FileMgr::Local');
 use_ok('MT::FileMgr::FTP');
 SKIP: {
+    if (eval{ require Net::FTPSSL }) {
+        use_ok('MT::FileMgr::FTPS');
+    } else {
+        skip('Net::FTPSSL is not installed', 1);
+    }
+}
+SKIP: {
     if (eval{ require Net::SFTP }) {
         use_ok('MT::FileMgr::SFTP');
     }
