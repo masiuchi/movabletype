@@ -41,8 +41,8 @@ before_script:
   - rm t/110-commercial-permission-cms.t
   - rm t/110-community-pemission.t
   - rm t/110-enterprise-permission.t
-  - rm t/33-ddl-postgresql.t
-  - rm t/33-postgresql.t
+  - rm t/33-ddl-postgres.t
+  - rm t/33-postgres.t
   - rm t/36-ddl-oracle.t
   - rm t/36-oracle.t
   - rm t/37-ddl-mssqlserver.t
