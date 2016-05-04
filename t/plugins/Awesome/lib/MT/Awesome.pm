@@ -1,7 +1,7 @@
 
 package MT::Awesome;
 
-our @ISA = qw( MT::Object );
+use base qw( MT::Object );
 
 __PACKAGE__->install_properties(
     {   column_defs => {
