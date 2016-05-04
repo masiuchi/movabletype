@@ -16,3 +16,13 @@ matrix:
     - language: perl
       perl: "5.8"
 
+before_script:
+  - mysql -e "create database mt_test;"
+  - mysql -uroot -e "grant all privileges on mt_test.* to mt@localhost;"
+
+  # Some tests need mt-config.cgi.
+  - cp ./t/mysql-test.cfg ./mt-config.cgi
+
+script:
+  - PERL_HASH_SEED=0 prove t plugins/*/t
+
