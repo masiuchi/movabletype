@@ -29,7 +29,7 @@ requires 'XML::Parser';
 requires 'YAML::Syck';     # MT::Util::YAML::Syck
 requires 'Net::FTPSSL';    # MT::FileMgr::FTPS
 requires 'DBD::SQLite';
-requires 'Memcached';
+requires 'Cache::Memcached';
 
 ## recommends
 requires 'Starlet';
