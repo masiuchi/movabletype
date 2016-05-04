@@ -31,6 +31,12 @@ addons:
     # For installing GD.
     - libgd2-xpm-dev
 
+cache:
+  directories:
+    - ./local
+    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin
+    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/lib/site_perl
+
 before_install:
   - mkdir image-magick
   - cd image-magick
