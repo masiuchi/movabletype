@@ -1,8 +1,3 @@
-addons:
-  apt_packages:
-    # For installing DB_File.
-    - libdb-dev
-
 matrix:
   include:
     - language: perl
@@ -15,6 +10,16 @@ matrix:
       perl: "5.10"
     - language: perl
       perl: "5.8"
+
+services:
+  - memcached
+
+addons:
+  apt_packages:
+    # For installing DB_File.
+    - libdb-dev
+    # For Imager manipulating GIF.
+    - libgif-dev
 
 before_script:
   - mysql -e "create database mt_test;"

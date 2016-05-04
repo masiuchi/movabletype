@@ -26,10 +26,21 @@ requires 'IO::Socket::SSL';
 requires 'Net::SSLeay';
 requires 'XML::Parser';
 
+requires 'YAML::Syck';     # MT::Util::YAML::Syck
+requires 'Net::FTPSSL';    # MT::FileMgr::FTPS
+requires 'DBD::SQLite';
+requiers 'Memcached';
+
 ## recommends
 requires 'Starlet';
 requires 'XML::LibXML';
 requires 'Server::Starter';
+
+on 'test' => sub {
+    requires 'Test::Base';
+    requires 'Test::Class';
+    requires 'Test::MockObject';
+};
 
 ## % carton exec -- local/bin/start_server --port 8000 --pid-file=log/mt.pid -- plackup -s Starlet --max-workers=2 --access-log=log/access.log mt.psgi >& log/error.log &
 
