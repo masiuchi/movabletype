@@ -38,15 +38,7 @@ cache:
     - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/lib/site_perl
 
 before_install:
-  - mkdir image-magick
-  - cd image-magick
-  - wget https://www.imagemagick.org/download/ImageMagick.tar.gz
-  - tar xzvf ImageMagick.tar.gz
-  - cd ImageMagick-*
-  - ./configure --prefix=${HOME}/image-magick --with-perl=${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin/perl
-  - make
-  - make install
-  - cd ../../
+  - bash t/build-image-magick.sh ${HOME}/image-magick
 
 install:
   - travis_retry cpanm Carton
