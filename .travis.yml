@@ -34,8 +34,26 @@ before_script:
   # Some tests need mt-config.cgi.
   - cp ./t/mysql-test.cfg ./mt-config.cgi
 
-  # Remove failed tests.
+  # Skip failed tests.
   - rm t/90-podcoverage.t
+
+  # Skip not MTOS tests.
+  - rm t/110-commercial-permission-cms.t
+  - rm t/110-community-pemission.t
+  - rm t/110-enterprise-permission.t
+  - rm t/33-ddl-postgresql.t
+  - rm t/33-postgresql.t
+  - rm t/36-ddl-oracle.t
+  - rm t/36-oracle.t
+  - rm t/37-ddl-mssqlserver.t
+  - rm t/37-mssqlserver.t
+  - rm t/44-spider.t
+  - rm t/46-i18n-en.t
+  - rm t/47-i18n-ja.t
+  - rm t/51-objectsync.t
+  - rm t/52-ldap.t
+  - rm t/53-grouptsync.t
+  - rm t/54-usersgroupsroles.t
 
 script:
   - PERL_HASH_SEED=0 prove t plugins/*/t
