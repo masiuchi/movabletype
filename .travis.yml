@@ -32,10 +32,14 @@ addons:
     - libmagick-dev
     - libmagick++-dev
     - libmagickcore-dev
+    - libimage-magick-perl
+    - perlmagick
+    - imagemagick
+    - imagemagick-common
 
 before_install:
   - cpanm https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/ExtUtils-ParseXS-2.2206.tar.gz
-  - cpanm https://cpan.metacpan.org/authors/id/J/JC/JCRISTY/PerlMagick-6.71.tar.gz -v
+  - cpanm https://cpan.metacpan.org/authors/id/J/JC/JCRISTY/PerlMagick-6.71.tar.gz -v -n
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
