@@ -31,6 +31,7 @@ addons:
     - libperl-dev
 
 before_install:
+  - cpanm ExtUtils::ParseXS@2.2206
   - cpanm https://cpan.metacpan.org/authors/id/J/JC/JCRISTY/PerlMagick-6.71.tar.gz -v
 
 before_script:
