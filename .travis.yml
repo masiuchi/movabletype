@@ -1,5 +1,6 @@
 addons:
   apt_packages:
+    # For installing DB_File.
     - libdb-dev
 
 matrix:
