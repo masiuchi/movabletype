@@ -9,8 +9,8 @@ matrix:
       perl: "5.18"
     - language: perl
       perl: "5.16"
-    - language: perl
-      perl: "5.14"
+    # - language: perl
+    #   perl: "5.14"
     - language: perl
       perl: "5.12"
     - language: perl
@@ -21,6 +21,8 @@ matrix:
     # Perl 5.14
     - language: php
       php: "5.4"
+    # - language: php
+    #   php: "5.3"
 
 services:
   - memcached
