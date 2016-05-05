@@ -59,7 +59,7 @@ before_install:
 
 install:
   - travis_retry cpanm Carton -l ./local
-  - travis_retry carton install
+  - travis_retry perl -Ilocal/lib/perl5 local/bin/carton install
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
@@ -109,5 +109,5 @@ before_script:
   - rm t/54-usersgroupsroles.t
 
 script:
-  - PERL_HASH_SEED=0 carton exec prove t plugins/*/t
+  - PERL_HASH_SEED=0 perl -Ilocal/lib/perl5 local/bin/carton exec prove t plugins/*/t
 
