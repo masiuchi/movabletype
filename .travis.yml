@@ -1,5 +1,6 @@
 matrix:
   include:
+    # PHP 5.3
     - language: perl
       perl: "5.22"
     - language: perl
@@ -16,6 +17,10 @@ matrix:
       perl: "5.10"
     - language: perl
       perl: "5.8"
+
+    # Perl 5.14
+    - language: php
+      php: "5.4"
 
 services:
   - memcached
