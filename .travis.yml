@@ -41,6 +41,9 @@ addons:
     - libperl-dev
     # For installing GD.
     - libgd2-xpm-dev
+    # For PHP test.
+    - cpanminus
+    - perlmagick
 
 cache:
   directories:
@@ -55,7 +58,7 @@ before_install:
   - bash t/build-image-magick.sh ${HOME}/image-magick
 
 install:
-  - travis_retry cpanm Carton
+  - travis_retry cpanm Carton -l ./local
   - travis_retry carton install
 
 before_script:
