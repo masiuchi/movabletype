@@ -38,6 +38,8 @@ requires 'XML::LibXML';
 requires 'Server::Starter';
 
 on 'test' => sub {
+    requires 'Clone';
+    requires 'DateTime';
     requires 'Test::Base';
     requires 'Test::Class';
     requires 'Test::LeakTrace';

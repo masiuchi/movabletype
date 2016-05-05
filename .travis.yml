@@ -1,5 +1,6 @@
 matrix:
   include:
+    # PHP 5.3
     - language: perl
       perl: "5.22"
     - language: perl
@@ -8,14 +9,20 @@ matrix:
       perl: "5.18"
     - language: perl
       perl: "5.16"
-    - language: perl
-      perl: "5.14"
+    # - language: perl
+    #   perl: "5.14"
     - language: perl
       perl: "5.12"
     - language: perl
       perl: "5.10"
     - language: perl
       perl: "5.8"
+
+    # Perl 5.14
+    - language: php
+      php: "5.4"
+    # - language: php
+    #   php: "5.3"
 
 services:
   - memcached
@@ -32,26 +39,29 @@ addons:
     - php5-mysql
     - php5-gd
     - php5-memcache
-    # For installing Image::Magick.
+    # For building ImageMagick.
     - libperl-dev
     # For installing GD.
     - libgd2-xpm-dev
+    # For PHP test.
+    - cpanminus
+    - perlmagick
 
 cache:
   directories:
     # CPAN modules
     - ./local
-    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin
-    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/lib/site_perl
     # ImageMagick
     - ${HOME}/image-magick
+    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin
+    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/lib/site_perl
 
 before_install:
   - bash t/build-image-magick.sh ${HOME}/image-magick
 
 install:
-  - travis_retry cpanm Carton
-  - travis_retry carton install
+  - travis_retry cpanm Carton -l ./local
+  - travis_retry perl -Ilocal/lib/perl5 local/bin/carton install
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
@@ -101,5 +111,5 @@ before_script:
   - rm t/54-usersgroupsroles.t
 
 script:
-  - PERL_HASH_SEED=0 carton exec prove t plugins/*/t
+  - PERL_HASH_SEED=0 perl -Ilocal/lib/perl5 local/bin/carton exec prove t plugins/*/t
 

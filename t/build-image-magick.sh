@@ -5,6 +5,10 @@ archive_url=https://www.imagemagick.org/download/$archive_file
 
 dir=$1
 
+if [[ -v TRAVIS_PHP_VERSION ]]; then
+  exit 0
+fi
+
 if [[ -f $dir/$archive_file ]]; then
   exit 0
 fi
