@@ -186,7 +186,7 @@ sub _get_options_tmpl {
     }
     else {    # no spaces in $tmpl; must be a filename...
         if ( my $c = $importer->{plugin} ) {
-            return $c->load_tmpl($tmpl) or die $c->errstr;
+            return $c->load_tmpl($tmpl) || die $c->errstr;
         }
         else {
             return MT->instance->load_tmpl($tmpl);
