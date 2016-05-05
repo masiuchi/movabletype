@@ -37,7 +37,7 @@ addons:
     - php5-mysql
     - php5-gd
     - php5-memcache
-    # For installing Image::Magick.
+    # For building ImageMagick.
     - libperl-dev
     # For installing GD.
     - libgd2-xpm-dev
@@ -49,10 +49,10 @@ cache:
   directories:
     # CPAN modules
     - ./local
-    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin
-    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/lib/site_perl
     # ImageMagick
     - ${HOME}/image-magick
+    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/bin
+    - ${HOME}/perl5/perlbrew/perls/${TRAVIS_PERL_VERSION}/lib/site_perl
 
 before_install:
   - bash t/build-image-magick.sh ${HOME}/image-magick
