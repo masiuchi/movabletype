@@ -40,3 +40,5 @@ themes/eiger
 
 t/site/
 t/db/mt.db
+
+.perl-version
