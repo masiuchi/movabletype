@@ -1,6 +1,8 @@
 matrix:
   include:
     - language: perl
+      perl: "5.20"
+    - language: perl
       perl: "5.18"
     - language: perl
       perl: "5.16"
