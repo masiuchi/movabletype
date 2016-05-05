@@ -538,7 +538,7 @@ sub theme {
 
 sub raw_site_url {
     my $blog = shift;
-    my $site_url = $blog->SUPER::site_url || '';
+    my $site_url = $blog->column('site_url') || '';
     if ( my ( $subdomain, $path ) = split( '/::/', $site_url ) ) {
         if ( $subdomain ne $site_url ) {
             return ( $subdomain, $path );
@@ -551,7 +551,7 @@ sub site_url {
     my $blog = shift;
 
     if (@_) {
-        return $blog->SUPER::site_url(@_);
+        return $blog->column( 'site_url', @_ );
     }
     elsif ( $blog->is_dynamic ) {
         my $cfg  = MT->config;
@@ -569,13 +569,13 @@ sub site_url {
         my $url = '';
         if ( $blog->is_blog() ) {
             if ( my $website = $blog->website() ) {
-                $url = $website->SUPER::site_url;
+                $url = $website->column('site_url');
             }
             else {
 
                 # FIXME: there are a few occasions where
                 # a blog does not have its parent, like (bugid:102749)
-                return $blog->SUPER::site_url;
+                return $blog->column('site_url');
             }
             my @paths = $blog->raw_site_url;
             if ( 2 == @paths ) {
@@ -591,7 +591,7 @@ sub site_url {
             }
         }
         else {
-            $url = $blog->SUPER::site_url;
+            $url = $blog->column('site_url');
         }
 
         return $url;
@@ -603,7 +603,7 @@ sub is_site_path_absolute {
 
     my $raw_path;
     if ( ref $blog ) {
-        $raw_path = $blog->SUPER::site_path;
+        $raw_path = $blog->column('site_path');
     }
     else {
         $raw_path = $_[0];
@@ -619,10 +619,10 @@ sub site_path {
     my $blog = shift;
 
     if (@_) {
-        $blog->SUPER::site_path(@_);
+        $blog->column( 'site_path', @_ );
     }
     else {
-        my $raw_path = $blog->SUPER::site_path;
+        my $raw_path = $blog->column('site_path');
         return $raw_path if $blog->is_site_path_absolute;
 
         my $base_path = '';
@@ -646,7 +646,7 @@ sub site_path {
 
 sub raw_archive_url {
     my $blog = shift;
-    my $archive_url = $blog->SUPER::archive_url || '';
+    my $archive_url = $blog->column('archive_url') || '';
     if ( my ( $subdomain, $path ) = split( '/::/', $archive_url ) ) {
         return ( $subdomain, $path );
         if ( $subdomain ne $archive_url ) {
@@ -660,7 +660,7 @@ sub archive_url {
     my $blog = shift;
 
     if (@_) {
-        $blog->SUPER::archive_url(@_) || $blog->site_url;
+        $blog->column( 'archive_url', @_ ) || $blog->site_url;
     }
     elsif ( $blog->is_dynamic ) {
         return $blog->site_url;
@@ -669,9 +669,9 @@ sub archive_url {
         my $url = $blog->site_url;
         if ( $blog->is_blog() ) {
             if ( my $website = $blog->website() ) {
-                $url = $website->SUPER::site_url;
+                $url = $website->column('site_url');
             }
-            my $archive_url = $blog->SUPER::archive_url;
+            my $archive_url = $blog->column('archive_url');
             return $blog->site_url unless $archive_url;
             return $archive_url if $archive_url =~ m!^https?://!;
             my @paths = $blog->raw_archive_url;
@@ -694,7 +694,7 @@ sub archive_url {
 sub is_archive_path_absolute {
     my $blog = shift;
 
-    my $raw_path = $blog->SUPER::archive_path;
+    my $raw_path = $blog->column('archive_path');
     return 0 unless $raw_path;
     return 1 if $raw_path =~ m!^/!;
     return 1 if $raw_path =~ m!^[a-zA-Z]:\\!;
@@ -706,18 +706,18 @@ sub archive_path {
     my $blog = shift;
 
     if (@_) {
-        $blog->SUPER::archive_path(@_) || $blog->site_path;
+        $blog->column( 'archive_path', @_ ) || $blog->site_path;
     }
     else {
         return $blog->site_path if !$blog->column('archive_path');
 
-        my $raw_path = $blog->SUPER::archive_path;
+        my $raw_path = $blog->column('archive_path');
         return $raw_path if $blog->is_archive_path_absolute;
 
         my $base_path = '';
         my $path      = '';
         if ( my $website = $blog->website() ) {
-            $base_path = $website->SUPER::site_path;
+            $base_path = $website->column('site_path');
         }
         $path = $raw_path;
         if ($base_path) {
@@ -1648,21 +1648,21 @@ sub apply_theme {
 sub use_revision {
     my $blog = shift;
     return unless ref($blog);
-    return $blog->SUPER::use_revision(@_)
+    return $blog->column( 'use_revision', @_ )
         if 0 < scalar(@_);
     return 0 unless MT->config->TrackRevisions;
-    return $blog->SUPER::use_revision;
+    return $blog->column('use_revision');
 }
 
 sub raw_template_set {
     my $blog = shift;
-    $blog->theme_id || $blog->SUPER::template_set || '';
+    $blog->theme_id || $blog->meta('template_set') || '';
 }
 
 sub template_set {
     my $blog = shift;
     if (@_) {
-        return $blog->SUPER::template_set(@_);
+        return $blog->meta( 'template_set', @_ );
     }
 
     my $theme = $blog->theme;
@@ -1670,7 +1670,7 @@ sub template_set {
 
         # Try to load template set as theme.
         require MT::Theme;
-        $theme = MT::Theme->load( $blog->SUPER::template_set );
+        $theme = MT::Theme->load( $blog->meta('template_set') );
     }
 
     if ($theme) {
@@ -1684,7 +1684,7 @@ sub template_set {
         }
     }
 
-    $blog->SUPER::template_set;
+    $blog->meta('template_set');
 }
 
 sub to_hash {
