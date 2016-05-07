@@ -138,12 +138,13 @@ abstract class BaseObject extends ADOdb_Active_Record
             }
         }
 
-        $objs = $db->GetActiveRecordsClass(get_class($this),
-                                          $this->_table . $join,
-                                          $whereOrderBy,
-                                          $bindarr,
-                                          $pkeysArr,
-                                          $extra);
+        $objs = $this->adodb_GetActiveRecordsClass($db,
+                                                   get_class($this),
+                                                   $this->_table . $join,
+                                                   $whereOrderBy,
+                                                   $bindarr,
+                                                   $pkeysArr,
+                                                   $extra);
         $ret_objs;
         $unique_arr = array();
         if ($objs) {
@@ -468,6 +469,83 @@ abstract class BaseObject extends ADOdb_Active_Record
             }
         }
         return self::$_cache_driver;
+    }
+
+    // Copy from previous/current version of adodb5/adodb-active-record.inc.php.
+    private function adodb_GetActiveRecordsClass(&$db, $class, $table,$whereOrderBy,$bindarr, $primkeyArr, $extra) {
+        global $_ADODB_ACTIVE_DBS;
+
+        $save = $db->SetFetchMode(ADODB_FETCH_NUM);
+
+        /* original code */
+        // $qry = "select * from ".$table;
+
+        /* added code start */
+        // Separate table name if table name was already joined other table.
+        if (preg_match('/^(.+)\sJOIN\s.+ON/i', $table)) {
+                $matches = preg_split('/\s/i', $table);
+                $tblname = trim($matches[0]);
+                $qry = "$tblname.* from ".$table;
+                $table = $tblname;
+        } else
+                $qry = "* from ".$table;
+
+        if (isset($extra['distinct']))
+            $qry = "distinct " . $qry;
+        $qry = "select " . $qry;
+        /* added code end */
+
+        if (!empty($whereOrderBy)) {
+                $qry .= ' WHERE '.$whereOrderBy;
+        }
+        if(isset($extra['limit'])) {
+                $rows = false;
+                if(isset($extra['offset'])) {
+                        $rs = $db->SelectLimit($qry, $extra['limit'], $extra['offset'],$bindarr);
+                } else {
+                        $rs = $db->SelectLimit($qry, $extra['limit'],-1,$bindarr);
+                }
+                if ($rs) {
+                        while (!$rs->EOF) {
+                                $rows[] = $rs->fields;
+                                $rs->MoveNext();
+                        }
+                }
+        } else
+                $rows = $db->GetAll($qry,$bindarr);
+
+        $db->SetFetchMode($save);
+
+        $false = false;
+
+        if ($rows === false) {
+                return $false;
+        }
+
+
+        if (!class_exists($class)) {
+                $db->outp_throw("Unknown class $class in GetActiveRecordsClass()",'GetActiveRecordsClass');
+                return $false;
+        }
+        $arr = array();
+        // arrRef will be the structure that knows about our objects.
+        // It is an associative array.
+        // We will, however, return arr, preserving regular 0.. order so that
+        // obj[0] can be used by app developpers.
+        $arrRef = array();
+        $bTos = array(); // Will store belongTo's indices if any
+        foreach($rows as $row) {
+
+                $obj = new $class($table,$primkeyArr,$db);
+                if ($obj->ErrorNo()){
+                        $db->_errorMsg = $obj->ErrorMsg();
+                        return $false;
+                }
+                $obj->Set($row);
+                $arr[] = $obj;
+        } // foreach($rows as $row)
+
+        return $arr;
     }
 }
 ?>
