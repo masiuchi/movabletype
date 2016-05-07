@@ -125,7 +125,7 @@ class MTViewer extends Smarty {
         'mtincludeblock' => 1,
     );
 
-    function MTViewer(&$mt) {
+    function __construct(&$mt) {
         // prevents an unknown index error within Smarty.class.php
         $this->id = md5(uniqid('MTViewer',true));
         $_COOKIE['SMARTY_DEBUG'] = 0;
