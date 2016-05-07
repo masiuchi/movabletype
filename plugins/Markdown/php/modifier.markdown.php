@@ -726,11 +726,11 @@ function _DoHeaders($text) {
 }
 
 function _DoHeaders_callback_1($matches) {
-	return "<h1>" . _RunSpanGamut(_UnslashQuotes($matches[1])) . "</h1>\n\n"
+	return "<h1>" . _RunSpanGamut(_UnslashQuotes($matches[1])) . "</h1>\n\n";
 }
 
 function _DoHeaders_callback_2($matches) {
-	return "<h2>" . _RunSpanGamut(_UnslashQuotes($matches[1])) . "</h2>\n\n"
+	return "<h2>" . _RunSpanGamut(_UnslashQuotes($matches[1])) . "</h2>\n\n";
 }
 
 function _DoHeaders_callback_3($matches) {
