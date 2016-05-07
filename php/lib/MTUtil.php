@@ -262,8 +262,8 @@ function format_ts($format, $ts, $blog, $lang = null) {
         $format = preg_replace('!%b %e!', '%e %b', $format);
     }
     if (isset($format)) {
-        if (preg_match('!%(\w)!', $format, $matches)) {
-            $format = preg_replace('!%(\w)!', $f[$matches[1]], $format);
+        foreach ($f as $key => $value) {
+            $format = preg_replace("!%$key!", $value, $format);
         }
     }
     return $format;
