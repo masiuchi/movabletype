@@ -131,7 +131,7 @@ class MTViewer extends Smarty {
         $_COOKIE['SMARTY_DEBUG'] = 0;
         $GLOBALS['HTTP_COOKIE_VARS']['SMARTY_DEBUG'] = 0;
         $this->path_sep = (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') ? ';' : ':';
-        $this->Smarty();
+        parent::__construct();
         $this->mt =& $mt;
         $this->__stash =& $this->_tpl_vars;
         $this->left_delimiter = "{{";

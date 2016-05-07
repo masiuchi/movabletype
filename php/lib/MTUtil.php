@@ -262,7 +262,9 @@ function format_ts($format, $ts, $blog, $lang = null) {
         $format = preg_replace('!%b %e!', '%e %b', $format);
     }
     if (isset($format)) {
-        $format = preg_replace('!%(\w)!e', '\$f[\'\1\']', $format);
+        foreach ($f as $key => $value) {
+            $format = preg_replace("!%$key!", $value, $format);
+        }
     }
     return $format;
 }
@@ -1647,12 +1649,16 @@ function normalize_language($language, $locale, $ietf) {
         $language = $real_lang[$language];
     }
     if ($locale) {
-        $language = preg_replace('/^([A-Za-z][A-Za-z])([-_]([A-Za-z][A-Za-z]))?$/e', '\'$1\' . "_" . (\'$3\' ? strtoupper(\'$3\') : strtoupper(\'$1\'))', $language);
+        $language = preg_replace_callback('/^([A-Za-z][A-Za-z])([-_]([A-Za-z][A-Za-z]))?$/', '_normalize_language_callback', $language);
     } elseif ($ietf) {
         # http://www.ietf.org/rfc/rfc3066.txt
         $language = preg_replace('/_/', '-', $language);
     }
     return $language;
+}
+
+function _normalize_language_callback($matches) {
+    return $matches[1] . "_" . ($matches[3] ? strtoupper($matches[3]) : strtoupper($matches[1]));
 }
 
 ?>
