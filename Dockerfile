@@ -42,6 +42,7 @@ RUN cpanm --installdeps .
 # PHP
 RUN yum -y install php php-mysql php-gd php-pecl-memcache
 RUN sed 's/^;date\.timezone =/date\.timezone = "Asia\/Tokyo"/' -i /etc/php.ini
+RUN sed 's/^memory_limit = 128M/memory_limit = 256M/' -i /etc/php.ini
 
 RUN service mysqld start & sleep 10 && \
     mysql -e "create database mt_test default character set utf8;" && \
