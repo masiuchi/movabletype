@@ -125,13 +125,13 @@ class MTViewer extends Smarty {
         'mtincludeblock' => 1,
     );
 
-    function MTViewer(&$mt) {
+    function __construct(&$mt) {
         // prevents an unknown index error within Smarty.class.php
         $this->id = md5(uniqid('MTViewer',true));
         $_COOKIE['SMARTY_DEBUG'] = 0;
         $GLOBALS['HTTP_COOKIE_VARS']['SMARTY_DEBUG'] = 0;
         $this->path_sep = (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') ? ';' : ':';
-        $this->Smarty();
+        parent::__construct();
         $this->mt =& $mt;
         $this->__stash =& $this->_tpl_vars;
         $this->left_delimiter = "{{";
