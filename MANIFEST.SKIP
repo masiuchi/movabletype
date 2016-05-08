@@ -246,3 +246,7 @@ Dockerfile
 ^cpanfile
 \.travis\.yml
 
+# CircleCI
+^Dockerfile
+^circle\.yml
+
