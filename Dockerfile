@@ -37,7 +37,7 @@ RUN cpanm Test::More
 RUN cpanm LWP::Protocol::https -f
 RUN cpanm GD -f
 
-# RUN cpanm --installdeps .
+RUN cpanm --installdeps .
 
 # PHP
 RUN yum -y install php php-mysql php-gd php-pecl-memcache
