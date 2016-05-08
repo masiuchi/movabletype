@@ -33,9 +33,7 @@ requires 'Cache::Memcached';
 requires 'GD';
 
 ## recommends
-requires 'Starlet';
 requires 'XML::LibXML';
-requires 'Server::Starter';
 
 on 'test' => sub {
     requires 'Clone';
