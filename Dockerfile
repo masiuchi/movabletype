@@ -49,3 +49,5 @@ RUN service mysqld start & sleep 10 && \
     mysql -e "grant all privileges on mt_test.* to mt@localhost;" && \
     service mysqld stop
 
+# For Imager.
+RUN yum -y install giflib-devel
