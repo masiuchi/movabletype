@@ -8,7 +8,7 @@ RUN yum -y install mysql mysql-server
 RUN yum -y install wget make gcc
 RUN wget --no-check-certificate -O - http://cpanmin.us | perl - App::cpanminus
 
-RUN wget --no-check-certificate http://raw.githubusercontent.com/masiuchi/movabletype/new-master/cpanfile
+RUN wget --no-check-certificate http://raw.githubusercontent.com/masiuchi/movabletype/support-php-5.1/cpanfile
 
 # For installing Net::SSLeay
 RUN yum -y install openssl-devel
