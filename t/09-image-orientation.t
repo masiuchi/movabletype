@@ -10,7 +10,8 @@ use MT::Image;
 use Test::More;
 
 BEGIN {
-    eval { require Image::Magick }
+    # Image::Magick@6.2.8 on CentOS 5 does not have SetPixel() method.
+    eval { require Image::Magick && $Image::Magick::VERSION ne '6.2.8' }
         or plan skip_all => 'Image::Magick is not installed';
 }
 
