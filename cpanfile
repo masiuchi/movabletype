@@ -41,6 +41,7 @@ on 'test' => sub {
     requires 'Clone';
     requires 'DateTime';
     requires 'Test::Base';
+    requires 'Test::Deep';
     requires 'Test::Class';
     requires 'Test::LeakTrace';
     requires 'Test::MockObject';
