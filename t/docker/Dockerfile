@@ -10,7 +10,7 @@ RUN DEBIAN_FRONTEND=nointeractive\
  memcached\
  php5 php5-cli php5-mysql php5-gd php5-memcache\
  git make gcc wget curl unzip bzip2\
- libssl-dev libgmp-dev libgd2-xpm-dev libxml2-dev libmysql++-dev libgif-dev
+ libssl-dev libgmp-dev libgd2-xpm-dev libxml2-dev libmysql++-dev libgif-dev libdb-dev
 
 RUN mysqld_safe & sleep 10 &&\
  mysql -e "create database mt_test default character set utf8;" &&\
