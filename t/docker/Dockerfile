@@ -9,7 +9,7 @@ RUN DEBIAN_FRONTEND=nointeractive\
  mysql-server mysql-client\
  memcached\
  php5 php5-cli php5-mysql php5-gd php5-memcache\
- git make gcc wget curl unzip\
+ git make gcc wget curl unzip bzip2\
  libssl-dev libgmp-dev libgd2-xpm-dev libxml2-dev libmysql++-dev libgif-dev
 
 RUN mysqld_safe & sleep 10 &&\
