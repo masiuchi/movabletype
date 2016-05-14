@@ -57,5 +57,5 @@ test:
     - rm t/54-usersgroupsroles.t
 
   override:
-    - docker run -v $PWD:/var/www/mt -w /var/www/mt mt bash -c 'mysqld_safe & sleep 10 && service memcached start & sleep 10 && eval "$(plenv init -)" && prove ./t ./plugins/*/t'
+    - docker run -v $PWD:/var/www/mt -w /var/www/mt mt bash -c 'mysqld_safe & sleep 10 && service memcached start & sleep 10 && eval "$(plenv init -)" && PERL_HASH_SEED=0 prove ./t ./plugins/*/t'
 
