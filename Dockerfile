@@ -1,49 +1,41 @@
 FROM centos:centos5
 
 RUN yum -y install epel-release
-RUN yum -y install memcached
 
-RUN yum -y install mysql mysql-server
+RUN yum -y install\
+ mysql mysql-server\
+ memcached\
+ mysql-devel openssl-devel gd-devel expat-devel libxml2-devel giflib-devel db4-devel\
+ php php-mysql php-gd php-pecl-memcache\
+ git wget bzip2 patch make gcc
 
-RUN yum -y install wget make gcc
-RUN wget --no-check-certificate -O - http://cpanmin.us | perl - App::cpanminus
+ENV HOME /root
+ENV PATH $PATH:$HOME/.plenv/bin
+RUN git clone git://github.com/tokuhirom/plenv.git $HOME/.plenv &&\
+ git clone git://github.com/tokuhirom/Perl-Build.git $HOME/.plenv/plugins/perl-build/ &&\
+ echo 'eval "$(plenv init -)"' >> $HOME/.bashrc
 
-RUN wget --no-check-certificate http://raw.githubusercontent.com/masiuchi/movabletype/support-php-5.1/cpanfile
+RUN eval "$(plenv init -)" &&\
+ plenv install 5.24.0 -Duseshrplib &&\
+ plenv global 5.24.0 &&\
+ plenv rehash
 
-# For installing Net::SSLeay
-RUN yum -y install openssl-devel
+RUN eval "$(plenv init -)" &&\
+ plenv install-cpanm
 
-# For installing GD
-RUN yum -y install gd-devel perl-GD
+RUN eval "$(plenv init -)" &&\
+ cpanm Alien::ImageMagick
 
-# Install Image::Magick from RPM.
-RUN yum -y install ImageMagick-perl
+RUN eval "$(plenv init -)" &&\
+ cpanm -f GD LWP::Protocol::https
 
-# For installing XML::Parser.
-RUN yum -y install expat-devel perl-XML-Parser
-
-# For installing XML::LibXML.
-RUN yum -y install libxml2-devel
-
-# For Imager.
-RUN yum -y install giflib-devel
-
-# File::Path is old to install File::Spec.
-RUN cpanm File::Path
-
-# For installing Crypt::SSLeay.
-RUN cpanm Getopt::Long
-
-# For installing Encode.
-RUN cpanm Test::More
-
-RUN cpanm LWP::Protocol::https -f
-RUN cpanm GD -f
-
-RUN cpanm --installdeps .
+WORKDIR /root
+RUN wget --no-check-certificate http://raw.githubusercontent.com/masiuchi/movabletype/new-master/cpanfile &&\
+ eval "$(plenv init -)" &&\
+ cpanm --installdeps . &&\
+ rm -rf cpanfile /root/.cpanm/
 
 # PHP
-RUN yum -y install php php-mysql php-gd php-pecl-memcache
 RUN sed 's/^;date\.timezone =/date\.timezone = "Asia\/Tokyo"/' -i /etc/php.ini
 RUN sed 's/^memory_limit = 128M/memory_limit = 256M/' -i /etc/php.ini
 
