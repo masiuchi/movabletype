@@ -25,7 +25,6 @@ use Plack::App::File;
 use IPC::Open3;
 use IO::Select;
 use Symbol qw( gensym );
-use XMLRPC::Transport::HTTP::Plack;
 
 use constant DEBUG => $ENV{MT_PSGI_DEBUG} || 0;
 our $mt = MT->new();
@@ -216,18 +215,6 @@ sub make_app {
         my $filepath = File::Spec->catfile( $FindBin::Bin, $script );
         $psgi_app = $mt_cgi->($filepath);
     }
-    elsif ( $type eq 'xmlrpc' ) {
-        my $handler = $app->{handler};
-        my $server;
-        $server = XMLRPC::Transport::HTTP::Plack->new;
-        $server->dispatch_to( 'blogger', 'metaWeblog', 'mt', 'wp' );
-        $psgi_app = sub {
-            eval "require $handler";
-            my $env = shift;
-            my $req = Plack::Request->new($env);
-            $server->handle($req);
-        };
-    }
     else {
         my $handler = $app->{handler};
         $psgi_app = $mt_app->($handler);
@@ -407,7 +394,7 @@ By default, the value of CGIPath config directive will be used.
 
 =item applications/YOURAPP/type
 
-Specify the application type. Only 'run_once' and 'xmlrpc' are acceptable value.
+Specify the application type. Only 'run_once' is acceptable value.
 If type is not given, standard persistent PSGI application will be compiled.
 
 =over 8
@@ -417,11 +404,6 @@ If type is not given, standard persistent PSGI application will be compiled.
 Run as non-persistent CGI script with C<fork>/C<exec> model. It's good for
 the kind of applications which be excuted infrequently like MT::Upgrader.
 Also usable to run old script who have no good cleanup process at exiting.
-
-=item xmlrpc
-
-Special mode for apps which constructed on XMLRPC::Lite. Make PSGI app with
-using XMLRPC::Transport::HTTP::Plack.
 
 =back
 
