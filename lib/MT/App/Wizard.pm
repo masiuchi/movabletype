@@ -164,12 +164,6 @@ sub init_core_registry {
                 label =>
                     'This module and its dependencies are required to run Movable Type under psgi.',
             },
-            'XMLRPC::Transport::HTTP::Plack' => {
-                link =>
-                    'http://search.cpan.org/dist/SOAP-Transport-HTTP-Plack/',
-                label =>
-                    'This module and its dependencies are required to run Movable Type under psgi.',
-            },
             'Net::SMTP' => {
                 link => 'http://search.cpan.org/dist/libnet/',
                 label =>

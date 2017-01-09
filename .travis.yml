@@ -93,6 +93,8 @@ before_script:
   - rm t/153-all-selected.t 
   - rm t/160-folder.t
   - rm t/20-setup.t
+  - rm t/28-xmlrpc-invalid-request.t
+  - rm t/28-xmlrpc.t
   - rm t/41-atom.t
   - rm t/61-to_from_xml.t
   - rm t/62-asset.t
