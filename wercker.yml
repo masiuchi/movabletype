@@ -49,7 +49,7 @@ build:
     - script:
         name: Install CPAN modules
         code: |
-          cpm install -g --test --cpanfile=t/cpanfile
+          cpm install -g --test
     - script:
         name: Copy mt-config.cgi
         code: |
