@@ -1,16 +1,18 @@
 matrix:
   include:
-    # PHP 5.3
+    # PHP 7.1
+    - language: perl
+      perl: "5.24"
     - language: perl
       perl: "5.22"
     - language: perl
       perl: "5.20"
-    - language: perl
-      perl: "5.18"
+    # - language: perl
+    #   perl: "5.18"
     - language: perl
       perl: "5.16"
-    # - language: perl
-    #   perl: "5.14"
+    - language: perl
+      perl: "5.14"
     - language: perl
       perl: "5.12"
     - language: perl
@@ -18,7 +20,7 @@ matrix:
     - language: perl
       perl: "5.8"
 
-    # Perl 5.14
+    # Perl 5.18
     - language: php
       php: "7.0"
     - language: php
@@ -27,10 +29,6 @@ matrix:
       php: "5.5"
     - language: php
       php: "5.4"
-    # - language: php
-    #   php: "5.3"
-    - language: php
-      php: "5.2"
 
 services:
   - memcached
@@ -121,5 +119,7 @@ before_script:
   - rm t/54-usersgroupsroles.t
 
 script:
+  - perl -v
+  - php -v
   - PERL_HASH_SEED=0 perl -Ilocal/lib/perl5 local/bin/carton exec prove t plugins/*/t
 
