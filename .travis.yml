@@ -29,8 +29,6 @@ matrix:
       php: "5.5"
     - language: php
       php: "5.4"
-    - language: php
-      php: "5.3"
 
 services:
   - memcached
