@@ -121,5 +121,7 @@ before_script:
   - rm t/54-usersgroupsroles.t
 
 script:
+  - perl -v
+  - php -v
   - PERL_HASH_SEED=0 perl -Ilocal/lib/perl5 local/bin/carton exec prove t plugins/*/t
 
