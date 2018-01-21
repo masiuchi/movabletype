@@ -29,7 +29,7 @@ my $mt = MT->new;
 $mt->config('NoHTMLEntities', 1);
 
 ## Use done_testing()
-## BEGIN { plan tests => 221 };
+## BEGIN { plan tests => 220 };
 
 is(substr_wref("Sabado", 0, 3), "Sab");
 is(substr_wref("S&agrave;bado", 0, 3), "S&agrave;b");
@@ -440,7 +440,6 @@ my $utf8_e38182 = Encode::decode('utf8', "\xe3\x81\x82");
 is(escape_unicode(Encode::encode('utf8', $utf8_e38182)), '&#12354;', 'escape_unicode()');
 is(unescape_unicode('&#12354;'), $utf8_e38182, 'unescape_unicode()');
 
-isa_ok(sax_parser(), 'XML::LibXML::SAX', 'sax_parser()');
 is(asset_cleanup('<form mt:asset-id="1" contenteditable="false"><img src="http://example.com/img/foo.jpg" /></form>'), '<span><img src="http://example.com/img/foo.jpg" /></span>', 'asset_cleanup()');
 is(caturl('http://example.com/', 'foo', '/bar', 'baz/', '/foo/'), 'http://example.com/foo/bar/baz/foo/', 'caturl()');
 {
