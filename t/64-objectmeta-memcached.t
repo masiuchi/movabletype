@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
-use lib qw( t/lib extlib lib ../lib ../extlib );
+use lib qw( t/lib extlib lib ../lib ../extlib . );
 
 BEGIN {
     $ENV{MT_CONFIG} = 'mysql-memcached-test.cfg';
