@@ -36,6 +36,7 @@ requires 'GD';
 requires 'Starlet';
 requires 'XML::LibXML';
 requires 'Server::Starter';
+requires 'Web::Scraper';
 
 on 'test' => sub {
     requires 'Clone';
