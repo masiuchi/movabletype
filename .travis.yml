@@ -124,4 +124,6 @@ script:
   - perl -v
   - php -v
   - PERL_HASH_SEED=0 perl -Ilocal/lib/perl5 local/bin/carton exec prove t plugins/*/t
+  - find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -c FILENAME > /dev/null
+  - find tools -type f | xargs -IFILENAME perl -It/lib -c FILENAME > /dev/null
 
