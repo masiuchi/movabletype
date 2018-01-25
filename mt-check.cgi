@@ -753,7 +753,8 @@ my $cwd = '';
     eval { $cwd = Cwd::getcwd() };
     if ( $bad || $@ ) {
         eval { $cwd = Cwd::cwd() };
-        if ( $@ && $@ !~ /Insecure \$ENV{PATH}/ ) {
+        my $insecure_error = "Insecure $ENV{PATH}";
+        if ( $@ && $@ !~ /$insecure_error/ ) {
             die $@;
         }
     }

@@ -2,6 +2,8 @@ matrix:
   include:
     # PHP 7.1
     - language: perl
+      perl: "5.26"
+    - language: perl
       perl: "5.24"
     - language: perl
       perl: "5.22"
@@ -122,4 +124,6 @@ script:
   - perl -v
   - php -v
   - PERL_HASH_SEED=0 perl -Ilocal/lib/perl5 local/bin/carton exec prove t plugins/*/t
+  - find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -Ilocal/lib/perl5 -c FILENAME > /dev/null
+  - find tools -type f | xargs -IFILENAME perl -It/lib -Ilocal/lib/perl5 -c FILENAME > /dev/null
 
