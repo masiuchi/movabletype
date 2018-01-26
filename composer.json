@@ -8,8 +8,8 @@
     ],
     "require": {
         "oomphinc/composer-installers-extender": "^1.1",
-        "adodb/adodb-php": "v5.20.4",
-        "smarty/smarty": "v2.6.29"
+        "smarty/smarty": "v2.6.29",
+        "adodb/adodb-php": "^5.20"
     },
     "extra": {
         "installer-types": ["library"],

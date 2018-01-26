@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea0497cb03b87e70d8a873869d349760",
+    "content-hash": "c1373dc29ab6b17d9e6bd755cc7b2e30",
     "packages": [
         {
             "name": "adodb/adodb-php",
-            "version": "v5.20.4",
+            "version": "v5.20.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ADOdb/ADOdb.git",
-                "reference": "1a47f1078318557ac278c82b1b401c8dfc62ae4d"
+                "reference": "f601748cca1ccb86dfd427620a1692a70e681075"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/1a47f1078318557ac278c82b1b401c8dfc62ae4d",
-                "reference": "1a47f1078318557ac278c82b1b401c8dfc62ae4d",
+                "url": "https://api.github.com/repos/ADOdb/ADOdb/zipball/f601748cca1ccb86dfd427620a1692a70e681075",
+                "reference": "f601748cca1ccb86dfd427620a1692a70e681075",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 }
             ],
             "description": "ADOdb is a PHP database abstraction layer library",
-            "homepage": "http://adodb.sourceforge.net/",
+            "homepage": "http://adodb.org/",
             "keywords": [
                 "abstraction",
                 "database",
@@ -58,7 +58,7 @@
                 "library",
                 "php"
             ],
-            "time": "2016-03-31T08:10:52+00:00"
+            "time": "2016-12-21T17:19:42+00:00"
         },
         {
             "name": "composer/installers",
