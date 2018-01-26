@@ -1,0 +1,21 @@
+{
+    "name": "masiuchi/movabletype",
+    "authors": [
+        {
+            "name": "Masahiro Iuchi",
+            "email": "masahiro.iuchi@gmail.com"
+        }
+    ],
+    "require": {
+        "oomphinc/composer-installers-extender": "^1.1",
+        "adodb/adodb-php": "v5.20.4",
+        "smarty/smarty": "v2.6.29"
+    },
+    "extra": {
+        "installer-types": ["library"],
+        "installer-paths": {
+            "php/extlib/adodb5/": ["adodb/adodb-php"],
+            "php/extlib/smarty/": ["smarty/smarty"]
+        }
+    }
+}
