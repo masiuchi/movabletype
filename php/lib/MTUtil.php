@@ -1542,7 +1542,7 @@ function create_rating_expr_function($expr, $filter, $namespace, $datasource = '
     $expr .= ' return $ret;';
 
     try {
-        $fn = eval("function (&\$e, &\$c) { $expr }");
+        eval("\$fn = function (&\$e, &\$c) { $expr };");
     } catch (ParseError $e) {
         $error = true;
     }
