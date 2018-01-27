@@ -49,6 +49,7 @@ t/db/mt.db
 /php/extlib/adodb5/**/.*
 /php/extlib/adodb5/replicate
 /php/extlib/adodb5/scripts
+/php/ext/lib/adodb5/tests
 /php/extlib/smarty/**/.*
 ^/php/extlib/**/.git*
 
