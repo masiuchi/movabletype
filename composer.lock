@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1373dc29ab6b17d9e6bd755cc7b2e30",
+    "content-hash": "b59e74873a6dfa091f351204250fb6c4",
     "packages": [
         {
             "name": "adodb/adodb-php",
@@ -224,16 +224,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v2.6.29",
+            "version": "v2.6.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "47fa66cdcf0bde5c44923fb0e15dd0921f8d3a83"
+                "reference": "4ab9757b492f08a38f68123a6e7c1df7110bbc49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/47fa66cdcf0bde5c44923fb0e15dd0921f8d3a83",
-                "reference": "47fa66cdcf0bde5c44923fb0e15dd0921f8d3a83",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/4ab9757b492f08a38f68123a6e7c1df7110bbc49",
+                "reference": "4ab9757b492f08a38f68123a6e7c1df7110bbc49",
                 "shasum": ""
             },
             "require": {
@@ -271,7 +271,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-06-21T13:10:14+00:00"
+            "time": "2017-11-03T06:39:13+00:00"
         }
     ],
     "packages-dev": [],

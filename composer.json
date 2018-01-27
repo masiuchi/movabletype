@@ -8,7 +8,7 @@
     ],
     "require": {
         "oomphinc/composer-installers-extender": "^1.1",
-        "smarty/smarty": "v2.6.29",
+        "smarty/smarty": "^2.6",
         "adodb/adodb-php": "^5.20"
     },
     "extra": {
