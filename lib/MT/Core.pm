@@ -1722,7 +1722,6 @@ BEGIN {
             'AtomScript'            => { default => 'mt-atom.cgi', },
             'UpgradeScript'         => { default => 'mt-upgrade.cgi', },
             'CheckScript'           => { default => 'mt-check.cgi', },
-            'NotifyScript'          => { default => 'mt-add-notify.cgi', },
             'PublishCharset'        => { default => 'utf-8', },
             'SafeMode'              => { default => 1, },
             'AllowFileInclude'      => { default => 0, },
@@ -1965,10 +1964,6 @@ BEGIN {
             'view' => {
                 handler => 'MT::App::Viewer',
                 script  => sub { MT->config->ViewScript },
-            },
-            'notify' => {
-                handler => 'MT::App::NotifyList',
-                script  => sub { MT->config->NotifyScript },
             },
             'tb' => {
                 handler => 'MT::App::Trackback',
