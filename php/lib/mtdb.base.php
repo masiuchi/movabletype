@@ -1378,22 +1378,22 @@ abstract class MTDatabase {
                 } else {
                     if (($sort_field == 'entry_status') || ($sort_field == 'entry_author_id') || ($sort_field == 'entry_id')
                           || ($sort_field == 'entry_comment_count') || ($sort_field == 'entry_ping_count')) {
-                          $sort_fn = function ($a, $b) {
+                          $sort_fn = function ($a, $b) use ($sort_field) {
                               if ($a->$sort_field == $b->$sort_field) return 0;
                               return $a->$sort_field < $b->$sort_field ? -1 : 1;
                           };
                     } else {
-                        $sort_fn = function ($a, $b) {
+                        $sort_fn = function ($a, $b) use ($sort_field) {
                             $f = addslashes($sort_field);
                             return strcmp($a->$f,$b->$f);
                         };
                     }
                     if ($order == 'asc') {
-                        $sorter = function ($a, $b) {
+                        $sorter = function ($a, $b) use ($sort_fn) {
                             return $sort_fn($a, $b);
                         };
                     } else {
-                        $sorter = function ($b, $a) {
+                        $sorter = function ($b, $a) use ($sort_fn) {
                             return $sort_fn($a, $b);
                         };
                     }

@@ -1119,7 +1119,7 @@ function create_cat_expr_function($expr, &$cats, $param) {
     $expr = preg_replace('/#(\d+)/', "array_key_exists('\\1', \$pm)", $expr);
     $expr = '$pm = array_key_exists($e->entry_id, $c["p"]) ? $c["p"][$e->entry_id] : array(); return (' . $expr . ');';
     try {
-        $fn = eval("function (&\$e, &\$c) { $expr }");
+        eval("\$fn = function (&\$e, &\$c) { $expr };");
     } catch (ParseError $e) {
         $error = true;
     }
@@ -1230,7 +1230,7 @@ function create_tag_expr_function($expr, &$tags, $datasource = 'entry') {
     # test for existence of specified tags in entries.
     $expr = '$tm = array_key_exists($e->'.$datasource.'_id, $c["t"]) ? $c["t"][$e->'.$datasource.'_id] : array(); return (' . $result . ');';
     try {
-        $fn = eval("function (&\$e, &\$c) { $expr }");
+        eval("\$fn = function (&\$e, &\$c) { $expr };");
     } catch (ParseError $e) {
         $error = true;
     }
@@ -1475,7 +1475,7 @@ function create_role_expr_function($expr, &$roles, $datasource = 'author') {
 
     $expr = '$tm = array_key_exists($e->'.$datasource.'_id, $c["r"]) ? $c["r"][$e->'.$datasource.'_id] : array(); return ' . $expr . ';';
     try {
-        $fn = eval("function (&\$e, &\$c) { $expr }");
+        eval("\$fn = function (&\$e, &\$c) { $expr };");
     } catch (ParseError $e) {
         $error = true;
     }
@@ -1508,7 +1508,7 @@ function create_status_expr_function($expr, &$status, $datasource = 'author') {
     $expr = preg_replace('/#(\d+)/', '$e->status == $1', $expr);
     $expr = 'return ' . $expr . ';';
     try {
-        $fn = eval("function (&\$e, &\$c) { $expr }");
+        eval("\$fn = function (&\$e, &\$c) { $expr };");
     } catch (ParseError $e) {
         $error = true;
     }

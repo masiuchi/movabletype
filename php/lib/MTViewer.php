@@ -803,7 +803,7 @@ EOT;
             elseif ($type == 'function') {
                 $fn = function ($args, &$ctx) use ($tag) {
                     @include_once "function.$tag.php";
-                    $stmarty_function_tag = "smarty_function_$tag";
+                    $smarty_function_tag = "smarty_function_$tag";
                     if (function_exists($smarty_function_tag)) {
                         return $smarty_function_tag($args, $ctx);
                     }
