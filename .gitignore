@@ -45,3 +45,10 @@ t/db/mt.db
 
 *.pid
 
+/vendor/
+/php/extlib/adodb5/**/.*
+/php/extlib/adodb5/replicate
+/php/extlib/adodb5/scripts
+/php/extlib/smarty/**/.*
+^/php/extlib/**/.git*
+
