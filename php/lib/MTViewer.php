@@ -791,9 +791,24 @@ EOT;
             $fn = $old_handler[0];
         } else {
             if ($type == 'block')
-                $fn = create_function('$args, $content, &$ctx, &$repeat', 'if (!isset($content)) @include_once "block.' . $tag . '.php"; if (function_exists("smarty_block_' . $tag . '")) { return smarty_block_' . $tag . '($args, $content, $ctx, $repeat); } $repeat = false; return "";');
+            $fn = function ($args, $content, &$ctx, &$repeat) use ($tag) {
+                if (!isset($content)) @include_once "block.$tag.php";
+                $smarty_block_tag = "smarty_block_$tag";
+                if (function_exists($smarty_block_tag)) {
+                    return $smarty_block_tag($args, $content, $ctx, $repeat);
+                }
+                $repeat = false;
+                return "";
+            };
             elseif ($type == 'function') {
-                $fn = create_function('$args, &$ctx', '@include_once "function.' . $tag . '.php"; if (function_exists("smarty_function_' . $tag . '")) { return smarty_function_' . $tag . '($args, $ctx); } return "";');
+                $fn = function ($args, &$ctx) use ($tag) {
+                    @include_once "function.$tag.php";
+                    $stmarty_function_tag = "smarty_function_$tag";
+                    if (function_exists($smarty_function_tag)) {
+                        return $smarty_function_tag($args, $ctx);
+                    }
+                    return "";
+                };
             }
         }
         return $fn;

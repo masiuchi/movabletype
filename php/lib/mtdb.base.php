@@ -793,7 +793,9 @@ abstract class MTDatabase {
         }
 
         if (isset($args['unique']) && $args['unique']) {
-            $filters[] = create_function('$e,$ctx', 'return !isset($ctx["entry_ids_published"][$e->entry_id]);');
+            $filters[] = function ($e, $ctx) {
+                return !isset($ctx["entry_ids_published"][$e->entry_id]);
+            };
             $ctx['entry_ids_published'] = &$_REQUEST['entry_ids_published'];
         }
 
@@ -1376,13 +1378,25 @@ abstract class MTDatabase {
                 } else {
                     if (($sort_field == 'entry_status') || ($sort_field == 'entry_author_id') || ($sort_field == 'entry_id')
                           || ($sort_field == 'entry_comment_count') || ($sort_field == 'entry_ping_count')) {
-                        $sort_fn = "if (\$a->$sort_field == \$b->$sort_field) return 0; return \$a->$sort_field < \$b->$sort_field ? -1 : 1;";
+                          $sort_fn = function ($a, $b) {
+                              if ($a->$sort_field == $b->$sort_field) return 0;
+                              return $a->$sort_field < $b->$sort_field ? -1 : 1;
+                          };
                     } else {
-                        $sort_fn = "\$f = '" . addslashes($sort_field) . "'; return strcmp(\$a->\$f,\$b->\$f);";
+                        $sort_fn = function ($a, $b) {
+                            $f = addslashes($sort_field);
+                            return strcmp($a->$f,$b->$f);
+                        };
                     }
-                    $sorter = create_function(
-                        $order == 'asc' ? '$a,$b' : '$b,$a',
-                        $sort_fn);
+                    if ($order == 'asc') {
+                        $sorter = function ($a, $b) {
+                            return $sort_fn($a, $b);
+                        };
+                    } else {
+                        $sorter = function ($b, $a) {
+                            return $sort_fn($a, $b);
+                        };
+                    }
                     usort($entries, $sorter);
 
                     if (isset($post_sort_offset)) {
@@ -2025,25 +2039,40 @@ abstract class MTDatabase {
                 $field_name = $type.'_id';
                 $obj_id = $obj->$field_name;
                 if (isset($args['min_score'])) {
-                    $expr = '$ctx = $c;if ($ctx == null) { $mt = MT::get_instance(); $ctx = $mt->context(); } ';
-                    $expr .= '$sc = get_score($ctx, '.$obj_id.', "'.$type.'", "'.$args['namespace'].'", $e->author_id);';
-                    $expr .= '$ret = $sc >= '.$args['min_score'].';';
-                    $expr .= ' return $ret;';
-                    $fn = create_function('&$e,&$c', $expr);
+                    $fn = function (&$e, &$c) use ($obj_id, $args) {
+                        $ctx = $c;
+                        if ($ctx == null) {
+                            $mt = MT::get_instance();
+                            $ctx = $mt->context();
+                        }
+                        $sc = get_score($ctx, $obj_id, $type, $args['namespace'], $e->author_id);
+                        $ret = $sc >= $args['min_score'];
+                        return $ret;
+                    };
                     $filters[] = $fn;
                 } elseif (isset($args['max_score'])) {
-                    $expr = '$ctx = $c;if ($ctx == null) { $mt = MT::get_instance(); $ctx = $mt->context(); } ';
-                    $expr .= '$sc = get_score($ctx, '.$obj_id.', "'.$type.'", "'.$args['namespace'].'", $e->author_id);';
-                    $expr .= '$ret = $sc <= '.$args['max_score'].';';
-                    $expr .= ' return $ret;';
-                    $fn = create_function('&$e,&$c', $expr);
+                    $fn = function (&$e, &$c) use ($obj_id, $args) {
+                        $ctx = $c;
+                        if ($ctx == null) {
+                            $mt = MT::get_instance();
+                            $ctx = $mt->context();
+                        }
+                        $sc = get_score($ctx, $obj_id, $type, $args['namespace'], $e->author_id);
+                        $ret = $sc <= $args['max_score'];
+                        return $ret;
+                    };
                     $filters[] = $fn;
                 }
                 else {
-                    $expr = '$ctx = $c;if ($ctx == null) { $mt = MT::get_instance(); $ctx = $mt->context(); } ';
-                    $expr .= '$ret = !is_null($ctx->mt->db()->fetch_score('.$args['namespace'].','.$obj_id.', $e->author_id,'.$type.'));';
-                    $expr .= ' return $ret;';
-                    $fn = create_function('&$e,&$c', $expr);
+                    $fn = function (&$e, &$c) use ($obj_id, $args, $type) {
+                        $ctx = $c;
+                        if ($ctx == null) {
+                            $mt = MT::get_instance();
+                            $ctx = $mt->context();
+                        }
+                        $ret = !is_null($ctx->mt->db()->fetch_score($args['namespace'], $obj_id, $e->author_id, $type));
+                        return $ret;
+                    };
                     $filters[] = $fn;
                 }
             }
@@ -2924,9 +2953,13 @@ abstract class MTDatabase {
 
         if ($reorder && !isset($args['sort_by'])) {  // lastn and ascending sort
             if ( $order == 'asc' ) {
-                $resorting = create_function('$a,$b', 'return strcmp($a->comment_created_on, $b->comment_created_on);');
+                $resorting = function ($a, $b) {
+                    return strcmp($a->comment_created_on, $b->comment_created_on);
+                };
             } else {
-                $resorting = create_function('$a,$b', 'return strcmp($b->comment_created_on, $a->comment_created_on);');
+                $resorting = function ($a, $b) {
+                    return strcmp($b->comment_created_on, $a->comment_created_on);
+                };
             }
             usort($comments, $resorting);
         }
@@ -3016,7 +3049,9 @@ abstract class MTDatabase {
             return array();
 
         if ($reorder) {  // lastn and ascending sort
-            $asc_created_on = create_function('$a,$b', 'return strcmp($a->comment_created_on, $b->comment_created_on);');
+            $asc_created_on = function ($a, $b) {
+                return strcmp($a->comment_created_on, $b->comment_created_on);
+            };
             usort($comments, $asc_created_on);
         }
   
