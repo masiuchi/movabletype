@@ -259,7 +259,7 @@ function smarty_prefilter_mt_to_smarty($tpl_source, &$ctx2) {
 
             if ($mttag == 'mtelse') {
                 if ($open != '/') {
-                    if (count($args)) {
+                    if (is_array($args) && count($args)) {
                         # else-if
                         $smart_source .= $ldelim.'if $elseif_conditional'.$rdelim;
                     } else {
@@ -271,7 +271,7 @@ function smarty_prefilter_mt_to_smarty($tpl_source, &$ctx2) {
                 }
             } elseif ($mttag == 'mtelseif') {
                 if ($open != '/') {
-                    if (count($args)) {
+                    if (is_array($args) && count($args)) {
                         # else-if
                         $smart_source .= $ldelim.'if $elseif_conditional'.$rdelim;
                     } else {
