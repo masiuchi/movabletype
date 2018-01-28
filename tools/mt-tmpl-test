@@ -1,7 +1,7 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 # Use this line if you want to enable the NYTProf Perl profile:
-#!/usr/bin/perl -d:NYTProf
+#!/usr/bin/env perl -d:NYTProf
 
 package MT::CLITest;
 
