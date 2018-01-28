@@ -54,3 +54,5 @@ t/db/mt.db
 /php/extlib/smarty/**/.*
 ^/php/extlib/**/.git*
 
+.DS_Store
+
