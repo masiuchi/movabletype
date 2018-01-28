@@ -37,6 +37,7 @@ mt-sp.cgi
 plugins/SmartphoneOption
 mt-static/plugins/SmartphoneOption
 themes/eiger
+themes/rainier
 
 t/site/
 t/db/mt.db
