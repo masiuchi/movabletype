@@ -343,7 +343,7 @@ sub core_widgets {
             handler  => "${pkg}Dashboard::mt_news_widget",
             singular => 1,
             set      => 'sidebar',
-            view     => 'user',
+            view     => [],
         },
         blog_stats => {
             label    => 'Blog Stats',
