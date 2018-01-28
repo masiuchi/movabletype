@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 # Movable Type (r) Open Source (C) 2005-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
@@ -7,6 +7,7 @@
 # $Id$
 
 use strict;
+use warnings;
 use Getopt::Long;
 
 my ($file1, $file2, $file3);
