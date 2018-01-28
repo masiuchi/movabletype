@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl
 # $Id: 43-localua.t 3531 2009-03-12 09:11:52Z fumiakiy $
 use strict;
 use warnings;
