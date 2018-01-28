@@ -24,11 +24,11 @@ sub core_tags {
         block => {
 
             ## Core
-            Ignore    => sub {''},
-            'If?'     => \&MT::Template::Tags::Core::_hdlr_if,
-            'Unless?' => \&MT::Template::Tags::Core::_hdlr_unless,
-            'Else'    => \&MT::Template::Tags::Core::_hdlr_else,
-            'ElseIf'  => \&MT::Template::Tags::Core::_hdlr_elseif,
+            Ignore         => sub {''},
+            'If?'          => \&MT::Template::Tags::Core::_hdlr_if,
+            'Unless?'      => \&MT::Template::Tags::Core::_hdlr_unless,
+            'Else'         => \&MT::Template::Tags::Core::_hdlr_else,
+            'ElseIf'       => \&MT::Template::Tags::Core::_hdlr_elseif,
             'IfNonEmpty?'  => \&MT::Template::Tags::Core::_hdlr_if_nonempty,
             'IfNonZero?'   => \&MT::Template::Tags::Core::_hdlr_if_nonzero,
             Loop           => \&MT::Template::Tags::Core::_hdlr_loop,
@@ -937,6 +937,9 @@ sub core_tags {
                 '$Core::MT::Template::Tags::Misc::_hdlr_widget_manager',
             CaptchaFields =>
                 '$Core::MT::Template::Tags::Misc::_hdlr_captcha_fields',
+
+            ## Dummy
+            StatsSnippet => sub {''},
         },
         modifier => {
             'numify'  => '$Core::MT::Template::Tags::Filters::_fltr_numify',
@@ -1115,7 +1118,7 @@ sub build_date {
                 unless $blog;
         }
     }
-    my $lang 
+    my $lang
         = $args->{language}
         || $ctx->var('local_lang_id')
         || ( $blog && $blog->date_language );
@@ -1940,7 +1943,7 @@ sub _hdlr_loop {
     my $var = $ctx->var($name);
     return ''
         unless $var && ( ( ref($var) eq 'ARRAY' ) && ( scalar @$var ) )
-            || ( ( ref($var) eq 'HASH' ) && ( scalar( keys %$var ) ) );
+        || ( ( ref($var) eq 'HASH' ) && ( scalar( keys %$var ) ) );
 
     my $hash_var;
     if ( 'HASH' eq ref($var) ) {
@@ -3201,7 +3204,7 @@ sub _hdlr_app_widget {
         : "";
     my $tabbed       = $args->{tabbed} ? ' mt:delegate="tab-container"' : "";
     my $header_class = $tabbed         ? 'widget-header-tabs'           : '';
-    my $return_args = $app->make_return_args;
+    my $return_args  = $app->make_return_args;
     $return_args = encode_html($return_args);
     my $cgi = $app->uri;
     if ( $hosted_widget && ( !$insides !~ m/<form\s/i ) ) {
@@ -3990,7 +3993,7 @@ L<IncludeBlock> tag. If unassigned, the "contents" variable is used.
         # the block (so any variables/context changes made in that template
         # affect the contained template code)
         my $tokens = $ctx->stash('tokens');
-        local $ctx->{__stash}{vars}{lc $name} = sub {
+        local $ctx->{__stash}{vars}{ lc $name } = sub {
             my $builder = $ctx->stash('builder');
             my $html = $builder->build( $ctx, $tokens, $cond );
             return $ctx->error( $builder->errstr ) unless defined $html;
@@ -4239,8 +4242,8 @@ B<Example:> Passing Parameters to a Template Module
                 )
                 )
                 if $cur_tmpl
-                    && $cur_tmpl->id
-                    && ( $cur_tmpl->id == $tmpl->id );
+                && $cur_tmpl->id
+                && ( $cur_tmpl->id == $tmpl->id );
 
             $req->stash( $stash_id, [ $tmpl, undef ] );
         }
@@ -4248,7 +4251,7 @@ B<Example:> Passing Parameters to a Template Module
         my $blog = $ctx->stash('blog') || MT->model('blog')->load($blog_id);
 
         my %include_recipe;
-        my $use_ssi 
+        my $use_ssi
             = $blog
             && $blog->include_system
             && ( $arg->{ssi} || $tmpl->include_with_ssi ) ? 1 : 0;
@@ -4281,13 +4284,14 @@ B<Example:> Passing Parameters to a Template Module
 
         if ( $blog && $blog->include_cache ) {
             $cache_expire_type = $tmpl->cache_expire_type || 0;
-            $cache_enabled = ( ( $arg->{cache} && $arg->{cache} > 0 )
-            || $arg->{cache_key}
-            || $arg->{key}
-            || ( exists $arg->{ttl} )
-            || ( $cache_expire_type != 0 ) ) ? 1 : 0;
+            $cache_enabled
+                = (    ( $arg->{cache} && $arg->{cache} > 0 )
+                    || $arg->{cache_key}
+                    || $arg->{key}
+                    || ( exists $arg->{ttl} )
+                    || ( $cache_expire_type != 0 ) ) ? 1 : 0;
         }
-        my $cache_key 
+        my $cache_key
             = $arg->{cache_key}
             || $arg->{key}
             || $tmpl->get_cache_key();
@@ -4482,7 +4486,8 @@ B<Example:> Passing Parameters to a Template Module
                 MT->translate( "Cannot find included file '[_1]'", $file ) )
                 unless $path;
             local *FH;
-            open FH, $path
+            open FH,
+                $path
                 or return $ctx->error(
                 MT->translate(
                     "Error opening included file '[_1]': [_2]",
@@ -5756,7 +5761,7 @@ B<Example:>
             ,    # year/month, used as default archive map
 
         );
-        $format =~ s!%y/%m!%_Z!g if defined $format;
+        $format =~ s!%y/%m!%_Z!g               if defined $format;
         $format =~ s!%([_-]?[A-Za-z])!$f{$1}!g if defined $format;
 
         # now build this template and return result
@@ -5992,6 +5997,29 @@ sub _hdlr_password_validation_rules {
 
     return $msg;
 }
+
+###########################################################################
+
+=head2 StatsSnippet
+
+A dummy function tag for Rainier theme.
+
+B<See also:>
+
+=over 4
+
+=item * MTStatsSnippet in MT6
+
+L<https://www.movabletype.org/documentation/appendices/tags/statssnippet.html>
+L<https://www.movabletype.jp/documentation/appendices/tags/statssnippet.html>
+
+=item * Rainier theme
+
+L<https://github.com/movabletype/mt-theme-rainier>
+
+=back
+
+=cut
 
 1;
 __END__

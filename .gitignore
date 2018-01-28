@@ -37,6 +37,7 @@ mt-sp.cgi
 plugins/SmartphoneOption
 mt-static/plugins/SmartphoneOption
 themes/eiger
+themes/rainier
 
 t/site/
 t/db/mt.db
@@ -52,4 +53,6 @@ t/db/mt.db
 /php/ext/lib/adodb5/tests
 /php/extlib/smarty/**/.*
 ^/php/extlib/**/.git*
+
+.DS_Store
 
