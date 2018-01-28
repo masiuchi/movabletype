@@ -2439,9 +2439,9 @@ abstract class MTDatabase {
                     $blog_url = $row['blog_site_url'];
 
                 preg_match('/^(https?):\/\/(.+)\/$/', $row['website_url'], $matches);
-                if ( count($matches > 1 ) ) {
+                if ( count($matches) > 1 ) {
                     $site_url = preg_split( '/\/::\//', $blog_url );
-                    if ( count($site_url > 0 ) )
+                    if ( count($site_url) > 0 )
                         $path = $matches[1] . '://' . $site_url[0] . $matches[2] . '/' . $site_url[1];
                     else
                         $path = $row['website_url'] . $this->blog_url;
@@ -2782,6 +2782,7 @@ abstract class MTDatabase {
     public function fetch_comments($args) {
         # load comments
         $extras = array();
+        $filters = array();
 
         $entry_id = intval($args['entry_id']);
 
@@ -3241,6 +3242,7 @@ abstract class MTDatabase {
     function fetch_assets($args) {
         # load assets
         $extras = array();
+        $filters = array();
 
         if (isset($args['blog_id'])) {
             $blog_filter = 'and asset_blog_id = '.intval($args['blog_id']);
