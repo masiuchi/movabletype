@@ -522,6 +522,13 @@ my @CORE_OPT = (
         )
     ],
 
+    [   'XMLRPC::Transport::HTTP::Plack',
+        0, 0,
+        translate(
+            'This module and its dependencies are required to run Movable Type under psgi.'
+        )
+    ],
+
     [   'HTML::Entities',
         0, 0,
         translate(
