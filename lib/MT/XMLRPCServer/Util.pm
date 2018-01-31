@@ -13,6 +13,17 @@ use Time::Local qw( timegm );
 use MT;
 use MT::Util qw( offset_time_list );
 
+my ($HAVE_XML_PARSER);
+
+BEGIN {
+    eval { require XML::Parser };
+    $HAVE_XML_PARSER = $@ ? 0 : 1;
+}
+
+sub have_xml_parser {
+    $HAVE_XML_PARSER;
+}
+
 sub mt_new {
     my $cfg
         = $ENV{MOD_PERL}

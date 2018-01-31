@@ -13,13 +13,6 @@ use MT::Util
 use MT::XMLRPCServer::Util;
 use base qw( MT::ErrorHandler );
 
-my ($HAVE_XML_PARSER);
-
-BEGIN {
-    eval { require XML::Parser };
-    $HAVE_XML_PARSER = $@ ? 0 : 1;
-}
-
 sub _validate_params {
     my ($params) = @_;
 
@@ -283,7 +276,7 @@ sub _new_entry {
     {
         next unless defined $item->{$f};
         my $enc = $mt->{cfg}->PublishCharset;
-        unless ($HAVE_XML_PARSER) {
+        unless ( MT::XMLRPCServer::Util::have_xml_parser() ) {
             $item->{$f} = decode_html( $item->{$f} );
             $item->{$f} =~ s!&apos;!'!g;         #'
         }
@@ -502,7 +495,7 @@ sub _edit_entry {
     {
         next unless defined $item->{$f};
         my $enc = $mt->config('PublishCharset');
-        unless ($HAVE_XML_PARSER) {
+        unless ( MT::XMLRPCServer::Util::have_xml_parser() ) {
             $item->{$f} = decode_html( $item->{$f} );
             $item->{$f} =~ s!&apos;!'!g;         #'
         }
