@@ -7,9 +7,9 @@
 # $Id$
 
 use strict;
-my $MT_DIR;
 
 sub BEGIN {
+    my $MT_DIR;
     require File::Spec;
     if ( !( $MT_DIR = $ENV{MT_HOME} ) ) {
         if ( $0 =~ m!(.*[/\\])! ) {
@@ -26,8 +26,6 @@ sub BEGIN {
 
 use XMLRPC::Transport::HTTP;
 use MT::XMLRPCServer;
-
-$MT::XMLRPCServer::MT_DIR = $MT_DIR;
 
 use vars qw($server);
 {

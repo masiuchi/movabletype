@@ -14,7 +14,7 @@ sub mt_new {
     my $cfg
         = $ENV{MOD_PERL}
         ? Apache->request->dir_config('MTConfig')
-        : ( $ENV{MT_CONFIG} || $MT::XMLRPCServer::MT_DIR . '/mt-config.cgi' );
+        : ( $ENV{MT_CONFIG} || $ENV{MT_HOME} . '/mt-config.cgi' );
     my $mt = MT->new( Config => $cfg )
         or die MT::XMLRPCServer::_fault( MT->errstr );
 
@@ -68,8 +68,6 @@ use MT;
 use MT::Util
     qw( first_n_words decode_html start_background_task archive_file_for );
 use base qw( MT::ErrorHandler );
-
-our $MT_DIR;
 
 my ($HAVE_XML_PARSER);
 
