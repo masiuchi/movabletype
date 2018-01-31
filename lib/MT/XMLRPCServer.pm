@@ -26,12 +26,6 @@ sub _validate_params {
     return 1;
 }
 
-sub _make_token {
-    my @alpha = ( 'a' .. 'z', 'A' .. 'Z', 0 .. 9 );
-    my $token = join '', map $alpha[ rand @alpha ], 1 .. 40;
-    $token;
-}
-
 sub _login {
     my $class = shift;
     my ( $user, $pass, $blog_id ) = @_;
