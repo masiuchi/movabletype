@@ -6,7 +6,10 @@
 
 package MT::XMLRPCServer::Util;
 use strict;
+
+use SOAP::Lite;
 use Time::Local qw( timegm );
+
 use MT;
 use MT::Util qw( offset_time_list );
 
@@ -16,7 +19,7 @@ sub mt_new {
         ? Apache->request->dir_config('MTConfig')
         : ( $ENV{MT_CONFIG} || $ENV{MT_HOME} . '/mt-config.cgi' );
     my $mt = MT->new( Config => $cfg )
-        or die MT::XMLRPCServer::_fault( MT->errstr );
+        or die fault( MT->errstr );
 
     ## Initialize the MT::Request singleton for this particular request.
     $mt->request->reset();
@@ -28,7 +31,7 @@ sub mt_new {
 
 sub iso2ts {
     my ( $blog, $iso ) = @_;
-    die MT::XMLRPCServer::_fault( MT->translate("Invalid timestamp format") )
+    die fault( MT->translate("Invalid timestamp format") )
         unless $iso
         =~ /^(\d{4})(?:-?(\d{2})(?:-?(\d\d?)(?:T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})?)?)?)?/;
     my ( $y, $mo, $d, $h, $m, $s, $offset )
@@ -61,6 +64,12 @@ sub ts2iso {
     sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $yr, $mo, $dy, $hr, $mn, $sc );
 }
 
+sub fault {
+    my $enc = mt_new()->config('PublishCharset');
+    SOAP::Fault->faultcode(1)
+        ->faultstring( SOAP::Data->type( string => $_[0] || '' ) );
+}
+
 package MT::XMLRPCServer;
 use strict;
 
@@ -80,19 +89,13 @@ sub _validate_params {
     my ($params) = @_;
 
     foreach my $p (@$params) {
-        die _fault( MT->translate("Invalid parameter") )
+        die MT::XMLRPCServer::Util::fault(
+            MT->translate("Invalid parameter") )
             if ( 'ARRAY' eq ref $p )
             or ( 'HASH' eq ref $p );
     }
 
     return 1;
-}
-
-sub _fault {
-    my $mt  = MT::XMLRPCServer::Util::mt_new();
-    my $enc = $mt->config('PublishCharset');
-    SOAP::Fault->faultcode(1)
-        ->faultstring( SOAP::Data->type( string => $_[0] || '' ) );
 }
 
 ## This is sort of a hack. XML::Parser automatically makes everything
@@ -141,12 +144,12 @@ sub _login {
     my $enc = $mt->config('PublishCharset');
     require MT::Author;
     my $author = MT::Author->load( { name => $user, type => 1 } ) or return;
-    die _fault(
+    die MT::XMLRPCServer::Util::fault(
         MT->translate(
             "No web services password assigned.  Please see your user profile to set it."
         )
     ) unless $author->api_password;
-    die _fault(
+    die MT::XMLRPCServer::Util::fault(
         MT->translate("Failed login attempt by disabled user '[_1]'") )
         unless $author->is_active;
     my $auth = $author->api_password eq $pass;
@@ -205,7 +208,7 @@ sub _apply_basename {
             $param->{__permaLink_folders} = \@folders;
         }
         else {
-            die _fault(
+            die MT::XMLRPCServer::Util::fault(
                 MT->translate(
                     "Requested permalink '[_1]' is not available for this page",
                     $req_url
@@ -267,7 +270,7 @@ sub _save_placements {
                     $folder->label($basename);
                     $changed = 1;
                     $folder->save
-                        or die _fault(
+                        or die MT::XMLRPCServer::Util::fault(
                         MT->translate(
                             "Saving folder failed: [_1]",
                             $folder->errstr
@@ -308,7 +311,7 @@ CATEGORY: for my $category (@categories) {
         }
         $place->category_id( $category->id );
         $place->save
-            or die _fault(
+            or die MT::XMLRPCServer::Util::fault(
             MT->translate( "Saving placement failed: [_1]", $place->errstr )
             );
 
@@ -335,7 +338,8 @@ sub _new_entry {
     my ( $blog_id, $user, $pass, $item, $publish )
         = @param{qw( blog_id user pass item publish )};
     my $obj_type = $param{page} ? 'page' : 'entry';
-    die _fault( MT->translate("No blog_id") ) unless $blog_id;
+    die MT::XMLRPCServer::Util::fault( MT->translate("No blog_id") )
+        unless $blog_id;
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     for my $f (
         qw( title description mt_text_more
@@ -352,12 +356,15 @@ sub _new_entry {
     require MT::Blog;
     my $blog
         = MT::Blog->load( { id => $blog_id, class => [ 'blog', 'website' ] } )
-        or die _fault( MT->translate( "Invalid blog ID '[_1]'", $blog_id ) );
-    die _fault( MT->translate( "Invalid blog ID '[_1]'", $blog_id ) )
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid blog ID '[_1]'", $blog_id ) );
+    die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid blog ID '[_1]'", $blog_id ) )
         if !$blog->is_blog && !$param{page};
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Permission denied.") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
         if !$author->is_superuser
         && ( !$perms
         || !$perms->can_do('create_new_entry_via_xmlrpc_server') );
@@ -403,7 +410,7 @@ sub _new_entry {
     for my $field (qw( allow_pings )) {
         my $val = $item->{"mt_$field"};
         next unless defined $val;
-        die _fault(
+        die MT::XMLRPCServer::Util::fault(
             MT->translate(
                 "Value for 'mt_[_1]' must be either 0 or 1 (was '[_2]')",
                 $field, $val
@@ -427,7 +434,7 @@ sub _new_entry {
     }
     if ( my $iso = $item->{dateCreated} ) {
         $entry->authored_on( MT::XMLRPCServer::Util::iso2ts( $blog, $iso ) )
-            || die MT::XMLRPCServer::_fault(
+            || die MT::XMLRPCServer::Util::fault(
             MT->translate("Invalid timestamp format") );
         require MT::DateTime;
         $entry->status( MT::Entry::FUTURE() )
@@ -443,7 +450,7 @@ sub _new_entry {
     $entry->discover_tb_from_entry();
 
     MT->run_callbacks( "api_pre_save.$obj_type", $mt, $entry, $orig_entry )
-        || die MT::XMLRPCServer::_fault(
+        || die MT::XMLRPCServer::Util::fault(
         MT->translate( "PreSave failed [_1]", MT->errstr ) );
 
     $entry->save;
@@ -475,7 +482,8 @@ sub _new_entry {
     );
 
     if ($publish) {
-        $class->_publish( $mt, $entry ) or die _fault( $class->errstr );
+        $class->_publish( $mt, $entry )
+            or die MT::XMLRPCServer::Util::fault( $class->errstr );
     }
     delete $ENV{SERVER_SOFTWARE};
     SOAP::Data->type( string => $entry->id );
@@ -549,7 +557,8 @@ sub _edit_entry {
     my ( $blog_id, $entry_id, $user, $pass, $item, $publish )
         = @param{qw( blog_id entry_id user pass item publish )};
     my $obj_type = $param{page} ? 'page' : 'entry';
-    die _fault( MT->translate("No entry_id") ) unless $entry_id;
+    die MT::XMLRPCServer::Util::fault( MT->translate("No entry_id") )
+        unless $entry_id;
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     for my $f (
         qw( title description mt_text_more
@@ -564,17 +573,21 @@ sub _edit_entry {
         }
     }
     my $entry = MT->model($obj_type)->load($entry_id)
-        or
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     if ( $blog_id && $blog_id != $entry->blog_id ) {
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        die MT::XMLRPCServer::Util::fault(
+            MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     }
     require MT::Blog;
     my $blog = MT::Blog->load($blog_id)
-        or die _fault( MT->translate( "Invalid blog ID '[_1]'", $blog_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid blog ID '[_1]'", $blog_id ) );
     my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Not allowed to edit entry") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault(
+        MT->translate("Not allowed to edit entry") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
     my $orig_entry = $entry->clone;
@@ -594,7 +607,7 @@ sub _edit_entry {
     for my $field (qw( allow_pings )) {
         my $val = $item->{"mt_$field"};
         next unless defined $val;
-        die _fault(
+        die MT::XMLRPCServer::Util::fault(
             MT->translate(
                 "Value for 'mt_[_1]' must be either 0 or 1 (was '[_2]')",
                 $field, $val
@@ -619,7 +632,7 @@ sub _edit_entry {
     if ( my $iso = $item->{dateCreated} ) {
         $entry->authored_on(
             MT::XMLRPCServer::Util::iso2ts( $entry->blog_id, $iso ) )
-            || die MT::XMLRPCServer::_fault(
+            || die MT::XMLRPCServer::Util::fault(
             MT->translate("Invalid timestamp format") );
         require MT::DateTime;
         $entry->status( MT::Entry::FUTURE() )
@@ -632,7 +645,7 @@ sub _edit_entry {
     $entry->discover_tb_from_entry();
 
     MT->run_callbacks( "api_pre_save.$obj_type", $mt, $entry, $orig_entry )
-        || die MT::XMLRPCServer::_fault(
+        || die MT::XMLRPCServer::Util::fault(
         MT->translate( "PreSave failed [_1]", MT->errstr ) );
 
     $entry->save;
@@ -665,7 +678,7 @@ sub _edit_entry {
 
     if ($publish) {
         $class->_publish( $mt, $entry, undef, $old_categories )
-            or die _fault( $class->errstr );
+            or die MT::XMLRPCServer::Util::fault( $class->errstr );
     }
     SOAP::Data->type( boolean => 1 );
 }
@@ -749,7 +762,8 @@ sub getUsersBlogs {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ($author) = $class->_login( $user, $pass );
-    die _fault( MT->translate("Invalid login") ) unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
 
     require MT::Permission;
     require MT::Blog;
@@ -800,7 +814,8 @@ sub getUserInfo {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ($author) = $class->_login( $user, $pass );
-    die _fault( MT->translate("Invalid login") ) unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
     my ( $fname, $lname ) = split /\s+/, $author->name;
     $lname ||= '';
     {   userid    => SOAP::Data->type( string => $author->id ),
@@ -820,8 +835,9 @@ sub _get_entries {
     my $obj_type = $param{page} ? 'page' : 'entry';
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Permission denied.") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_do('get_entries_via_xmlrpc_server') );
     my $iter = MT->model($obj_type)->load_iter(
@@ -937,11 +953,12 @@ sub _delete_entry {
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my $obj_type = $param{page} ? 'page' : 'entry';
     my $entry    = MT->model($obj_type)->load($entry_id)
-        or
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Permission denied.") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
 
@@ -958,12 +975,13 @@ sub _delete_entry {
     # Rebuild archives
     if (%recipe) {
         $mt->rebuild_archives( Blog => $blog, Recipe => \%recipe, )
-            or die _fault( $class->errstr );
+            or die MT::XMLRPCServer::Util::fault( $class->errstr );
     }
 
     # Rebuild index files
     if ( $mt->config('RebuildAtDelete') ) {
-        $mt->rebuild_indexes( Blog => $blog ) or die _fault( $class->errstr );
+        $mt->rebuild_indexes( Blog => $blog )
+            or die MT::XMLRPCServer::Util::fault( $class->errstr );
     }
 
     $mt->log(
@@ -1025,14 +1043,17 @@ sub _get_entry {
     my $obj_type = $param{page} ? 'page' : 'entry';
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my $entry = MT->model($obj_type)->load($entry_id)
-        or
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     if ( $blog_id && $blog_id != $entry->blog_id ) {
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        die MT::XMLRPCServer::Util::fault(
+            MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     }
     my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Not allowed to get entry") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault(
+        MT->translate("Not allowed to get entry") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
     my $co = sprintf "%04d%02d%02dT%02d:%02d:%02d", unpack 'A4A2A2A2A2A2',
@@ -1147,8 +1168,9 @@ sub getCategoryList {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Permission denied.") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
         if !$author->is_superuser
         && ( !$perms
         || !$perms->can_do('get_category_list_via_xmlrpc_server') );
@@ -1174,8 +1196,9 @@ sub getCategories {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Permission denied.") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_do('get_categories_via_xmlrpc_server') );
     require MT::Category;
@@ -1213,8 +1236,9 @@ sub getTagList {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Permission denied.") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_do('get_tag_list_via_xmlrpc_server') );
     require MT::Tag;
@@ -1248,11 +1272,12 @@ sub getPostCategories {
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     require MT::Entry;
     my $entry = MT::Entry->load($entry_id)
-        or
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Permission denied.") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
         if !$author->is_superuser
         && ( !$perms
         || !$perms->can_do('get_post_categories_via_xmlrpc_server') );
@@ -1285,11 +1310,13 @@ sub setPostCategories {
     require MT::Entry;
     require MT::Placement;
     my $entry = MT::Entry->load($entry_id)
-        or
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Not allowed to set entry categories") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault(
+        MT->translate("Not allowed to set entry categories") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
     my @place = MT::Placement->load( { entry_id => $entry_id } );
@@ -1317,12 +1344,12 @@ sub setPostCategories {
         $is_primary = 0 if $place->is_primary;
         $place->category_id( $cat->{categoryId} );
         $place->save
-            or die _fault(
+            or die MT::XMLRPCServer::Util::fault(
             MT->translate( "Saving placement failed: [_1]", $place->errstr )
             );
     }
     $class->_publish( $mt, $entry, undef, [ map { $_->category_id } @place ] )
-        or die _fault( $class->errstr );
+        or die MT::XMLRPCServer::Util::fault( $class->errstr );
     SOAP::Data->type( boolean => 1 );
 }
 
@@ -1359,16 +1386,18 @@ sub publishPost {
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     require MT::Entry;
     my $entry = MT::Entry->load($entry_id)
-        or
-        die _fault( MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Not allowed to edit entry") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault(
+        MT->translate("Not allowed to edit entry") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
     $mt->rebuild_entry( Entry => $entry, BuildDependencies => 1 )
-        or
-        die _fault( MT->translate( "Publishing failed: [_1]", $mt->errstr ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Publishing failed: [_1]", $mt->errstr ) );
     SOAP::Data->type( boolean => 1 );
 }
 
@@ -1380,7 +1409,8 @@ sub runPeriodicTasks {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
     my $author = $class->_login( $user, $pass );
-    die _fault( MT->translate("Invalid login") ) unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
 
     $mt->run_tasks;
 
@@ -1395,9 +1425,11 @@ sub publishScheduledFuturePosts {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
     my $author = $class->_login( $user, $pass );
-    die _fault( MT->translate("Invalid login") ) unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
     my $blog = MT::Blog->load($blog_id)
-        or die _fault( MT->translate( 'Cannot load blog #[_1].', $blog_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( 'Cannot load blog #[_1].', $blog_id ) );
 
     my $now = time;
 
@@ -1459,7 +1491,8 @@ sub getNextScheduled {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
     my $author = $class->_login( $user, $pass );
-    die _fault( MT->translate("Invalid login") ) unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
 
     my $next_scheduled = MT::get_next_sched_post_for_user( $author->id() );
 
@@ -1476,7 +1509,8 @@ sub setRemoteAuthToken {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ($author) = $class->_login( $user, $pass );
-    die _fault( MT->translate("Invalid login") ) unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
     $author->remote_auth_username($remote_auth_username);
     $author->remote_auth_token($remote_auth_token);
     $author->save();
@@ -1492,20 +1526,25 @@ sub newMediaObject {
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
-    die _fault( MT->translate("Invalid login") ) unless $author;
-    die _fault( MT->translate("Not allowed to upload files") )
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault(
+        MT->translate("Not allowed to upload files") )
         if !$author->is_superuser
         && ( !$perms || !$perms->can_do('upload_asset_via_xmlrpc_server') );
 
     require MT::Blog;
     require File::Spec;
     my $blog = MT::Blog->load($blog_id)
-        or die _fault( MT->translate( 'Cannot load blog #[_1].', $blog_id ) );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( 'Cannot load blog #[_1].', $blog_id ) );
 
     my $fname = $file->{name}
-        or die _fault( MT->translate("No filename provided") );
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate("No filename provided") );
     if ( $fname =~ m!\.\.|\0|\|! ) {
-        die _fault( MT->translate( "Invalid filename '[_1]'", $fname ) );
+        die MT::XMLRPCServer::Util::fault(
+            MT->translate( "Invalid filename '[_1]'", $fname ) );
     }
 
     if ( my $deny_exts = MT->config->DeniedAssetFileExtensions ) {
@@ -1514,7 +1553,7 @@ sub newMediaObject {
             else                  {qr/\.$_/i}
         } split '\s?,\s?', $deny_exts;
         my @ret = File::Basename::fileparse( $fname, @deny_exts );
-        die _fault(
+        die MT::XMLRPCServer::Util::fault(
             MT->translate(
                 'The file ([_1]) that you uploaded is not allowed.', $fname
             )
@@ -1527,7 +1566,7 @@ sub newMediaObject {
             else                  {qr/\.$_/i}
         } split '\s?,\s?', $allow_exts;
         my @ret = File::Basename::fileparse( $fname, @allowed );
-        die _fault(
+        die MT::XMLRPCServer::Util::fault(
             MT->translate(
                 'The file ([_1]) that you uploaded is not allowed.', $fname
             )
@@ -1544,7 +1583,7 @@ sub newMediaObject {
         my $data = $file->{bits};
         open( $fh, "+<", \$data );
         close($fh),
-            die _fault(
+            die MT::XMLRPCServer::Util::fault(
             MT->translate(
                 "Saving [_1] failed: [_2]",
                 $file->{name},
@@ -1562,7 +1601,7 @@ sub newMediaObject {
         if $vol;
     unless ( $fmgr->exists($path) ) {
         $fmgr->mkpath($path)
-            or die _fault(
+            or die MT::XMLRPCServer::Util::fault(
             MT->translate(
                 "Error making path '[_1]': [_2]",
                 $path, $fmgr->errstr
@@ -1571,14 +1610,14 @@ sub newMediaObject {
     }
     defined( my $bytes
             = $fmgr->put_data( $file->{bits}, $local_file, 'upload' ) )
-        or die _fault(
+        or die MT::XMLRPCServer::Util::fault(
         MT->translate( "Error writing uploaded file: [_1]", $fmgr->errstr ) );
     my $url = $blog->site_url . $fname;
 
     require File::Basename;
     my $local_basename = File::Basename::basename($local_file);
     eval { require Image::Size; };
-    die _fault(
+    die MT::XMLRPCServer::Util::fault(
         MT->translate(
             "Perl module Image::Size is required to determine width and height of uploaded images."
         )
@@ -1673,7 +1712,7 @@ sub newMediaObject {
 ## We assign it twice to get rid of "setTemplate used only once" warnings.
 
 sub getTemplate {
-    die _fault(
+    die MT::XMLRPCServer::Util::fault(
         MT->translate(
             "Template methods are not implemented, due to differences between the Blogger API and the Movable Type API."
         )
