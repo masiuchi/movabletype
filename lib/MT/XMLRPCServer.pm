@@ -26,27 +26,6 @@ sub _validate_params {
     return 1;
 }
 
-## This is sort of a hack. XML::Parser automatically makes everything
-## UTF-8, and that is causing severe problems with the serialization
-## of database records (what happens is this: we construct a string
-## consisting of pack('N', length($string)) . $string. If the $string SV
-## is flagged as UTF-8, the packed length is then upgraded to UTF-8,
-## which turns characters with values greater than 128 into two bytes,
-## like v194.129. And so on. This is obviously now what we want, because
-## pack produces a series of bytes, not a string that should be mucked
-## about with.)
-##
-## The following subroutine strips the UTF8 flag from a string, thus
-## forcing it into a series of bytes. "pack 'C0'" is a magic way of
-## forcing the following string to be packed as bytes, not as UTF8.
-
-sub no_utf8 {
-    for (@_) {
-        next if ref;
-        $_ = pack 'C0A*', $_;
-    }
-}
-
 ## SOAP::Lite 0.7 or above, expects string with UTF8 flag for response data.
 sub _encode_text_for_soap {
     if ( $] > 5.007 ) {
