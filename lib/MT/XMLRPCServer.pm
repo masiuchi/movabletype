@@ -378,21 +378,19 @@ sub newPost {
     }
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $blog_id, $user, $pass, $publish ] )
-        or return;
+        [ $blog_id, $user, $pass, $publish ] );
     my $values;
     foreach my $k ( keys %$item ) {
         if ( 'categories' eq $k || 'mt_tb_ping_urls' eq $k ) {
 
             # XMLRPC supports categories array and mt_tb_ping_urls array
-            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } )
-                or return;
+            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } );
         }
         else {
             push @$values, $item->{$k};
         }
     }
-    MT::XMLRPCServer::Util::validate_params( \@$values ) or return;
+    MT::XMLRPCServer::Util::validate_params( \@$values );
 
     $class->_new_entry(
         blog_id => $blog_id,
@@ -408,21 +406,19 @@ sub newPage {
     my ( $blog_id, $user, $pass, $item, $publish ) = @_;
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $blog_id, $user, $pass, $publish ] )
-        or return;
+        [ $blog_id, $user, $pass, $publish ] );
     my $values;
     foreach my $k ( keys %$item ) {
         if ( 'mt_tb_ping_urls' eq $k ) {
 
             # XMLRPC supports mt_tb_ping_urls array
-            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } )
-                or return;
+            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } );
         }
         else {
             push @$values, $item->{$k};
         }
     }
-    MT::XMLRPCServer::Util::validate_params( \@$values ) or return;
+    MT::XMLRPCServer::Util::validate_params( \@$values );
 
     $class->_new_entry(
         blog_id => $blog_id,
@@ -579,21 +575,19 @@ sub editPost {
     }
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $entry_id, $user, $pass, $publish ] )
-        or return;
+        [ $entry_id, $user, $pass, $publish ] );
     my $values;
     foreach my $k ( keys %$item ) {
         if ( 'categories' eq $k || 'mt_tb_ping_urls' eq $k ) {
 
             # XMLRPC supports categories array and mt_tb_ping_urls array
-            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } )
-                or return;
+            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } );
         }
         else {
             push @$values, $item->{$k};
         }
     }
-    MT::XMLRPCServer::Util::validate_params( \@$values ) or return;
+    MT::XMLRPCServer::Util::validate_params( \@$values );
 
     $class->_edit_entry(
         entry_id => $entry_id,
@@ -609,21 +603,19 @@ sub editPage {
     my ( $blog_id, $entry_id, $user, $pass, $item, $publish ) = @_;
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $blog_id, $entry_id, $user, $pass, $publish ] )
-        or return;
+        [ $blog_id, $entry_id, $user, $pass, $publish ] );
     my $values;
     foreach my $k ( keys %$item ) {
         if ( 'mt_tb_ping_urls' eq $k ) {
 
             # XMLRPC supports mt_tb_ping_urls array
-            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } )
-                or return;
+            MT::XMLRPCServer::Util::validate_params( \@{ $item->{$k} } );
         }
         else {
             push @$values, $item->{$k};
         }
     }
-    MT::XMLRPCServer::Util::validate_params( \@$values ) or return;
+    MT::XMLRPCServer::Util::validate_params( \@$values );
 
     $class->_edit_entry(
         blog_id  => $blog_id,
@@ -646,7 +638,7 @@ sub getUsersBlogs {
     }
     my ( $appkey, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] ) or return;
+    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ($author) = $class->_login( $user, $pass );
@@ -698,7 +690,7 @@ sub getUserInfo {
     }
     my ( $appkey, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] ) or return;
+    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ($author) = $class->_login( $user, $pass );
@@ -795,8 +787,7 @@ sub getRecentPosts {
     }
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $blog_id, $user, $pass, $num ] )
-        or return;
+        [ $blog_id, $user, $pass, $num ] );
 
     $class->_get_entries(
         blog_id => $blog_id,
@@ -811,8 +802,7 @@ sub getRecentPostTitles {
     my ( $blog_id, $user, $pass, $num ) = @_;
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $blog_id, $user, $pass, $num ] )
-        or return;
+        [ $blog_id, $user, $pass, $num ] );
 
     $class->_get_entries(
         blog_id     => $blog_id,
@@ -827,8 +817,7 @@ sub getPages {
     my $class = shift;
     my ( $blog_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     $class->_get_entries(
         blog_id => $blog_id,
@@ -903,8 +892,7 @@ sub deletePost {
     my ( $appkey, $entry_id, $user, $pass, $publish ) = @_;
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $entry_id, $user, $pass, $publish ] )
-        or return;
+        [ $entry_id, $user, $pass, $publish ] );
 
     $class->_delete_entry(
         entry_id => $entry_id,
@@ -919,8 +907,7 @@ sub deletePage {
     my ( $blog_id, $user, $pass, $entry_id ) = @_;
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $blog_id, $user, $pass, $entry_id ] )
-        or return;
+        [ $blog_id, $user, $pass, $entry_id ] );
 
     $class->_delete_entry(
         blog_id  => $blog_id,
@@ -999,8 +986,7 @@ sub getPost {
     my $class = shift;
     my ( $entry_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] );
 
     $class->_get_entry( entry_id => $entry_id, user => $user, pass => $pass );
 }
@@ -1010,8 +996,7 @@ sub getPage {
     my ( $blog_id, $entry_id, $user, $pass ) = @_;
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $blog_id, $entry_id, $user, $pass ] )
-        or return;
+        [ $blog_id, $entry_id, $user, $pass ] );
 
     $class->_get_entry(
         blog_id  => $blog_id,
@@ -1064,8 +1049,7 @@ sub getCategoryList {
     my $class = shift;
     my ( $blog_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
@@ -1093,8 +1077,7 @@ sub getCategories {
     my $class = shift;
     my ( $blog_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
@@ -1134,8 +1117,7 @@ sub getTagList {
     my $class = shift;
     my ( $blog_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
@@ -1170,8 +1152,7 @@ sub getPostCategories {
     my $class = shift;
     my ( $entry_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     require MT::Entry;
@@ -1205,10 +1186,9 @@ sub setPostCategories {
     my $class = shift;
     my ( $entry_id, $user, $pass, $cats ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] );
     foreach my $c (@$cats) {
-        MT::XMLRPCServer::Util::validate_params( [ values %$c ] ) or return;
+        MT::XMLRPCServer::Util::validate_params( [ values %$c ] );
     }
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
@@ -1262,7 +1242,7 @@ sub getTrackbackPings {
     my $class = shift;
     my ($entry_id) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [$entry_id] ) or return;
+    MT::XMLRPCServer::Util::validate_params( [$entry_id] );
 
     require MT::Trackback;
     require MT::TBPing;
@@ -1286,8 +1266,7 @@ sub publishPost {
     my $class = shift;
     my ( $entry_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     require MT::Entry;
@@ -1311,7 +1290,7 @@ sub runPeriodicTasks {
     my $class = shift;
     my ( $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] ) or return;
+    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
     my $author = $class->_login( $user, $pass );
@@ -1327,8 +1306,7 @@ sub publishScheduledFuturePosts {
     my $class = shift;
     my ( $blog_id, $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] )
-        or return;
+    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
     my $author = $class->_login( $user, $pass );
@@ -1394,7 +1372,7 @@ sub getNextScheduled {
     my $class = shift;
     my ( $user, $pass ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] ) or return;
+    MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
     my $author = $class->_login( $user, $pass );
@@ -1411,8 +1389,7 @@ sub setRemoteAuthToken {
     my ( $user, $pass, $remote_auth_username, $remote_auth_token ) = @_;
 
     MT::XMLRPCServer::Util::validate_params(
-        [ $user, $pass, $remote_auth_username, $remote_auth_token ] )
-        or return;
+        [ $user, $pass, $remote_auth_username, $remote_auth_token ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ($author) = $class->_login( $user, $pass );
@@ -1428,9 +1405,8 @@ sub newMediaObject {
     my $class = shift;
     my ( $blog_id, $user, $pass, $file ) = @_;
 
-    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] )
-        or return;
-    MT::XMLRPCServer::Util::validate_params( [ values %$file ] ) or return;
+    MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
+    MT::XMLRPCServer::Util::validate_params( [ values %$file ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
     my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
