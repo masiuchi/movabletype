@@ -9,38 +9,9 @@ use strict;
 
 use MT;
 use MT::Util;
+use MT::XMLRPCServer::Core;
 use MT::XMLRPCServer::Util;
 use base qw( MT::ErrorHandler );
-
-sub _login {
-    my $class = shift;
-    my ( $user, $pass, $blog_id ) = @_;
-
-    my $mt  = MT::XMLRPCServer::Util::mt_new();
-    my $enc = $mt->config('PublishCharset');
-    require MT::Author;
-    my $author = MT::Author->load( { name => $user, type => 1 } ) or return;
-    die MT::XMLRPCServer::Util::fault(
-        MT->translate(
-            "No web services password assigned.  Please see your user profile to set it."
-        )
-    ) unless $author->api_password;
-    die MT::XMLRPCServer::Util::fault(
-        MT->translate("Failed login attempt by disabled user '[_1]'") )
-        unless $author->is_active;
-    my $auth = $author->api_password eq $pass;
-    $auth ||= crypt( $pass, $author->api_password ) eq $author->api_password;
-    return unless $auth;
-    return $author unless $blog_id;
-    require MT::Permission;
-    my $perms = MT::Permission->load(
-        {   author_id => $author->id,
-            blog_id   => $blog_id
-        }
-    );
-
-    ( $author, $perms );
-}
 
 sub _publish {
     my $class = shift;
@@ -237,7 +208,8 @@ sub _new_entry {
     die MT::XMLRPCServer::Util::fault(
         MT->translate( "Invalid blog ID '[_1]'", $blog_id ) )
         if !$blog->is_blog && !$param{page};
-    my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
@@ -461,7 +433,8 @@ sub _edit_entry {
     my $blog = MT::Blog->load($blog_id)
         or die MT::XMLRPCServer::Util::fault(
         MT->translate( "Invalid blog ID '[_1]'", $blog_id ) );
-    my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault(
@@ -640,7 +613,7 @@ sub getUsersBlogs {
     MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ($author) = $class->_login( $user, $pass );
+    my ($author) = MT::XMLRPCServer::Core->login( $user, $pass );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
 
@@ -692,7 +665,7 @@ sub getUserInfo {
     MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ($author) = $class->_login( $user, $pass );
+    my ($author) = MT::XMLRPCServer::Core->login( $user, $pass );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     my ( $fname, $lname ) = split /\s+/, $author->name;
@@ -713,7 +686,8 @@ sub _get_entries {
         = @param{qw( blog_id user pass num titles_only )};
     my $obj_type = $param{page} ? 'page' : 'entry';
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
@@ -836,7 +810,8 @@ sub _delete_entry {
     my $entry    = MT->model($obj_type)->load($entry_id)
         or die MT::XMLRPCServer::Util::fault(
         MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
@@ -932,7 +907,8 @@ sub _get_entry {
         die MT::XMLRPCServer::Util::fault(
             MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
     }
-    my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault(
@@ -1051,7 +1027,8 @@ sub getCategoryList {
     MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
@@ -1079,7 +1056,8 @@ sub getCategories {
     MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
@@ -1119,7 +1097,8 @@ sub getTagList {
     MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
@@ -1158,7 +1137,8 @@ sub getPostCategories {
     my $entry = MT::Entry->load($entry_id)
         or die MT::XMLRPCServer::Util::fault(
         MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
@@ -1196,7 +1176,8 @@ sub setPostCategories {
     my $entry = MT::Entry->load($entry_id)
         or die MT::XMLRPCServer::Util::fault(
         MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault(
@@ -1272,7 +1253,8 @@ sub publishPost {
     my $entry = MT::Entry->load($entry_id)
         or die MT::XMLRPCServer::Util::fault(
         MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    my ( $author, $perms ) = $class->_login( $user, $pass, $entry->blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault(
@@ -1292,7 +1274,7 @@ sub runPeriodicTasks {
     MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
-    my $author = $class->_login( $user, $pass );
+    my $author = MT::XMLRPCServer::Core->login( $user, $pass );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
 
@@ -1308,7 +1290,7 @@ sub publishScheduledFuturePosts {
     MT::XMLRPCServer::Util::validate_params( [ $blog_id, $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
-    my $author = $class->_login( $user, $pass );
+    my $author = MT::XMLRPCServer::Core->login( $user, $pass );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     my $blog = MT::Blog->load($blog_id)
@@ -1374,7 +1356,7 @@ sub getNextScheduled {
     MT::XMLRPCServer::Util::validate_params( [ $user, $pass ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();
-    my $author = $class->_login( $user, $pass );
+    my $author = MT::XMLRPCServer::Core->login( $user, $pass );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
 
@@ -1391,7 +1373,7 @@ sub setRemoteAuthToken {
         [ $user, $pass, $remote_auth_username, $remote_auth_token ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ($author) = $class->_login( $user, $pass );
+    my ($author) = MT::XMLRPCServer::Core->login( $user, $pass );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     $author->remote_auth_username($remote_auth_username);
@@ -1408,7 +1390,8 @@ sub newMediaObject {
     MT::XMLRPCServer::Util::validate_params( [ values %$file ] );
 
     my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my ( $author, $perms ) = $class->_login( $user, $pass, $blog_id );
+    my ( $author, $perms )
+        = MT::XMLRPCServer::Core->login( $user, $pass, $blog_id );
     die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
         unless $author;
     die MT::XMLRPCServer::Util::fault(
