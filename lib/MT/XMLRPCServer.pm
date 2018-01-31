@@ -26,17 +26,6 @@ sub _validate_params {
     return 1;
 }
 
-## SOAP::Lite 0.7 or above, expects string with UTF8 flag for response data.
-sub _encode_text_for_soap {
-    if ( $] > 5.007 ) {
-        require Encode;
-        return Encode::decode( 'utf-8', encode_text(@_) );
-    }
-    else {
-        return encode_text(@_);
-    }
-}
-
 sub _make_token {
     my @alpha = ( 'a' .. 'z', 'A' .. 'Z', 0 .. 9 );
     my $token = join '', map $alpha[ rand @alpha ], 1 .. 40;
