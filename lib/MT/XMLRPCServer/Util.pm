@@ -81,5 +81,17 @@ sub fault {
         ->faultstring( SOAP::Data->type( string => $_[0] || '' ) );
 }
 
+sub validate_params {
+    my ($params) = @_;
+
+    foreach my $p (@$params) {
+        die fault( MT->translate("Invalid parameter") )
+            if ( 'ARRAY' eq ref $p )
+            or ( 'HASH' eq ref $p );
+    }
+
+    return 1;
+}
+
 1;
 
