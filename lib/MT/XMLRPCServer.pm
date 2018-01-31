@@ -8,7 +8,7 @@ package MT::XMLRPCServer;
 use strict;
 
 use MT;
-use MT::Util qw( decode_html start_background_task archive_file_for );
+use MT::Util;
 use MT::XMLRPCServer::Util;
 use base qw( MT::ErrorHandler );
 
@@ -225,7 +225,7 @@ sub _new_entry {
         next unless defined $item->{$f};
         my $enc = $mt->{cfg}->PublishCharset;
         unless ( MT::XMLRPCServer::Util::have_xml_parser() ) {
-            $item->{$f} = decode_html( $item->{$f} );
+            $item->{$f} = MT::Util::decode_html( $item->{$f} );
             $item->{$f} =~ s!&apos;!'!g;         #'
         }
     }
@@ -446,7 +446,7 @@ sub _edit_entry {
         next unless defined $item->{$f};
         my $enc = $mt->config('PublishCharset');
         unless ( MT::XMLRPCServer::Util::have_xml_parser() ) {
-            $item->{$f} = decode_html( $item->{$f} );
+            $item->{$f} = MT::Util::decode_html( $item->{$f} );
             $item->{$f} =~ s!&apos;!'!g;         #'
         }
     }
@@ -1093,7 +1093,7 @@ sub getCategories {
 
     while ( my $cat = $iter->() ) {
         my $url = File::Spec->catfile( $blog->site_url,
-            archive_file_for( undef, $blog, 'Category', $cat ) );
+            MT::Util::archive_file_for( undef, $blog, 'Category', $cat ) );
         push @data,
             {
             categoryId => SOAP::Data->type( string => $cat->id ),
@@ -1348,7 +1348,7 @@ sub publishScheduledFuturePosts {
             $entry->save or die $entry->errstr;
 
             $types{ $entry->class } = 1;
-            start_background_task(
+            MT::Util::start_background_task(
                 sub {
                     $mt->rebuild_entry( Entry => $entry, Blog => $blog )
                         or die $mt->errstr;
