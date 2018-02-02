@@ -77,140 +77,6 @@ sub newPage {
     );
 }
 
-sub _edit_entry {
-    my $class = shift;
-    my %param = @_;
-    my ( $blog_id, $entry_id, $user, $pass, $item, $publish )
-        = @param{qw( blog_id entry_id user pass item publish )};
-    my $obj_type = $param{page} ? 'page' : 'entry';
-    die MT::XMLRPCServer::Util::fault( MT->translate("No entry_id") )
-        unless $entry_id;
-    my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    for my $f (
-        qw( title description mt_text_more
-        mt_excerpt mt_keywords mt_tags mt_basename wp_slug )
-        )
-    {
-        next unless defined $item->{$f};
-        my $enc = $mt->config('PublishCharset');
-        unless ( MT::XMLRPCServer::Util::have_xml_parser() ) {
-            $item->{$f} = MT::Util::decode_html( $item->{$f} );
-            $item->{$f} =~ s!&apos;!'!g;         #'
-        }
-    }
-    my $entry = MT->model($obj_type)->load($entry_id)
-        or die MT::XMLRPCServer::Util::fault(
-        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    if ( $blog_id && $blog_id != $entry->blog_id ) {
-        die MT::XMLRPCServer::Util::fault(
-            MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    }
-    require MT::Blog;
-    my $blog = MT::Blog->load($blog_id)
-        or die MT::XMLRPCServer::Util::fault(
-        MT->translate( "Invalid blog ID '[_1]'", $blog_id ) );
-    my ( $author, $perms )
-        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
-    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
-        unless $author;
-    die MT::XMLRPCServer::Util::fault(
-        MT->translate("Not allowed to edit entry") )
-        if !$author->is_superuser
-        && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
-    my $orig_entry = $entry->clone;
-    $entry->status( MT::Entry::RELEASE() )
-        if $publish
-        && ( $author->is_superuser
-        || $perms->can_do('publish_entry_via_xmlrpc_server') );
-    $entry->title( $item->{title} ) if $item->{title};
-
-    MT::XMLRPCServer::Core->apply_basename( $entry, $item, \%param );
-
-    $entry->text( $item->{description} );
-    $entry->convert_breaks( $item->{mt_convert_breaks} )
-        if exists $item->{mt_convert_breaks};
-    $entry->allow_comments( $item->{mt_allow_comments} )
-        if exists $item->{mt_allow_comments};
-    for my $field (qw( allow_pings )) {
-        my $val = $item->{"mt_$field"};
-        next unless defined $val;
-        die MT::XMLRPCServer::Util::fault(
-            MT->translate(
-                "Value for 'mt_[_1]' must be either 0 or 1 (was '[_2]')",
-                $field, $val
-            )
-        ) unless $val == 0 || $val == 1;
-        $entry->$field($val);
-    }
-    $entry->excerpt( $item->{mt_excerpt} ) if defined $item->{mt_excerpt};
-    $entry->text_more( $item->{mt_text_more} )
-        if defined $item->{mt_text_more};
-    $entry->keywords( $item->{mt_keywords} ) if defined $item->{mt_keywords};
-    $entry->modified_by( $author->id );
-    if ( my $tags = $item->{mt_tags} ) {
-        require MT::Tag;
-        my $tag_delim = chr( $author->entry_prefs->{tag_delim} );
-        my @tags = MT::Tag->split( $tag_delim, $tags );
-        $entry->set_tags(@tags);
-    }
-    if ( my $urls = $item->{mt_tb_ping_urls} ) {
-        $entry->to_ping_urls( join "\n", @$urls );
-    }
-    if ( my $iso = $item->{dateCreated} ) {
-        $entry->authored_on(
-            MT::XMLRPCServer::Util::iso2ts( $entry->blog_id, $iso ) )
-            || die MT::XMLRPCServer::Util::fault(
-            MT->translate("Invalid timestamp format") );
-        require MT::DateTime;
-        $entry->status( MT::Entry::FUTURE() )
-            if MT::DateTime->compare(
-            blog => $blog,
-            a    => $entry->authored_on,
-            b    => { value => time(), type => 'epoch' }
-            ) > 0;
-    }
-    $entry->discover_tb_from_entry();
-
-    MT->run_callbacks( "api_pre_save.$obj_type", $mt, $entry, $orig_entry )
-        || die MT::XMLRPCServer::Util::fault(
-        MT->translate( "PreSave failed [_1]", MT->errstr ) );
-
-    $entry->save;
-
-    my $old_categories = $entry->categories;
-    $entry->clear_cache('categories');
-    my $changed
-        = MT::XMLRPCServer::Core->save_placements( $entry, $item, \%param );
-    my @types = ($obj_type);
-    if ($changed) {
-        push @types, 'folder';    # folders are the only type that can be
-                                  # created in _save_placements
-    }
-    $blog->touch(@types);
-
-    MT->run_callbacks( "api_post_save.$obj_type", $mt, $entry, $orig_entry );
-
-    require MT::Log;
-    $mt->log(
-        {   message => $mt->translate(
-                "User '[_1]' (user #[_2]) edited [lc,_4] #[_3]",
-                $author->name, $author->id,
-                $entry->id,    $entry->class_label
-            ),
-            level    => MT::Log::INFO(),
-            class    => $obj_type,
-            category => 'edit',
-            metadata => $entry->id
-        }
-    );
-
-    if ($publish) {
-        MT::XMLRPCServer::Core->publish( $mt, $entry, undef,
-            $old_categories );
-    }
-    SOAP::Data->type( boolean => 1 );
-}
-
 sub editPost {
     my $class = shift;
     my ( $entry_id, $user, $pass, $item, $publish );
@@ -238,7 +104,7 @@ sub editPost {
     }
     MT::XMLRPCServer::Util::validate_params( \@$values );
 
-    $class->_edit_entry(
+    MT::XMLRPCServer::Core->edit_entry(
         entry_id => $entry_id,
         user     => $user,
         pass     => $pass,
@@ -266,7 +132,7 @@ sub editPage {
     }
     MT::XMLRPCServer::Util::validate_params( \@$values );
 
-    $class->_edit_entry(
+    MT::XMLRPCServer::Core->edit_entry(
         blog_id  => $blog_id,
         entry_id => $entry_id,
         user     => $user,
