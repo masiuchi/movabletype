@@ -7,10 +7,10 @@
 package MT::XMLRPCServer;
 use strict;
 
-use MT;
-use MT::Util;
-use MT::XMLRPCServer::Core;
-use MT::XMLRPCServer::Util;
+use MT                     ();
+use MT::Util               ();
+use MT::XMLRPCServer::Core ();
+use MT::XMLRPCServer::Util ();
 
 sub newPost {
     my $class = shift;
