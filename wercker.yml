@@ -50,6 +50,7 @@ build:
         name: Install CPAN modules
         code: |
           cpm install -g --test
+          cpm install -g --test Devel::Cover::Report::Coveralls
     - script:
         name: Copy mt-config.cgi
         code: |
@@ -62,7 +63,8 @@ build:
     - script:
         name: Run test
         code: |
-          prove -w t plugins/*t/
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t plugins/*t/
+          cover -report coveralls
           find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -c FILENAME > /dev/null
           find tools -type f | xargs -IFILENAME perl -It/lib -c FILENAME > /dev/null
     - script:
