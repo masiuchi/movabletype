@@ -62,9 +62,17 @@ build:
           service mysqld start
           service memcached start
     - script:
-        name: Run t/[01]*.t test
+        name: Run t/0*.t test
         code: |
-          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/[01]*.t
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/0*.t
+    - script:
+        name: Run t/110*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/110*.t
+    - script:
+        name: Run t/1[^1]*.t and t/11[^0]*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/1[^1]*.t -t/11[^0]*.t
     - script:
         name: Run t/[^01]*.t test
         code: |
