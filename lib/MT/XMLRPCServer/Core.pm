@@ -2,6 +2,8 @@ package MT::XMLRPCServer::Core;
 use strict;
 use warnings;
 
+use SOAP::Lite;
+
 use MT;
 use MT::XMLRPCServer::Util;
 
@@ -495,6 +497,75 @@ sub edit_entry {
         $class->publish( $mt, $entry, undef, $old_categories );
     }
     SOAP::Data->type( boolean => 1 );
+}
+
+sub get_entries {
+    my $class = shift;
+    my %param = @_;
+    my ( $api_class, $blog_id, $user, $pass, $num, $titles_only )
+        = @param{qw( api_class blog_id user pass num titles_only )};
+    my $obj_type = $param{page} ? 'page' : 'entry';
+    my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
+    my ( $author, $perms ) = $class->login( $user, $pass, $blog_id );
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
+        if !$author->is_superuser
+        && ( !$perms || !$perms->can_do('get_entries_via_xmlrpc_server') );
+    my $iter = MT->model($obj_type)->load_iter(
+        { blog_id => $blog_id },
+        {   'sort'    => 'authored_on',
+            direction => 'descend',
+            limit     => $num
+        }
+    );
+    my @res;
+
+    while ( my $entry = $iter->() ) {
+        my $co = sprintf "%04d%02d%02dT%02d:%02d:%02d",
+            unpack 'A4A2A2A2A2A2', $entry->authored_on;
+        my $row = {
+            dateCreated => SOAP::Data->type( dateTime => $co ),
+            userid      => SOAP::Data->type( string   => $entry->author_id )
+        };
+        $row->{ $param{page} ? 'page_id' : 'postid' }
+            = SOAP::Data->type( string => $entry->id );
+        if ( $api_class eq 'blogger' ) {
+            $row->{content}
+                = SOAP::Data->type( string => $entry->text || '' );
+        }
+        else {
+            $row->{title} = SOAP::Data->type( string => $entry->title || '' );
+            unless ($titles_only) {
+                require MT::Tag;
+                my $tag_delim = chr( $author->entry_prefs->{tag_delim} );
+                my $tags = MT::Tag->join( $tag_delim, $entry->tags );
+                $row->{description}
+                    = SOAP::Data->type( string => $entry->text );
+                my $link = $entry->permalink;
+                $row->{link}      = SOAP::Data->type( string => $link || '' );
+                $row->{permaLink} = SOAP::Data->type( string => $link || '' ),
+                    $row->{mt_basename}
+                    = SOAP::Data->type( string => $entry->basename || '' );
+                $row->{mt_allow_comments}
+                    = SOAP::Data->type( int => $entry->allow_comments + 0 );
+                $row->{mt_allow_pings}
+                    = SOAP::Data->type( int => $entry->allow_pings + 0 );
+                $row->{mt_convert_breaks}
+                    = SOAP::Data->type( string => $entry->convert_breaks
+                        || '' );
+                $row->{mt_text_more}
+                    = SOAP::Data->type( string => $entry->text_more || '' );
+                $row->{mt_excerpt}
+                    = SOAP::Data->type( string => $entry->excerpt || '' );
+                $row->{mt_keywords}
+                    = SOAP::Data->type( string => $entry->keywords || '' );
+                $row->{mt_tags} = SOAP::Data->type( string => $tags || '' );
+            }
+        }
+        push @res, $row;
+    }
+    \@res;
 }
 
 1;
