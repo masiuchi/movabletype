@@ -13,164 +13,6 @@ use MT::XMLRPCServer::Core;
 use MT::XMLRPCServer::Util;
 use base qw( MT::ErrorHandler );
 
-sub _new_entry {
-    my $class = shift;
-    my %param = @_;
-    my ( $blog_id, $user, $pass, $item, $publish )
-        = @param{qw( blog_id user pass item publish )};
-    my $obj_type = $param{page} ? 'page' : 'entry';
-    die MT::XMLRPCServer::Util::fault( MT->translate("No blog_id") )
-        unless $blog_id;
-    my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    for my $f (
-        qw( title description mt_text_more
-        mt_excerpt mt_keywords mt_tags mt_basename wp_slug )
-        )
-    {
-        next unless defined $item->{$f};
-        my $enc = $mt->{cfg}->PublishCharset;
-        unless ( MT::XMLRPCServer::Util::have_xml_parser() ) {
-            $item->{$f} = MT::Util::decode_html( $item->{$f} );
-            $item->{$f} =~ s!&apos;!'!g;         #'
-        }
-    }
-    require MT::Blog;
-    my $blog
-        = MT::Blog->load( { id => $blog_id, class => [ 'blog', 'website' ] } )
-        or die MT::XMLRPCServer::Util::fault(
-        MT->translate( "Invalid blog ID '[_1]'", $blog_id ) );
-    die MT::XMLRPCServer::Util::fault(
-        MT->translate( "Invalid blog ID '[_1]'", $blog_id ) )
-        if !$blog->is_blog && !$param{page};
-    my ( $author, $perms )
-        = MT::XMLRPCServer::Core->login( $user, $pass, $blog_id );
-    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
-        unless $author;
-    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
-        if !$author->is_superuser
-        && ( !$perms
-        || !$perms->can_do('create_new_entry_via_xmlrpc_server') );
-    my $entry      = MT->model($obj_type)->new;
-    my $orig_entry = $entry->clone;
-    $entry->blog_id($blog_id);
-    $entry->author_id( $author->id );
-
-    ## In 2.1 we changed the behavior of the $publish flag. Previously,
-    ## it was used to determine the post status. That was a bad idea.
-    ## So now entries added through XML-RPC are always set to publish,
-    ## *unless* the user has set "NoPublishMeansDraft 1" in mt.cfg, which
-    ## enables the old behavior.
-    if ( $mt->{cfg}->NoPublishMeansDraft ) {
-        $entry->status(
-            $publish && ( $author->is_superuser
-                || $perms->can_do('publish_new_post_via_xmlrpc_server') )
-            ? MT::Entry::RELEASE()
-            : MT::Entry::HOLD()
-        );
-    }
-    else {
-        $entry->status(
-            (          $author->is_superuser
-                    || $perms->can_do('publish_new_post_via_xmlrpc_server')
-            ) ? MT::Entry::RELEASE() : MT::Entry::HOLD()
-        );
-    }
-    $entry->allow_comments( $blog->allow_comments_default );
-    $entry->allow_pings( $blog->allow_pings_default );
-    $entry->convert_breaks(
-        defined $item->{mt_convert_breaks}
-        ? $item->{mt_convert_breaks}
-        : $blog->convert_paras
-    );
-    $entry->allow_comments( $item->{mt_allow_comments} )
-        if exists $item->{mt_allow_comments};
-    $entry->title( $item->{title} ) if exists $item->{title};
-
-    MT::XMLRPCServer::Core->apply_basename( $entry, $item, \%param );
-
-    $entry->text( $item->{description} );
-    for my $field (qw( allow_pings )) {
-        my $val = $item->{"mt_$field"};
-        next unless defined $val;
-        die MT::XMLRPCServer::Util::fault(
-            MT->translate(
-                "Value for 'mt_[_1]' must be either 0 or 1 (was '[_2]')",
-                $field, $val
-            )
-        ) unless $val == 0 || $val == 1;
-        $entry->$field($val);
-    }
-    $entry->excerpt( $item->{mt_excerpt} )     if $item->{mt_excerpt};
-    $entry->text_more( $item->{mt_text_more} ) if $item->{mt_text_more};
-    $entry->keywords( $item->{mt_keywords} )   if $item->{mt_keywords};
-    $entry->created_by( $author->id );
-
-    if ( my $tags = $item->{mt_tags} ) {
-        require MT::Tag;
-        my $tag_delim = chr( $author->entry_prefs->{tag_delim} );
-        my @tags = MT::Tag->split( $tag_delim, $tags );
-        $entry->set_tags(@tags);
-    }
-    if ( my $urls = $item->{mt_tb_ping_urls} ) {
-        $entry->to_ping_urls( join "\n", @$urls );
-    }
-    if ( my $iso = $item->{dateCreated} ) {
-        $entry->authored_on( MT::XMLRPCServer::Util::iso2ts( $blog, $iso ) )
-            || die MT::XMLRPCServer::Util::fault(
-            MT->translate("Invalid timestamp format") );
-        require MT::DateTime;
-        $entry->status( MT::Entry::FUTURE() )
-            if ( $entry->status == MT::Entry::RELEASE() )
-            && (
-            MT::DateTime->compare(
-                blog => $blog,
-                a    => $entry->authored_on,
-                b    => { value => time(), type => 'epoch' }
-            ) > 0
-            );
-    }
-    $entry->discover_tb_from_entry();
-
-    MT->run_callbacks( "api_pre_save.$obj_type", $mt, $entry, $orig_entry )
-        || die MT::XMLRPCServer::Util::fault(
-        MT->translate( "PreSave failed [_1]", MT->errstr ) );
-
-    $entry->save;
-
-    my $changed
-        = MT::XMLRPCServer::Core->save_placements( $entry, $item, \%param );
-
-    my @types = ($obj_type);
-    if ($changed) {
-        push @types, 'folder';    # folders are the only type that can be
-                                  # created in _save_placements
-    }
-    $blog->touch(@types);
-    $blog->save;
-
-    MT->run_callbacks( "api_post_save.$obj_type", $mt, $entry, $orig_entry );
-
-    require MT::Log;
-    $mt->log(
-        {   message => $mt->translate(
-                "User '[_1]' (user #[_2]) added [lc,_4] #[_3]",
-                $author->name, $author->id,
-                $entry->id,    $entry->class_label
-            ),
-            level    => MT::Log::INFO(),
-            class    => $obj_type,
-            category => 'new',
-            metadata => $entry->id
-        }
-    );
-
-    if ($publish) {
-        MT::XMLRPCServer::Core->publish( $mt, $entry );
-    }
-    delete $ENV{SERVER_SOFTWARE};
-    SOAP::Data->type( string => $entry->id );
-}
-
 sub newPost {
     my $class = shift;
     my ( $appkey, $blog_id, $user, $pass, $item, $publish );
@@ -197,7 +39,7 @@ sub newPost {
     }
     MT::XMLRPCServer::Util::validate_params( \@$values );
 
-    $class->_new_entry(
+    MT::XMLRPCServer::Core->new_entry(
         blog_id => $blog_id,
         user    => $user,
         pass    => $pass,
@@ -225,7 +67,7 @@ sub newPage {
     }
     MT::XMLRPCServer::Util::validate_params( \@$values );
 
-    $class->_new_entry(
+    MT::XMLRPCServer::Core->new_entry(
         blog_id => $blog_id,
         user    => $user,
         pass    => $pass,
