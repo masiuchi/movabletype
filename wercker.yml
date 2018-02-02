@@ -62,14 +62,28 @@ build:
           service mysqld start
           service memcached start
     - script:
-        name: Run test
+        name: Run t/[01]*.t test
         code: |
-          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t plugins/*t/
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/[01]*.t
+    - script:
+        name: Run t/[^01]*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/[^01]*.t
+    - script:
+        name: Run plugins test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w plugins/*t/
+    - script:
+        name: Send test coverage to Coveralls
+        code: |
           cover -report coveralls
+    - script:
+        name: Perl lint
+        code: |
           find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -c FILENAME > /dev/null
           find tools -type f | xargs -IFILENAME perl -It/lib -c FILENAME > /dev/null
     - script:
-        name: Run PHP test
+        name: PHP lint
         code: |
           find . -name "*.php" | xargs -n1 php -l
 
