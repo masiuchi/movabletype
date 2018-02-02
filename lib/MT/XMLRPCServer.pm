@@ -314,77 +314,17 @@ sub deletePage {
     );
 }
 
-sub _get_entry {
-    my $class = shift;
-    my %param = @_;
-    my ( $blog_id, $entry_id, $user, $pass )
-        = @param{qw( blog_id entry_id user pass )};
-    my $obj_type = $param{page} ? 'page' : 'entry';
-    my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
-    my $entry = MT->model($obj_type)->load($entry_id)
-        or die MT::XMLRPCServer::Util::fault(
-        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    if ( $blog_id && $blog_id != $entry->blog_id ) {
-        die MT::XMLRPCServer::Util::fault(
-            MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
-    }
-    my ( $author, $perms )
-        = MT::XMLRPCServer::Core->login( $user, $pass, $entry->blog_id );
-    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
-        unless $author;
-    die MT::XMLRPCServer::Util::fault(
-        MT->translate("Not allowed to get entry") )
-        if !$author->is_superuser
-        && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
-    my $co = sprintf "%04d%02d%02dT%02d:%02d:%02d", unpack 'A4A2A2A2A2A2',
-        $entry->authored_on;
-    my $link = $entry->permalink;
-    require MT::Tag;
-    my $delim = chr( $author->entry_prefs->{tag_delim} );
-    my $tags = MT::Tag->join( $delim, $entry->tags );
-
-    my $cats     = [];
-    my $cat_data = $entry->__load_category_data();
-    if ( scalar @$cat_data ) {
-        my ($first_cat) = grep { $_->[1] } @$cat_data;
-        my @cat_ids = grep { !$_->[1] } @$cat_data;
-        unshift @cat_ids, $first_cat if $first_cat;
-        $cats = MT->model('category')
-            ->lookup_multi( [ map { $_->[0] } @cat_ids ] );
-    }
-
-    my $basename = SOAP::Data->type( string => $entry->basename || '' );
-    {   dateCreated => SOAP::Data->type( dateTime => $co ),
-        userid      => SOAP::Data->type( string   => $entry->author_id ),
-        ( $param{page} ? 'page_id' : 'postid' ) =>
-            SOAP::Data->type( string => $entry->id ),
-        description => SOAP::Data->type( string => $entry->text  || '' ),
-        title       => SOAP::Data->type( string => $entry->title || '' ),
-        mt_basename => $basename,
-        wp_slug     => $basename,
-        link        => SOAP::Data->type( string => $link         || '' ),
-        permaLink   => SOAP::Data->type( string => $link         || '' ),
-        categories =>
-            [ map { SOAP::Data->type( string => $_->label || '' ) } @$cats ],
-        mt_allow_comments =>
-            SOAP::Data->type( int => $entry->allow_comments + 0 ),
-        mt_allow_pings => SOAP::Data->type( int => $entry->allow_pings + 0 ),
-        mt_convert_breaks =>
-            SOAP::Data->type( string => $entry->convert_breaks || '' ),
-        mt_text_more => SOAP::Data->type( string => $entry->text_more || '' ),
-        mt_excerpt   => SOAP::Data->type( string => $entry->excerpt   || '' ),
-        mt_keywords  => SOAP::Data->type( string => $entry->keywords  || '' ),
-        mt_tags      => SOAP::Data->type( string => $tags             || '' ),
-    };
-}
-
 sub getPost {
     my $class = shift;
     my ( $entry_id, $user, $pass ) = @_;
 
     MT::XMLRPCServer::Util::validate_params( [ $entry_id, $user, $pass ] );
 
-    $class->_get_entry( entry_id => $entry_id, user => $user, pass => $pass );
+    MT::XMLRPCServer::Core->get_entry(
+        entry_id => $entry_id,
+        user     => $user,
+        pass     => $pass
+    );
 }
 
 sub getPage {
@@ -394,7 +334,7 @@ sub getPage {
     MT::XMLRPCServer::Util::validate_params(
         [ $blog_id, $entry_id, $user, $pass ] );
 
-    $class->_get_entry(
+    MT::XMLRPCServer::Core->get_entry(
         blog_id  => $blog_id,
         entry_id => $entry_id,
         user     => $user,
