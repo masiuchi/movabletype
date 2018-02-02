@@ -13,56 +13,6 @@ use MT::XMLRPCServer::Core;
 use MT::XMLRPCServer::Util;
 use base qw( MT::ErrorHandler );
 
-sub _apply_basename {
-    my $class = shift;
-    my ( $entry, $item, $param ) = @_;
-
-    my $basename = $item->{mt_basename} || $item->{wp_slug};
-    if ( $param->{page} && $item->{permaLink} ) {
-        local $entry->{column_values}->{basename} = '##s##';
-        my $real_url = $entry->archive_url();
-        my ( $pre, $post ) = split /##s##/, $real_url, 2;
-
-        my $req_url = $item->{permaLink};
-        if ( $req_url =~ m{ \A \Q$pre\E (.*) \Q$post\E \z }xms ) {
-            my $req_base = $1;
-            my @folders = split /\//, $req_base;
-            $basename = pop @folders;
-            $param->{__permaLink_folders} = \@folders;
-        }
-        else {
-            die MT::XMLRPCServer::Util::fault(
-                MT->translate(
-                    "Requested permalink '[_1]' is not available for this page",
-                    $req_url
-                )
-            );
-        }
-    }
-
-    if ( defined $basename ) {
-
-        # Ensure this basename is unique.
-        my $entry_class   = ref $entry;
-        my $basename_uses = $entry_class->exist(
-            {   blog_id  => $entry->blog_id,
-                basename => $basename,
-                (   $entry->id
-                    ? ( id => { op => '!=', value => $entry->id } )
-                    : ()
-                ),
-            }
-        );
-        if ($basename_uses) {
-            $basename = MT::Util::make_unique_basename($entry);
-        }
-
-        $entry->basename($basename);
-    }
-
-    1;
-}
-
 sub _save_placements {
     my $class = shift;
     my ( $entry, $item, $param ) = @_;
@@ -228,7 +178,7 @@ sub _new_entry {
         if exists $item->{mt_allow_comments};
     $entry->title( $item->{title} ) if exists $item->{title};
 
-    $class->_apply_basename( $entry, $item, \%param );
+    MT::XMLRPCServer::Core->apply_basename( $entry, $item, \%param );
 
     $entry->text( $item->{description} );
     for my $field (qw( allow_pings )) {
@@ -423,7 +373,7 @@ sub _edit_entry {
         || $perms->can_do('publish_entry_via_xmlrpc_server') );
     $entry->title( $item->{title} ) if $item->{title};
 
-    $class->_apply_basename( $entry, $item, \%param );
+    MT::XMLRPCServer::Core->apply_basename( $entry, $item, \%param );
 
     $entry->text( $item->{description} );
     $entry->convert_breaks( $item->{mt_convert_breaks} )

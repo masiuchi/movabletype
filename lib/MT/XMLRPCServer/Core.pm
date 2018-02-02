@@ -63,5 +63,56 @@ sub publish {
     1;
 }
 
+sub apply_basename {
+    my $class = shift;
+    my ( $entry, $item, $param ) = @_;
+
+    my $basename = $item->{mt_basename} || $item->{wp_slug};
+    if ( $param->{page} && $item->{permaLink} ) {
+        local $entry->{column_values}->{basename} = '##s##';
+        my $real_url = $entry->archive_url();
+        my ( $pre, $post ) = split /##s##/, $real_url, 2;
+
+        my $req_url = $item->{permaLink};
+        if ( $req_url =~ m{ \A \Q$pre\E (.*) \Q$post\E \z }xms ) {
+            my $req_base = $1;
+            my @folders = split /\//, $req_base;
+            $basename = pop @folders;
+            $param->{__permaLink_folders} = \@folders;
+        }
+        else {
+            die MT::XMLRPCServer::Util::fault(
+                MT->translate(
+                    "Requested permalink '[_1]' is not available for this page",
+                    $req_url
+                )
+            );
+        }
+    }
+
+    if ( defined $basename ) {
+
+        # Ensure this basename is unique.
+        my $entry_class   = ref $entry;
+        my $basename_uses = $entry_class->exist(
+            {   blog_id  => $entry->blog_id,
+                basename => $basename,
+                (   $entry->id
+                    ? ( id => { op => '!=', value => $entry->id } )
+                    : ()
+                ),
+            }
+        );
+        if ($basename_uses) {
+            require MT::Util;
+            $basename = MT::Util::make_unique_basename($entry);
+        }
+
+        $entry->basename($basename);
+    }
+
+    1;
+}
+
 1;
 
