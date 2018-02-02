@@ -50,7 +50,8 @@ build:
         name: Install CPAN modules
         code: |
           cpm install -g --test
-          cpm install -g --test Devel::Cover::Report::Coveralls
+          cpm install -g --test App::cpanminus
+          cpanm -v Devel::Cover::Report::Coveralls
     - script:
         name: Copy mt-config.cgi
         code: |
