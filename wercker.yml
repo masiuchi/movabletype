@@ -72,7 +72,7 @@ build:
     - script:
         name: Run t/1[^1]*.t and t/11[^0]*.t test
         code: |
-          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/1[^1]*.t -t/11[^0]*.t
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/1[^1]*.t t/11[^0]*.t
     - script:
         name: Run t/[^01]*.t test
         code: |
