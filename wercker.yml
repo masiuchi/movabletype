@@ -51,7 +51,7 @@ build:
         code: |
           cpm install -g --test
           cpm install -g --test App::cpanminus
-          cpanm -v Devel::Cover::Report::Coveralls
+          COVERALLS_REPO_TOKEN= cpanm -v Devel::Cover::Report::Coveralls
     - script:
         name: Copy mt-config.cgi
         code: |
