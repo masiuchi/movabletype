@@ -114,5 +114,97 @@ sub apply_basename {
     1;
 }
 
+sub save_placements {
+    my $class = shift;
+    my ( $entry, $item, $param ) = @_;
+
+    my @categories;
+    my $changed = 0;
+
+    if ( $param->{page} ) {
+        if ( my $folders = $param->{__permaLink_folders} ) {
+            my $parent_id = 0;
+            my $folder;
+            require MT::Folder;
+            for my $basename (@$folders) {
+                $folder = MT::Folder->load(
+                    {   blog_id  => $entry->blog_id,
+                        parent   => $parent_id,
+                        basename => $basename,
+                    }
+                );
+
+                if ( !$folder ) {
+
+                    # Autovivify the folder tree.
+                    $folder = MT::Folder->new;
+                    $folder->blog_id( $entry->blog_id );
+                    $folder->parent($parent_id);
+                    $folder->basename($basename);
+                    $folder->label($basename);
+                    $changed = 1;
+                    $folder->save
+                        or die MT::XMLRPCServer::Util::fault(
+                        MT->translate(
+                            "Saving folder failed: [_1]",
+                            $folder->errstr
+                        )
+                        );
+                }
+
+                $parent_id = $folder->id;
+            }
+            @categories = ($folder) if $folder;
+        }
+    }
+    elsif ( my $cats = $item->{categories} ) {
+        if (@$cats) {
+            my $cat_class = MT->model('category');
+
+            # The spec says to ignore invalid category names.
+            @categories
+                = grep {defined}
+                $cat_class->search(
+                { blog_id => $entry->blog_id, label => $cats, } );
+        }
+    }
+
+    require MT::Placement;
+    my $is_primary_placement = 1;
+CATEGORY: for my $category (@categories) {
+        my $place;
+        if ($is_primary_placement) {
+            $place = MT::Placement->load(
+                { entry_id => $entry->id, is_primary => 1, } );
+        }
+        if ( !$place ) {
+            $place = MT::Placement->new;
+            $place->blog_id( $entry->blog_id );
+            $place->entry_id( $entry->id );
+            $place->is_primary( $is_primary_placement ? 1 : 0 );
+        }
+        $place->category_id( $category->id );
+        $place->save
+            or die MT::XMLRPCServer::Util::fault(
+            MT->translate( "Saving placement failed: [_1]", $place->errstr )
+            );
+
+        if ($is_primary_placement) {
+
+            # Delete all the secondary placements, so each of the remaining
+            # iterations of the loop make a brand new placement.
+            my @old_places = MT::Placement->load(
+                { entry_id => $entry->id, is_primary => 0, } );
+            for my $place (@old_places) {
+                $place->remove;
+            }
+        }
+
+        $is_primary_placement = 0;
+    }
+
+    $changed;
+}
+
 1;
 
