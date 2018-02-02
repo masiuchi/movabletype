@@ -568,5 +568,62 @@ sub get_entries {
     \@res;
 }
 
+sub delete_entry {
+    my $class = shift;
+    my %param = @_;
+    my ( $blog_id, $entry_id, $user, $pass, $publish )
+        = @param{qw( blog_id entry_id user pass publish )};
+    my $mt = MT::XMLRPCServer::Util::mt_new();   ## Will die if MT->new fails.
+    my $obj_type = $param{page} ? 'page' : 'entry';
+    my $entry    = MT->model($obj_type)->load($entry_id)
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( "Invalid entry ID '[_1]'", $entry_id ) );
+    my ( $author, $perms ) = $class->login( $user, $pass, $entry->blog_id );
+    die MT::XMLRPCServer::Util::fault( MT->translate("Invalid login") )
+        unless $author;
+    die MT::XMLRPCServer::Util::fault( MT->translate("Permission denied.") )
+        if !$author->is_superuser
+        && ( !$perms || !$perms->can_edit_entry( $entry, $author ) );
+
+    # Delete archive file
+    require MT::Blog;
+    require MT::Entry;
+    my $blog   = MT::Blog->load( $entry->blog_id );
+    my %recipe = $mt->publisher->rebuild_deleted_entry(
+        Entry => $entry,
+        Blog  => $blog
+    ) if $entry->status eq MT::Entry::RELEASE();
+
+    # Remove object
+    $entry->remove;
+
+    # Rebuild archives
+    if (%recipe) {
+        $mt->rebuild_archives( Blog => $blog, Recipe => \%recipe, )
+            or die MT::XMLRPCServer::Util::fault( $mt->errstr );
+    }
+
+    # Rebuild index files
+    if ( $mt->config('RebuildAtDelete') ) {
+        $mt->rebuild_indexes( Blog => $blog )
+            or die MT::XMLRPCServer::Util::fault( $mt->errstr );
+    }
+
+    require MT::Log;
+    $mt->log(
+        {   message => $mt->translate(
+                "Entry '[_1]' ([lc,_5] #[_2]) deleted by '[_3]' (user #[_4]) from xml-rpc",
+                $entry->title, $entry->id, $author->name,
+                $author->id,   $entry->class_label
+            ),
+            level    => MT::Log::INFO(),
+            class    => $entry->class,
+            category => 'delete'
+        }
+    );
+
+    SOAP::Data->type( boolean => 1 );
+}
+
 1;
 
