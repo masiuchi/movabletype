@@ -62,7 +62,7 @@ build:
     - script:
         name: Run test
         code: |
-          prove -w t plugins/*t/
+          prove -w t plugins/*/t
           find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -c FILENAME > /dev/null
           find tools -type f | xargs -IFILENAME perl -It/lib -c FILENAME > /dev/null
     - script:
