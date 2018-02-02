@@ -35,5 +35,33 @@ sub login {
     ( $author, $perms );
 }
 
+sub publish {
+    my $class = shift;
+    my ( $mt, $entry, $no_ping, $old_categories ) = @_;
+    require MT::Blog;
+    my $blog = MT::Blog->load( $entry->blog_id );
+    $mt->rebuild_entry(
+        Entry => $entry,
+        Blog  => $blog,
+        (   $old_categories
+            ? ( OldCategories => join(
+                    ',', map { ref $_ ? $_->id : $_ } @$old_categories
+                )
+                )
+            : ()
+        ),
+        BuildDependencies => 1
+        )
+        or die MT::XMLRPCServer::Util::fault(
+        MT->translate( 'Publish error: [_1]', $mt->errstr ) );
+    require MT::Entry;
+    if ( $entry->status == MT::Entry::RELEASE() && !$no_ping ) {
+        $mt->ping_and_save( Blog => $blog, Entry => $entry )
+            or die MT::XMLRPCServer::Util::fault(
+            MT->translate( 'Ping error: [_1]', $mt->errstr ) );
+    }
+    1;
+}
+
 1;
 

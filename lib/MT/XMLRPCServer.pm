@@ -13,30 +13,6 @@ use MT::XMLRPCServer::Core;
 use MT::XMLRPCServer::Util;
 use base qw( MT::ErrorHandler );
 
-sub _publish {
-    my $class = shift;
-    my ( $mt, $entry, $no_ping, $old_categories ) = @_;
-    require MT::Blog;
-    my $blog = MT::Blog->load( $entry->blog_id );
-    $mt->rebuild_entry(
-        Entry => $entry,
-        Blog  => $blog,
-        (   $old_categories
-            ? ( OldCategories => join(
-                    ',', map { ref $_ ? $_->id : $_ } @$old_categories
-                )
-                )
-            : ()
-        ),
-        BuildDependencies => 1
-    ) or return $class->error( "Publish error: " . $mt->errstr );
-    if ( $entry->status == MT::Entry::RELEASE() && !$no_ping ) {
-        $mt->ping_and_save( Blog => $blog, Entry => $entry )
-            or return $class->error( "Ping error: " . $mt->errstr );
-    }
-    1;
-}
-
 sub _apply_basename {
     my $class = shift;
     my ( $entry, $item, $param ) = @_;
@@ -330,8 +306,7 @@ sub _new_entry {
     );
 
     if ($publish) {
-        $class->_publish( $mt, $entry )
-            or die MT::XMLRPCServer::Util::fault( $class->errstr );
+        MT::XMLRPCServer::Core->publish( $mt, $entry );
     }
     delete $ENV{SERVER_SOFTWARE};
     SOAP::Data->type( string => $entry->id );
@@ -528,8 +503,8 @@ sub _edit_entry {
     );
 
     if ($publish) {
-        $class->_publish( $mt, $entry, undef, $old_categories )
-            or die MT::XMLRPCServer::Util::fault( $class->errstr );
+        MT::XMLRPCServer::Core->publish( $mt, $entry, undef,
+            $old_categories );
     }
     SOAP::Data->type( boolean => 1 );
 }
@@ -1213,8 +1188,8 @@ sub setPostCategories {
             MT->translate( "Saving placement failed: [_1]", $place->errstr )
             );
     }
-    $class->_publish( $mt, $entry, undef, [ map { $_->category_id } @place ] )
-        or die MT::XMLRPCServer::Util::fault( $class->errstr );
+    MT::XMLRPCServer::Core->publish( $mt, $entry, undef,
+        [ map { $_->category_id } @place ] );
     SOAP::Data->type( boolean => 1 );
 }
 
