@@ -11,7 +11,6 @@ use MT;
 use MT::Util;
 use MT::XMLRPCServer::Core;
 use MT::XMLRPCServer::Util;
-use base qw( MT::ErrorHandler );
 
 sub newPost {
     my $class = shift;
@@ -951,16 +950,16 @@ sub getTemplate {
 ## etc., because we are implementing Blogger's API. Thus, the empty
 ## subclass.
 package blogger;
-BEGIN { @blogger::ISA = qw( MT::XMLRPCServer ); }
+use base 'MT::XMLRPCServer';
 
 package metaWeblog;
-BEGIN { @metaWeblog::ISA = qw( MT::XMLRPCServer ); }
+use base 'MT::XMLRPCServer';
 
 package mt;
-BEGIN { @mt::ISA = qw( MT::XMLRPCServer ); }
+use base 'MT::XMLRPCServer';
 
 package wp;
-BEGIN { @wp::ISA = qw( MT::XMLRPCServer ); }
+use base 'MT::XMLRPCServer';
 
 1;
 __END__
