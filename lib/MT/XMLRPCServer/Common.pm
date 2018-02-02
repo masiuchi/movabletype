@@ -1,4 +1,4 @@
-package MT::XMLRPCServer::Core;
+package MT::XMLRPCServer::Common;
 use strict;
 use warnings;
 
