@@ -91,7 +91,7 @@ build:
     - script:
         name: Run plugins test
         code: |
-          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w plugins/*t/
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w plugins/*/t
     - script:
         name: Send test coverage to Coveralls
         code: |
