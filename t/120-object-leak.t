@@ -13,10 +13,10 @@ use Test::More;
 use constant HAS_LEAKTRACE => eval { require Test::LeakTrace };
 
 BEGIN {
-    unless (HAS_LEAKTRACE) {
+    if ( !HAS_LEAKTRACE ) {
         plan skip_all => 'require Test::LeakTrace';
     }
-    if ( ( $ENV{HARNESS_PERL_SWITCHES} || '' ) =~ /-MDevel::Cover/ ) {
+    elsif ( ( $ENV{HARNESS_PERL_SWITCHES} || '' ) =~ /-MDevel::Cover/ ) {
         plan skip_all => 'skip if coverage test';
     }
 }
