@@ -1,0 +1,71 @@
+2018-02-04
+	* Send git information to Coveralls (#69)
+	* Revert and fix mt-xmlrpc.cgi (#68)
+	* Use Coveralls on Wercker (#67)
+
+2018-02-02
+	* Fix that plugins test does not run on Wercker (#66)
+
+2017-01-29
+	* Fix shebang (#63)
+	* Add Test::MockModule to cpanfile (#65)
+
+2017-01-28
+	* Add .DS_store to .gitignore (#64)
+	* Add test and fix for PHP 7.2 (#54)
+	* Remove Rainier theme (#62)
+	* Remove mt-view.cgi (#61)
+	* Remove mt-testbg.cgi (#60)
+	* Remove link to MT online documentation in header (#59)
+	* Hide mt_news widget on user dashboard (#58)
+	* Remove MT::App::NotifyList and related files (#57)
+
+2017-01-27
+	* Remove php/extlib/adodb5/tests/ (#56)
+	* Remove php/extlib/adodb5/schemas/ (#55)
+	* Remove build/themes/ (#53)
+	* Move composer-installer-extender to require-dev section (#52)
+	* Update adodb/adodb-php and smarty/smarty (#51)
+
+2017-01-25
+	* Add test and fix for Perl 5.26 (#50)
+
+2017-01-22
+	* Add mt.pid to .gitignore (#49)
+
+2017-01-21
+	* Run test by PHP 5.3 on Wercker (#48)
+	* Fix/Update settings of CI service (#47)
+	* Remove TypePadAntiSpam (02d7346f1ca23b489f5dcc65902520f7e2fcfeff)
+	* Remove ezSQL (c49059b4d13669ca9cdefc9ac8c39261afff08fe)
+
+2017-01-10
+	* Update JSON and JSON::PP in extlib (#44)
+
+2017-01-09
+	* Remove mt-xmlrpc.cgi temporarily (#43)
+
+2016-05-22
+	* Add test and fix for PHP 7.0 (#42)
+
+2016-05-14
+	* Run test with Perl 5.24 on CircleCI (#41)
+
+2016-05-08
+	* Run test with PHP 5.2 on Travis CI (#40)
+
+2016-05-07
+	* Run test with PHP 5.6 on Travis CI (#38)
+	* Fix for PHP 5.5 (#37)
+
+2016-05-05
+	* Run test with PHP 5.4 on Travis CI (#36)
+	* Fix for Perl 5.22 and run test on Travis CI (#35)
+	* Fix for Perl 5.20 (#34)
+	* Run test for Perl 5.20 on Travis CI (#33)
+	* Fix for Perl 5.18 and run test on Travis CI (#32)
+	* Run test on Travis CI (#31)
+
+2015-04-15
+	* Release MTOS 5.2.13 by Six Apart Ltd.
+
