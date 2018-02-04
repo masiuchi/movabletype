@@ -262,6 +262,9 @@ use_ok('MT::ArchiveType::Yearly');
 
 # XMLRPC support
 use_ok('MT::XMLRPC');
+use_ok('MT::XMLRPCServer');
+use_ok('MT::XMLRPCServer::Common');
+use_ok('MT::XMLRPCServer::Util');
 
 # Atom support
 use_ok('MT::Atom');
