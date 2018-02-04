@@ -1,5 +1,6 @@
 2018-02-04  Masahiro IUCHI
 
+	* Add name and fix order in ChangeLog (#71)
 	* Add this ChangeLog (#70)
 	* Send git information to Coveralls (#69)
 	* Revert and fix mt-xmlrpc.cgi (#68)
