@@ -50,6 +50,7 @@ build:
         name: Install CPAN modules
         code: |
           cpm install -g --test
+          COVERALLS_REPO_TOKEN= cpm install -g --test Devel::Cover::Report::Coveralls
     - script:
         name: Copy mt-config.cgi
         code: |
@@ -60,13 +61,48 @@ build:
           service mysqld start
           service memcached start
     - script:
-        name: Run test
+        name: Run t/0*.t test
         code: |
-          prove -w t plugins/*/t
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/0*.t
+    - script:
+        name: Run t/110*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/110*.t
+    - script:
+        name: Run t/1[^1]*.t and t/11[^0]*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/1[^1]*.t t/11[^0]*.t
+    - script:
+        name: Run t/2*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/2*.t
+    - script:
+        name: Run t/3*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/3*.t
+    - script:
+        name: Run t/[4-9]*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/[4-9]*.t
+    - script:
+        name: Run t/[^0-9]*.t test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w t/[^0-9]*.t
+    - script:
+        name: Run plugins test
+        code: |
+          HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,^extlib,+ignore,^t prove -w plugins/*/t
+    - script:
+        name: Send test coverage to Coveralls
+        code: |
+          cover -report coveralls
+    - script:
+        name: Perl lint
+        code: |
           find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -c FILENAME > /dev/null
           find tools -type f | xargs -IFILENAME perl -It/lib -c FILENAME > /dev/null
     - script:
-        name: Run PHP test
+        name: PHP lint
         code: |
           find . -name "*.php" | xargs -n1 php -l
 

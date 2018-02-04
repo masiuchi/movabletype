@@ -43,6 +43,7 @@ t/site/
 t/db/mt.db
 
 .perl-version
+/cover_db/
 
 *.pid
 

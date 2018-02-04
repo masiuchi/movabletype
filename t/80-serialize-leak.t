@@ -3,13 +3,24 @@
 use strict;
 use warnings;
 use lib qw( t/lib lib extlib ../lib ../extlib );
+
+use Test::More;
+
+use constant HAS_LEAKTRACE => eval { require Test::LeakTrace };
+
+BEGIN {
+    if ( !HAS_LEAKTRACE ) {
+        plan skip_all => 'require Test::LeakTrace';
+    }
+    elsif ( ( $ENV{HARNESS_PERL_SWITCHES} || '' ) =~ /-MDevel::Cover/ ) {
+        plan skip_all => 'skip if coverage test';
+    }
+}
+
+use Test::LeakTrace;
+
 use MT;
 use MT::Test;
-use constant HAS_LEAKTRACE => eval { require Test::LeakTrace };
-use Test::More HAS_LEAKTRACE
-    ? ( tests => 12 )
-    : ( skip_all => 'require Test::LeakTrace' );
-use Test::LeakTrace;
 
 require MT::Serialize;
 my %sers
@@ -18,7 +29,8 @@ my %sers
 my $a     = [1];
 my $c     = 3;
 my $data1 = [
-    1, { a => 'value-a', b => $a, c => [ 'array', $a, $c, 2 ], d => 1 }, undef
+    1, { a => 'value-a', b => $a, c => [ 'array', $a, $c, 2 ], d => 1 },
+    undef
 ];
 my $data2 = [
     1, { a => 'value-a', b => $a, c => [ 'array', $a, \$c, 2 ], d => 1 },
@@ -30,7 +42,7 @@ for my $label ( keys %sers ) {
     my $ser = $sers{$label};
     note "Checking leaks for $label\n";
 
-    # Call it once outside of leak check to make sure we load the serialization backend
+# Call it once outside of leak check to make sure we load the serialization backend
     $ser->serialize( \$data1 );
 
     no_leaks_ok {
@@ -59,3 +71,6 @@ for my $label ( keys %sers ) {
         '<', 20, "$label: leak with circular data";
     }
 }
+
+done_testing;
+
