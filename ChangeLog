@@ -2,6 +2,7 @@
 	* Send git information to Coveralls (#69)
 	* Revert and fix mt-xmlrpc.cgi (#68)
 	* Use Coveralls on Wercker (#67)
+	* Add this ChangeLog (#70)
 
 2018-02-02
 	* Fix that plugins test does not run on Wercker (#66)
