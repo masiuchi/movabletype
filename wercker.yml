@@ -95,6 +95,7 @@ build:
     - script:
         name: Send test coverage to Coveralls
         code: |
+          yum -y install git
           cover -report coveralls
     - script:
         name: Perl lint
