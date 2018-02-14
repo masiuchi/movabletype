@@ -1058,7 +1058,7 @@ sub permissions {
             $obj = MT::Blog->load($blog_id);
         }
         $cache_key .= "_blog_$blog_id";
-        $terms->{blog_id} = [ 0, $blog_id ];
+        $terms->{blog_id} = $blog_id;
     }
     else {
         $terms->{blog_id} = 0;
