@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -204,7 +204,7 @@ __END__
 
 =head1 NAME
 
-convert-db - A tool to convert backend database of Movable Type
+convert-db - A tool to convert backend database of MyMTOS
 
 =head1 SYNOPSIS
 
@@ -212,7 +212,7 @@ convert-db --new=mt-config.cgi.new [--old=mt-config.cgi.current]
 
 =head1 DESCRIPTION
 
-I<convert-db> is a tool to convert database of Movable Type to 
+I<convert-db> is a tool to convert database of MyMTOS to 
 others.  It is useful when it is necessary to switch like from 
 MySQL to PostgreSQL.
 
@@ -221,6 +221,6 @@ The following options are available:
   --new       mt-config.cgi file of destination
   --old       mt-config.cgi file of source (optional)
 
-It is also useful to replicate Movable Type database.
+It is also useful to replicate MyMTOS database.
 
 =cut

@@ -235,5 +235,5 @@ rebuild_pages
 
     This script requires following perl modules.
         Web::Scraper           You must install from CPAN if you not installed yet.
-        LWP::UserAgent::Local  You must install from sixapart repository if you not installed yet.
-                               https://github.com/movabletype/movabletype/blob/master/t/lib/LWP/UserAgent/Local.pm
+        LWP::UserAgent::Local  You must install from MyMTOS repository if you not installed yet.
+                               https://github.com/masiuchi/movabletype/blob/master/t/lib/LWP/UserAgent/Local.pm
