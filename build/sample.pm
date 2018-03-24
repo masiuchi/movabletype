@@ -1,4 +1,5 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -261,7 +262,7 @@ sub encoding { "iso-8859-1" }   # Latin-1
     'No Archives' => '',
     'Enter the archive file extension. This can take the form of \'html\', \'shtml\', \'php\', etc. Note: do not enter the leading period (\'.\').' => '',
     'File extension for archive files:' => '',
-    'When you update your blog, Movable Type will automatically notify the selected sites.' => '',
+    'When you update your blog, MyMTOS will automatically notify the selected sites.' => '',
     'Notify the following sites when I update my blog:' => '',
     'Others: (separate URLs with a carriage return)' => '',
     'If you have received a recently updated key (by virtue of your donation), enter it here.' => '',
@@ -320,7 +321,7 @@ sub encoding { "iso-8859-1" }   # Latin-1
     'Your weblog configuration has been saved.' => '',
     'Name your weblog. The weblog name can be changed at any time.' => '',
     'Weblog name:' => '',
-    'Enter the path where your main index file will be located. An absolute path (starting with \'/\') is preferred, but you can also use a path relative to the Movable Type directory.' => '',
+    'Enter the path where your main index file will be located. An absolute path (starting with \'/\') is preferred, but you can also use a path relative to the MyMTOS directory.' => '',
     'Example:' => '',
     'Local Site Path:' => '',
     'Enter the URL of your website. Exclude the filename (i.e. index.html).' => '',
@@ -510,7 +511,7 @@ sub encoding { "iso-8859-1" }   # Latin-1
     'Add/Edit Weblog Authors' => '',
     'List &amp; Delete Authors' => '',
     '_USAGE_AUTHORS' => '',
-    'You have successfully deleted the authors from the Movable Type system.' => '',
+    'You have successfully deleted the authors from the MyMTOS system.' => '',
     'Created By' => '',
 
     ## Main Menu screen (list_blog.tmpl)
@@ -582,7 +583,7 @@ sub encoding { "iso-8859-1" }   # Latin-1
     'Create template module' => '',
 
     ## Login screen (login.tmpl)
-    'Your Movable Type session has ended. If you wish to log in again, you can do so below.' => '',
+    'Your MyMTOS session has ended. If you wish to log in again, you can do so below.' => '',
     'Remember me?' => '',
     'Log In' => '',
     'Forgot your password?' => '',
@@ -595,8 +596,8 @@ sub encoding { "iso-8859-1" }   # Latin-1
     'Welcome to [_1].' => '',
     'You can post and maintain your weblog by selecting an option from the menu located to the left of this message.' => '',
     'If you need assistance, try:' => '',
-    'Movable Type User Manual' => '',
-    'Movable Type Support Forum' => '',
+    'MyMTOS User Manual' => '',
+    'MyMTOS Support Forum' => '',
     'This welcome message is configurable.' => '',
     'Change this message.' => '',
     'Five Most Recent Entries' => '',
@@ -636,7 +637,7 @@ sub encoding { "iso-8859-1" }   # Latin-1
 
     ## Password recovery screen (recover.tmpl)
     'Your password has been changed, and the new password has been sent to your email address ([_1]).' => '',
-    'Enter your Movable Type username:' => '',
+    'Enter your MyMTOS username:' => '',
     'Enter your birthplace:' => '',
     'Recover' => '',
 
@@ -694,7 +695,7 @@ sub encoding { "iso-8859-1" }   # Latin-1
 
     ## Activity Log screen (view_log.tmpl)
     'Activity Log' => '',
-    'The Movable Type activity log contains a record of notable actions in the system. All times are displayed in GMT.' => '',
+    'The MyMTOS activity log contains a record of notable actions in the system. All times are displayed in GMT.' => '',
     'The activity log has been reset.' => '',
     'Log Entry' => '',
     'Reset Activity Log' => '',

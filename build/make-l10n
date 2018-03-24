@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -35,12 +35,16 @@ package MT::L10N::$languagename;
 PACKAGENAME
 
 my $yr = (localtime(time))[5] + 1900;
+if ( $yr > 2018 ) {
+    $yr = "2018-$yr";
+}
 
 my $parent_class = $languagename eq 'en_us' ? 'MT::L10N' : 'MT::L10N::en_us';
 print <<"HEADER";
-# Copyright 2001-$yr Six Apart. This code cannot be redistributed without
-# permission from www.sixapart.com.  For more information, consult your
-# Movable Type license.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) $yr Masahiro IUCHI
+# This program is distributed under the terms of the
+# GNU General Public License, version 2.
 #
 # \$Id\$
 

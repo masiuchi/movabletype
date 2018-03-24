@@ -105,7 +105,7 @@ foreach my $lang (qw(ja de nl fr es)) {
         or die "failed to open mt-static/mt_$lang.js for writing";
 
     binmode $FOUT, ":utf8";
-    print $FOUT "/* Movable Type language lexicon for $lang localization. */\n\n";
+    print $FOUT "/* MyMTOS language lexicon for $lang localization. */\n\n";
 
     for my $text ( keys %lexicon ) {
         print $FOUT "Lexicon['$text'] = '$lexicon{$text}';\n";

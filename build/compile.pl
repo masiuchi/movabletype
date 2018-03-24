@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -49,7 +49,7 @@ my $response = $ua->post(
 my $year     = ( localtime(time) )[5] + 1900;
 my $compiled = << "HEAD";
 /*
- * Movable Type (r) Open Source (C) 2001-$year Six Apart, Ltd.
+ * Copyright (C) 2001-$year Six Apart, Ltd.
  * This program is distributed under the terms of the
  * GNU General Public License, version 2.
  *

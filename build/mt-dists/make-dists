@@ -216,7 +216,7 @@ sub process_file_for_license {
     }
     close FIN;
 
-    my $open = quotemeta('# Movable Type (r) Open Source (C)');
+    my $open = quotemeta('# MyMTOS (r) Open Source (C)');
 
     # skip file if it doesn't contain the Open Source license
     return unless $content =~ m/$open/;
