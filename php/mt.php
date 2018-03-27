@@ -1,5 +1,5 @@
 <?php
-# Movable Type (r) Open Source (C) 2004-2013 Six Apart, Ltd.
+# Copyright (C) 2004-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -15,7 +15,7 @@ define('PRODUCT_VERSION', '5.2.13');
 
 $PRODUCT_NAME = '__PRODUCT_NAME__';
 if($PRODUCT_NAME == '__PRODUCT' . '_NAME__')
-    $PRODUCT_NAME = 'Movable Type';
+    $PRODUCT_NAME = 'MyMTOS';
 define('PRODUCT_NAME', $PRODUCT_NAME);
 
 $RELEASE_NUMBER = '__RELEASE_NUMBER__';
