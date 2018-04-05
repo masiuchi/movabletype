@@ -25,7 +25,6 @@ build:
           rm t/41-atom.t
           rm t/61-to_from_xml.t
           rm t/62-asset.t
-          rm plugins/Markdown/t/00.require.t
           rm plugins/MultiBlog/t/02.tags_blogs.t
           rm plugins/Textile/t/00.require.t
 
