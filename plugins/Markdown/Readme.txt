@@ -7,7 +7,7 @@ http://daringfireball.net/
 Version 1.5.1 - Fri 12 Mar 2004
 
 
-SmartyPants is a free web publishing plug-in for Movable Type, Blosxom,
+SmartyPants is a free web publishing plug-in for MT, Blosxom,
 and BBEdit that easily translates plain ASCII punctuation characters
 into "smart" typographic punctuation HTML entities. SmartyPants can also
 be invoked as a standalone Perl script.
@@ -28,8 +28,8 @@ ASCII straight quotes, plain dashes, and plain dots, but your published
 posts (and final HTML output) will appear with smart quotes, em-dashes,
 and proper ellipses.
 
-SmartyPants is a combination plug-in -- the same file works with Movable
-Type, Blosxom, and BBEdit. It can also be used from a Unix-style
+SmartyPants is a combination plug-in -- the same file works with MT,
+Blosxom, and BBEdit. It can also be used from a Unix-style
 command-line. Version requirements and installation instructions for
 each of these tools can be found in the corresponding sub-section under
 "Installation", below.
@@ -75,7 +75,7 @@ looks like:
 
 ### Markdown and MT-Textile Integration ###
 
-Movable Type users should also note that SmartyPants can be used in
+MT users should also note that SmartyPants can be used in
 conjunction with two text filtering plug-ins: [Markdown] [1] and Brad
 Choate's [MT-Textile] [2].
 
@@ -87,7 +87,7 @@ easy-to-write and easy-to-read structured text format for writing for
 the web. You write plain text; Markdown turns it into HTML. This readme
 file is formatted in Markdown.
 
-When Markdown and SmartyPants are both present in the same Movable Type
+When Markdown and SmartyPants are both present in the same MT
 installation, the "Markdown With SmartyPants" filter will be available
 from MT's Text Formatting pop-up menu. The "Markdown With SmartyPants"
 filter automatically applies SmartyPants to the bodies of your entries;
@@ -95,7 +95,7 @@ the regular "Markdown" filter does not. See the Markdown web page for
 more details.
 
 MT-Textile is a port of Dean Allen's original [Textile] [3] project to
-Perl and Movable Type. MT-Textile by itself only translates Textile
+Perl and MT. MT-Textile by itself only translates Textile
 markup to HTML. However, if SmartyPants is also installed, MT-Textile
 will call on SmartyPants to educate quotes, dashes, and ellipses,
 automatically. Textile is Dean Allen's "humane web text generator",
@@ -105,10 +105,10 @@ another easy-to-write and easy-to-read shorthand for web writing. An
     [3]: http://textism.com/tools/textile/
 
 Using SmartyPants in conjunction with MT-Textile or the "Markdown With
-SmartyPants" filter requires no modifications to your Movable Type
+SmartyPants" filter requires no modifications to your MT
 templates. You simply choose the appropriate filter from the Text
 Formatting menu, on a per-post basis. However, note that as of this
-writing, Movable Type does not apply text filters to article titles or
+writing, MT does not apply text filters to article titles or
 excerpts; you'll need to edit your templates to get SmartyPants
 processing for those fields.
 
@@ -121,11 +121,11 @@ invoking SmartyPants from your templates.
 Installation
 ------------
 
-### Movable Type ###
+### MT ###
 
-SmartyPants works with Movable Type version 2.5 or later.
+SmartyPants works with MT version 2.5 or later.
 
-1.  Copy the "SmartyPants.pl" file into your Movable Type "plugins"
+1.  Copy the "SmartyPants.pl" file into your MT "plugins"
     directory. The "plugins" directory should be in the same directory
     as "mt.cgi"; if it doesn't already exist, use your FTP program to
     create it. Your installation should look like this:
@@ -156,7 +156,7 @@ SmartyPants works with Movable Type version 2.5 or later.
 SmartyPants works with Blosxom version 2.0 or later.
 
 1.  Rename the "SmartyPants.pl" plug-in to "SmartyPants" (case is
-    important). Movable Type requires plug-ins to have a ".pl"
+    important). MT requires plug-ins to have a ".pl"
     extension; Blosxom forbids it (at least as of this writing).
 
 2.  Copy the "SmartyPants" plug-in file to your Blosxom plug-ins folder.
@@ -312,7 +312,7 @@ attributes are now officially deprecated.
 
 ### Version Info Tag ###
 
-If you include this tag in a Movable Type template:
+If you include this tag in a MT template:
 
     <$MTSmartyPantsVersion$>
 
@@ -538,7 +538,7 @@ Version History
 1.2: Thu Feb 27, 2003
 
 *   SmartyPants is now a combination plug-in, supporting both
-    Movable Type (2.5 or later) and Blosxom (2.0 or later).
+    MT (2.5 or later) and Blosxom (2.0 or later).
     It also works as a BBEdit text filter and standalone
     command-line Perl program. Thanks to Rael Dornfest for the
     initial Blosxom port (and for the excellent Blosxom plug-in

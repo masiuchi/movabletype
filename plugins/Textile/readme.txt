@@ -1,5 +1,5 @@
 Textile Text Formatter
-A plugin for Movable Type
+A plugin for MT
 
 Release 2.05
 April 22, 2008
@@ -14,13 +14,13 @@ Copyright (c) 2003-2008, Brad Choate
 
 INSTALLATION
 
-To install, you will need to add the following files to your Movable
-Type installation. The directory locations and file names are:
+To install, you will need to add the following files to your MT
+installation. The directory locations and file names are:
 
   * (mt home)/plugins/textile.pl
   * (mt home)/extlib/Text/Textile.pm
 
-Refer to the Movable Type documentation for more information regarding
+Refer to the MT documentation for more information regarding
 plugins.
 
 You may also consider installing two additional plugins that MT-Textile

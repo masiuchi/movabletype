@@ -1,5 +1,5 @@
 #
-# SmartyPants  -  A Plug-In for Movable Type, Blosxom, and BBEdit
+# SmartyPants  -  A Plug-In for MT, Blosxom, and BBEdit
 # by John Gruber
 # http://daringfireball.net
 #
@@ -27,7 +27,7 @@ my $smartypants_attr
 # Globals:
 my $tags_to_skip = qr!<(/?)(?:pre|code|kbd|script|math)[\s>]!;
 
-# Movable Type plug-in interface:
+# MT plug-in interface:
 
 require MT;
 MT->add_plugin(
@@ -752,8 +752,8 @@ Three consecutive dots (C<...>) into an ellipsis entity
 
 =back
 
-SmartyPants is a combination plug-in -- the same file works with Movable
-Type, Blosxom, BBEdit, and as a standalone Perl script. Version
+SmartyPants is a combination plug-in -- the same file works with MT,
+Blosxom, BBEdit, and as a standalone Perl script. Version
 requirements and installation instructions for each of these tools can
 be found in the readme file that accompanies this script.
 
@@ -1003,7 +1003,7 @@ proper HTML entity for closing single-quotes (C<&#8217;>) by hand.
     1.2: Thu Feb 27, 2003
 
     +   SmartyPants is now a combination plug-in, supporting both
-        Movable Type (2.5 or later) and Blosxom (2.0 or later).
+        MT (2.5 or later) and Blosxom (2.0 or later).
         It also works as a BBEdit text filter and standalone
         command-line Perl program. Thanks to Rael Dornfest for the
         initial Blosxom port (and for the excellent Blosxom plug-in

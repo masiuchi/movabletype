@@ -60,9 +60,6 @@ $plugin = MT::Plugin::MultiBlog->new(
             },
             tags => {
                 help_url => sub {
-                    MT->translate(
-                        'http://www.movabletype.org/documentation/appendices/tags/%t.html'
-                    );
                 },
                 block => {
                     Entries    => 'MultiBlog::preprocess_native_tags',

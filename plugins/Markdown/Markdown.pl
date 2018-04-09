@@ -59,7 +59,7 @@ my %g_html_blocks;
 # (see _ProcessListItems() for details):
 my $g_list_level = 0;
 
-#### Movable Type plug-in interface #####################################
+#### MT plug-in interface #####################################
 
 require MT;
 require MT::Plugin;
