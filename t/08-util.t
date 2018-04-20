@@ -458,10 +458,6 @@ is(make_string_csv('Foo,Bar'), '"Foo,Bar"', 'make_string_csv()');
 my %accept_languages = qw(
     en-us en-us
     ja-jp ja
-    de-DE de
-    es-ve es
-    fr-ca fr
-    nl-nl nl
 );
 while (my($env, $expected) = each(%accept_languages)) {
     $ENV{HTTP_ACCEPT_LANGUAGE} = $env;
