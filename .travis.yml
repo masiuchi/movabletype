@@ -2,7 +2,7 @@ matrix:
   include:
     # PHP 7.1
     - language: perl
-      perl: "5.26"
+      perl: "5.26.1"
     - language: perl
       perl: "5.24"
     - language: perl
