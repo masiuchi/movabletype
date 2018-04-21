@@ -1,3 +1,7 @@
+2018-04-21  Masahiro IUCHI
+
+	* Remove unused lexicon (#77)
+
 2018-03-28	Masahiro IUCHI
 
 	* Remove WidgetManager plugin (#75)
