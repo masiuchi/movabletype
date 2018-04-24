@@ -1,4 +1,5 @@
-# Movable Type (r) Open Source (C) 2005-2013 Six Apart, Ltd.
+# Copyright (C) 2005-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -18,7 +19,7 @@ use vars qw( %Lexicon );
 ## plugins/StyleCatcher/config.yaml
 	'StyleCatcher lets you easily browse through styles and then apply them to your blog in just a few clicks.' => 'StyleCatcherを使うと、ウェブサイトやブログのスタイルを探して、数クリックで変更することができます。',
 	'MT 4 Style Library' => 'MT 4 スタイルライブラリ',
-	'A collection of styles compatible with Movable Type 4 default templates.' => 'Movable Type 4のデフォルトテンプレートと互換性のあるスタイルです。',
+	'A collection of styles compatible with MT 4 default templates.' => 'MT 4のデフォルトテンプレートと互換性のあるスタイルです。',
 	'Styles' => 'スタイル',
 	'Moving current style to blog_meta for website...' => 'ウェブサイトの現在のスタイルの格納場所を移動しています...',
 	'Moving current style to blog_meta for blog...' => 'ブログの現在のスタイルの格納場所を移動しています...',
