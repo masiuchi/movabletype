@@ -45,7 +45,7 @@ __END__
 
 =head1 NAME
 
-MT::Callback - Movable Type wrapper for executable code with error state
+MT::Callback - MyMTOS wrapper for executable code with error state
 
 =head1 SYNOPSIS
 

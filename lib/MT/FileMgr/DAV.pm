@@ -17,7 +17,7 @@ sub init {
     my $fmgr = shift;
     $fmgr->SUPER::init(@_);
     my $dav = $fmgr->{dav} = HTTP::DAV->new;
-    $dav->get_user_agent->agent( 'MovableType/' . MT->version_id );
+    $dav->get_user_agent->agent( 'MyMTOS/' . MT->version_id );
     $dav->credentials( -url => $_[0], -user => $_[1], -pass => $_[2] )
         or return $fmgr->error(
         MT->translate( "DAV connection failed: [_1]", $dav->message ) );

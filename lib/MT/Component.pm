@@ -757,7 +757,7 @@ __END__
 
 =head1 NAME
 
-MT::Component - Movable Type class that describes a component.
+MT::Component - MyMTOS class that describes a component.
 
 =head1 SYNOPSIS
 

@@ -310,22 +310,6 @@ sub recent_blogs_widget {
     $param->{has_more_blogs} = 1 if $count > 10;
 }
 
-sub mt_news_widget {
-    my $app = shift;
-    my ( $tmpl, $param ) = @_;
-
-    $param->{news_html} = get_newsbox_content($app) || '';
-}
-
-sub get_newsbox_content {
-    my $app         = shift;
-    my $newsbox_url = $app->config('NewsboxURL');
-    if ( $newsbox_url && $newsbox_url ne 'disable' ) {
-        return MT::Util::get_newsbox_html( $newsbox_url, 'NW' );
-    }
-    return q();
-}
-
 sub mt_blog_stats_widget {
     my $app = shift;
     my ( $tmpl, $param ) = @_;

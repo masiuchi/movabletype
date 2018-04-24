@@ -40,7 +40,7 @@ __END__
 
 =head1 NAME
 
-MT::Placement - Movable Type entry-category placement record
+MT::Placement - MyMTOS entry-category placement record
 
 =head1 SYNOPSIS
 

@@ -848,7 +848,7 @@ B<Attributes:>
 
 If specified, can be used to test if a particular type of registration
 is enabled. The core types include "OpenID", "Vox", "LiveJournal", "TypeKey"
-and "MovableType". The identifier is case-insensitive.
+and "MyMTOS". The identifier is case-insensitive.
 
 =back
 

@@ -1728,7 +1728,7 @@ __END__
 
 =head1 NAME
 
-MT::Entry - Movable Type entry record
+MT::Entry - MyMTOS entry record
 
 =head1 SYNOPSIS
 
@@ -1744,7 +1744,7 @@ MT::Entry - Movable Type entry record
 
 =head1 DESCRIPTION
 
-An I<MT::Entry> object represents an entry in the Movable Type system. It
+An I<MT::Entry> object represents an entry in the MyMTOS system. It
 contains all of the metadata about the entry (author, status, category, etc.),
 as well as the actual body (and extended body) of the entry.
 

@@ -27,7 +27,7 @@ use MT::Asset;
 
 =head2 IfImageSupport
 
-A conditional tag that returns true when the Movable Type installation
+A conditional tag that returns true when the MyMTOS installation
 has the Perl modules necessary for manipulating image files.
 
 =cut

@@ -545,7 +545,7 @@ __END__
 
 MT::Auth::OpenID
 
-Movable Type commenter authentication module via OpenID
+MyMTOS commenter authentication module via OpenID
 
 =head1 METHODS
 
@@ -553,8 +553,8 @@ Movable Type commenter authentication module via OpenID
 
 This method is called from MT::App::Comments::login_external,
 to initiate process of logging in to a website other than 
-Movable Type itself.  You should not have to modify the
-behavior of this method.
+MyMTOS itself.  You should not have to modify the behavior of
+this method.
 
 =head2 handle_sign_in
 

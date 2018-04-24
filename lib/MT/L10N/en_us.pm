@@ -38,33 +38,33 @@ sub ascii_only { ( ( ref $_[0] ) || $_[0] ) eq __PACKAGE__ }
     '_REVISION_DATE_'          => 'Date',
 
     '_ERROR_CONFIG_FILE' =>
-        'Your Movable Type configuration file is missing or cannot be read properly. Please see the <a href="javascript:void(0)">Installation and Configuration</a> section of the Movable Type manual for more information.',
+        'Your MyMTOS configuration file is missing or cannot be read properly. Please see the <a href="javascript:void(0)">Installation and Configuration</a> section of the MyMTOS manual for more information.',
     '_ERROR_DATABASE_CONNECTION' =>
-        'Your database settings are either invalid or not present in your Movable Type configuration file. Please see the <a href="javascript:void(0)">Installation and Configuration</a> section of the Movable Type manual for more information.',
+        'Your database settings are either invalid or not present in your MyMTOS configuration file. Please see the <a href="javascript:void(0)">Installation and Configuration</a> section of the MyMTOS manual for more information.',
     '_ERROR_CGI_PATH' =>
-        'Your CGIPath configuration setting is either invalid or not present in your Movable Type configuration file. Please see the <a href="javascript:void(0)">Installation and Configuration</a> section of the Movable Type manual for more information.',
+        'Your CGIPath configuration setting is either invalid or not present in your MyMTOS configuration file. Please see the <a href="javascript:void(0)">Installation and Configuration</a> section of the MyMTOS manual for more information.',
     '_USAGE_REBUILD' =>
         '<a href="javascript:void(0)" onclick="doRebuild()">REBUILD</a> to see those changes reflected on your public site.',
     '_USAGE_VIEW_LOG' =>
         'Check the <a href="[_1]">Activity Log</a> for the error.',
 
     '_USAGE_FORGOT_PASSWORD_1' =>
-        'You requested recovery of your Movable Type password. Your password has been changed in the system; here is the new password:',
+        'You requested recovery of your MyMTOS password. Your password has been changed in the system; here is the new password:',
     '_USAGE_FORGOT_PASSWORD_2' =>
-        'You should be able to log in to Movable Type using this new password from the URL below. Once you have logged in, you should change your password to something more memorable.',
+        'You should be able to log in to MyMTOS using this new password from the URL below. Once you have logged in, you should change your password to something more memorable.',
 
     '_BACKUP_TEMPDIR_WARNING' =>
         'Requested data has been backed up successfully in the [_1] directory.  Make sure that you download and <strong>then delete</strong> files listed above from [_1] <strong>immediately</strong> because backup files contain sensitive information.',
     '_BACKUP_DOWNLOAD_MESSAGE' =>
         'Downloading of the backup file will start automatically in a few seconds.  If for some reason it does not, click <a href="javascript:(void)" onclick="submit_form()">here</a> to start downloading manually.  Please note that you can download the backup file only once for a session.',
     '_USAGE_BOOKMARKLET_1' =>
-        'Setting up QuickPost to post to Movable Type allows you to perform one-click posting and publishing without ever entering through the main Movable Type interface.',
+        'Setting up QuickPost to post to MyMTOS allows you to perform one-click posting and publishing without ever entering through the main MyMTOS interface.',
     '_USAGE_BOOKMARKLET_2' =>
-        'Movable Type\'s QuickPost structure allows you to customize the layout and fields on your QuickPost page. For example, you may wish to add the ability to add excerpts through the QuickPost window. By default, a QuickPost window will always have: a pulldown menu for the weblog to post to; a pulldown menu to select the Post Status (Draft or Publish) of the new entry; a text entry box for the Title of the entry; and a text entry box for the entry body.',
+        'MyMTOS\'s QuickPost structure allows you to customize the layout and fields on your QuickPost page. For example, you may wish to add the ability to add excerpts through the QuickPost window. By default, a QuickPost window will always have: a pulldown menu for the weblog to post to; a pulldown menu to select the Post Status (Draft or Publish) of the new entry; a text entry box for the Title of the entry; and a text entry box for the entry body.',
     '_USAGE_BOOKMARKLET_3' =>
-        'To install the Movable Type QuickPost bookmark, drag the following link to your browser\'s menu or Favorites toolbar:',
+        'To install the MyMTOS QuickPost bookmark, drag the following link to your browser\'s menu or Favorites toolbar:',
     '_USAGE_BOOKMARKLET_4' =>
-        'After installing QuickPost, you can post from anywhere on the web. When viewing a page that you want to post about, click the "QuickPost" QuickPost to open a popup window with a special Movable Type editing window. From that window you can select a weblog to post the entry to, then enter you post, and publish.',
+        'After installing QuickPost, you can post from anywhere on the web. When viewing a page that you want to post about, click the "QuickPost" QuickPost to open a popup window with a special MyMTOS editing window. From that window you can select a weblog to post the entry to, then enter you post, and publish.',
     '_USAGE_BOOKMARKLET_5' =>
         'Alternatively, if you are running Internet Explorer on Windows, you can install a "QuickPost" option into the Windows right-click menu. Click on the link below and accept the browser prompt to "Open" the file. Then quit and restart your browser to add the link to the right-click menu.',
     '_USAGE_ARCHIVE_MAPS' =>
@@ -135,37 +135,37 @@ sub ascii_only { ( ( ref $_[0] ) || $_[0] ) eq __PACKAGE__ }
         'Select the set of fields to be displayed on the entry editor.',
 
     '_USAGE_IMPORT' =>
-        'You can import entries for your weblog from a file in the <code>import</code> directory where Movable Type is installed, or uploaded by following forms. Entries can be imported from other Movable Type installations or other applications.',
+        'You can import entries for your weblog from a file in the <code>import</code> directory where MyMTOS is installed, or uploaded by following forms. Entries can be imported from other MyMTOS installations or other applications.',
     '_USAGE_EXPORT_1' =>
         'Export the entries, comments and TrackBacks of a blog. An export is not considered a <em>complete</em> backup of a blog.',
     '_USAGE_EXPORT_2' =>
         'To export your entries, click on the link below ("Export Entries From [_1]"). To save the exported data to a file, you can hold down the <code>option</code> key on the Macintosh, or the <code>Shift</code> key on a PC, while clicking on the link. Alternatively, you can select all of the data, then copy it into another document. (<a href="javascript:void(0)" onclick="openManual(\'importing\', \'export_ie\');return false;">Exporting from Internet Explorer?</a>)',
     '_USAGE_EXPORT_3' =>
-        'Clicking the link below will export all of your current weblog entries to the Tangent server. This is generally a one-time push of your entries, to be done after you have installed the Tangent add-on for Movable Type, but conceivably it could be executed whenever you wish.',
+        'Clicking the link below will export all of your current weblog entries to the Tangent server. This is generally a one-time push of your entries, to be done after you have installed the Tangent add-on for MyMTOS, but conceivably it could be executed whenever you wish.',
 
     '_NO_SUPERUSER_DISABLE' =>
-        'Because you are a system administrator on the Movable Type system, you can not disable yourself.',
+        'Because you are a system administrator on the MyMTOS system, you can not disable yourself.',
 
     '_USAGE_AUTHORS' =>
-        'This is a list of all of the users in the Movable Type system. You can edit a user\'s profile by clicking on his/her name.',
+        'This is a list of all of the users in the MyMTOS system. You can edit a user\'s profile by clicking on his/her name.',
     '_USAGE_AUTHORS_1' =>
-        'This is a list of all of the users in the Movable Type system. You can edit a user\'s profile by clicking on his/her name. You can create, edit and delete user records by using CSV-based command file.',
+        'This is a list of all of the users in the MyMTOS system. You can edit a user\'s profile by clicking on his/her name. You can create, edit and delete user records by using CSV-based command file.',
     '_USAGE_AUTHORS_LDAP' =>
-        'This is a list of all of the users in the Movable Type system. You can edit a user\'s profile by clicking on his/her name. You can disable users by checking the checkbox next to their name, then pressing DISABLE. By doing this, the user will not be able to login to Movable Type.',
+        'This is a list of all of the users in the MyMTOS system. You can edit a user\'s profile by clicking on his/her name. You can disable users by checking the checkbox next to their name, then pressing DISABLE. By doing this, the user will not be able to login to MyMTOS.',
     '_USAGE_AUTHORS_2' =>
         'You can create, edit and delete users in bulk by uploading a CSV-formatted file containing those commands and relevant data.',
 
     '_USAGE_GROUPS' =>
-        'Below is a list of all groups in the Movable Type system. You can enable or disable a group by checking the checkbox next to its name, then pressing either the Enable or Disable button. You can edit a group by clicking on its name.',
+        'Below is a list of all groups in the MyMTOS system. You can enable or disable a group by checking the checkbox next to its name, then pressing either the Enable or Disable button. You can edit a group by clicking on its name.',
     '_USAGE_GROUPS_USER' =>
         'Below is a list of the groups in which the user is a member. You can remove the user from a group by checking the checkbox next to that group and clicking REMOVE.',
     '_USAGE_GROUPS_LDAP' =>
-        'Below is a list of all groups in the Movable Type system. You can enable or disable a group by checking the checkbox next to its name, then pressing either the Enable or Disable button.',
+        'Below is a list of all groups in the MyMTOS system. You can enable or disable a group by checking the checkbox next to its name, then pressing either the Enable or Disable button.',
     '_USAGE_GROUPS_USER_LDAP' =>
         'Below is a list of the groups in which the user is a member.',
 
     '_USAGE_PLUGINS' =>
-        'This is a list of all plugins currently registered with Movable Type.',
+        'This is a list of all plugins currently registered with MyMTOS.',
 
     '_USAGE_LIST_POWER' =>
         'Here is the list of entries for [_1] in batch-editing mode. In the form below, you may change any of the values for any of the entries displayed; after making the desired modifications, press the SAVE button. The standard List &amp; Edit Entries controls (filters, paging) work in batch mode in the manner to which you are accustomed.',
@@ -189,7 +189,7 @@ sub ascii_only { ( ( ref $_[0] ) || $_[0] ) eq __PACKAGE__ }
         'Here is the list of users who wish to be notified when you publish to your site. To add a new user, enter their email address in the form below. The URL field is optional. To delete a user, check the delete box in the table below and press the DELETE button.',
 
     '_USAGE_SEARCH' =>
-        'You can use the Search &amp; Replace tool to find and optionally replace text or data found in many item listings within Movable Type. IMPORTANT: be careful when doing a replace, because there is <b>no undo</b>.',
+        'You can use the Search &amp; Replace tool to find and optionally replace text or data found in many item listings within MyMTOS. IMPORTANT: be careful when doing a replace, because there is <b>no undo</b>.',
 
     '_USAGE_UPLOAD' =>
         'You can upload the file to a subdirectory in the selected path. The subdirectory will be created if it does not exist.',
@@ -197,16 +197,12 @@ sub ascii_only { ( ( ref $_[0] ) || $_[0] ) eq __PACKAGE__ }
     '_THROTTLED_COMMENT' =>
         'Too many comments have been submitted from you in a short period of time.  Please try again in a short while.',
 
-    '_INDEX_INTRO' =>
-        '<p>If you are installing Movable Type, you may want to review the <a href="http://www.sixapart.com/movabletype/docs/mtinstall.html">installation instructions</a> and view the <a rel="nofollow" href="mt-check.cgi">Movable Type System Check</a> to make sure that your system has what it needs.</p>',
     '_LOG_TABLE_BY'         => 'By',
     '_REBUILD_PUBLISH'      => 'Publish',
     '_DATE_FROM'            => 'From',
     '_DATE_TO'              => 'To',
     '_SHORT_MAY'            => 'May',
-    '_MTCOM_URL'            => 'http://www.movabletype.com/',
-    '_PLUGIN_DIRECTORY_URL' => 'http://plugins.movabletype.org/',
-    '_THEME_DIRECTORY_URL'  => 'http://plugins.movabletype.org/',
+    '_MTCOM_URL'            => 'https://github.com/masiuchi/movabletype',
     '_CATEGORY_BASENAME'    => 'Basename',
 
     '_AUTO'                => 1,
@@ -231,7 +227,7 @@ sub ascii_only { ( ( ref $_[0] ) || $_[0] ) eq __PACKAGE__ }
     'UTC+10' => 'UTC+10 (East Australian Standard Time)',
 
     '_POWERED_BY' =>
-        'Powered by <a href="http://www.movabletype.org/"><$MTProductName$></a>',
+        'Powered by <a href="https://github.com/masiuchi/movabletype"><$MTProductName$></a>',
     '_DISPLAY_OPTIONS_SHOW' => 'Show',
     '_WARNING_DELETE_USER_EUM' =>
         'Deleting a user is an irrevocable action which creates orphans of the user\'s entries. If you wish to retire a user or remove their access to the system, disabling their account is the recommended course of action. Are you sure you want to delete the selected user(s)? They will be able to re-create themselves if selected user(s) still exist in your external directory.',

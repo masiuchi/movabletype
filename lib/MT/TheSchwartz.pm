@@ -392,7 +392,7 @@ __END__
 
 =head1 NAME
 
-MT::TheSchwartz - Movable Type
+MT::TheSchwartz - MyMTOS job queue system
 
 =head1 SYNOPSIS
 

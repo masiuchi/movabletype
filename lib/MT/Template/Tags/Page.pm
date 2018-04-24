@@ -387,7 +387,7 @@ an page which is used as part of the individual pages's archive filename.
 The basename is created by dirifiying the page title when the page is
 first saved (regardless of the page status). From then on, barring direct
 manipulation, the page basename stays constant even when you change the
-page's title. In this way, Movable Type ensures that changes you make
+page's title. In this way, MyMTOS ensures that changes you make
 to an page after saving it don't change the URL to the page, subsequently
 breaking incoming links.
 

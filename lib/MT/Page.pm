@@ -261,7 +261,7 @@ __END__
 
 =head1 NAME
 
-MT::Page - Movable Type page record
+MT::Page - MyMTOS page record
 
 =head1 SYNOPSIS
 

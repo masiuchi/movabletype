@@ -2,18 +2,13 @@
 
 =head1 NAME
 
-Callback.pod - Movable Type Callbacks
+Callback.pod - MyMTOS Callbacks
 
 =head1 DESCRIPTION
 
-The callback system in Movable Type is easy to use and is invoked at key areas
+The callback system in MyMTOS is easy to use and is invoked at key areas
 throughout the application. This document is a reference of all available
-callbacks in Movable Type itself.
-
-It's important to note that this documentation (as with all API documentation)
-applies to the B<Movable Type platform> which includes both Movable Type and 
-Movable Type Enterprise.  In the rare occurance that something refers 
-exclusively to one or the other, it will be explicitly noted.
+callbacks in MyMTOS itself.
 
 =head1 OVERVIEW
 
@@ -641,7 +636,7 @@ if unavailable).
 =head2 MT::App::Comments
 
 This application handles receiving all comments posted to the
-Movable Type installation.
+MyMTOS installation.
 
 =over 4
 
@@ -691,7 +686,7 @@ be saved. The callback has the following signature:
 =head2 MT::App::Trackback
 
 This application handles receiving all TrackBack pings sent to the
-Movable Type installation.
+MyMTOS installation.
 
 =over 4
 
@@ -767,7 +762,7 @@ should be an Atom-based feed.
 
 =head2 Publishing
 
-The Movable Type publishing callbacks are invoked from the
+The MyMTOS publishing callbacks are invoked from the
 I<MT::WeblogPublisher> module. These callbacks are used to allow manipulation
 of the publishing process.
 
@@ -775,7 +770,7 @@ of the publishing process.
 
 =item * BuildFileFilter
 
-This filter is called when Movable Type wants to rebuild a file, but
+This filter is called when MyMTOS wants to rebuild a file, but
 before doing so. This gives plugins the chance to determine whether a
 file should actually be rebuild in particular situations.
 
@@ -830,7 +825,7 @@ determine whether a single entry is on deck to be built.
 
 In the case of a date-based archive page, this is a timestamp at the
 beginning of the period from which entries will be included on this
-page, in Movable Type's standard 14-digit "timestamp" format. For
+page, in MyMTOS's standard 14-digit "timestamp" format. For
 example, if the page is a Daily archive for April 17, 1796, this value
 would be 17960417000000. If the page were a Monthly archive for March,
 2003, C<$start> would be 20030301000000. Again, this parameter may be
@@ -949,7 +944,7 @@ parameter is the I<HTML::Template> object used to generate the page.
 
 =head2 Default Templates
 
-When a new weblog is created, Movable Type uses the I<MT::DefaultTemplates>
+When a new weblog is created, MyMTOS uses the I<MT::DefaultTemplates>
 module to retrieve the set of default templates to be installed. It also
 invokes a callback that provides plugins an opportunity to alter the set
 of default templates (either to amend, or to filter them).
@@ -1050,23 +1045,6 @@ to the callback. This will allow the plugin to use it's own lexicon for
 localizing the template for the currently logged-in user.
 
 =back
-
-=back
-
-=head2 New User Provisioning
-
-I<This feature is only available in Movable Type Enterprise.>
-
-=over 4
-
-=item * NewUserProvisioning
-
-    callback($cb, $user)
-
-This callback is invoked when a user is being added to Movable Type.
-Movable Type itself registers for this callback (with a priority of 5)
-to provision the user with a new weblog if the system has been configured
-to do so.
 
 =back
 

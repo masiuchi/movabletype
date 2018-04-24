@@ -2574,7 +2574,7 @@ that is less than the current time.
 
 =item BuildFileFilter
 
-This filter is called when Movable Type wants to rebuild a file, but
+This filter is called when MyMTOS wants to rebuild a file, but
 before doing so. This gives plugins the chance to determine whether a
 file should actually be rebuild in particular situations.
 
@@ -2629,7 +2629,7 @@ determine whether a single entry is on deck to be built.
 
 In the case of a date-based archive page, this is a timestamp at the
 beginning of the period from which entries will be included on this
-page, in Movable Type's standard 14-digit "timestamp" format. For
+page, in MyMTOS's standard 14-digit "timestamp" format. For
 example, if the page is a Daily archive for April 17, 1796, this value
 would be 17960417000000. If the page were a Monthly archive for March,
 2003, C<$start> would be 20030301000000. Again, this parameter may be

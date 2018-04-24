@@ -64,7 +64,7 @@ sub _hdlr_author_userpic_url {
 =head2 AuthorUserpicAsset
 
 This container tag creates a context that contains the userpic asset for
-the current author. This then allows you to use all of Movable Type's
+the current author. This then allows you to use all of MyMTOS's
 asset template tags to display the userpic's properties.
 
     <ul><mt:Authors>
@@ -214,7 +214,7 @@ sub _hdlr_commenter_userpic_url {
 
 This template tag is a container tag that puts the current commenter's
 userpic asset in context. Because userpics are stored as assets within
-Movable Type, this allows you to utilize all of the asset-related
+MyMTOS, this allows you to utilize all of the asset-related
 template tags when displaying a user's userpic.
 
 B<Example:>

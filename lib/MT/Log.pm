@@ -496,7 +496,7 @@ __END__
 
 =head1 NAME
 
-MT::Log - Movable Type activity log record
+MT::Log - MyMTOS activity log record
 
 =head1 SYNOPSIS
 
@@ -524,7 +524,7 @@ You can also log directly with the MT package:
 
 =head1 DESCRIPTION
 
-An I<MT::Log> object represents a record in the Movable Type activity log.
+An I<MT::Log> object represents a record in the MyMTOS activity log.
 
 =head1 USAGE
 

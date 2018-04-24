@@ -574,7 +574,7 @@ __END__
 
 =head1 NAME
 
-MT::Filter - Movable Type filter record
+MT::Filter - MyMTOS filter record
 
 =head1 SYNOPSIS
 

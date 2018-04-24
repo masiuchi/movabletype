@@ -55,7 +55,7 @@ __END__
 
 =head1 NAME
 
-MT::FailedLogin - Movable Type failed login log record
+MT::FailedLogin - MyMTOS failed login log record
 
 =head1 SYNOPSIS
 

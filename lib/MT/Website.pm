@@ -238,7 +238,7 @@ __END__
 
 =head1 NAME
 
-MT::Website - Movable Type webpage record
+MT::Website - MyMTOS webpage record
 
 =head1 SYNOPSIS
 

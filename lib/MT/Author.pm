@@ -567,7 +567,7 @@ sub member_list_props {
 sub member_system_filters {
     return {
         navive_users => {
-            label     => 'MT Native Users',
+            label     => 'MyMTOS Native Users',
             items     => [ { type => 'type', args => { value => 1 }, }, ],
             condition => sub {
                 MT->config->SingleCommunity ? 0 : 1;
@@ -653,7 +653,7 @@ sub _bulk_author_name_html {
         my $auth_label;
         if ( $obj->auth_type eq 'MT' || $obj->auth_type eq 'LDAP' ) {
             $auth_img .= 'images/comment/mt_logo.png';
-            $auth_label = 'Movable Type';
+            $auth_label = 'MyMTOS';
         }
         else {
             my $auth
@@ -1532,7 +1532,7 @@ __END__
 
 =head1 NAME
 
-MT::Author - Movable Type author record
+MT::Author - MyMTOS author record
 
 =head1 SYNOPSIS
 
@@ -1547,7 +1547,7 @@ MT::Author - Movable Type author record
 
 =head1 DESCRIPTION
 
-An I<MT::Author> object represents a user in the Movable Type system. It
+An I<MT::Author> object represents a user in the MyMTOS system. It
 contains profile information (name, nickname, email address, etc.), global
 permissions settings (blog creation, activity log viewing), and authentication
 information (password, public key). It does not contain any per-blog
@@ -1848,7 +1848,7 @@ system activity log.
 
 =item * created_by
 
-The author ID of the author who created this author. If the author was created by a process where no user was logged in to Movable Type, the created_by column will be empty.
+The author ID of the author who created this author. If the author was created by a process where no user was logged in to MyMTOS, the created_by column will be empty.
 
 =item * public_key
 

@@ -1702,7 +1702,7 @@ __END__
 
 =head1 NAME
 
-MT::Blog - Movable Type blog record
+MT::Blog - MyMTOS blog record
 
 =head1 SYNOPSIS
 
@@ -1714,7 +1714,7 @@ MT::Blog - Movable Type blog record
 
 =head1 DESCRIPTION
 
-An I<MT::Blog> object represents a blog in the Movable Type system. It
+An I<MT::Blog> object represents a blog in the MyMTOS system. It
 contains all of the settings, preferences, and configuration for a particular
 blog. It does not contain any per-author permissions settings--for those,
 look at the I<MT::Permission> object.
@@ -1923,8 +1923,8 @@ immediately delete spam
 
 =item * mt_update_key
 
-The Movable Type Recently Updated Key to be sent to I<movabletype.org> after
-an entry is saved
+The MyMTOS Recently Updated Key to be sent to C<MTPingURL> configuration
+setting after an entry is saved
 
 =item * google_api_key
 
@@ -2050,7 +2050,7 @@ Default setting for embedded images in entries
 =item * commenter_authenticators
 
 A comma-delimited list of authentication options for commenters.
-for example: "MovableType,TypeKey,LiveJournal"
+for example: "MyMTOS,TypeKey,LiveJournal"
 
 =item * require_typekey_emails
 

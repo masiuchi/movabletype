@@ -559,7 +559,7 @@ detected by the default handler.
 The majority of the methods MT::Revisable provides are implemented by driver
 modules. These driver modules specify how versions of an object are saved and
 retrieved from a data store. By default, MT::Revisable uses the
-MT::Revisable::Local driver which saves versions within the Movable Type database.
+MT::Revisable::Local driver which saves versions within the MyMTOS database.
 To change this, you would first need to create a driver that implements the
 following methods:
 

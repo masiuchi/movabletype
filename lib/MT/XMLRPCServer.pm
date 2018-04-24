@@ -941,7 +941,7 @@ sub newMediaObject {
 sub getTemplate {
     die MT::XMLRPCServer::Util::fault(
         MT->translate(
-            "Template methods are not implemented, due to differences between the Blogger API and the Movable Type API."
+            "Template methods are not implemented, due to differences between the Blogger API and the MyMTOS API."
         )
     );
 }
@@ -971,7 +971,7 @@ MT::XMLRPCServer
 
 =head1 SYNOPSIS
 
-An XMLRPC API interface for communicating with Movable Type.
+An XMLRPC API interface for communicating with MyMTOS.
 
 =head1 CALLBACKS
 

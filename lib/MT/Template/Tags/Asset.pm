@@ -902,7 +902,7 @@ sub _hdlr_asset_file_path {
 
 =head2 AssetDateAdded
 
-The date the asset in context was added to Movable Type.
+The date the asset in context was added to MyMTOS.
 
 B<Attributes:>
 

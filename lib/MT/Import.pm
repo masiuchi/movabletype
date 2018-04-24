@@ -44,12 +44,12 @@ sub init {
 sub core_import_formats {
     return {
         'import_mt' => {
-            label   => 'Movable Type',
+            label   => 'MyMTOS',
             type    => 'MT::ImportExport',
             handler => 'MT::ImportExport::import_contents',
         },
         'import_mt_format' => {
-            label   => 'Another system (Movable Type format)',
+            label   => 'Another system (MyMTOS format)',
             type    => 'MT::ImportExport',
             handler => 'MT::ImportExport::import_contents',
             options => [ 'title_start', 'title_end', 'default_status' ],

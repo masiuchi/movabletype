@@ -893,7 +893,7 @@ __END__
 
 =head1 NAME
 
-MT::Tag - Movable Type tag record and methods
+MT::Tag - MyMTOS tag record and methods
 
 =head1 SYNOPSIS
 

@@ -292,7 +292,7 @@ __END__
 
 =head1 NAME
 
-MT::Plugin - Movable Type class that describes a plugin
+MT::Plugin - MyMTOS class that describes a plugin
 
 =head1 SYNOPSIS
 
@@ -517,7 +517,7 @@ parameter can either be a coderef or a hashref for app-specific routines.
 
 =item * template_tags
 
-This parameter is used to declare custom tag handlers for Movable Type.
+This parameter is used to declare custom tag handlers for MyMTOS.
 It is similar in function to C<MT::Template::Context-E<gt>add_tag>.
 The parameter is given as a hashref, in this format:
 
@@ -529,7 +529,7 @@ You may register one or more template tags in this way.
 
 =item * container_tags
 
-This parameter is used to declare custom container tags for Movable Type.
+This parameter is used to declare custom container tags for MyMTOS.
 It is similar in function to C<MT::Template::Context-E<gt>add_container_tag>.
 You may register one or more container tags in this way.
 
@@ -539,7 +539,7 @@ You may register one or more container tags in this way.
 
 =item * conditional_tags
 
-This parameter is used to declare custom conditional tags for Movable Type.
+This parameter is used to declare custom conditional tags for MyMTOS.
 This is similar in function to C<MT::Template::Context-E<gt>add_conditional_tag>.
 You may register one or more conditional tags in this way.
 

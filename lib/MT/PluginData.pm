@@ -116,7 +116,7 @@ __END__
 
 =head1 NAME
 
-MT::PluginData - Arbitrary data storage for Movable Type plugins
+MT::PluginData - Arbitrary data storage for MyMTOS plugins
 
 =head1 SYNOPSIS
 
@@ -135,8 +135,8 @@ MT::PluginData - Arbitrary data storage for Movable Type plugins
 
 =head1 DESCRIPTION
 
-I<MT::PluginData> is a data storage mechanism for Movable Type plugins. It
-uses the same backend datasource as the rest of the Movable Type system:
+I<MT::PluginData> is a data storage mechanism for MyMTOS plugins. It
+uses the same backend datasource as the rest of the MyMTOS system:
 Berkeley DB, MySQL, etc. Plugins can use this class to store arbitrary
 data structures in the database, keyed on a string specific to the plugin
 and a key, just like a big associate array. Data structures are serialized

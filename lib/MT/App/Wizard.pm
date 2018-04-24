@@ -153,23 +153,23 @@ sub init_core_registry {
             'Plack' => {
                 link => 'http://search.cpan.org/dist/Plack/',
                 label =>
-                    'This module and its dependencies are required to run Movable Type under psgi.',
+                    'This module and its dependencies are required to run MyMTOS under psgi.',
             },
             'CGI::PSGI' => {
                 link => 'http://search.cpan.org/dist/CGI-PSGI/',
                 label =>
-                    'This module and its dependencies are required to run Movable Type under psgi.',
+                    'This module and its dependencies are required to run MyMTOS under psgi.',
             },
             'CGI::Parse::PSGI' => {
                 link => 'http://search.cpan.org/dist/CGI-Emulate-PSGI/',
                 label =>
-                    'This module and its dependencies are required to run Movable Type under psgi.',
+                    'This module and its dependencies are required to run MyMTOS under psgi.',
             },
             'XMLRPC::Transport::HTTP::Plack' => {
                 link =>
                     'http://search.cpan.org/dist/SOAP-Transport-HTTP-Plack/',
                 label =>
-                    'This module and its dependencies are required to run Movable Type under psgi.',
+                    'This module and its dependencies are required to run MyMTOS under psgi.',
             },
             'Net::SMTP' => {
                 link => 'http://search.cpan.org/dist/libnet/',
@@ -285,7 +285,7 @@ link => 'http://search.cpan.org/dist/Storable',
             'Cache::Memcached' => {
                 link => 'http://search.cpan.org/dist/Cache-Memcached',
                 label =>
-                    'This module is required in order to use memcached as caching mechanism used by Movable Type.',
+                    'This module is required in order to use memcached as caching mechanism used by MyMTOS.',
             },
             'Archive::Tar' => {
                 link => 'http://search.cpan.org/dist/Archive-Tar',
@@ -329,7 +329,7 @@ link => 'http://search.cpan.org/dist/Storable',
             'Text::Balanced' => {
                 link => 'http://search.cpan.org/dist/Text-Balanced',
                 label =>
-                    'This module is required by mt-search.cgi if you are running Movable Type using a version of Perl older than Perl 5.8.',
+                    'This module is required by mt-search.cgi if you are running MyMTOS using a version of Perl older than Perl 5.8.',
             },
             'XML::Parser' => {
                 link  => 'http://search.cpan.org/dist/Text-Balanced',
@@ -356,7 +356,7 @@ link => 'http://search.cpan.org/dist/Storable',
             'CGI' => {
                 link => 'http://search.cpan.org/dist/CGI.pm',
                 label =>
-                    'CGI is required for all Movable Type application functionality.',
+                    'CGI is required for all MyMTOS application functionality.',
             },
             'File::Spec' => {
                 link    => 'http://search.cpan.org/dist/File-Spec',
@@ -367,7 +367,7 @@ link => 'http://search.cpan.org/dist/Storable',
             'LWP::UserAgent' => {
                 link => 'http://search.cpan.org/dist/libwww-perl/',
                 label =>
-                    'LWP::UserAgent is required for creating Movable Type configuration files using the installation wizard.',
+                    'LWP::UserAgent is required for creating MyMTOS configuration files using the installation wizard.',
             },
         },
         database_options => {
@@ -1033,14 +1033,14 @@ sub optional {
                 To => $param{test_mail_address},
                 From => $cfg->EmailAddressMain || $param{test_mail_address},
                 Subject => $app->translate(
-                    "Test email from Movable Type Configuration Wizard")
+                    "Test email from MyMTOS Configuration Wizard")
             );
             my $charset = $cfg->MailEncoding || $cfg->PublishCharset;
             $head{'Content-Type'} = qq(text/plain; charset="$charset");
 
             my $body
                 = $app->translate(
-                "This is the test email sent by your new installation of Movable Type."
+                "This is the test email sent by your new installation of MyMTOS."
                 );
 
             require MT::Mail;

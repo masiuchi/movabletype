@@ -24,7 +24,7 @@ sub check_availability {
     eval "require Image::Magick;";
     if ($@) {
         return MT->translate(
-            'Movable Type default CAPTCHA provider requires Image::Magick.');
+            'MyMTOS default CAPTCHA provider requires Image::Magick.');
     }
 
     my $cfg  = MT->config;

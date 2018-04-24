@@ -683,7 +683,7 @@ __END__
 
 =head1 NAME
 
-MT::TBPing - Movable Type TrackBack Ping record
+MT::TBPing - MyMTOS TrackBack Ping record
 
 =head1 SYNOPSIS
 
@@ -699,7 +699,7 @@ MT::TBPing - Movable Type TrackBack Ping record
 
 =head1 DESCRIPTION
 
-An I<MT::TBPing> object represents a TrackBack ping in the Movable Type system.
+An I<MT::TBPing> object represents a TrackBack ping in the MyMTOS system.
 It contains all of the metadata about the ping (title, excerpt, URL, etc).
 
 =head1 USAGE

@@ -779,7 +779,7 @@ __END__
 
 =head1 NAME
 
-MT::Permission - Movable Type permissions record
+MT::Permission - MyMTOS permissions record
 
 =head1 SYNOPSIS
 
@@ -804,7 +804,7 @@ a bitmask.
 Note: The I<MT::Permission> object is not meant to be modified or created
 directly. Permissions should be assigned to users through role associations,
 or through MT::Author's can_xxx methods for system level privileges.
-The I<MT::Permission> object is actually managed by Movable Type purely, and
+The I<MT::Permission> object is actually managed by MyMTOS purely, and
 is a flattened view of all the permissions a particular user has for a single
 blog.  Users' system level privileges are also stored in MT::Permission record
 with blog_id = 0.
@@ -856,12 +856,12 @@ permissions declared with that 'set' identifier.
 =head2 MT::Permission->add_permission( \@perm )
 
 Both of these methods can be used to register a new permission with
-Movable Type.
+MyMTOS.
 
 Note: It is not advisable to call these method to register custom permissions
 without having preregistered for one from Six Apart, Ltd. This will
 reserve your permission and allow it to coexist with other plugins and
-future permissions defined by Movable Type itself.
+future permissions defined by MyMTOS itself.
 
 When calling add_permission with a hashref, you should specify these
 elements in the hash:

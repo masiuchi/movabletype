@@ -75,8 +75,8 @@ sub edit {
         }
         if ( my $auths = $blog->commenter_authenticators ) {
             foreach ( split ',', $auths ) {
-                if ( 'MovableType' eq $_ ) {
-                    $param->{enabled_mt} = 1;
+                if ( 'MovableType' eq $_ || 'MyMTOS' eq $_ ) {
+                    $param->{enabled_MyMTOS} = 1;
                 }
                 else {
                     $cmtauth{$_}->{enabled} = 1;
@@ -535,8 +535,8 @@ sub cfg_registration {
     }
     if ( my $auths = $blog->commenter_authenticators ) {
         foreach ( split ',', $auths ) {
-            if ( 'MovableType' eq $_ ) {
-                $param{enabled_mt} = 1;
+            if ( 'MovableType' eq $_ || 'MyMTOS' eq $_ ) {
+                $param{enabled_MyMTOS} = 1;
             }
             elsif ( exists $cmtauth{$_} ) {
                 $cmtauth{$_}->{enabled} = 1;
@@ -2626,13 +2626,13 @@ sub _create_dynamiccache_dir {
 
     if ( -d $cache_path ) {
         $message = MT->translate(
-            'Error: Movable Type cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory.',
+            'Error: MyMTOS cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory.',
             'cache'
         ) unless ( -w $cache_path );
     }
     else {
         $message = MT->translate(
-            'Error: Movable Type was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory.',
+            'Error: MyMTOS was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory.',
             'cache'
         ) unless ( -d $cache_path );
     }
@@ -2667,13 +2667,13 @@ sub prepare_dynamic_publishing {
 
         if ( -d $compiled_template_path ) {
             $message = MT->translate(
-                'Error: Movable Type cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory.',
+                'Error: MyMTOS cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory.',
                 'templates_c'
             ) unless ( -w $compiled_template_path );
         }
         else {
             $message = MT->translate(
-                'Error: Movable Type was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory.',
+                'Error: MyMTOS was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory.',
                 'templates_c'
             ) unless ( -d $compiled_template_path );
         }
@@ -2788,7 +2788,7 @@ sub prepare_dynamic_publishing {
             if ( $contents !~ /^\s*Rewrite(Cond|Engine|Rule)\b/m ) {
                 my $htaccess = <<HTACCESS;
 
-## %%%%%%% Movable Type generated this part; don't remove this line! %%%%%%%
+## %%%%%%% MyMTOS generated this part; don't remove this line! %%%%%%%
 # Disable fancy indexes, so mtview.php gets a chance...
 Options -Indexes
   <IfModule mod_rewrite.c>
@@ -2828,7 +2828,7 @@ Options -Indexes
   ErrorDocument 404 $mtview_server_url
   ErrorDocument 403 $mtview_server_url
 </IfModule>
-## ******* Movable Type generated this part; don't remove this line! *******
+## ******* MyMTOS generated this part; don't remove this line! *******
 
 HTACCESS
 

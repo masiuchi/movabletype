@@ -91,7 +91,7 @@ MT::Memcached - Handy wrapper class for Cache::Memcached
 
 I<MT::Memcached> provides a singleton wrapper interface around
 I<Cache::Memcached>. It automatically loads up the I<Cache::Memcached>
-object with the server information defined in the Movable Type
+object with the server information defined in the MyMTOS
 configuration file, in the C<MemcachedServers> variable.
 
 If your server environment doesn't have I<Cache::Memcached> installed,
@@ -113,7 +113,7 @@ Returns the singleton object (a I<MT::Memcached> object).
 
 =head2 MT::Memcached->is_available
 
-Returns true if there are memcached servers defined in your Movable Type
+Returns true if there are memcached servers defined in your MyMTOS
 configuration and if the I<Cache::Memcached> module can be loaded.
 
 =head2 MT::Memcached->cleanup

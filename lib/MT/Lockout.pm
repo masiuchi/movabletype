@@ -424,7 +424,7 @@ __END__
 
 =head1 NAME
 
-MT::Lockout - Movable Type class for user and IP address lockout feature.
+MT::Lockout - MyMTOS class for user and IP address lockout feature.
 
 
 =head1 SYNOPSIS

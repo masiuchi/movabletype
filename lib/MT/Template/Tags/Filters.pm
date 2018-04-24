@@ -917,7 +917,7 @@ is empty.
 
 B<Example:>
 
-    <$mt:BlogDescription _default="Not 'just another' Movable Type blog."$>
+    <$mt:BlogDescription _default="Not 'just another' MyMTOS blog."$>
 
 =cut
 

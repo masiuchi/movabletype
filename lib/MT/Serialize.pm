@@ -407,7 +407,7 @@ MT::Serialize - Data serialization library
 =head1 DESCRIPTION
 
 This package provides an abstraction layer to the serialization methods that
-are available to Movable Type.  The user can select the type of serialization
+are available to MyMTOS.  The user can select the type of serialization
 they want to use by specifying it in the mt.cfg file with the 'Serializer'
 configuration key. 'MT' and 'Storable' are the currently available
 serialization methods.

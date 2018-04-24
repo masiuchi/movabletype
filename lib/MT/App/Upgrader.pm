@@ -727,7 +727,7 @@ sub main {
         };
         if ( $author && !$author->is_superuser ) {
             return $app->errtrans(
-                "No permissions. Please contact your Movable Type administrator for assistance with upgrading Movable Type."
+                "No permissions. Please contact your MyMTOS administrator for assistance with upgrading MyMTOS."
             );
         }
     }
@@ -752,7 +752,7 @@ sub main {
         $param->{mt_version_incremented} = 1;
         MT->log(
             {   message => MT->translate(
-                    "Movable Type has been upgraded to version [_1].",
+                    "MyMTOS has been upgraded to version [_1].",
                     (     $cur_rel
                         ? $cur_version . '.' . $cur_rel
                         : $cur_version

@@ -235,7 +235,7 @@ __END__
 
 =head1 NAME
 
-MT::Image - Movable Type image manipulation routines
+MT::Image - MyMTOS image manipulation routines
 
 =head1 SYNOPSIS
 

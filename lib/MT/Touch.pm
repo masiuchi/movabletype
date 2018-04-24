@@ -84,7 +84,7 @@ MT::Touch - Object class for recording object type modification times
 
 This module is used to store and retrieve the last modification timestamp
 for any registered object type. This is primarily utilized by the
-module caching layer of Movable Type, where caches can expire based on
+module caching layer of MyMTOS, where caches can expire based on
 changes to entries, pages, categories, etc. Timestamps stored to the
 'modified_on' column are in UTC time.
 

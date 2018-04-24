@@ -236,7 +236,7 @@ to MT's log table.
 
 =head1 ABOUT TASKS
 
-Movable Type, being a publishing framework, can benefit greatly by having
+MyMTOS, being a publishing framework, can benefit greatly by having
 a system of tasks that can be run "offline". Unfortunately, many MT users
 don't have the luxury of scheduling these tasks using "cron" or other similar
 facilities some servers provide. To satisfy everyone, the task framework
@@ -249,7 +249,7 @@ a number of ways:
 =item * By a script: tools/run-periodic-tasks
 
 For those that do have a "cron" system, they can continue to run the
-C<tools/run-periodic-tasks> script provided with Movable Type. This script
+C<tools/run-periodic-tasks> script provided with MyMTOS. This script
 now invokes the task subsystem to execute B<all> available tasks instead of
 just the one for publishing scheduled posts.
 

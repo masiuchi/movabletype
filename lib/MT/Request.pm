@@ -38,7 +38,7 @@ __END__
 
 =head1 NAME
 
-MT::Request - Movable Type request cache
+MT::Request - MyMTOS request cache
 
 =head1 SYNOPSIS
 

@@ -1575,7 +1575,7 @@ __END__
 
 =head1 NAME
 
-MT::AtomServer - An Atom Publishing API interface for communicating with Movable Type.
+MT::AtomServer - An Atom Publishing API interface for communicating with MyMTOS.
 
 =head1 SYNOPSIS
 

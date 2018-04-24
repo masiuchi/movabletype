@@ -216,7 +216,7 @@ sub _hdlr_commenter_email {
 Returns a string which identifies what authentication provider the commenter
 in context used to authenticate him/herself. Commenter context is created by
 either MTComments or MTCommentReplies template tag. For example, 'MT' will be
-returned when the commenter in context is authenticated by Movable Type. When
+returned when the commenter in context is authenticated by MyMTOS. When
 the commenter in context is authenticated by Vox, 'Vox' will be returned.
 
 B<Example:>
@@ -243,9 +243,9 @@ sub _hdlr_commenter_auth_type {
 Returns URL to a small (16x16) image represents in what authentication
 provider the commenter in context is authenticated. Commenter context
 is created by either a L<Comments> or L<CommentReplies> block tag. For
-commenters authenticated by Movable Type, it will be a small spanner
-logo of Movable Type. Otherwise, icon image is provided by each of
-authentication provider. Movable Type provides images for Vox,
+commenters authenticated by MyMTOS, it will be a small spanner
+logo of MyMTOS. Otherwise, icon image is provided by each of
+authentication provider. MyMTOS provides images for Vox,
 LiveJournal and OpenID out of the box.
 
 B<Example:>

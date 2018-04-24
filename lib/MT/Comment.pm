@@ -296,7 +296,7 @@ sub list_props {
                     || $commenter->auth_type eq 'LDAP' )
                 {
                     $auth_img .= 'images/comment/mt_logo.png';
-                    $auth_label = 'Movable Type';
+                    $auth_label = 'MyMTOS';
                 }
                 else {
                     my $auth = MT->registry(
@@ -1108,7 +1108,7 @@ __END__
 
 =head1 NAME
 
-MT::Comment - Movable Type comment record
+MT::Comment - MyMTOS comment record
 
 =head1 SYNOPSIS
 
@@ -1123,7 +1123,7 @@ MT::Comment - Movable Type comment record
 
 =head1 DESCRIPTION
 
-An I<MT::Comment> object represents a comment in the Movable Type system. It
+An I<MT::Comment> object represents a comment in the MyMTOS system. It
 contains all of the metadata about the comment (author name, email address,
 homepage URL, IP address, etc.), as well as the actual body of the comment.
 

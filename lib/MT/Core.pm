@@ -193,8 +193,8 @@ BEGIN {
                                 return;
                                 }
                                 unless $prop->has('sort')
-                                    || $prop->has('bulk_sort')
-                                    || $prop->has('sort_method');
+                                || $prop->has('bulk_sort')
+                                || $prop->has('sort_method');
                         }
                     },
                 },
@@ -317,11 +317,11 @@ BEGIN {
                     default_sort_order => 'descend',
                 },
                 float => {
-                    base      => '__virtual.integer',
-                    col_class => 'num',
+                    base        => '__virtual.integer',
+                    col_class   => 'num',
                     filter_tmpl => '<mt:Var name="filter_form_float">',
                     data_format => '%.1f',
-                    html      => sub {
+                    html        => sub {
                         my ( $prop, $obj ) = @_;
                         my $col = $prop->col;
                         return sprintf $prop->data_format, $obj->$col;
@@ -354,8 +354,7 @@ BEGIN {
                                 if ( $key eq 'days' ) {
                                     return $prop->error(
                                         MT->translate(
-                                            q{Days must be a number.}
-                                        )
+                                            q{Days must be a number.})
                                     ) if $args->{days} =~ /\D/;
                                 }
                                 elsif ( $key ne 'option' ) {
@@ -363,7 +362,7 @@ BEGIN {
                                     return $prop->error(
                                         MT->translate(q{Invalid date.}) )
                                         unless $date
-                                            =~ m/^\d{4}\-\d{2}\-\d{2}$/;
+                                        =~ m/^\d{4}\-\d{2}\-\d{2}$/;
                                 }
                             }
                             else {
@@ -385,8 +384,8 @@ BEGIN {
                         my $from   = $args->{from}   || undef;
                         my $to     = $args->{to}     || undef;
                         my $origin = $args->{origin} || undef;
-                        $from   =~ s/\D//g;
-                        $to     =~ s/\D//g;
+                        $from =~ s/\D//g;
+                        $to =~ s/\D//g;
                         $origin =~ s/\D//g;
                         $from .= '000000' if $from;
                         $to   .= '235959' if $to;
@@ -441,9 +440,9 @@ BEGIN {
                         if ( $val =~ m/\-/ ) {
                             my ( $from, $to ) = split /-/, $val;
                             $from = undef unless $from =~ m/^\d{8}$/;
-                            $to   = undef unless $to   =~ m/^\d{8}$/;
+                            $to   = undef unless $to =~ m/^\d{8}$/;
                             $from =~ s/^(\d{4})(\d{2})(\d{2})$/$1-$2-$3/;
-                            $to   =~ s/^(\d{4})(\d{2})(\d{2})$/$1-$2-$3/;
+                            $to =~ s/^(\d{4})(\d{2})(\d{2})$/$1-$2-$3/;
                             $param
                                 = $from && $to
                                 ? {
@@ -474,7 +473,7 @@ BEGIN {
                         if ( $val =~ m/\-/ ) {
                             my ( $from, $to ) = split /-/, $val;
                             $from = undef unless $from =~ m/^\d{8}$/;
-                            $to   = undef unless $to   =~ m/^\d{8}$/;
+                            $to   = undef unless $to =~ m/^\d{8}$/;
                             my $format = '%x';
                             $from = MT::Util::format_ts(
                                 $format, $from . '000000',
@@ -861,7 +860,8 @@ BEGIN {
                             ? $prop->count_args($opts)
                             : {};
                         my $iter
-                            = MT->model( $prop->count_class )->count_group_by(
+                            = MT->model( $prop->count_class )
+                            ->count_group_by(
                             $count_terms,
                             {   %$count_args,
                                 sort      => 'cnt',
@@ -893,7 +893,8 @@ BEGIN {
                             ? $prop->count_args($opts)
                             : {};
                         my $iter
-                            = MT->model( $prop->count_class )->count_group_by(
+                            = MT->model( $prop->count_class )
+                            ->count_group_by(
                             $count_terms,
                             {   %$count_args,
                                 direction => 'descend',
@@ -956,7 +957,7 @@ BEGIN {
                     col         => 'id',
                     display     => 'none',
                     view_filter => [],
-                    condition => sub {
+                    condition   => sub {
                         my $prop = shift;
                         return $prop->datasource->has_column('id') ? 1 : 0;
                     },
@@ -1216,7 +1217,7 @@ BEGIN {
                     while ( my $p = $iter->() ) {
                         $cond = 1, last
                             if $p->can_do('access_to_entry_list')
-                                and $p->blog->is_blog;
+                            and $p->blog->is_blog;
                     }
                     return $cond ? 1 : 0;
                 },
@@ -1600,9 +1601,8 @@ BEGIN {
             'DefaultLanguage'        => { default => 'en_US', },
             'LocalPreviews'          => { default => 0 },
             'EnableAutoRewriteOnIIS' => { default => 1 },
-            'DefaultCommenterAuth' =>
-                { default => 'MovableType,LiveJournal' },
-            'TemplatePath' => {
+            'DefaultCommenterAuth'   => { default => 'MyMTOS,LiveJournal' },
+            'TemplatePath'           => {
                 default => 'tmpl',
                 path    => 1,
             },
@@ -1673,9 +1673,8 @@ BEGIN {
             'SMTPPort'                      => undef,
             'DebugEmailAddress'             => undef,
             'WeblogsPingURL' => { default => 'http://rpc.weblogs.com/RPC2', },
-            'MTPingURL' =>
-                { default => 'http://www.movabletype.org/update/', },
-            'CGIMaxUpload' => {
+            'MTPingURL'      => undef,
+            'CGIMaxUpload'   => {
                 handler => \&CGIMaxUpload,
                 default => 20_480_000,
             },
@@ -1781,28 +1780,7 @@ BEGIN {
             'SearchThrottleIPWhitelist' => undef,
             'OneHourMaxPings'           => { default => 10, },
             'OneDayMaxPings'            => { default => 50, },
-            'SupportURL'                => {
-                default => 'http://www.sixapart.com/movabletype/support/',
-            },
-            'NewsURL' =>
-                { default => 'http://www.sixapart.com/movabletype/news/', },
-            'NewsboxURL' => {
-                default =>
-                    'http://www.sixapart.com/movabletype/news/mt4_news_widget.html',
-            },
-            'FeedbackURL' =>
-                { default => 'http://www.movabletype.org/feedback.html', },
 
-# 'MTNewsURL' => {
-#     default => 'http://www.sixapart.com/movabletype/news/mt4_news_widget.html',
-# },
-#            'LearningNewsURL' => {
-#                default => 'http://learning.movabletype.org/newsbox.html',
-#            },
-
-            # 'HackingNewsURL' => {
-            #     default => 'http://hacking.movabletype.org/newsbox.html',
-            # },
             'EmailAddressMain'      => undef,
             'EmailReplyTo'          => undef,
             'EmailNotificationBcc'  => { default => 1, },
@@ -1821,10 +1799,6 @@ BEGIN {
             'AllowComments'            => { default => 1, },
             'AllowPings'               => { default => 1, },
             'HelpURL'                  => undef,
-
-            #'HelpURL'               => {
-            #    default => 'http://www.sixapart.com/movabletype/docs/4.0/',
-            #},
             'UsePlugins'               => { default => 1, },
             'PluginSwitch'             => { type    => 'HASH', },
             'PluginSchemaVersion'      => { type    => 'HASH', },
@@ -1856,7 +1830,7 @@ BEGIN {
                 { handler => \&NewUserAutoProvisioning, },
             'NewUserBlogTheme'        => { default => 'rainier' },
             'NewUserDefaultWebsiteId' => undef,
-            'DefaultSiteURL'          => undef,    ## DEPRECATED
+            'DefaultSiteURL'          => undef,                  ## DEPRECATED
             'DefaultSiteRoot'         => undef,                  ## DEPRECATED
             'DefaultUserLanguage'     => undef,
             'DefaultUserTagDelimiter' => {
@@ -2044,7 +2018,7 @@ BEGIN {
         },
         richtext_editors => {
             'archetype' => {
-                label    => 'Movable Type Default',
+                label    => 'MyMTOS Default',
                 template => 'archetype_editor.tmpl',
             },
         },
@@ -2218,7 +2192,7 @@ sub load_core_tasks {
             frequency => $cfg->FuturePostFrequency * 60,    # once per minute
             code      => sub {
                 MT->instance->publisher->publish_future_posts;
-                }
+            }
         },
         'AddSummaryWatcher' => {
             label     => 'Add Summary Watcher to queue',
@@ -2253,7 +2227,7 @@ sub load_core_tasks {
             frequency => 60,     # * 60 * 24,   # once a day
             code      => sub {
                 MT::Core->purge_session_records;
-                }
+            }
         },
         'CleanExpiredFailedLogin' => {
             label     => 'Remove expired lockout data',
@@ -2261,7 +2235,7 @@ sub load_core_tasks {
             code      => sub {
                 my $app = MT->instance;
                 $app->model('failedlogin')->cleanup($app);
-                }
+            }
         },
         'CleanFileInfoRecords' => {
             label     => 'Purge Unused FileInfo Records',
@@ -2269,7 +2243,7 @@ sub load_core_tasks {
             code      => sub {
                 my $app = MT->instance;
                 $app->model('fileinfo')->cleanup;
-                }
+            }
         },
     };
 }
@@ -2279,7 +2253,7 @@ sub remove_temporary_files {
 
     my @files
         = MT::Session->load(
-        { kind => 'TF', start => [ undef, time - 60 * 60 ] },
+        { kind  => 'TF', start => [ undef, time - 60 * 60 ] },
         { range => { start => 1 } } );
     my $fmgr = MT::FileMgr->new('Local');
     foreach my $f (@files) {
@@ -3132,7 +3106,7 @@ __END__
 
 =head1 NAME
 
-MT::Core - Core component for Movable Type functionality.
+MT::Core - Core component for MyMTOS functionality.
 
 =head1 METHODS
 
@@ -3220,7 +3194,7 @@ will return a default location, which is programatically determined.
 A L<MT::ConfigMgr> get/set method for the C<ProcessMemoryCommand>
 configuration setting. If the user has not assigned this themselves,
 it will return a default command, determined by the operating system
-Movable Type is running on.
+MyMTOS is running on.
 
 =head2 MT::Core::SecretToken
 
@@ -3271,8 +3245,7 @@ this directive, the system will be use a default value.
 
 =head1 LICENSE
 
-The license that applies is the one you agreed to when downloading
-Movable Type.
+GPL v2.0
 
 =head1 AUTHOR & COPYRIGHT
 

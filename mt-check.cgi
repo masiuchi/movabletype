@@ -231,7 +231,7 @@ if ( !$view ) {
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="$lang" />
     <meta name='robots' content='noindex,nofollow' />
-    <title><__trans phrase="Movable Type System Check"> [mt-check.cgi]</title>
+    <title><__trans phrase="MyMTOS System Check"> [mt-check.cgi]</title>
     <style type=\"text/css\">
         <!--
             body {
@@ -390,7 +390,7 @@ HTML
 
     if ($invalid) {
         print_encode( trans_templ(<<HTML) );
-<div id="header"><h1 id="brand"><span><__trans phrase="Movable Type System Check"> [mt-check.cgi]</span></h1></div>
+<div id="header"><h1 id="brand"><span><__trans phrase="MyMTOS System Check"> [mt-check.cgi]</span></h1></div>
 <div id="content">
 <div class="msg msg-info">
 <p class="msg-text"><__trans phrase="You attempted to use a feature that you do not have permission to access. If you believe you are seeing this message in error contact your system administrator."></p>
@@ -403,10 +403,10 @@ HTML
 
     if ( $cfg_path && !$unsafe ) {
         print_encode( trans_templ(<<HTML) );
-<div id="header"><h1 id="brand"><span><__trans phrase="Movable Type System Check"> [mt-check.cgi]</span></h1></div>
+<div id="header"><h1 id="brand"><span><__trans phrase="MyMTOS System Check"> [mt-check.cgi]</span></h1></div>
 <div id="content">
 <div class="msg msg-info">
-<p class="meg-text"><__trans phrase="The MT-Check report is disabled when Movable Type has a valid configuration file (mt-config.cgi)"></p>
+<p class="meg-text"><__trans phrase="The MyMTOS-Check report is disabled when MyMTOS has a valid configuration file (mt-config.cgi)"></p>
 </div>
 </div>
 </body></html>
@@ -415,11 +415,11 @@ HTML
     }
 
     print_encode( trans_templ(<<HTML) );
-<div id="header"><h1 id="brand"><span><__trans phrase="Movable Type System Check"> [mt-check.cgi]</span></h1></div>
+<div id="header"><h1 id="brand"><span><__trans phrase="MyMTOS System Check"> [mt-check.cgi]</span></h1></div>
 
 <div id="content">
 <div class="msg msg-info">
-<p class="msg-text"><__trans phrase="The mt-check.cgi script provides you with information about your system's configuration and determines whether you have all of the components you need to run Movable Type."></p>
+<p class="msg-text"><__trans phrase="The mt-check.cgi script provides you with information about your system's configuration and determines whether you have all of the components you need to run MyMTOS."></p>
 </div>
 HTML
 }
@@ -505,28 +505,28 @@ my @CORE_OPT = (
 
     [   'Plack', 0, 0,
         translate(
-            'This module and its dependencies are required in order to operate Movable Type under psgi.'
+            'This module and its dependencies are required in order to operate MyMTOS under psgi.'
         )
     ],
 
     [   'CGI::PSGI',
         0, 0,
         translate(
-            'This module and its dependencies are required to run Movable Type under psgi.'
+            'This module and its dependencies are required to run MyMTOS under psgi.'
         )
     ],
 
     [   'CGI::Parse::PSGI',
         0, 0,
         translate(
-            'This module and its dependencies are required to run Movable Type under psgi.'
+            'This module and its dependencies are required to run MyMTOS under psgi.'
         )
     ],
 
     [   'XMLRPC::Transport::HTTP::Plack',
         0, 0,
         translate(
-            'This module and its dependencies are required to run Movable Type under psgi.'
+            'This module and its dependencies are required to run MyMTOS under psgi.'
         )
     ],
 
@@ -597,14 +597,14 @@ my @CORE_OPT = (
     [   'IPC::Run',
         0, 0,
         translate(
-            'IPC::Run is optional; It is needed if you would like to use NetPBM as the image processor for Movable Type.'
+            'IPC::Run is optional; It is needed if you would like to use NetPBM as the image processor for MyMTOS.'
         )
     ],
 
     [   'Storable',
         0, 0,
         translate(
-            'Storable is optional; It is required by certain Movable Type plugins available from third-party developers.'
+            'Storable is optional; It is required by certain MyMTOS plugins available from third-party developers.'
         )
     ],
 
@@ -643,7 +643,7 @@ my @CORE_OPT = (
     [   'Cache::Memcached',
         0, 0,
         translate(
-            'Cache::Memcached and a memcached server are required to use in-memory object caching on the servers where Movable Type is deployed.'
+            'Cache::Memcached and a memcached server are required to use in-memory object caching on the servers where MyMTOS is deployed.'
         )
     ],
 
@@ -744,7 +744,7 @@ my @CORE_OPT = (
     [   'Text::Balanced',
         0, 0,
         translate(
-            'This module is required by mt-search.cgi, if you are running Movable Type using a version of Perl older than Perl 5.8.'
+            'This module is required by mt-search.cgi, if you are running MyMTOS using a version of Perl older than Perl 5.8.'
         )
     ],
 
@@ -793,7 +793,7 @@ if ($version) {
     $version = $cgi->escapeHTML($version);
     print_encode( trans_templ(<<INFO) );
 <ul class="version">
-    <li><strong><__trans phrase="Movable Type version:"></strong> <code>$version</code></li>
+    <li><strong><__trans phrase="MyMTOS version:"></strong> <code>$version</code></li>
 </ul>
 INFO
 }
@@ -921,7 +921,7 @@ MSG
     if ($data) {
         if ( !$view ) {
             print_encode( trans_templ(<<MSG) );
-        <p class="msg msg-info"><__trans phrase="The following modules are required by databases that can be used with Movable Type. Your server must have DBI and at least one of these related modules installed for the application to work properly."></p>
+        <p class="msg msg-info"><__trans phrase="The following modules are required by databases that can be used with MyMTOS. Your server must have DBI and at least one of these related modules installed for the application to work properly."></p>
 
 MSG
         }
@@ -980,7 +980,7 @@ MSG
                     if ( $DBD::mysql::VERSION == 3.0000 ) {
                         print_encode(
                             trans_templ(
-                                qq{<div class="msg msg-warning"><p class="msg-text"><__trans phrase="The DBD::mysql version you have installed is known to be incompatible with Movable Type. Please install the most current release available."></p></div>}
+                                qq{<div class="msg msg-warning"><p class="msg-text"><__trans phrase="The DBD::mysql version you have installed is known to be incompatible with MyMTOS. Please install the most current release available."></p></div>}
                             )
                         );
                     }
@@ -1015,7 +1015,7 @@ if ($is_good) {
     if ( !$view ) {
         print_encode( trans_templ(<<HTML) );
     <div class="msg msg-success">
-        <h2><__trans phrase="Movable Type System Check Successful"></h2>
+        <h2><__trans phrase="MyMTOS System Check Successful"></h2>
         <p><strong><__trans phrase="You're ready to go!"></strong> <__trans phrase="Your server has all of the required modules installed; you do not need to perform any additional module installations. Continue with the installation instructions."></p>
     </div>
 

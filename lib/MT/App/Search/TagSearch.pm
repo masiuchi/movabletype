@@ -286,13 +286,13 @@ MT::App::Search::TagSearch
 
 TagSearch allows the following syntax in url-encoded "tag" parameter.
 
-"MovableType,TypePad,Vox" matches objects which has either MovableType,
+"MyMTOS,TypePad,Vox" matches objects which has either MyMTOS,
 TypePad, or Vox tag.
 
-"MovableType+TypePad+Vox" matches objects which has all three tags.
+"MyMTOS+TypePad+Vox" matches objects which has all three tags.
 
-"TypePad OR Vox AND "Movable Type"" matches objects which has
-either TypePad or Vox tag *and* "Movable Type" tag.
+"TypePad OR Vox AND "MyMTOS"" matches objects which has
+either TypePad or Vox tag *and* "MyMTOS" tag.
 
 =head1 AUTHOR & COPYRIGHT
 

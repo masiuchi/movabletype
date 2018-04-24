@@ -49,12 +49,12 @@ sub fcgi_sig_handler {
 
        # With exit requested flag set, FastCGI loop will exit when it is done.
         print STDERR
-            "Movable Type: SIG$sig caught. Exiting gracefully after current request.\n";
+            "MyMTOS: SIG$sig caught. Exiting gracefully after current request.\n";
     }
     else {
 
         # Not currently handling a request, so just go ahead and exit.
-        print STDERR "Movable Type: SIG$sig caught. Exiting gracefully.\n";
+        print STDERR "MyMTOS: SIG$sig caught. Exiting gracefully.\n";
         exit(1);
     }
 }
@@ -141,7 +141,7 @@ sub import {
                     # Check for caught signal
                     if ($fcgi_exit_requested) {
                         print STDERR
-                            "Movable Type: FastCGI request loop exiting. Caught signal SIG$fcgi_exit_requested.\n";
+                            "MyMTOS: FastCGI request loop exiting. Caught signal SIG$fcgi_exit_requested.\n";
                         last;
                     }
 
@@ -301,7 +301,7 @@ Startup module used to simplify MT application CGIs.
 
 =head1 SYNOPSIS
 
-Movable Type CGI scripts should utilize the C<MT::Bootstrap> module
+MyMTOS CGI scripts should utilize the C<MT::Bootstrap> module
 to invoke the application code itself. When run, it is necessary
 to add the MT "lib" directory to the Perl include path.
 

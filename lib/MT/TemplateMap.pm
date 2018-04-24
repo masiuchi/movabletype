@@ -220,7 +220,7 @@ __END__
 
 =head1 NAME
 
-MT::TemplateMap - Movable Type archive-template association record
+MT::TemplateMap - MyMTOS archive-template association record
 
 =head1 SYNOPSIS
 

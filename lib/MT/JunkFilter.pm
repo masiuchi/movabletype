@@ -229,20 +229,20 @@ MT::JunkFilter
 
 =head1 Introduction
 
-Movable Type 3.2 introduces a pluggable spam-detection framework
+MT 3.2 introduces a pluggable spam-detection framework
 that plugin developers can extend without conflicting with each other. The
 framework uses a "scoring" model: each plugin either assesses an incoming
 feedback with a numerical score, or it abstains; the scores are combined into
 a composite score. The composite score is used to decide what action to take
 on the feedback: to publish it or throw it in the junk folder.
 
-The composite score used by Movable Type is the average (arithmetic
+The composite score used by MyMTOS is the average (arithmetic
 mean) of all the attesting plugins' scores (we also allow a plugin to
 I<abstain> in which case it is not included in the average). This value
 is called the "composite score." If the composite score is above a threshold
 (by default, 0) then we count the comment (or trackback) as junk.
 
-Another way to think of it is to imagine that Movable Type weighs each comment
+Another way to think of it is to imagine that MyMTOS weighs each comment
 using a balance beam that starts out flat. Each plugin, after looking at the
 item, can place a unit weight anywhere it wants on the balance beam (or it
 can abstain). If every plugin places its weight on the left side of the
@@ -327,7 +327,7 @@ items that have a lot of those monsters.
 
     1;
 
-Some of this is boilerplate for defining a basic Movable Type plugin. Let's
+Some of this is boilerplate for defining a basic MyMTOS plugin. Let's
 cut to the junk.
 
     MT->register_junk_filter({name => 'E Junk Filter', code => \&score});
@@ -360,7 +360,7 @@ but four or five E's just can't be good.
 It is good practice to provide a log message that includes the score you're
 returning. The messages will be displayed in the admin interface along with
 the comment, so that the weblog owner can track how a score got to be what
-it is. Movable Type will add a log line with the final score and the action
+it is. MyMTOS will add a log line with the final score and the action
 taken.
 
 If there are no E's in the comment, the plugin has no rightful judgment about
@@ -399,15 +399,11 @@ axis it measures.
     }
 
 You're invited to use the "SpamLookup" junk filters that were supplied
-with Movable Type as a basis for developing your own Junk Filter plugins.
-The SpamLookup code included with Movable Type is licensed under the
-Artistic License and may be modified and/or redistributed under the same
-terms as Perl itself.
+with MyMTOS as a basis for developing your own Junk Filter plugins.
 
 =head1 LICENSE
 
-The license that applies is the one you agreed to when downloading
-Movable Type.
+GPL v2.0
 
 =head1 AUTHOR & COPYRIGHT
 

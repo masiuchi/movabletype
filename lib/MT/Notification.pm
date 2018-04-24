@@ -126,7 +126,7 @@ __END__
 
 =head1 NAME
 
-MT::Notification - Movable Type notification list record
+MT::Notification - MyMTOS notification list record
 
 =head1 SYNOPSIS
 
@@ -140,7 +140,7 @@ MT::Notification - Movable Type notification list record
 =head1 DESCRIPTION
 
 An I<MT::Notification> object represents an email address in the notification
-list for your blog in the Movable Type system. It contains the email address,
+list for your blog in the MyMTOS system. It contains the email address,
 as well as some metadata about the record.
 
 =head1 USAGE

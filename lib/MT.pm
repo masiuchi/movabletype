@@ -38,26 +38,9 @@ BEGIN {
         $VERSION_ID,   $RELEASE_NUMBER, $PORTAL_URL,
         )
         = (
-        '__PRODUCT_NAME__',   'MT',
-        '5.2.13',              '__PRODUCT_VERSION_ID__',
-        '__RELEASE_NUMBER__', '__PORTAL_URL__'
+        'MyMTOS', 'MyMTOS', '5.2.13', '5.2.13',
+        '13', 'https://github.com/masiuchi/movabletype'
         );
-
-  # To allow MT to run straight from svn, if no build process (pre-processing)
-  # is run, then default to MTOS
-    if ( $PRODUCT_NAME eq '__PRODUCT' . '_NAME__' ) {
-        $PRODUCT_NAME = 'Movable Type';
-    }
-    if ( $PORTAL_URL eq '__PORTAL' . '_URL__' ) {
-        $PORTAL_URL = 'http://www.movabletype.org/';
-    }
-    if ( $VERSION_ID eq '__PRODUCT_VERSION' . '_ID__' ) {
-        $VERSION_ID = $PRODUCT_VERSION;
-    }
-
-    if ( $RELEASE_NUMBER eq '__RELEASE' . '_NUMBER__' ) {
-        $RELEASE_NUMBER = 13;
-    }
 
     $DebugMode = 0;
 
@@ -96,13 +79,7 @@ sub product_name    {$PRODUCT_NAME}
 sub product_version {$PRODUCT_VERSION}
 sub schema_version  {$SCHEMA_VERSION}
 sub release_number  {$RELEASE_NUMBER}
-
-sub portal_url {
-    if ( my $url = const('PORTAL_URL') ) {
-        return $url;
-    }
-    return $PORTAL_URL;
-}
+sub portal_url      {$PORTAL_URL}
 
 # Default id method turns MT::App::CMS => cms; Foo::Bar => foo/bar
 sub id {
@@ -113,14 +90,6 @@ sub id {
     $id =~ s/^MT::App:://;
     $id =~ s!::!/!g;
     return lc $id;
-}
-
-sub version_slug {
-    return MT->translate_templatized(<<"SLUG");
-<__trans phrase="Powered by [_1]" params="$PRODUCT_NAME">
-<__trans phrase="Version [_1]" params="$VERSION_ID">
-<__trans phrase="http://www.movabletype.com/">
-SLUG
 }
 
 sub build_id {
@@ -858,12 +827,11 @@ sub init_config {
         $mt->{app_dir} = $ENV{PWD} || "";
         $mt->{app_dir} = dirname($0)
             if !$mt->{app_dir}
-                || !File::Spec->file_name_is_absolute( $mt->{app_dir} );
+            || !File::Spec->file_name_is_absolute( $mt->{app_dir} );
         $mt->{app_dir} = dirname( $ENV{SCRIPT_FILENAME} )
             if $ENV{SCRIPT_FILENAME}
-                && ( !$mt->{app_dir}
-                    || (!File::Spec->file_name_is_absolute( $mt->{app_dir} ) )
-                );
+            && ( !$mt->{app_dir}
+            || ( !File::Spec->file_name_is_absolute( $mt->{app_dir} ) ) );
         $mt->{app_dir} ||= $mt->{mt_dir};
         $mt->{app_dir} = File::Spec->rel2abs( $mt->{app_dir} );
     }
@@ -1159,8 +1127,8 @@ sub init_paths {
         if !$APP_DIR || !File::Spec->file_name_is_absolute($APP_DIR);
     $APP_DIR = dirname( $ENV{SCRIPT_FILENAME} )
         if $ENV{SCRIPT_FILENAME}
-            && ( !$APP_DIR
-                || ( !File::Spec->file_name_is_absolute($APP_DIR) ) );
+        && ( !$APP_DIR
+        || ( !File::Spec->file_name_is_absolute($APP_DIR) ) );
     $APP_DIR ||= $MT_DIR;
     $APP_DIR = File::Spec->rel2abs($APP_DIR);
 
@@ -1181,9 +1149,6 @@ sub init_core {
 
 sub i18n_default_settings {
     my %settings = (
-        'NewsboxURL'         => 'NEWSBOX_URL',
-        'SupportURL'         => 'SUPPORT_URL',
-        'NewsURL'            => 'NEWS_URL',
         'DefaultTimezone'    => 'DEFAULT_TIMEZONE',
         'TimeOffset'         => 'DEFAULT_TIMEZONE',
         'MailEncoding'       => 'MAIL_ENCODING',
@@ -1191,7 +1156,6 @@ sub i18n_default_settings {
         'LogExportEncoding'  => 'LOG_EXPORT_ENCODING',
         'CategoryNameNodash' => 'CATEGORY_NAME_NODASH',
         'PublishCharset'     => 'PUBLISH_CHARSET',
-        'FeedbackURL'        => 'FEEDBACK_URL',
     );
 
     foreach my $key ( keys %settings ) {
@@ -1370,7 +1334,7 @@ sub init_plugins {
             "You cannot register multiple plugin objects from a single script. $plugin_sig"
             )
             if exists( $Plugins{$plugin_sig} )
-                && ( exists $Plugins{$plugin_sig}{object} );
+            && ( exists $Plugins{$plugin_sig}{object} );
 
         $Components{ lc $id } = $plugin if $id;
         $Plugins{$plugin_sig}{object} = $plugin;
@@ -1827,7 +1791,8 @@ sub ping_and_save {
             if ( !$res->{good} ) {
                 $still_ping{ $res->{url} } = 1;
             }
-            push @$pinged, $res->{url}
+            push @$pinged,
+                $res->{url}
                 . (
                 $res->{good}
                 ? ''
@@ -2939,7 +2904,7 @@ sub captcha_providers {
 sub core_captcha_providers {
     return {
         'mt_default' => {
-            label     => 'Movable Type default',
+            label     => 'MyMTOS default',
             class     => 'MT::Util::Captcha',
             condition => sub {
                 require MT::Util::Captcha;
@@ -2958,7 +2923,7 @@ sub init_captcha_providers {
     foreach my $provider ( keys %$providers ) {
         delete $providers->{$provider}
             if exists( $providers->{$provider}->{condition} )
-                && !( $providers->{$provider}->{condition}->() );
+            && !( $providers->{$provider}->{condition}->() );
     }
     %Captcha_Providers = %$providers;
     $Captcha_Providers{$_}{key} ||= $_ for keys %Captcha_Providers;
@@ -3032,8 +2997,8 @@ sub handler_to_coderef {
         if ($delayed) {
             if ($method) {
                 return sub {
-                    eval "# line " 
-                        . __LINE__ . " " 
+                    eval "# line "
+                        . __LINE__ . " "
                         . __FILE__
                         . "\nrequire $hdlr_pkg;"
                         or Carp::confess(
@@ -3047,8 +3012,8 @@ sub handler_to_coderef {
             }
             else {
                 return sub {
-                    eval "# line " 
-                        . __LINE__ . " " 
+                    eval "# line "
+                        . __LINE__ . " "
                         . __FILE__
                         . "\nrequire $hdlr_pkg;"
                         or Carp::confess(
@@ -3065,8 +3030,8 @@ sub handler_to_coderef {
             }
         }
         else {
-            eval "# line " 
-                . __LINE__ . " " 
+            eval "# line "
+                . __LINE__ . " "
                 . __FILE__
                 . "\nrequire $hdlr_pkg;"
                 or Carp::confess(
@@ -3118,9 +3083,10 @@ sub help_url {
     my ($append) = @_;
 
     my $url = $pkg->config->HelpURL;
-    return $url if defined $url;
-    $url = $pkg->translate('http://www.movabletype.org/documentation/');
+    return $url if defined $url && $url ne '';
+    $url = $pkg->portal_url;
     if ($append) {
+        $url .= '/' unless $url =~ m|/$|;
         $url .= $append;
     }
     $url;
@@ -3152,7 +3118,7 @@ __END__
 
 =head1 NAME
 
-MT - Movable Type
+MT - MyMTOS
 
 =head1 SYNOPSIS
 
@@ -3164,33 +3130,33 @@ MT - Movable Type
 =head1 DESCRIPTION
 
 The I<MT> class is the main high-level rebuilding/pinging interface in the
-Movable Type library. It handles all rebuilding operations. It does B<not>
+MyMTOS library. It handles all rebuilding operations. It does B<not>
 handle any of the application functionality--for that, look to I<MT::App> and
 I<MT::App::CMS>, both of which subclass I<MT> to handle application requests.
 
 =head1 PLUGIN APPLICATIONS
 
-At any given time, the user of the Movable Type platform is
-interacting with either the core Movable Type application, or a plugin
+At any given time, the user of the MyMTOS platform is
+interacting with either the core MyMTOS application, or a plugin
 application (or "sub-application").
 
 A plugin application is a plugin with a user interface that inherits
-functionality from Movable Type, and appears to the user as a
-component of Movable Type. A plugin application typically has its own
+functionality from MyMTOS, and appears to the user as a
+component of MyMTOS. A plugin application typically has its own
 templates displaying its own special features; but it inherits some
-templates from Movable Type, such as the navigation chrome and error
+templates from MyMTOS, such as the navigation chrome and error
 pages.
 
 =head2 The MT Root and the Application Root
 
-To locate assets of the core Movable Type application and any plugin
+To locate assets of the core MyMTOS application and any plugin
 applications, the platform uses two directory paths, C<mt_dir> and
 C<app_dir>. These paths are returned by the MT class methods with the
 same names, and some other methods return derivatives of these paths.
 
-Conceptually, mt_dir is the root of the Movable Type installation, and
+Conceptually, mt_dir is the root of the MyMTOS installation, and
 app_dir is the root of the "currently running application", which
-might be Movable Type or a plugin application. It is important to
+might be MyMTOS or a plugin application. It is important to
 understand the distinction between these two values and what each is
 used for.
 
@@ -3285,14 +3251,14 @@ Similar to C<new>, but does not set the active instance
 
 =head2 $mt->init(%params)
 
-Initializes the Movable Type instance, including registration of basic
+Initializes the MyMTOS instance, including registration of basic
 resources and callbacks. This method also invokes the C<init_config>
 and C<init_plugins> methods.
 
 =head2 $mt->init_core()
 
 A method that the base MT class uses to initialize all the 'core'
-functionality of Movable Type. If you want to subclass MT and extensively
+functionality of MyMTOS. If you want to subclass MT and extensively
 modify it's core behavior, this method can be overridden to do that.
 The L<MT::Core> module is a L<MT::Component> that defines the core
 features of MT, and this method loads that component. Non-core components
@@ -3310,7 +3276,7 @@ MT::Permission->init_permissions method to establish system permissions.
 
 =head2 $mt->init_schema()
 
-Completes the initialization of the Movable Type schema following the
+Completes the initialization of the MyMTOS schema following the
 loading of plugins. After this method runs, any MT object class may
 safely be used.
 
@@ -3452,11 +3418,11 @@ See the L<MT::Request> package for more information.
 =head2 MT->new_ua
 
 Returns a new L<LWP::UserAgent> instance that is configured according to the
-Movable Type configuration settings (specifically C<HTTPInterface>, C<HTTPTimeout>, C<HTTPProxy> and C<HTTPNoProxy>). The agent string is set
-to "MovableType/(version)" and is also limited to receiving a response of
+MyMTOS configuration settings (specifically C<HTTPInterface>, C<HTTPTimeout>, C<HTTPProxy> and C<HTTPNoProxy>). The agent string is set
+to "MyMTOS/(version)" and is also limited to receiving a response of
 100,000 bytes by default (you can override this by using the 'max_size'
 method on the returned instance). Using this method is recommended for
-any HTTP requests issued by Movable Type since it uses the MT configuration
+any HTTP requests issued by MyMTOS since it uses the MT configuration
 settings to prepare the UserAgent object.
 
 =head2 $mt->ping( %args )
@@ -3749,7 +3715,7 @@ the coderef is actually invoked.
 
 =head2 MT->registry( @path )
 
-Queries the Movable Type registry data structure for a given resource
+Queries the MyMTOS registry data structure for a given resource
 path. The MT registry is a collection of hash structures that contain
 resources MT and/or plugins can utilize.
 
@@ -3798,14 +3764,11 @@ with it:
 
 =head2 MT->product_code
 
-The product code identifying the Movable Type product that is installed.
-This is either 'MTE' for Movable Type Enterprise version or 'MT' for the
-community version.
+The product code identifying the MyMTOS product that is installed.
 
 =head2 MT->product_name
 
-The name of the Movable Type product that is installed. This is either
-'Movable Type Advanced' or 'Movable Type Publishing Platform'.
+The name of the MyMTOS product that is installed.
 
 =head2 MT->product_version
 
@@ -3848,11 +3811,6 @@ Perl package name, by stripping off any 'MT::App::' prefix, and lowercasing
 the remaining string.
 
 For example: MT::App::CMS => cms; Foo::Bar => foo/bar
-
-=head2 MT->version_slug
-
-Returns a string of text that is appended to emails sent through the
-C<build_email> method.
 
 =head2 $mt->publisher
 
@@ -3943,7 +3901,7 @@ live. An override template takes the place of one of MT's core
 application templates, and is used interchangeably with the core
 template. This allows power users to customize the look and feel of
 the MT application. If I<AltTemplatePath> is relative, its base path
-is the value of the Movable Type configuration file.
+is the value of the MyMTOS configuration file.
 
 Next, any application built on the C<MT::App> foundation can define
 its own I<template_dir> parameter, which identifies a subdirectory of
@@ -4098,7 +4056,7 @@ Returns a help URL for the application. This method is used to construct
 the URL directing users to online documentation. If called without any
 parameters, it returns the base URL for providing help. If a parameter is
 given, the URL is appended with the given subpath. The base URL by default
-is 'http://www.movabletype.org/documentation/'. This string is passed
+is 'https://github.com/masiuchi/movabletype'. This string is passed
 through MT's localization modules, so it can be changed on a per-language
 basis. The C<$suffix> parameter, however, is always appended to this base URL.
 
@@ -4125,8 +4083,8 @@ operations.
 
 =head2 MT->log_times
 
-Used as part of Movable Type's performance logging framework. This method
-is called internally, once at the startup of Movable Type, and once as it
+Used as part of MyMTOS's performance logging framework. This method
+is called internally, once at the startup of MyMTOS, and once as it
 is shutting down.
 
 =head2 MT->time_this($string, $code)
@@ -4190,7 +4148,7 @@ is sent to your web server's error log).
 
 =head1 CALLBACKS
 
-Movable Type has a variety of hook points at which a plugin can attach
+MyMTOS has a variety of hook points at which a plugin can attach
 a callback.
 
 In each case, the first parameter is an L<MT::Callback> object which
@@ -4202,8 +4160,8 @@ which they invoke.
 
 =head2 NewUserProvisioning($cb, $user)
 
-This callback is invoked when a user is being added to Movable Type.
-Movable Type itself registers for this callback (with a priority of 5)
+This callback is invoked when a user is being added to MyMTOS.
+MyMTOS itself registers for this callback (with a priority of 5)
 to provision the user with a new weblog if the system has been configured
 to do so.
 
@@ -4216,8 +4174,7 @@ through to the callback.
 
 =head1 LICENSE
 
-The license that applies is the one you agreed to when downloading
-Movable Type.
+GPL v2.0
 
 =head1 AUTHOR & COPYRIGHT
 

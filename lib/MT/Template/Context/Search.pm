@@ -166,10 +166,10 @@ This tag is only recognized in search templates.
 
 =head2 IfMaxResultsCutoff
 
-NOTE: this tag only applies if you are using older Movable Type than
+NOTE: this tag only applies if you are using older MTOS than
 version 4.15, or you set up your search script so it instantiates
 MT::App::Search::Legacy, the older search script.  Under the default
-search script in Movable Type, this tag will never be evaluated as true and
+search script in MyMTOS, this tag will never be evaluated as true and
 therefore the contents will never be rendered.
 
 A conditional tag that returns true when the number of search results

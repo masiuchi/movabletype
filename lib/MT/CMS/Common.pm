@@ -267,7 +267,7 @@ sub save {
             $obj->nofollow_urls(1);
             $obj->follow_auth_links(1);
             $obj->page_layout('layout-wtt');
-            my @authenticators = qw( MovableType );
+            my @authenticators = qw( MyMTOS );
             my @default_auth = split /,/, MT->config('DefaultCommenterAuth');
             foreach my $auth (@default_auth) {
                 my $a = MT->commenter_authenticator($auth);

@@ -258,8 +258,7 @@ specified in I<enc>.
 
 =head1 LICENSE
 
-The license that applies is the one you agreed to when downloading
-Movable Type.
+GPL v2.0
 
 =head1 AUTHOR & COPYRIGHT
 

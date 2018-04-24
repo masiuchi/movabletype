@@ -71,7 +71,7 @@ __END__
 
 =head1 NAME
 
-MT::IPBanList - Movable Type IP comment banning record
+MT::IPBanList - MyMTOS IP comment banning record
 
 =head1 SYNOPSIS
 

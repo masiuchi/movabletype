@@ -413,7 +413,7 @@ __END__
 
 =head1 NAME
 
-MT::ConfigMgr - Movable Type configuration manager
+MT::ConfigMgr - MyMTOS configuration manager
 
 =head1 SYNOPSIS
 
@@ -425,7 +425,7 @@ MT::ConfigMgr - Movable Type configuration manager
 
 =head1 DESCRIPTION
 
-L<MT::ConfigMgr> is a singleton class that manages the Movable Type
+L<MT::ConfigMgr> is a singleton class that manages the MyMTOS
 configuration file (F<mt-config.cgi>), allowing access to the config
 directives contained therin.
 

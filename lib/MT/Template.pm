@@ -1081,7 +1081,7 @@ __END__
 
 =head1 NAME
 
-MT::Template - Movable Type template record
+MT::Template - MyMTOS template record
 
 =head1 SYNOPSIS
 
@@ -1096,13 +1096,13 @@ MT::Template - Movable Type template record
 
 =head1 DESCRIPTION
 
-An I<MT::Template> object represents a template in the Movable Type system.
+An I<MT::Template> object represents a template in the MyMTOS system.
 It contains the actual template body, along with metadata used for keeping
 the template in sync with a linked file, etc. It also contains the
 functionality necessary to build an output file from a generic template.
 
 Linking a template to an external file means that any updates to the template
-through the Movable Type CMS will be synced automatically to the file on
+through the MyMTOS CMS will be synced automatically to the file on
 disk, and vice versa. This allows authors to edit their templates in an
 external editor that supports FTP, which is preferable for users who do not
 like editing in textareas.
@@ -1202,7 +1202,7 @@ if the template is an Index Template.
 
 =item * text
 
-The body of the template, containing the markup and Movable Type template
+The body of the template, containing the markup and MyMTOS template
 tags.
 
 If the template is linked to an external file, the body of the template is

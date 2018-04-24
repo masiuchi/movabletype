@@ -271,10 +271,8 @@ sub mount_applications {
         Plack::App::Directory->new( { root => $staticpath } )->to_app );
 
     ## Mount support directory
-    my $supporturl = MT->config->SupportURL;
-    $supporturl =~ s!^https?://[^/]*!!;
     my $supportpath = MT->config->SupportDirectoryPath;
-    $urlmap->map( $supporturl,
+    $urlmap->map( $staticurl,
         Plack::App::Directory->new( { root => $supportpath } )->to_app );
 
     ## Mount favicon.ico
@@ -342,12 +340,12 @@ __END__
 
 =head1 NAME
 
-MT::PSGI - Movable Type as PSGI application
+MT::PSGI - MyMTOS as PSGI application
 
 
 =head1 SYNOPSIS
 
-    # Full stack Movable Type server
+    # Full stack MyMTOS server
     use MT::PSGI;
     use Plack::Builder;
     builder {

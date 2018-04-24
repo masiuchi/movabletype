@@ -647,7 +647,7 @@ __END__
 
 =head1 NAME
 
-MT::Category - Movable Type category record
+MT::Category - MyMTOS category record
 
 =head1 SYNOPSIS
 
@@ -661,7 +661,7 @@ MT::Category - Movable Type category record
 
 =head1 DESCRIPTION
 
-An I<MT::Category> object represents a category in the Movable Type system.
+An I<MT::Category> object represents a category in the MyMTOS system.
 It is essentially a wrapper around the category label; by wrapping the label
 in an object with a numeric ID, we can use the ID as a "foreign key" when
 mapping entries into categories. Thus, if the category label changes, the

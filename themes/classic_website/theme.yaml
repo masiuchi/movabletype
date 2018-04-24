@@ -97,8 +97,6 @@ elements:
                         label: OpenID Accepted
                     pages_list:
                         label: Page Listing
-                    powered_by:
-                        label: Powered By
                     recent_assets:
                         label: Recent Assets
                     recent_comments:
@@ -126,7 +124,6 @@ elements:
                             - Page Listing
                             - Syndication
                             - OpenID Accepted
-                            - Powered By
                     3column_layout_primary_sidebar:
                         label: '3-column layout - Primary Sidebar'
                         order: 1000
@@ -135,7 +132,6 @@ elements:
                             - Page Listing
                             - Syndication
                             - OpenID Accepted
-                            - Powered By
                     3column_layout_secondary_sidebar:
                         label: '3-column layout - Secondary Sidebar'
                         order: 1000
