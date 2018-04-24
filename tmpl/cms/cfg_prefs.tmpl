@@ -16,7 +16,7 @@
      id="no-writedir"
      class="error"
      can_close="0">
-    <__trans phrase="Error: Movable Type was not able to create a directory for publishing your [_1]. If you create this directory yourself, grant write permission to the web server." params="<mt:var name="object_label" lower_case="1">">
+    <__trans phrase="Error: MyMTOS was not able to create a directory for publishing your [_1]. If you create this directory yourself, grant write permission to the web server." params="<mt:var name="object_label" lower_case="1">">
   </mtapp:statusmsg>
 <mt:else>
   <mt:if name="no_cachedir">
@@ -24,7 +24,7 @@
      id="no-cachedir"
      class="error"
      can_close="0">
-    <__trans phrase="Error: Movable Type was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory." params="templates_c">
+    <__trans phrase="Error: MyMTOS was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory." params="templates_c">
   </mtapp:statusmsg>
   <mt:else>
     <mt:if name="no_writecache">
@@ -32,7 +32,7 @@
      id="no-writecache"
      class="error"
      can_close="0">
-    <__trans phrase="Error: Movable Type cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory." params="templates_c">
+    <__trans phrase="Error: MyMTOS cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory." params="templates_c">
   </mtapp:statusmsg>
     <mt:else>
       <mt:if name="no_cache_path">
@@ -40,7 +40,7 @@
      id="no-cache-path"
      class="error"
      can_close="0">
-    <__trans phrase="Error: Movable Type was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory." params="cache">
+    <__trans phrase="Error: MyMTOS was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory." params="cache">
   </mtapp:statusmsg>
       <mt:else>
         <mt:if name="no_write_cache_path">
@@ -48,7 +48,7 @@
      id="no-write-cache-path"
      class="error"
      can_close="0">
-    <__trans phrase="Error: Movable Type cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory." params="cache">
+    <__trans phrase="Error: MyMTOS cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory." params="cache">
   </mtapp:statusmsg>
         <mt:else>
           <mt:if name="saved">

@@ -1893,9 +1893,9 @@ sub external_authenticators {
         my $id = lc $key;
         $id =~ s/[^a-z0-9-]//;
         if ( $key eq 'MovableType' ) {
-            $param->{default_id}          = $id;
-            $param->{enabled_MovableType} = 1;
-            $param->{default_signin}      = 'MovableType';
+            $param->{default_id}     = $id;
+            $param->{enabled_mt}     = 1;
+            $param->{default_signin} = 'MovableType';
             my $cfg = $app->config;
             if ( my $registration = $cfg->CommenterRegistration ) {
                 if ( $cfg->AuthenticationModule eq 'MT' ) {

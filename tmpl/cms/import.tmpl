@@ -32,7 +32,7 @@ function selectBlog() {
 /* ]]> */
 </script>
 
-<p class="page-desc"><__trans phrase="Transfer weblog entries into Movable Type from other Movable Type installations or even other blogging tools or export your entries to create a backup or copy."></p>
+<p class="page-desc"><__trans phrase="Transfer weblog entries into MyMTOS from other MyMTOS installations or even other blogging tools or export your entries to create a backup or copy."></p>
 
 <form method="post" id="import_form" enctype="multipart/form-data" action="<mt:var name="script_url">" onsubmit="return validate(this)">
   <input type="hidden" name="__mode" value="import" />
@@ -100,7 +100,7 @@ function selectBlog() {
     <mtapp:setting
        id="file"
        label="<__trans phrase="Upload import file (optional)">"
-       hint="<__trans phrase="If your import file is located on your computer, you can upload it here.  Otherwise, Movable Type will automatically look in the 'import' folder of your Movable Type directory.">"
+       hint="<__trans phrase="If your import file is located on your computer, you can upload it here.  Otherwise, MyMTOS will automatically look in the 'import' folder of your MyMTOS directory.">"
        help_page="entry_import"
        help_section="source_file">
       <input name="file" id="file" type="file" />
@@ -119,7 +119,7 @@ function selectBlog() {
     <mtapp:setting
        id="encoding"
        label="<__trans phrase="Import File Encoding">"
-       hint="<__trans phrase="By default, Movable Type will attempt to automatically detect the character encoding of your import file.  However, if you experience difficulties, you can set it explicitly.">"
+       hint="<__trans phrase="By default, MyMTOS will attempt to automatically detect the character encoding of your import file.  However, if you experience difficulties, you can set it explicitly.">"
        help_page="entry_import"
        help_section="source_file_encoding">
       <select name="encoding" id="encoding">

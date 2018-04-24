@@ -76,7 +76,7 @@ sub edit {
         if ( my $auths = $blog->commenter_authenticators ) {
             foreach ( split ',', $auths ) {
                 if ( 'MovableType' eq $_ ) {
-                    $param->{enabled_MovableType} = 1;
+                    $param->{enabled_mt} = 1;
                 }
                 else {
                     $cmtauth{$_}->{enabled} = 1;
@@ -536,7 +536,7 @@ sub cfg_registration {
     if ( my $auths = $blog->commenter_authenticators ) {
         foreach ( split ',', $auths ) {
             if ( 'MovableType' eq $_ ) {
-                $param{enabled_MovableType} = 1;
+                $param{enabled_mt} = 1;
             }
             elsif ( exists $cmtauth{$_} ) {
                 $cmtauth{$_}->{enabled} = 1;

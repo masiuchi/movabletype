@@ -8,7 +8,7 @@
    label="<__trans phrase="Sign in using">..."
    label_class="top-label">
   <select name="auth_options" id="auth_options" class="full">
-  <mt:if name="enabled_MovableType">
+  <mt:if name="enabled_mt">
     <option value="<mt:var name="default_id" escape="html">"><mt:var name="default_signin" escape="html"></option>
   </mt:if>
   <mt:loop name="auth_loop">
@@ -35,8 +35,8 @@
   </mtapp:statusmsg>
 </mt:if>
 
-<mt:if name="enabled_MovableType">
-<div id="signin_with_<mt:var name="default_id" escape="html">"<mt:unless name="enabled_MovableType"> style="display: none"</mt:unless>>
+<mt:if name="enabled_mt">
+<div id="signin_with_<mt:var name="default_id" escape="html">"<mt:unless name="enabled_mt"> style="display: none"</mt:unless>>
   <form method="post" action="<mt:var name="script_url">">
     <input type="hidden" name="__mode" value="do_login" />
     <input type="hidden" name="blog_id" value="<mt:var name="blog_id" escape="html">" />
