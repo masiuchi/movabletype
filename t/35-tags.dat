@@ -522,7 +522,7 @@
 { "r" : "1", "t" : "<MTPings lastn='1'><MTPingScorehigh></MTPings>", "e" : ""}, #521
 { "r" : "1", "t" : "<MTPings lastn='1'><MTPingScorelow></MTPings>", "e" : ""}, #522
 { "r" : "1", "t" : "<MTPings><MTPingsHeader><ul></MTPingsHeader><li><MTPingTitle></li><MTPingsFooter></ul></MTPingsFooter></MTPings>", "e" : "<ul><li>Trackbacking to a page</li><li>Foo</li></ul>"}, #523
-{ "r" : "1", "t" : "<MTProductName>", "e" : "Movable Type"}, #524
+{ "r" : "1", "t" : "<MTProductName>", "e" : "MyMTOS"}, #524
 { "r" : "1", "t" : "<MTSection>Content</MTSection>", "e" : "Content"}, #525
 { "r" : "1", "t" : "<MTSetVars>\nfoo=Foo\n</MTSetVars><MTGetVar name='foo'>", "e" : "Foo"}, #526
 { "r" : "1", "t" : "<MTSetVarTemplate name='foo_template'><MTSetVar name='foo' value='Bar'></MTSetVarTemplate><MTSetVar name='foo' value='Foo'><MTVar name='foo_template'><MTGetVar name='foo'>", "e" : "Bar"}, #527
