@@ -2,7 +2,7 @@ matrix:
   include:
     # PHP 7.1
     - language: perl
-      perl: "5.26.1"
+      perl: "5.26"
     - language: perl
       perl: "5.24"
     - language: perl
@@ -70,8 +70,7 @@ before_install:
   - bash t/build-image-magick.sh ${HOME}/image-magick
 
 install:
-  - travis_retry cpanm Carton -l ./local
-  - travis_retry perl -Ilocal/lib/perl5 local/bin/carton install
+  - travis_retry cpanm -nq -l local --installdeps .
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
@@ -123,8 +122,8 @@ before_script:
 script:
   - perl -v
   - php -v
-  - PERL_HASH_SEED=0 perl -Ilocal/lib/perl5 local/bin/carton exec prove t plugins/*/t
+  - PERL_HASH_SEED=0 prove -Ilocal/lib/perl5 t plugins/*/t
   - find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -Ilocal/lib/perl5 -c FILENAME > /dev/null
-  - find tools -type f | xargs -IFILENAME perl -It/lib -Ilocal/lib/perl5 -c FILENAME > /dev/null
+  - find tools -type f | xargs -IFILENAME perl -Ilocal/lib/perl5 -It/lib -c FILENAME > /dev/null
   - find . -name "*.php" | xargs -n1 php -l
 
