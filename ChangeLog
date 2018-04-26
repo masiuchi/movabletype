@@ -1,8 +1,12 @@
+2018-04-26  Masahiro IUCHI
+
+	* Fix failed tests on Travis CI (#78)
+
 2018-04-21  Masahiro IUCHI
 
 	* Remove unused lexicon (#77)
 
-2018-03-28	Masahiro IUCHI
+2018-03-28  Masahiro IUCHI
 
 	* Remove WidgetManager plugin (#75)
 	* Remove WXRImporter plugin (#74)
