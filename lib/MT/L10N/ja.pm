@@ -4866,19 +4866,6 @@ use vars qw( @ISA %Lexicon );
 	'Import Content' => 'インポート',
 	'Blog Preferences' => 'ブログの設定',
 
-## tmpl/cms/widget/new_install.tmpl
-	'Thank you for installing MyMToS' => 'MyMTOS をご利用いただき、ありがとうございます。',
-	'You are now ready to:' => '次の方法で、ウェブサイトにコンテンツを公開できます。',
-	'Create a new page on your website' => 'ウェブサイトに新しいページを作成',
-	'Create a blog on your website' => 'ウェブサイトにブログを作成',
-	'Create a blog (many blogs can exist in one website) to start posting.' => 'ブログを作成して(ひとつのウェブサイト内に複数のブログを作成できます)、ブログ記事を投稿します。',
-
-## tmpl/cms/widget/new_user.tmpl
-	q{Welcome to MyMTOS, the world's most powerful blogging, publishing and social media platform:} => q{世界で最もパワフルなブログ、ウェブサイト、ソーシャルメディアプラットフォームであるMyMTOSへようこそ:},
-
-## tmpl/cms/widget/new_version.tmpl
-	q{What's new in MyMTOS [_1]} => q{MyMTOS [_1] の新機能},
-
 ## tmpl/cms/widget/recent_blogs.tmpl
 	'No blogs could be found. [_1]' => 'ブログがありません。[_1]',
 

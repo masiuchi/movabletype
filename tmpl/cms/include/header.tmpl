@@ -7,6 +7,7 @@
 
 <mt:setvarblock name="html_head" prepend="1">
   <link rel="icon" href="<$mt:var name="static_uri"$>images/favicon.ico" type="image/ico" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <mt:if name="feed_url">
   <link type="application/atom+xml" rel="alternate" <mt:if name="feed_name">title="<mt:var name="feed_name" escape="html">" </mt:if>href="<mt:var name="feed_url" escape="html">" />
 </mt:if>
@@ -99,7 +100,9 @@
 
   <div id="header">
     <div id="brand">
-      <a href="<$mt:var name="mt_url"$>?__mode=dashboard"><span><img alt="<mt:var name="mt_product_name">" src="<mt:var name="static_uri">images/logo/movable-type-logo<mt:if name="blog_id"><mt:if name="is_blog"><mt:else>-website</mt:if><mt:else>-system</mt:if>.png" /></span></a>
+      <a href="<$mt:var name="mt_url"$>?__mode=dashboard">
+        MyMTOS
+      </a>
     </div>
 
   <mt:if name="author_name">

@@ -652,7 +652,7 @@ sub _bulk_author_name_html {
         my $auth_img        = MT->static_path;
         my $auth_label;
         if ( $obj->auth_type eq 'MT' || $obj->auth_type eq 'LDAP' ) {
-            $auth_img .= 'images/comment/mt_logo.png';
+            $auth_img .= 'images/comment/mymtos_logo.png';
             $auth_label = 'MyMTOS';
         }
         else {
@@ -1391,7 +1391,7 @@ sub auth_icon_url {
     return q() unless $auth_type;
 
     if ( $author->type == MT::Author::AUTHOR() ) {
-        return $static_path . 'images/comment/mt_logo.png';
+        return $static_path . 'images/comment/mymtos_logo.png';
     }
 
     my $authenticator = MT->commenter_authenticator( $auth_type, force => 1 );

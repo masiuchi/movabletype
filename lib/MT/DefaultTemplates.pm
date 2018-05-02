@@ -143,7 +143,6 @@ BEGIN {
             'monthly_archive_list' => { label => 'Monthly Archives', },
             'pages_list'           => { label => 'Page Listing', },
             'recent_assets'        => { label => 'Recent Assets', },
-            'powered_by'           => { label => 'Powered By', },
             'recent_comments'      => { label => 'Recent Comments', },
             'recent_entries'       => { label => 'Recent Entries', },
             'search'               => { label => 'Search', },
@@ -169,7 +168,6 @@ BEGIN {
                     'Page Listing',
                     'Syndication',
                     'OpenID Accepted',
-                    'Powered By',
                 ],
             },
             '3column_layout_primary_sidebar' => {
@@ -180,7 +178,6 @@ BEGIN {
                     'Page Listing',
                     'Syndication',
                     'OpenID Accepted',
-                    'Powered By',
                 ],
             },
             '3column_layout_secondary_sidebar' => {

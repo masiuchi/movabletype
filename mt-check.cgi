@@ -268,20 +268,15 @@ if ( !$view ) {
                 padding: 1px;
                 background-color: #2b2b2b;
             }
-            body.has-static #header h1 span {
-                display: none;
-            }
 
             body.has-static h1#brand {
                 display: block;
                 position: absolute;
-                top: 5px;
+                top: 10px;
                 left: 15px;
-                width: 180px;
                 height: 35px;
                 margin: 0;
                 text-decoration: none;
-                background: #2b2b2b url($mt_static_path/images/logo/movable-type-brand-logo.png) center 3px no-repeat;
                 outline: 0;
             }
 

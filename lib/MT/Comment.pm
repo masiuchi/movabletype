@@ -295,7 +295,7 @@ sub list_props {
                 if (   $commenter->auth_type eq 'MT'
                     || $commenter->auth_type eq 'LDAP' )
                 {
-                    $auth_img .= 'images/comment/mt_logo.png';
+                    $auth_img .= 'images/comment/mymtos_logo.png';
                     $auth_label = 'MyMTOS';
                 }
                 else {
