@@ -117,7 +117,6 @@ before_script:
   - rm t/51-objectsync.t
   - rm t/52-ldap.t
   - rm t/53-grouptsync.t
-  - rm t/54-usersgroupsroles.t
 
 script:
   - perl -v
