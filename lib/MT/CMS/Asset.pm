@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -1228,7 +1228,7 @@ sub _upload_file {
         }
         return $app->error(
             $app->translate(
-                'Movable Type was unable to write to the "Upload Destination". Please make sure that the webserver can write to this folder.'
+                'MyMTOS was unable to write to the "Upload Destination". Please make sure that the webserver can write to this folder.'
             )
         ) unless -d $root_path;
         $relative_path = $q->param('extra_path');

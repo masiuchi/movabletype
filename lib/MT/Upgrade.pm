@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -1344,7 +1344,7 @@ against the database.
 
 =head1 UPGRADE FUNCTIONS
 
-The bulk of this module consists of Movable Type upgrade operations.
+The bulk of this module consists of MyMTOS upgrade operations.
 These are declared as upgrade functions, and are registered in the
 package variabled '%functions'. (Note: the word 'function' here is
 not meant to describe a Perl subroutine.)
@@ -1355,7 +1355,7 @@ a progress message to the calling application). The rest handle
 schema and data transformation from one version of the MT schema to
 another.
 
-Schema translation itself is handled by Movable Type automatically.
+Schema translation itself is handled by MyMTOS automatically.
 MT is able to check the physical schema represenation in the database
 and compare it with the schema as defined by the L<MT::Object>-descended
 package. If a new property is added to the L<MT::Blog> package, the
@@ -1445,7 +1445,7 @@ limit. This will allow the upgrade function to run for any prior releases
 but prevent it from running in subsequent releases.
 
 B<NOTE>: If you are declaring a B<plugin> upgrade function, this version
-limit is compared with your plugin's schema version, not the Movable Type
+limit is compared with your plugin's schema version, not the MyMTOS
 schema version.
 
 =item * priority (optional)

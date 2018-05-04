@@ -1,8 +1,8 @@
 # ---------------------------------------------------------------------------
 # MT-Textile Text Formatter
-# A plugin for Movable Type
+# A plugin for MT
 #
-# Release 2.05
+# Release 2.051
 #
 # Brad Choate
 # http://www.bradchoate.com/
@@ -12,6 +12,8 @@
 # If you distribute it, please keep this notice intact.
 #
 # Copyright (c) 2003-2008 Brad Choate
+#
+# Copyright (c) 2018 Masahiro IUCHI
 # ---------------------------------------------------------------------------
 # $Id$
 # ---------------------------------------------------------------------------
@@ -22,7 +24,7 @@ use strict;
 use MT;
 use base qw( MT::Plugin );
 
-our $VERSION = 2.05;
+our $VERSION = 2.051;
 our ( $_initialized, $Have_SmartyPants );
 
 MT->add_plugin(
@@ -30,22 +32,18 @@ MT->add_plugin(
         {   name        => "Textile",
             description => '<MT_TRANS phrase="A humane web text generator.">',
             author_name => "Brad Choate",
-            author_link => "http://bradchoate.com/",
+            author_link => "https://bradchoate.com/",
+            plugin_link => 'https://github.com/masiuchi/movabletype',
             version     => $VERSION,
             registry    => {
                 text_filters => {
                     textile_2 => {
                         label => "Textile 2",
                         code  => \&textile_2,
-                        docs =>
-                            "http://www.movabletype.org/documentation/author/textile-2-syntax.html",
                     },
                 },
                 tags => {
                     help_url => sub {
-                        MT->translate(
-                            'http://www.movabletype.org/documentation/appendices/tags/%t.html'
-                        );
                     },
                     block    => { Textile => \&Textile, },
                     function => {
@@ -195,7 +193,7 @@ sub _highlight {
 }
 
 # This is a Text::Textile subclass that provides enhanced
-# functionality for Movable Type integration
+# functionality for MT integration
 
 package MT::Textile;
 
@@ -329,18 +327,17 @@ __END__
 
 =head1 NAME
 
-Textile - A plugin for Movable Type.
+Textile - A plugin for MT.
 
 =head1 DESCRIPTION
 
-This plugin integrates the Perl Text::Textile module with Movable
-Type.
+This plugin integrates the Perl Text::Textile module with MT.
 
 =head1 INSTALLATION
 
-To install, place the 'textile2.pl' file in your Movable Type
-'plugins' directory. Install the 'Textile.pm' file in a 'Text'
-subdirectory underneath the Movable Type 'extlib' directory.
+To install, place the 'textile2.pl' file in your MT 'plugins'
+directory. Install the 'Textile.pm' file in a 'Text'
+subdirectory underneath the MT 'extlib' directory.
 
 Your installation should look like this:
 
@@ -361,10 +358,10 @@ to colorize the code.
 =head2 textile_2
 
 The text formatter identified by "textile_2" invokes the Textile
-formatter. You can select "Textile 2" from the Movable Type interface
+formatter. You can select "Textile 2" from the MT interface
 to use this option to format your entries and/or comments.
 
-You may also invoke the formatter on any Movable Type tag, like this:
+You may also invoke the formatter on any MT tag, like this:
 
     <$MTBlogDescription filters="textile_2"$>
 
@@ -401,8 +398,8 @@ If no charset is given anywhere, it will default to ISO-8859-1.
 Set to 1 to encode special characters to HTML entities. If
 you're outputting utf-8 data, this can be set to '0' to
 output plaintext instead. In fact, if you set your PublishCharset
-for Movable Type to utf-8, it will effectively set this
-setting to '0'. Otherwise, the default value is 1.
+for MT to utf-8, it will effectively set this setting to '0'.
+Otherwise, the default value is 1.
 
 =item do_quotes
 

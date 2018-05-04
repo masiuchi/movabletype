@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -28,7 +28,7 @@ $@ = undef;
 
 my $mt = MT->new() or die MT->errstr;
 
-die "This program must be run under Movable Type 4.\n"
+die "This program must be run under MTOS 4.\n"
     if $mt->version_number > 5.0;
 die "This program cannot be run if ObjectDriver is not 'Microsoft SQLServer.'\n"
     if $mt->config->ObjectDriver !~ m/UMSSQLServer$/i;

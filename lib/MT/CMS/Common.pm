@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -267,7 +267,7 @@ sub save {
             $obj->nofollow_urls(1);
             $obj->follow_auth_links(1);
             $obj->page_layout('layout-wtt');
-            my @authenticators = qw( MovableType );
+            my @authenticators = qw( MyMTOS );
             my @default_auth = split /,/, MT->config('DefaultCommenterAuth');
             foreach my $auth (@default_auth) {
                 my $a = MT->commenter_authenticator($auth);

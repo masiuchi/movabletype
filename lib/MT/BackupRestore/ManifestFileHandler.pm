@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -47,14 +47,17 @@ sub start_element {
 
     if ( $self->{start} ) {
         die MT->translate(
-            "The uploaded file was not a valid Movable Type backup manifest file."
-            )
-            if !(      ( 'manifest' eq $name )
-                    && ( MT::BackupRestore::NS_MOVABLETYPE() eq $ns )
+            "The uploaded file was not a valid MyMTOS backup manifest file.")
+            if !(
+            ( 'manifest' eq $name )
+            && (   MT::BackupRestore::NS_MOVABLETYPE() eq $ns
+                || MT::BackupRestore::NS_MYMTOS() eq $ns )
             );
         $self->{start} = 0;
     }
-    if ( MT::BackupRestore::NS_MOVABLETYPE() eq $ns ) {
+    if (   MT::BackupRestore::NS_MOVABLETYPE() eq $ns
+        || MT::BackupRestore::NS_MYMTOS() eq $ns )
+    {
         my $backups = $self->{backups};
         if ( ( 'file' eq $name ) && ( 'backup' eq $attrs{type} ) ) {
             push @{ $backups->{files} }, $attrs{name};

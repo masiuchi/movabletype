@@ -4,6 +4,8 @@
 # Copyright (c) 2004 John Gruber
 # <http://daringfireball.net/projects/markdown/>
 #
+# Copyright (c) 2018 Masahiro IUCHI
+#
 
 package Markdown;
 require 5.006_000;
@@ -13,7 +15,7 @@ use bytes;
 
 use Digest::MD5 qw(md5_hex);
 use vars qw($VERSION);
-$VERSION = '1.03';
+$VERSION = '1.031';
 
 # Tue 14 Dec 2004
 
@@ -59,7 +61,7 @@ my %g_html_blocks;
 # (see _ProcessListItems() for details):
 my $g_list_level = 0;
 
-#### Movable Type plug-in interface #####################################
+#### MT plug-in interface #####################################
 
 require MT;
 require MT::Plugin;
@@ -67,12 +69,12 @@ require MT::Plugin;
 my $plugin = new MT::Plugin(
     {   name        => "Markdown",
         author_name => "John Gruber",
-        author_link => "http://daringfireball.net/",
-        plugin_link => "http://daringfireball.net/projects/markdown/",
+        author_link => "https://daringfireball.net/",
+        plugin_link => "https://github.com/masiuchi/movabletype",
         version     => $VERSION,
         description =>
             '<MT_TRANS phrase="A plain-text-to-HTML formatting plugin.">',
-        doc_link => 'http://daringfireball.net/projects/markdown/',
+        doc_link => 'https://daringfireball.net/projects/markdown/',
         registry => {
             tags => {
                 block => {

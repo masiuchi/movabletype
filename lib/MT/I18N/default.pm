@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -27,14 +27,6 @@ sub DISPLAY_LENGTH_EDIT_ENTRY_TITLE ()                 {25}
 sub DISPLAY_LENGTH_EDIT_ENTRY_TEXT_FROM_EXCERPT ()     {50}
 sub DISPLAY_LENGTH_EDIT_ENTRY_TEXT_BREAK_UP ()         {30}
 
-sub PORTAL_URL() {''}  # default PORTAL_URL is determined in building packages
-sub SUPPORT_URL()  {'http://www.movabletype.com/support/'}
-sub NEWS_URL()     {'http://www.sixapart.com/movabletype/news/'}
-sub FEEDBACK_URL() {'http://www.movabletype.org/feedback.html'}
-
-sub NEWSBOX_URL() {
-    'http://www.sixapart.com/movabletype/news/mt4_news_widget.html';
-}
 sub LEARNINGNEWS_URL()     {''}
 sub CATEGORY_NAME_NODASH() {0}
 sub DEFAULT_TIMEZONE()     {0}

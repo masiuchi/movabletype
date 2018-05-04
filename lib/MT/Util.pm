@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -2388,83 +2388,6 @@ sub caturl {
     return $url;
 }
 
-sub get_newsbox_html {
-    my ( $newsbox_url, $kind, $cached_only ) = @_;
-
-    return unless $newsbox_url;
-    return unless is_url($newsbox_url);
-    return unless $kind && ( length($kind) == 2 );
-    $cached_only ||= 0;
-    my $enc               = MT->config('PublishCharset');
-    my $NEWSCACHE_TIMEOUT = 60 * 60 * 24;
-    my $sess_class        = MT->model('session');
-    my ($news_object)     = ("");
-    my $retries           = 0;
-    $news_object = $sess_class->load( { id => $kind } );
-    my $refresh_news;
-
-    if ( $news_object
-        && ( $news_object->start() < ( time - $NEWSCACHE_TIMEOUT ) ) )
-    {
-        $refresh_news = 1;
-    }
-    my $last_available_news = $news_object->data()
-        if $news_object;
-    $last_available_news = Encode::decode( $enc, $last_available_news )
-        unless Encode::is_utf8($last_available_news);
-    return $last_available_news unless $refresh_news || !$news_object;
-    return q() if $cached_only;
-
-    # don't block the dashboard for more than 10 seconds to fetch
-    # the news feed...
-    my $ua = MT->new_ua( { timeout => 10 } );
-    return $last_available_news unless $ua;
-
-    my $req    = new HTTP::Request( GET => $newsbox_url );
-    my $resp   = $ua->request($req);
-    my $result = $resp->content();
-    $result = Encode::decode_utf8($result) ## news pages are written in UTF-8.
-        unless Encode::is_utf8($result);
-    if ( !$resp->is_success() || !$result ) {
-
-        # failure; either timeout or worse
-        # if news_object is available, bump up it's expiration
-        # so we don't attempt to hit the server again
-        # for an hour
-        if ( !$news_object ) {
-            $news_object = MT::Session->new;
-            $news_object->set_values(
-                {   id   => $kind,
-                    kind => $kind,
-                    data => ''
-                }
-            );
-            $last_available_news = '';
-            $refresh_news        = 1;
-        }
-        if ( defined($last_available_news) && $refresh_news ) {
-            $news_object->start( ( time - $NEWSCACHE_TIMEOUT ) + 60 * 60 );
-            $news_object->save;
-        }
-        return $last_available_news;
-    }
-    require MT::Sanitize;
-
-    # allowed html
-    my $spec = 'a href,* style class id,ul,li,div,span,br';
-    $result = MT::Sanitize->sanitize( $result, $spec );
-    $news_object = MT::Session->new();
-    $news_object->set_values(
-        {   id    => $kind,
-            kind  => $kind,
-            start => time(),
-            data  => Encode::encode( $enc, $result ),
-        }
-    );
-    $news_object->save();
-    return $result;
-}
-
 sub sanitize_embed {
     my ( $str, $opt ) = @_;
 
@@ -2766,7 +2689,7 @@ __END__
 
 =head1 NAME
 
-MT::Util - Movable Type utility functions
+MT::Util - MyMTOS utility functions
 
 =head1 SYNOPSIS
 
@@ -2774,7 +2697,7 @@ MT::Util - Movable Type utility functions
 
 =head1 DESCRIPTION
 
-I<MT::Util> provides a variety of utility functions used by the Movable Type
+I<MT::Util> provides a variety of utility functions used by the MyMTOS
 libraries.
 
 =head1 USAGE
@@ -2948,12 +2871,6 @@ digits. Use perl_sha1_digest to get a binary representation.
 Verifies that sig is a DSA signature of $msg (or $dgst) produced using
 the private half of the public key given in $key. Requires
 Math::BigInt but doesn't call for any non-perl libraries.
-
-=head2 get_newsbox_html($newsbox_url, $kind)
-
-Retrieves newsbox content from the specified URL.  Content retrieved is
-cached in MT::Session for 24 hours under the key specified in I<$kind>.
-Content will be sanitized based on pre-defined rules.
 
 =head2 log_time
 

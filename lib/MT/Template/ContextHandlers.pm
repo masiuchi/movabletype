@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart Ltd.
+# Copyright (C) 2001-2013 Six Apart Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -18,9 +18,6 @@ sub init_default_filters  { }
 sub core_tags {
     my $tags = {
         help_url => sub {
-            MT->translate(
-                'http://www.movabletype.org/documentation/appendices/tags/%t.html'
-            );
         },
         block => {
 
@@ -1448,7 +1445,7 @@ If the <$mt:CommenterEmail$> matches foo@domain.com or bar@domain.com:
     </mt:If>
 
 If the <$mt:CommenterUsername$> matches the username of someone on the
-Movable Type team:
+MyMTOS team:
 
     <mt:If tag="CommenterUsername" like="(beau|byrne|brad|jim|mark|fumiaki|yuji|djchall)">
         <!-- do something -->
@@ -4101,8 +4098,8 @@ for module, widget or identifier includes.
 Also, other attributes given to this tag are locally assigned as
 variables when invoking the include template.
 
-The contents of the file or module are further evaluated for more Movable
-Type template tags.
+The contents of the file or module are further evaluated for more MyMTOS
+template tags.
 
 B<Example:> Including a Widget
 
@@ -4577,7 +4574,7 @@ and false otherwise.
 =head2 Section
 
 A utility block tag that is used to wrap content that can be cached,
-or merely manipulated by any of Movable Type's tag modifiers.
+or merely manipulated by any of MyMTOS's tag modifiers.
 
 B<Attributes:>
 
@@ -4589,7 +4586,7 @@ When specified, causes the contents of the section tag to be cached
 for some period of time. The 'period' attribute can specify the
 cache duration (in seconds), or will use the C<DashboardCachePeriod>
 configuration setting as a default (this feature was initially added
-to support cacheable portions of the Movable Type Dashboard).
+to support cacheable portions of the MyMTOS Dashboard).
 
 =item * period (optional)
 
@@ -5270,7 +5267,7 @@ sub _hdlr_cgi_relative_url {
 
 =head2 CGIServerPath
 
-Returns the file path to the directory where Movable Type has been
+Returns the file path to the directory where MyMTOS has been
 installed. Any trailing "/" character is removed.
 
 =for tags configuration
@@ -5287,7 +5284,7 @@ sub _hdlr_cgi_server_path {
 
 =head2 StaticFilePath
 
-The file path to the directory where Movable Type's static files are
+The file path to the directory where MyMTOS's static files are
 stored (as configured by the C<StaticFilePath> setting, or based on
 the location of the MT application files alone). This value is
 guaranteed to end with a "/" character.
@@ -5368,7 +5365,7 @@ sub _hdlr_support_directory_url {
 
 =head2 Version
 
-The version number of the Movable Type system.
+The version number of the MyMTOS system.
 
 B<Example:>
 
@@ -5387,7 +5384,7 @@ sub _hdlr_mt_version {
 
 =head2 ProductName
 
-The Movable Type edition in use.
+The MyMTOS edition in use.
 
 B<Attributes:>
 
@@ -5403,9 +5400,9 @@ B<Example:>
 
     <$mt:ProductName$>
 
-for the MTOS edition, this would output:
+this would output:
 
-    Movable Type Open Source
+    MyMTOS
 
 =for tags configuration
 
@@ -5468,7 +5465,7 @@ sub _hdlr_default_language {
 
 =head2 ConfigFile
 
-Returns the full file path for the Movable Type configuration file
+Returns the full file path for the MyMTOS configuration file
 (mt-config.cgi).
 
 =for tags configuration

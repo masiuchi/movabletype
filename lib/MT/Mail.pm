@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -445,7 +445,7 @@ __END__
 
 =head1 NAME
 
-MT::Mail - Movable Type mail sender
+MT::Mail - MyMTOS mail sender
 
 =head1 SYNOPSIS
 
@@ -457,7 +457,7 @@ MT::Mail - Movable Type mail sender
 
 =head1 DESCRIPTION
 
-I<MT::Mail> is the Movable Type mail-sending interface. It can send mail
+I<MT::Mail> is the MyMTOS mail-sending interface. It can send mail
 through I<sendmail> (in several different default locations), through SMTP,
 or through a debugging interface that writes data to STDERR. You can set the
 method of sending mail through the F<mt.cfg> file by changing the value for

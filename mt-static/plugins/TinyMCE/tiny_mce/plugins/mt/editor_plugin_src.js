@@ -1,5 +1,5 @@
 /*
- * Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+ * Copyright (C) 2001-2013 Six Apart, Ltd.
  * This program is distributed under the terms of the
  * GNU General Public License, version 2.
  *
@@ -82,7 +82,7 @@
         }
     });
 
-    tinymce.create('tinymce.plugins.MovableType', {
+    tinymce.create('tinymce.plugins.MT', {
         buttonSettings : '',
 
         _initButtonSettings : function(ed) {
@@ -761,7 +761,7 @@
 
         getInfo : function() {
             return {
-                longname : 'MovableType',
+                longname : 'MT',
                 author : 'Six Apart, Ltd',
                 authorurl : '',
                 infourl : '',
@@ -771,5 +771,5 @@
     });
 
     // Register plugin
-    tinymce.PluginManager.add('mt', tinymce.plugins.MovableType);
+    tinymce.PluginManager.add('mt', tinymce.plugins.MT);
 })(jQuery);

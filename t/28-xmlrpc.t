@@ -582,7 +582,7 @@ my @apis = (
     {
         api    => 'metaWeblog.newMediaObject',
         params => [ 1, $username, $password, {
-            name => 'movable-type-logo.gif',
+            name => 'mymtos-logo.gif',
             type => 'image/gif',
             bits  => sub {
                 return MIME::Base64::decode_base64($logo);
@@ -592,11 +592,11 @@ my @apis = (
             my ( $som ) = @_;
             my $result = $som->result;
             my $url = $result->{url};
-            is( $url, 'http://narnia.na/nana/movable-type-logo.gif' );
+            is( $url, 'http://narnia.na/nana/mymtos-logo.gif' );
             my $asset = MT::Asset::Image->load(undef, { sort => 'id', direction => 'descend', limit => 1 });
             ok($asset, 'asset loaded');
             is( $asset->mime_type, 'image/gif' );
-            is( $asset->file_name, 'movable-type-logo.gif' );
+            is( $asset->file_name, 'mymtos-logo.gif' );
             local $/;
             open my $fh, '<', $asset->file_path;
             my $image = <$fh>;

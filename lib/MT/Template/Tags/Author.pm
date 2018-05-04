@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -740,7 +740,7 @@ sub _hdlr_author_url {
 =head2 AuthorAuthType
 
 Outputs the authentication type identifier for the author currently
-in context. For Movable Type registered users, this is "MT".
+in context. For MyMTOS registered users, this is "MT".
 
 =for tags authors
 
@@ -764,8 +764,8 @@ sub _hdlr_author_auth_type {
 
 Returns URL to a small (16x16) image represents in what authentication
 provider the author in context is authenticated. For most of users it will
-be a small spanner logo of Movable Type. If user is a commenter, icon image
-is provided by each of authentication provider. Movable Type provides
+be a small spanner logo of MyMTOS. If user is a commenter, icon image
+is provided by each of authentication provider. MyMTOS provides
 images for Vox, LiveJournal and OpenID out of the box.
 
 B<Attributes:>

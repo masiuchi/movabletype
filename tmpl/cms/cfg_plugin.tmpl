@@ -15,7 +15,7 @@
       <mt:if name="plugin_loop">
         <mt:if name="can_config">
           <mt:unless name="blog_id">
-      <p><__trans phrase="Enable or disable plugin functionality for the entire Movable Type installation."></p>
+      <p><__trans phrase="Enable or disable plugin functionality for the entire MyMTOS installation."></p>
       <form id="plugin_control" action="<mt:var name="script_url">" method="post">
         <input type="hidden" name="__mode" value="plugin_control" />
         <input type="hidden" name="return_args" value="<mt:var name="return_args" escape="html">" />
@@ -48,12 +48,6 @@
       </mt:if>
     </mtapp:widget>
   </mt:unless>
-</mt:setvarblock>
-
-<mt:setvarblock name="content_header">
-<ul class="action-link-list">
-  <li><a href="<__trans phrase="_PLUGIN_DIRECTORY_URL">" class="icon-left icon-related" target="_blank"><__trans phrase="Find Plugins"></a></li>
-</ul>
 </mt:setvarblock>
 
 <mt:setvarblock name="plugins"> class="active"</mt:setvarblock>
@@ -138,13 +132,13 @@ function activatePlugin(flag, plugin_sig) {
     var question;
     if (flag == 0) {
         if (plugin_sig == '*') {
-            question = '<__trans phrase="Are you sure you want to disable plugins for the entire Movable Type installation?" escape="js">';
+            question = '<__trans phrase="Are you sure you want to disable plugins for the entire MyMTOS installation?" escape="js">';
         } else {
             question = '<__trans phrase="Are you sure you want to disable this plugin?" escape="js">';
         }
     } else {
         if (plugin_sig == '*') {
-            question = '<__trans phrase="Are you sure you want to enable plugins for the entire Movable Type installation? (This will restore plugin settings that were in place before all plugins were disabled.)" escape="js">';
+            question = '<__trans phrase="Are you sure you want to enable plugins for the entire MyMTOS installation? (This will restore plugin settings that were in place before all plugins were disabled.)" escape="js">';
         } else {
             question = '<__trans phrase="Are you sure you want to enable this plugin?" escape="js">';
         }
@@ -230,7 +224,7 @@ function activatePlugin(flag, plugin_sig) {
              id="plugin-compact-errors"
              class="error"
              can_close="0">
-            <__trans phrase="This plugin has not been upgraded to support Movable Type [_1]. As such, it may not be completely functional." params="<mt:var name="mt_version" regex_replace="/\..*$/":"">"><br />
+            <__trans phrase="This plugin has not been upgraded to support MyMTOS [_1]. As such, it may not be completely functional." params="<mt:var name="mt_version" regex_replace="/\..*$/":"">"><br />
             <ul>
             <mt:loop name="plugin_compat_errors">
               <li><$mt:var name="__value__"$></li>

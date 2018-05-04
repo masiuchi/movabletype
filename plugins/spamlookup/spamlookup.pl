@@ -1,4 +1,5 @@
-# Movable Type (r) Open Source (C) 2006-2013 Six Apart, Ltd.
+# Copyright (C) 2006-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -16,16 +17,16 @@ use vars qw($VERSION);
 
 sub BEGIN {
     @MT::Plugin::SpamLookup::ISA = ('MT::Plugin');
-    $VERSION                     = '2.13';
+    $VERSION                     = '2.131';
     my $plugin;
     $plugin = new MT::Plugin::SpamLookup(
         {   name    => 'SpamLookup - Lookups',
             version => $VERSION,
             description =>
                 '<MT_TRANS phrase="SpamLookup module for using blacklist lookup services to filter feedback.">',
-            doc_link        => 'http://www.spamlookup.com/wiki/LookupFilter',
             author_name     => 'Six Apart, Ltd.',
-            author_link     => 'http://www.movabletype.org/',
+            author_link     => 'https://www.movabletype.org/',
+            plugin_link     => 'https://github.com/masiuchi/movabletype',
             config_template => 'lookup_config.tmpl',
             l10n_class      => 'spamlookup::L10N',
             settings        => new MT::PluginSettings(

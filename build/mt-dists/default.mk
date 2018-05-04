@@ -1,6 +1,5 @@
-PRODUCT_NAME = Movable Type Core
+PRODUCT_NAME = MyMTOS
+PRODUCT_CODE = MyMTOS
 PRODUCT_VERSION = 5.2
-
+LICENSE = GPL
 VERSION_SUFFIX = 
-
-PORTAL_URL = http://www.sixapart.com/movabletype/

@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -667,11 +667,11 @@ off this work to the I<MT::Template::Context> object, which can look up a
 tag and determine whether it's valid, whether it's a container or substitution
 tag, etc.
 
-All I<MT::Builder> knows is the basic structure of a Movable Type tag, and
+All I<MT::Builder> knows is the basic structure of a MyMTOS tag, and
 how to break up a string into pieces: plain text pieces interspersed with
 tag callouts. It then knows how to take a list of these tokens/pieces and
 build a completed page, using the same I<MT::Template::Context> object to
-actually fill in the values for the Movable Type tags.
+actually fill in the values for the MyMTOS tags.
 
 =head1 USAGE
 

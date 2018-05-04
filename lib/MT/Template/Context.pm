@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -900,7 +900,7 @@ __END__
 
 =head1 NAME
 
-MT::Template::Context - Movable Type Template Context
+MT::Template::Context - MyMTOS Template Context
 
 =head1 SYNOPSIS
 
@@ -918,13 +918,13 @@ MT::Template::Context - Movable Type Template Context
 =head1 DESCRIPTION
 
 I<MT::Template::Context> provides the implementation for all of the built-in
-template tags in Movable Type, as well as the public interface to the
+template tags in MyMTOS, as well as the public interface to the
 system's plugin interface.
 
 This document focuses only on the public methods needed to implement plugins
-in Movable Type, and the methods that plugin developers might wish to make
+in MyMTOS, and the methods that plugin developers might wish to make
 use of. Of course, plugins can make use of other objects loaded from the
-Movable Type database, in which case you may wish to look at the documentation
+MyMTOS database, in which case you may wish to look at the documentation
 for the classes in question (for example, I<MT::Entry>).
 
 =head1 USAGE
@@ -1075,8 +1075,7 @@ To be used like this:
 
 =head2 MT::Template::Context->add_global_filter($name, \&subroutine)
 
-Registers a global tag attribute. More information is available in the
-Movable Type manual, in the Template Tags section, in "Global Tag Attributes".
+Registers a global tag attribute.
 
 Global tag attributes can be used in any tag, and are essentially global
 filters, used to filter the normal output of the tag and modify it in some

@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -12,6 +12,7 @@ use Symbol;
 use base qw( MT::ErrorHandler );
 
 sub NS_MOVABLETYPE {'http://www.sixapart.com/ns/movabletype'}
+sub NS_MYMTOS {'https://github.com/masiuchi/movabletype'}
 
 use File::Spec;
 use File::Copy;
@@ -301,7 +302,7 @@ sub backup {
 
     my $obj_to_backup = $class->_populate_obj_to_backup($blog_ids);
 
-    my $header .= "<movabletype xmlns='" . NS_MOVABLETYPE . "'\n";
+    my $header .= "<mymtos xmlns='" . NS_MYMTOS . "'\n";
     $header .= join ' ',
         map { $_ . "='" . $metadata->{$_} . "'" } keys %$metadata;
     $header .= ">\n";
@@ -320,7 +321,7 @@ sub backup {
         \@else_xml, $backuped_objs );
     $printer->($_) foreach @else_xml;
 
-    $printer->('</movabletype>');
+    $printer->('</mymtos>');
     $finisher->($files);
 }
 
@@ -603,7 +604,7 @@ sub restore_directory {
     unless ($backups) {
         push @$errors,
             MT->translate(
-            "Manifest file [_1] was not a valid Movable Type backup manifest file.",
+            "Manifest file [_1] was not a valid MyMTOS backup manifest file.",
             $manifest
             );
         return ( undef, undef );

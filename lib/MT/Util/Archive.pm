@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -77,7 +77,7 @@ MT::Util::Archive
 =head1 SYNOPSIS
 
 MT::Util::Archive is the utility package for easy extraction and compression
-of files in Movable Type, both for core usage and also plugins.  The package
+of files in MyMTOS, both for core usage and also plugins.  The package
 itself is just a simple factory.  The heavy lifting is done in child package
 for each compression method.
 

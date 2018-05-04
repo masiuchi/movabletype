@@ -1,4 +1,5 @@
-# Movable Type (r) Open Source (C) 2006-2013 Six Apart, Ltd.
+# Copyright (C) 2006-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -13,7 +14,7 @@ use warnings;
 
 use base qw( MT::Plugin );
 
-our $VERSION = '2.3';
+our $VERSION = '2.301';
 my $plugin;
 $plugin = MT::Plugin::MultiBlog->new(
     {   id   => 'multiblog',
@@ -23,10 +24,9 @@ $plugin = MT::Plugin::MultiBlog->new(
         version                => $VERSION,
         schema_version         => $VERSION,
         author_name            => 'Six Apart, Ltd.',
-        author_link            => 'http://www.movabletype.org/',
+        author_link            => 'https://www.movabletype.org/',
+        plugin_link            => 'https://github.com/masiuchi/movabletype',
         system_config_template => 'system_config.tmpl',
-        doc_link =>
-            'http://www.movabletype.org/documentation/appendices/tags/multiblog.html',
         blog_config_template => 'blog_config.tmpl',
         settings             => new MT::PluginSettings(
             [   [   'default_access_allowed',
@@ -59,9 +59,6 @@ $plugin = MT::Plugin::MultiBlog->new(
             },
             tags => {
                 help_url => sub {
-                    MT->translate(
-                        'http://www.movabletype.org/documentation/appendices/tags/%t.html'
-                    );
                 },
                 block => {
                     Entries    => 'MultiBlog::preprocess_native_tags',
@@ -353,7 +350,7 @@ sub update_trigger_cache {
                     $scope = "system";
                 }
                 elsif ( $id eq '_blogs_in_website' ) {
-                    my $app        = MT::instance;
+                    my $app        = MT->instance;
                     my $website_id = $app->param('blog_id');
                     next unless $website_id;
                     if ( my $website
@@ -382,7 +379,7 @@ sub update_trigger_cache {
                 $scope = "system";
             }
             elsif ( $id eq '_blogs_in_website' ) {
-                my $app        = MT::instance;
+                my $app        = MT->instance;
                 my $website_id = $app->param('blog_id');
                 next unless $website_id;
                 if ( my $website = $app->model('website')->load($website_id) )

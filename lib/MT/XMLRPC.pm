@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -87,7 +87,7 @@ __END__
 
 =head1 NAME
 
-MT::XMLRPC - Movable Type XML-RPC client routines
+MT::XMLRPC - MyMTOS XML-RPC client routines
 
 =head1 SYNOPSIS
 
@@ -106,7 +106,7 @@ MT::XMLRPC - Movable Type XML-RPC client routines
 
 I<MT::XMLRPC> provides XML-RPC client functionality for sending pings to
 "recently updated" services. It contains built-in methods for sending pings
-to I<weblogs.com> and I<movabletype.org>; in addition, it has a more
+to C<WeblogsPingURL> and C<MTPingURL>; in addition, it has a more
 generic method for sending XML-RPC pings to other services that support the
 general weblogs.com API.
 
@@ -114,17 +114,17 @@ general weblogs.com API.
 
 =head2 MT::XMLRPC->weblogs_ping($blog)
 
-Send an XML-RPC ping to I<weblogs.com> for the blog I<$blog>, which should be
-an I<MT::Blog> object.
+Send an XML-RPC ping to C<WeblogsPingURL> configuration setting for the blog
+I<$blog>, which should be an I<MT::Blog> object.
 
 On success, returns a true value; on failure, returns C<undef>, and the error
 message can be obtained by calling I<errstr> on the class name.
 
 =head2 MT::XMLRPC->mt_ping($blog)
 
-Send an XML-RPC ping to I<movabletype.org> for the blog I<$blog>, which should
-be an I<MT::Blog> object, and which should contain a valid Movable Type
-Recently Updated Key.
+Send an XML-RPC ping to C<MTPingURL> configuration setting for the blog
+I<$blog>, which should be an I<MT::Blog> object, and which should contain
+a valid MyMTOS Recently Updated Key.
 
 On success, returns a true value; on failure, returns C<undef>, and the error
 message can be obtained by calling I<errstr> on the class name.

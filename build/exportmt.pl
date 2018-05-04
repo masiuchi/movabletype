@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -71,11 +71,9 @@ __END__
 
 =head1 NAME
 
-exportmt - Movable Type Export Build Deployment and Notification
+exportmt - MyMTOS Export Build Deployment and Notification
 
 =head1 SEE ALSO
-
-https://intranet.sixapart.com/wiki/index.php/Movable_Type:MT_Export-Deploy
 
 The L<Build> (F<build/Build.pm>) module.
 

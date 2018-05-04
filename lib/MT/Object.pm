@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2016, 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -1799,7 +1799,7 @@ __END__
 
 =head1 NAME
 
-MT::Object - Movable Type base class for database-backed objects
+MT::Object - MyMTOS base class for database-backed objects
 
 =head1 SYNOPSIS
 
@@ -1840,10 +1840,10 @@ Using an I<MT::Object> subclass:
 
 =head1 DESCRIPTION
 
-I<MT::Object> is the base class for all Movable Type objects that will be
+I<MT::Object> is the base class for all MyMTOS objects that will be
 serialized/stored to some location for later retrieval.
 
-Movable Type objects know nothing about how they are stored--they know only
+MyMTOS objects know nothing about how they are stored--they know only
 of what types of data they consist, the names of those types of data (their
 columns), etc. The actual storage mechanism is in the L<Data::ObjectDriver>
 class and its driver subclasses; I<MT::Object> subclasses, on the other hand,
@@ -1853,7 +1853,7 @@ self-knowledge.
 This distinction between storage and in-memory representation allows objects
 to be serialized to disk in many different ways. Adding a new storage method
 is as simple as writing an object driver--a non-trivial task, to be sure, but
-one that will not require touching any other Movable Type code.
+one that will not require touching any other MyMTOS code.
 
 =head1 SUBCLASSING
 
@@ -2068,7 +2068,7 @@ classed objects (see 'class_type' above).
 =head2 System Initialization
 
 Before using (loading, saving, removing) an I<MT::Object> class and its
-objects, you must always initialize the Movable Type system. This is done
+objects, you must always initialize the MyMTOS system. This is done
 with the following lines of code:
 
     use MT;

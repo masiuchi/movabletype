@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2005-2013 Six Apart, Ltd.
+# Copyright (C) 2005-2013 Six Apart, Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -136,13 +136,13 @@ use vars qw( @ISA %Lexicon );
 	'Page not found - [_1]' => '[_1]が見つかりませんでした。',
 
 ## mt-check.cgi
-	'Movable Type System Check' => 'Movable Type システムチェック',
+	'MyMTOS System Check' => 'MyMTOS システムチェック',
 	'You attempted to use a feature that you do not have permission to access. If you believe you are seeing this message in error contact your system administrator.' => 'アクセス権がありません。システム管理者に連絡してください。',
-	q{The MT-Check report is disabled when Movable Type has a valid configuration file (mt-config.cgi)} => q{構成ファイル(mt-config.cgi)がすでに存在するため、'mt-check.cgi' スクリプトは無効になっています。},
-	q{The mt-check.cgi script provides you with information about your system's configuration and determines whether you have all of the components you need to run Movable Type.} => q{mt-check.cgiはシステムの構成を確認し、Movable Typeを実行するために必要なコンポーネントがそろっていることを確認するためのスクリプトです。},
-	'The version of Perl installed on your server ([_1]) is lower than the minimum supported version ([_2]). Please upgrade to at least Perl [_2].' => 'お使いのシステムにインストールされている Perl [_1] は、Movable Type でサポートされている最低限のバージョン[_2]を満たしていません。Perlをアップグレードしてください。',
+	q{The MyMTOS-Check report is disabled when MyMTOS has a valid configuration file (mt-config.cgi)} => q{構成ファイル(mt-config.cgi)がすでに存在するため、'mt-check.cgi' スクリプトは無効になっています。},
+	q{The mt-check.cgi script provides you with information about your system's configuration and determines whether you have all of the components you need to run MyMTOS.} => q{mt-check.cgiはシステムの構成を確認し、MyMTOSを実行するために必要なコンポーネントがそろっていることを確認するためのスクリプトです。},
+	'The version of Perl installed on your server ([_1]) is lower than the minimum supported version ([_2]). Please upgrade to at least Perl [_2].' => 'お使いのシステムにインストールされている Perl [_1] は、MyMTOS でサポートされている最低限のバージョン[_2]を満たしていません。Perlをアップグレードしてください。',
 	'System Information' => 'システム情報',
-	'Movable Type version:' => 'Movable Type バージョン',
+	'MyMTOS version:' => 'MyMTOS バージョン',
 	'Current working directory:' => '現在のディレクトリ',
 	'MT home directory:' => 'MTディレクトリ',
 	'Operating system:' => 'オペレーティングシステム',
@@ -151,30 +151,30 @@ use vars qw( @ISA %Lexicon );
 	'Web server:' => 'ウェブサーバー',
 	'(Probably) running under cgiwrap or suexec' => 'cgiwrapまたはsuexec環境下で動作していると思われます。',
 	'[_1] [_2] Modules' => '[_1]: [_2]モジュール',
-	'The following modules are <strong>optional</strong>. If your server does not have these modules installed, you only need to install them if you require the functionality that they provide.' => 'これらのモジュールのインストールは<strong>任意</strong>です。お使いのサーバーにこれらのモジュールがインストールされていない場合でも、Movable Type の基本機能は動作します。これらのモジュールの機能が必要となった場合にはインストールを行ってください。',
-	'The following modules are required by databases that can be used with Movable Type. Your server must have DBI and at least one of these related modules installed for the application to work properly.' => 'これらのモジュールは、Movable Type がデータを保存するために必要なモジュールです。DBIと、1つ以上のデータベース用のモジュールをインストールする必要があります。',
+	'The following modules are <strong>optional</strong>. If your server does not have these modules installed, you only need to install them if you require the functionality that they provide.' => 'これらのモジュールのインストールは<strong>任意</strong>です。お使いのサーバーにこれらのモジュールがインストールされていない場合でも、MyMTOS の基本機能は動作します。これらのモジュールの機能が必要となった場合にはインストールを行ってください。',
+	'The following modules are required by databases that can be used with MyMTOS. Your server must have DBI and at least one of these related modules installed for the application to work properly.' => 'これらのモジュールは、MyMTOS がデータを保存するために必要なモジュールです。DBIと、1つ以上のデータベース用のモジュールをインストールする必要があります。',
 	'Either your server does not have [_1] installed, the version that is installed is too old, or [_1] requires another module that is not installed.' => '[_1]がインストールされていないか、インストールされているバージョンが古い、または [_1]の動作に必要な他のモジュールが見つかりません。',
 	'Your server does not have [_1] installed, or [_1] requires another module that is not installed.' => 'サーバーに [_1]か、[_1]の動作に必要な他のモジュールがインストールされていません。',
 	'Please consult the installation instructions for help in installing [_1].' => '[_1]のインストールはインストールマニュアルに沿って行ってください。',
-	'The DBD::mysql version you have installed is known to be incompatible with Movable Type. Please install the most current release available.' => 'お使いのサーバーにインストールされている DBD::mysqlのバージョンは、Movable Type と互換性がありません。CPAN に公開されている最新バージョンをインストールしてください。',
+	'The DBD::mysql version you have installed is known to be incompatible with MyMTOS. Please install the most current release available.' => 'お使いのサーバーにインストールされている DBD::mysqlのバージョンは、MyMTOS と互換性がありません。CPAN に公開されている最新バージョンをインストールしてください。',
 	'The $mod is installed properly, but requires an updated DBI module. Please see the note above regarding the DBI module requirements.' => '$modはインストールされていますが、新しいDBIが必要です。上記を参考に必要なDBIを確認してください。',
 	'Your server has [_1] installed (version [_2]).' => 'サーバーに [_1] がインストールされています(バージョン [_2])。',
-	'Movable Type System Check Successful' => 'システムのチェックを完了しました。',
-	q{You're ready to go!} => q{Movable Typeを利用できます。},
-	'Your server has all of the required modules installed; you do not need to perform any additional module installations. Continue with the installation instructions.' => 'お使いのサーバーには、Movable Type の動作に必要なすべてのモジュールがインストールされています。モジュールを追加インストール作業は必要はありません。マニュアルに従い、インストールを続けてください。',
-	'CGI is required for all Movable Type application functionality.' => 'CGIは、Movable Type のすべてのアプリケーションの動作に必須です。',
+	'MyMTOS System Check Successful' => 'システムのチェックを完了しました。',
+	q{You're ready to go!} => q{MyMTOSを利用できます。},
+	'Your server has all of the required modules installed; you do not need to perform any additional module installations. Continue with the installation instructions.' => 'お使いのサーバーには、MyMTOS の動作に必要なすべてのモジュールがインストールされています。モジュールを追加インストール作業は必要はありません。マニュアルに従い、インストールを続けてください。',
+	'CGI is required for all MyMTOS application functionality.' => 'CGIは、MyMTOS のすべてのアプリケーションの動作に必須です。',
 	'Image::Size is required for file uploads (to determine the size of uploaded images in many different formats).' => 'Image::Sizeはファイルのアップロードを行うために必要です。各種のファイル形式に対応して画像のサイズを取得します。',
 	'File::Spec is required to work with file system path information on all supported operating systems.' => 'File::Specはオペレーティングシステムでパスの操作を行うために必要です。',
 	'CGI::Cookie is required for cookie authentication.' => 'CGI::Cookieはcookie 認証のために必要です。',
-	'LWP::UserAgent is required for creating Movable Type configuration files using the installation wizard.' => 'LWP::UserAgentは構成ウィザードの実行に必要です。',
+	'LWP::UserAgent is required for creating MyMTOS configuration files using the installation wizard.' => 'LWP::UserAgentは構成ウィザードの実行に必要です。',
 	'DBI is required to work with most supported databases.' => 'DBIはデータベースにアクセスするために必要です。',
 	'DBI and DBD::mysql are required if you want to use the MySQL database backend.' => 'データを保存するデータベースとして MySQL を利用する場合、DBIと DBD::mysqlが必要です。',
 	'DBI and DBD::Pg are required if you want to use the PostgreSQL database backend.' => 'データを保存するデータベースとして PostgreSQL を利用する場合、DBIと DBD::Pgが必要です。',
 	'DBI and DBD::SQLite are required if you want to use the SQLite database backend.' => 'データを保存するデータベースとして SQLite を利用する場合、DBIと DBD::SQLiteが必要です。',
 	'DBI and DBD::SQLite2 are required if you want to use the SQLite 2.x database backend.' => 'データを保存するデータベースとして SQLite2.x を利用する場合、DBIと DBD::SQLite2が必要です。',
 	'Digest::SHA is required in order to provide enhanced protection of user passwords.' => 'Digest::SHAはパスワードの高度な保護のために必要です。',
-	'This module and its dependencies are required in order to operate Movable Type under psgi.' => 'PSGI環境下でmt.psgiを実行する場合に必要となります。',
-	'This module and its dependencies are required to run Movable Type under psgi.' => 'PSGI環境下でmt.psgiを実行する場合に必要となります。',
+	'This module and its dependencies are required in order to operate MyMTOS under psgi.' => 'PSGI環境下でmt.psgiを実行する場合に必要となります。',
+	'This module and its dependencies are required to run MyMTOS under psgi.' => 'PSGI環境下でmt.psgiを実行する場合に必要となります。',
 	'HTML::Entities is needed to encode some characters, but this feature can be turned off using the NoHTMLEntities option in the configuration file.' => 'HTML::Entitiesのインストールは必須ではありません。特殊な文字をエンコードするときに必要になりますが、構成ファイルにNoHTMLEntitiesを設定すればこの機能を無効化できます。',
 	'HTML::Parser is optional; It is needed if you want to use the TrackBack system, the weblogs.com ping, or the MT Recently Updated ping.' => 'HTML::Parserのインストールは必須ではありません。トラックバック機能や更新通知機能を利用する場合に必要となります。',
 	'SOAP::Lite is optional; It is needed if you want to use the MT XML-RPC server implementation.' => 'SOAP::Liteのインストールは必須ではありません。XML-RPC による作業を行う場合に必要となります。',
@@ -182,14 +182,14 @@ use vars qw( @ISA %Lexicon );
 	'Scalar::Util is optional; It is needed if you want to use the Publish Queue feature.' => 'Scalar::Utilのインストールは必須ではありません。再構築キューを利用する場合に必要となります。',
 	'List::Util is optional; It is needed if you want to use the Publish Queue feature.' => 'List::Utilのインストールは必須ではありません。再構築キューを利用する場合に必要となります。',
 	'[_1] is optional; It is one of the image processors that you can use to create thumbnails of uploaded images.' => '[_1]のインストールは必須ではありません。アップロードした画像のサムネイルを作成する場合に必要となります。',
-	'IPC::Run is optional; It is needed if you would like to use NetPBM as the image processor for Movable Type.' => 'IPC::Runのインストールは必須ではありません。MTのイメージドライバとしてNetPBMを利用する場合に必要となります。',
-	'Storable is optional; It is required by certain Movable Type plugins available from third-party developers.' => 'Storableは必須ではありません。外部プラグインの利用の際に必要となる場合があります。',
+	'IPC::Run is optional; It is needed if you would like to use NetPBM as the image processor for MyMTOS.' => 'IPC::Runのインストールは必須ではありません。MyMTOSのイメージドライバとしてNetPBMを利用する場合に必要となります。',
+	'Storable is optional; It is required by certain MyMTOS plugins available from third-party developers.' => 'Storableは必須ではありません。外部プラグインの利用の際に必要となる場合があります。',
 	'Crypt::DSA is optional; If it is installed, comment registration sign-ins will be accelerated.' => 'Crypt::DSAのインストールは必須ではありません。インストールされていると、コメント投稿時のサインインが高速になります。',
 	'This module and its dependencies are required to permit commenters to authenticate via OpenID providers such as AOL and Yahoo! that require SSL support.' => 'Crypt::SSLeayはAOLやYahoo!などのSSLを利用するOpenIDのコメント投稿者を認証するために必要となります。',
 	'Cache::File is required if you would like to be able to allow commenters to authenticate via OpenID using Yahoo! Japan.' => 'Cache::Fileのインストールは必須ではありません。Yahoo! Japanによるコメント投稿者のOpenID認証を許可する場合に必要となります。',
 	'MIME::Base64 is required in order to enable comment registration and in order to send mail via an SMTP Server.' => 'MIME::Base64のインストールは必須ではありません。コメントの認証機能を利用する場合やメール送信にSMTPを利用する場合に必要となります。',
 	'XML::Atom is required in order to use the Atom API.' => 'XML::Atomのインストールは必須ではありません。Atom APIを利用する場合に必要となります。',
-	'Cache::Memcached and a memcached server are required to use in-memory object caching on the servers where Movable Type is deployed.' => 'Cache::Memcachedのインストールは必須ではありません。Movable Type のキャッシング機能として memcached サーバーを利用する場合に必要となります。',
+	'Cache::Memcached and a memcached server are required to use in-memory object caching on the servers where MyMTOS is deployed.' => 'Cache::Memcachedのインストールは必須ではありません。MyMTOS のキャッシング機能として memcached サーバーを利用する場合に必要となります。',
 	'Archive::Tar is required in order to manipulate files during backup and restore operations.' => 'Archive::Tarのインストールは必須ではありません。バックアップと復元で圧縮の機能を利用する場合に必要となります。',
 	'IO::Compress::Gzip is required in order to compress files during backup operations.' => 'IO::Compress::Gzipのインストールは必須ではありません。バックアップと復元で圧縮の機能を利用する場合に必要となります。',
 	'IO::Uncompress::Gunzip is required in order to decompress files during restore operation.' => 'IO::Uncompress::Gunzipのインストールは必須ではありません。バックアップと復元で圧縮の機能を利用する場合に必要となります。',
@@ -204,7 +204,7 @@ use vars qw( @ISA %Lexicon );
 	'Net::SSLeay is required to use SMTP Auth over an SSL connection, or to use it with a STARTTLS command.' => 'Net::SSLeayはSMTP認証にSSLまたは、STARTTLSコマンドを利用する場合に必要となります。',
 	'This module is used in a test attribute for the MTIf conditional tag.' => 'MT:Ifタグの機能で使われます。',
 	'This module is used by the Markdown text filter.' => 'Markdown形式を利用するために必要です。',
-	'This module is required by mt-search.cgi, if you are running Movable Type using a version of Perl older than Perl 5.8.' => 'Perl 5.8以下の環境で、mt-search.cgiを利用するときに必要です。',
+	'This module is required by mt-search.cgi, if you are running MyMTOS using a version of Perl older than Perl 5.8.' => 'Perl 5.8以下の環境で、mt-search.cgiを利用するときに必要です。',
 	'This module required for action streams.' => 'アクションストリームを利用するために必要です。',
 	'The [_1] database driver is required to use [_2].' => '[_2]を使うには[_1]のデータベースドライバが必要です。',
 	'DBI is required to store data in database.' => 'DBIはデータベースにアクセスするために必要です。',
@@ -258,7 +258,6 @@ use vars qw( @ISA %Lexicon );
 	'[_1] ([_2])' => '[_1] ([_2])',
 
 ## default_templates/banner_footer.mtml
-	'_POWERED_BY' => 'Powered by <a href="http://www.sixapart.jp/movabletype/"><$MTProductName$></a>',
 	'This blog is licensed under a <a href="[_1]">Creative Commons License</a>.' => 'このブログは<a href="[_1]">クリエイティブ・コモンズ</a>でライセンスされています。',
 
 ## default_templates/calendar.mtml
@@ -316,7 +315,7 @@ use vars qw( @ISA %Lexicon );
 	'Return to the <a href="[_1]">original entry</a>.' => '<a href="[_1]">元の記事</a>に戻る',
 
 ## default_templates/comment_throttle.mtml
-	'If this was an error, you can unblock the IP address and allow the visitor to add it again by logging in to your Movable Type installation, choosing Blog Config - IP Banning, and deleting the IP address [_1] from the list of banned addresses.' => 'これが間違いである場合は、Movable Typeにサインインして、ブログの設定画面に進み、禁止IPリストからIPアドレスを削除してください。',
+	'If this was an error, you can unblock the IP address and allow the visitor to add it again by logging in to your MyMTOS installation, choosing Blog Config - IP Banning, and deleting the IP address [_1] from the list of banned addresses.' => 'これが間違いである場合は、MyMTOSにサインインして、ブログの設定画面に進み、禁止IPリストからIPアドレスを削除してください。',
 	'A visitor to your blog [_1] has automatically been banned by adding more than the allowed number of comments in the last [_2] seconds.' => '[_1]を禁止しました。[_2]秒の間に許可された以上のコメントを送信してきました。',
 	'This was done to prevent a malicious script from overwhelming your weblog with comments. The banned IP address is' => 'これは悪意のスクリプトがブログをコメントで飽和させるのを阻止するための措置です。以下のIPアドレスを禁止しました。',
 
@@ -378,7 +377,7 @@ use vars qw( @ISA %Lexicon );
 	'Continue reading <a href="[_1]" rel="bookmark">[_2]</a>.' => '続きを読む: <a href="[_1]" rel="bookmark">[_2]</a>',
 
 ## default_templates/footer-email.mtml
-	'Powered by Movable Type [_1]' => 'Powered by Movable Type [_1]',
+	'Powered by MyMTOS [_1]' => 'Powered by MyMTOS [_1]',
 
 ## default_templates/javascript.mtml
 	'moments ago' => '直前',
@@ -401,7 +400,7 @@ use vars qw( @ISA %Lexicon );
 	'Recovery: [_1]' => '解除時刻: [_1]',
 
 ## default_templates/lockout-user.mtml
-	'This email is to notify you that a Movable Type user account has been locked out.' => 'これは以下のユーザーアカウントがロックされたことを通知するメールです。',
+	'This email is to notify you that a MyMTOS user account has been locked out.' => 'これは以下のユーザーアカウントがロックされたことを通知するメールです。',
 	'Display Name: [_1]' => '表示名: [_1]',
 	'If you want to permit this user to participate again, click the link below.' => 'ユーザーのロックを解除する場合は、リンクをクリックしてください。',
 
@@ -476,7 +475,6 @@ use vars qw( @ISA %Lexicon );
 	'Pages' => 'ウェブページ',
 
 ## default_templates/powered_by.mtml
-	'_MTCOM_URL' => 'http://www.sixapart.jp/movabletype/',
 
 ## default_templates/recent_assets.mtml
 
@@ -486,7 +484,7 @@ use vars qw( @ISA %Lexicon );
 ## default_templates/recent_entries.mtml
 
 ## default_templates/recover-password.mtml
-	'A request was made to change your Movable Type password. To complete this process click on the link below to select a new password.' => 'パスワードをリセットしようとしています。以下のリンクをクリックして、新しいパスワードを設定してください。',
+	'A request was made to change your MyMTOS password. To complete this process click on the link below to select a new password.' => 'パスワードをリセットしようとしています。以下のリンクをクリックして、新しいパスワードを設定してください。',
 	'If you did not request this change, you can safely ignore this email.' => 'このメールに心当たりがないときは、何もせずに無視してください。',
 
 ## default_templates/search.mtml
@@ -501,7 +499,6 @@ use vars qw( @ISA %Lexicon );
 	'No results found for &ldquo;[_1]&rdquo;.' => '「[_1]」と一致する結果は見つかりませんでした。',
 	'Instructions' => '例',
 	'By default, this search engine looks for all of the specified words in any order. To search for an exact phrase, enclose the phrase in quotes:' => 'すべての単語が順序に関係なく検索されます。フレーズで検索したいときは引用符で囲んでください。',
-	'movable type' => 'movable type',
 	'The search engine also supports the AND, OR, and NOT boolean operators:' => 'AND、OR、NOTを入れることで論理検索を行うこともできます。',
 	'personal OR publishing' => '個人 OR 出版',
 	'publishing NOT personal' => '個人 NOT 出版',
@@ -542,7 +539,6 @@ use vars qw( @ISA %Lexicon );
 ## lib/MT.pm
 	'Powered by [_1]' => 'Powered by [_1]',
 	'Version [_1]' => 'バージョン [_1]',
-	'http://www.movabletype.com/' => 'http://www.sixapart.jp/movabletype/',
 	'Hello, world' => 'Hello, world',
 	'Hello, [_1]' => '[_1]',
 	'Got an error: [_1]' => 'エラーが発生しました: [_1]',
@@ -564,7 +560,6 @@ use vars qw( @ISA %Lexicon );
 	'Error while creating email: [_1]' => 'メールの再構築中にエラーが発生しました: [_1]',
 	'The Perl module required for OpenID commenter authentication (Digest::SHA1) is missing.' => 'OpenIDを利用するのに必要なPerlモジュール(Digest::SHA1)がありません。',
 	'missing required Perl modules: [_1]' => '必要なPerlモジュールが見つかりません: [_1]',
-	'http://www.movabletype.org/documentation/' => 'http://www.movabletype.jp/documentation/',
 	'An error occurred: [_1]' => 'エラーが発生しました: [_1]',
 	'OpenID' => 'OpenID',
 	'LiveJournal' => 'LiveJournal',
@@ -577,7 +572,7 @@ use vars qw( @ISA %Lexicon );
 	'Yahoo! JAPAN' => 'Yahoo! JAPAN',
 	'livedoor' => 'ライブドア',
 	'Hatena' => 'はてな',
-	'Movable Type default' => 'Movable Type 既定',
+	'MyMTOS default' => 'MyMTOS 既定',
 
 ## lib/MT/App.pm
 	'Invalid request' => '不正な要求です。',
@@ -591,17 +586,17 @@ use vars qw( @ISA %Lexicon );
 	'Error assigning blog administration rights to user \'[_1]\' (ID: [_2]) for blog \'[_3]\' (ID: [_4]). No suitable blog administrator role was found.' => '\'[_1]\'(ID:[_2])をブログ\'[_3]\'(ID:[_4])の管理者にできませんでした。ブログの管理権限を持つロールが見つかりませんでした。',
 	'Internal Error: Login user is not initialized.' => '内部エラー: ユーザーが初期化されていません。',
 	'The login could not be confirmed because of a database error ([_1])' => 'データベースのエラーが発生したため、サインインできません。: [_1]',
-	'Sorry, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your Movable Type system administrator.' => 'ブログまたはウェブサイトへのアクセスが許されていません。エラーでこのページが表示された場合は、システム管理者に問い合わせてください。',
+	'Sorry, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your MyMTOS system administrator.' => 'ブログまたはウェブサイトへのアクセスが許されていません。エラーでこのページが表示された場合は、システム管理者に問い合わせてください。',
 	'Cannot load blog #[_1].' => 'ブログ(ID:[_1])をロードできません。',
 	'Invalid login.' => 'サインインできませんでした。',
 	'Failed login attempt by unknown user \'[_1]\'' => '未登録のユーザー [_1] がサインインしようとしました。',
 	'Failed login attempt by disabled user \'[_1]\'' => '無効なユーザー [_1] がサインインしようとしました。',
-	'This account has been disabled. Please see your Movable Type system administrator for access.' => 'このアカウントは無効にされています。システム管理者に問い合わせてください。',
+	'This account has been disabled. Please see your MyMTOS system administrator for access.' => 'このアカウントは無効にされています。システム管理者に問い合わせてください。',
 	'Failed login attempt by pending user \'[_1]\'' => '保留中のユーザー「[_1]」がサインインしようとしました。',
-	'This account has been deleted. Please see your Movable Type system administrator for access.' => 'このアカウントは削除されました。システム管理者に問い合わせてください。',
+	'This account has been deleted. Please see your MyMTOS system administrator for access.' => 'このアカウントは削除されました。システム管理者に問い合わせてください。',
 	'User cannot be created: [_1].' => 'ユーザーを登録できません: [_1]',
 	'User \'[_1]\' has been created.' => 'ユーザー「[_1]」が作成されました。',
-	'Our apologies, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your Movable Type system administrator.' => 'ブログまたはウェブサイトへのアクセスが許されていません。エラーでこのページが表示された場合は、システム管理者に問い合わせてください。',
+	'Our apologies, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your MyMTOS system administrator.' => 'ブログまたはウェブサイトへのアクセスが許されていません。エラーでこのページが表示された場合は、システム管理者に問い合わせてください。',
 	'User \'[_1]\' (ID:[_2]) logged in successfully' => 'ユーザー\'[_1]\'(ID[_2])がサインインしました。',
 	'Invalid login attempt from user \'[_1]\'' => '\'[_1]\'がサインインに失敗しました。',
 	'User \'[_1]\' (ID:[_2]) logged out' => 'ユーザー\'[_1]\'(ID[_2])がサインアウトしました。',
@@ -643,8 +638,8 @@ use vars qw( @ISA %Lexicon );
 	'All Entries' => 'すべてのブログ記事',
 	'[_1] Activity' => '[_1]のログ',
 	'All Activity' => 'すべてのログ',
-	'Movable Type System Activity' => 'Movable Typeのシステムログ',
-	'Movable Type Debug Activity' => 'Movable Typeのデバッグログ',
+	'MyMTOS System Activity' => 'MyMTOSのシステムログ',
+	'MyMTOS Debug Activity' => 'MyMTOSのデバッグログ',
 	'[_1] Pages' => '[_1]のウェブページ',
 	'All Pages' => 'すべてのウェブページ',
 
@@ -666,7 +661,6 @@ use vars qw( @ISA %Lexicon );
 	'None' => 'なし',
 	'Error during publishing: [_1]' => '公開中にエラーが発生しました: [_1]',
 	'This is You' => 'This is You',
-	'Movable Type News' => 'Movable Typeニュース',
 	'Blog Stats' => 'Blog Stats',
 	'Websites' => 'ウェブサイト',
 	'Blogs' => 'ブログ',
@@ -753,15 +747,15 @@ use vars qw( @ISA %Lexicon );
 
 ## lib/MT/App/Comments.pm
 	'Error assigning commenting rights to user \'[_1] (ID: [_2])\' for weblog \'[_3] (ID: [_4])\'. No suitable commenting role was found.' => '\'[_1]\' (ID:[_2])にブログ\'[_3]\'(ID:[_2])へのコメント権限を与えられませんでした。コメント権限を与えるためのロールが見つかりません。',
-	'Invalid commenter login attempt from [_1] to blog [_2](ID: [_3]) which does not allow Movable Type native authentication.' => '[_1]がブログ[_2](ID:[_3])にサインインしようとしましたが、このブログではMovable Type認証が有効になっていません。',
+	'Invalid commenter login attempt from [_1] to blog [_2](ID: [_3]) which does not allow MyMTOS native authentication.' => '[_1]がブログ[_2](ID:[_3])にサインインしようとしましたが、このブログではMyMTOS認証が有効になっていません。',
 	'Invalid login' => 'サインインできませんでした。',
-	'Successfully authenticated, but signing up is not allowed.  Please contact your Movable Type system administrator.' => '認証されましたが、登録は許可されていません。システム管理者に連絡してください。',
+	'Successfully authenticated, but signing up is not allowed.  Please contact your MyMTOS system administrator.' => '認証されましたが、登録は許可されていません。システム管理者に連絡してください。',
 	'You need to sign up first.' => '先に登録してください。',
 	'Permission denied.' => '権限がありません。',
 	'Login failed: permission denied for user \'[_1]\'' => 'サインインに失敗しました。[_1]には権限がありません。',
 	'Login failed: password was wrong for user \'[_1]\'' => 'サインインに失敗しました。[_1]のパスワードが誤っています。',
 	'Signing up is not allowed.' => '登録はできません。',
-	'Movable Type Account Confirmation' => 'Movable Type アカウント登録確認',
+	'MyMTOS Account Confirmation' => 'MyMTOS アカウント登録確認',
 	'Your confirmation has expired. Please register again.' => '有効期限が過ぎています。再度登録してください。',
 	'<a href="[_1]">Return to the original page.</a>' => '<a href="[_1]">元のページに戻る</a>',
 	'Your confirmation have expired. Please register again.' => '有効期限が過ぎています。再度登録してください。',
@@ -853,8 +847,8 @@ use vars qw( @ISA %Lexicon );
 	'The \'Website Root\' provided below is not allowed' => '指定された\'ウェブサイトパス\'は許可されていません。',
 	'The \'Website Root\' provided below is not writable by the web server.  Change the ownership or permissions on this directory, then click \'Finish Install\' again.' => '\'ウェブサイトパス\'にウェブサーバーから書き込めません。ウェブサイトパスの書き込み権限を、正しく設定してから再度、インストールボタンをクリックしてください。',
 	'Invalid session.' => 'セッションが不正です。',
-	'No permissions. Please contact your Movable Type administrator for assistance with upgrading Movable Type.' => '権限がありません。Movable Typeのアップグレードを管理者に依頼してください。',
-	'Movable Type has been upgraded to version [_1].' => 'Movable Typeをバージョン[_1]にアップグレードしました。',
+	'No permissions. Please contact your MyMTOS administrator for assistance with upgrading MyMTOS.' => '権限がありません。MyMTOSのアップグレードを管理者に依頼してください。',
+	'MyMTOS has been upgraded to version [_1].' => 'MyMTOSをバージョン[_1]にアップグレードしました。',
 
 ## lib/MT/App/Viewer.pm
 	'Loading blog with ID [_1] failed' => 'ブログ (ID：[_1]) の読み込みに失敗しました',
@@ -874,8 +868,8 @@ use vars qw( @ISA %Lexicon );
 	'Please select a database from the list of available databases and try again.' => 'データベースのリストからデータベースを選択して、やり直してください。',
 	'SMTP Server' => 'SMTPサーバー',
 	'Sendmail' => 'Sendmail',
-	'Test email from Movable Type Configuration Wizard' => 'Movable Type構成ウィザードからのテスト送信',
-	'This is the test email sent by your new installation of Movable Type.' => 'Movable Typeのインストール中に送信されたテストメールです。',
+	'Test email from MyMTOS Configuration Wizard' => 'MyMTOS構成ウィザードからのテスト送信',
+	'This is the test email sent by your new installation of MyMTOS.' => 'MyMTOSのインストール中に送信されたテストメールです。',
 	'Net::SMTP is required in order to send mail using an SMTP server.' => 'メールの送信にSMTPを利用する場合に必要になります。',
 	'This module is needed to encode special characters, but this feature can be turned off using the NoHTMLEntities option in mt-config.cgi.' => '特殊な文字をエンコードするときに必要になりますが、構成ファイルにNoHTMLEntitiesを設定すればこの機能を無効化できます。',
 	'This module is needed if you want to use the MT XML-RPC server implementation.' => 'XML-RPC による作業を行う場合に必要となります。',
@@ -887,13 +881,13 @@ use vars qw( @ISA %Lexicon );
 	'Cache::File is required if you would like to be able to allow commenters to be authenticated by Yahoo! Japan as OpenID.' => 'Yahoo! Japanによるコメント投稿者のOpenID認証を許可する場合に必要となります。',
 	'This module is needed to enable comment registration. Also, required in order to send mail via an SMTP Server.' => 'コメントの認証機能を利用する場合やメール送信にSMTPを利用する場合に必要となります。',
 	'This module enables the use of the Atom API.' => 'Atom APIを利用する場合に必要となります。',
-	'This module is required in order to use memcached as caching mechanism used by Movable Type.' => 'キャッシング機能としてmemcachedを利用する場合に必要となります。',
+	'This module is required in order to use memcached as caching mechanism used by MyMTOS.' => 'キャッシング機能としてmemcachedを利用する場合に必要となります。',
 	'This module is required in order to archive files in backup/restore operation.' => 'バックアップと復元で圧縮の機能を利用する場合に必要となります。',
 	'This module is required in order to compress files in backup/restore operation.' => 'バックアップと復元で圧縮の機能を利用する場合に必要となります。',
 	'This module is required in order to decompress files in backup/restore operation.' => 'バックアップと復元で圧縮の機能を利用する場合に必要となります。',
 	'This module and its dependencies are required in order to restore from a backup.' => '復元の機能を利用する場合に必要となります。',
 	'This module and its dependencies are required in order to allow commenters to be authenticated by OpenID providers including LiveJournal.' => 'LiveJournal、あるいはOpenIDでコメント投稿者を認証するために必要になります。',
-	'This module is required by mt-search.cgi if you are running Movable Type using a version of Perl older than Perl 5.8.' => 'Perl 5.8以下の環境で、mt-search.cgiを利用するときに必要です。',
+	'This module is required by mt-search.cgi if you are running MyMTOS using a version of Perl older than Perl 5.8.' => 'Perl 5.8以下の環境で、mt-search.cgiを利用するときに必要です。',
 	'This module is required for file uploads (to determine the size of uploaded images in many different formats).' => 'ファイルのアップロードを行うために必要です。各種のファイル形式に対応して画像のサイズを取得します。',
 	'This module is required for cookie authentication.' => 'cookie 認証のために必要です。',
 
@@ -1102,7 +1096,7 @@ use vars qw( @ISA %Lexicon );
 	'Enabled Commenters' => '有効なコメント投稿者',
 	'Disabled Commenters' => '無効なコメント投稿者',
 	'Pending Commenters' => '保留中のコメント投稿者',
-	'MT Native Users' => 'Movable Type認証ユーザー',
+	'MyMTOS Native Users' => 'MyMTOS認証ユーザー',
 	'Externally Authenticated Commenters' => '外部サービスで認証されたコメント投稿者',
 
 ## lib/MT/BackupRestore.pm
@@ -1114,7 +1108,7 @@ use vars qw( @ISA %Lexicon );
 	'Cannot open directory \'[_1]\': [_2]' => 'ディレクトリ\'[_1]\'を開けませんでした: [_2]',
 	'No manifest file could be found in your import directory [_1].' => 'importディレクトリにマニフェストファイルがありません。',
 	'Cannot open [_1].' => '[_1]を開けません。',
-	'Manifest file [_1] was not a valid Movable Type backup manifest file.' => '[_1]はMovable Typeバックアップで作成された正しいマニフェストファイルではありません。',
+	'Manifest file [_1] was not a valid MyMTOS backup manifest file.' => '[_1]はMyMTOSバックアップで作成された正しいマニフェストファイルではありません。',
 	'Manifest file: [_1]' => 'マニフェストファイル: [_1]',
 	'Path was not found for the file, [_1].' => 'ファイル([_1])のパスが見つかりませんでした。',
 	'[_1] is not writable.' => '[_1]には書き込めません。',
@@ -1135,9 +1129,9 @@ use vars qw( @ISA %Lexicon );
 	'ok' => 'OK',
 
 ## lib/MT/BackupRestore/BackupFileHandler.pm
-	'The uploaded file was not a valid Movable Type backup manifest file.' => 'アップロードされたファイルはMovable Typeバックアップで作成されたマニフェストファイルではありません。',
-	'The uploaded backup manifest file was created with Movable Type, but the schema version ([_1]) differs from the one used by this system ([_2]).  You should not restore this backup to this version of Movable Type.' => 'アップロードされたファイルはこのシステムのバージョン([_2])とは異なるバージョン([_1])でバックアップされています。このファイルを使って復元することはできません。',
-	'[_1] is not a subject to be restored by Movable Type.' => '[_1]はMovable Typeで復元する対象には含まれていません。',
+	'The uploaded file was not a valid MyMTOS backup manifest file.' => 'アップロードされたファイルはMyMTOSバックアップで作成されたマニフェストファイルではありません。',
+	'The uploaded backup manifest file was created with MyMTOS, but the schema version ([_1]) differs from the one used by this system ([_2]).  You should not restore this backup to this version of MyMTOS.' => 'アップロードされたファイルはこのシステムのバージョン([_2])とは異なるバージョン([_1])でバックアップされています。このファイルを使って復元することはできません。',
+	'[_1] is not a subject to be restored by MyMTOS.' => '[_1]はMyMTOSで復元する対象には含まれていません。',
 	'[_1] records restored.' => '[_1]件復元されました。',
 	'Restoring [_1] records:' => '[_1]を復元しています:',
 	'A user with the same name as the current user ([_1]) was found in the backup.  Skipping this user record.' => '現在サインインしているユーザー([_1])が見つかりました。このレコードはスキップします。',
@@ -1148,7 +1142,7 @@ use vars qw( @ISA %Lexicon );
 	'The system level settings for plugin \'[_1]\' already exist.  Skipping this record.' => '[_1]のシステムのプラグイン設定はすでに存在しています。このレコードはスキップします。',
 
 ## lib/MT/BackupRestore/BackupFileScanner.pm
-	'Cannot restore requested file because doing so requires the Digest::SHA Perl language module. Please contact your Movable Type system administrator.' => 'Digest::SHAがインストールされていないため、このファイルを復元することが出来ません。システム管理者問い合わせてください。',
+	'Cannot restore requested file because doing so requires the Digest::SHA Perl language module. Please contact your MyMTOS system administrator.' => 'Digest::SHAがインストールされていないため、このファイルを復元することが出来ません。システム管理者問い合わせてください。',
 	'Cannot restore requested file because a website was not found in either the system or backup data. A website must be created first.' => 'ウェブサイトのデータが含まれていないため、このファイルを復元することが出来ません。ウェブサイトを先に作成してください。',
 
 ## lib/MT/BackupRestore/ManifestFileHandler.pm
@@ -1221,7 +1215,7 @@ use vars qw( @ISA %Lexicon );
 	'Please select an audio file to upload.' => 'アップロードするオーディオファイルを選択してください。',
 	'Please select an image to upload.' => 'アップロードする画像を選択してください。',
 	'Please select a video to upload.' => 'アップロードするビデオファイルを選択してください。',
-	'Movable Type was unable to write to the "Upload Destination". Please make sure that the webserver can write to this folder.' => 'アップロード先のディレクトリに書き込みできません。ウェブサーバーから書き込みできるパーミッションを与えてください。',
+	'MyMTOS was unable to write to the "Upload Destination". Please make sure that the webserver can write to this folder.' => 'アップロード先のディレクトリに書き込みできません。ウェブサーバーから書き込みできるパーミッションを与えてください。',
 	'Invalid extra path \'[_1]\'' => '追加パスが不正です。',
 	'Cannot make path \'[_1]\': [_2]' => 'パス\'[_1]\'を作成できませんでした: [_2]',
 	'Invalid temp file name \'[_1]\'' => 'テンポラリファイルの名前\'[_1]\'が不正です。',
@@ -1270,8 +1264,8 @@ use vars qw( @ISA %Lexicon );
 	'Please choose a preferred archive type.' => '優先アーカイブタイプを指定してください',
 	'Blog \'[_1]\' (ID:[_2]) deleted by \'[_3]\'' => '\'[_3]\'がブログ\'[_1]\'(ID:[_2])を削除しました。',
 	'Saving blog failed: [_1]' => 'ブログを保存できませんでした: [_1]',
-	'Error: Movable Type cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory.' => 'テンプレートをキャッシュするディレクトリに書き込めません。サイトパスの下にある<code>[_1]</code>ディレクトリのパーミッションを確認してください。',
-	'Error: Movable Type was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory.' => 'テンプレートをキャッシュするディレクトリを作成できません。サイトパスの下に<code>[_1]</code>ディレクトリを作成してください。',
+	'Error: MyMTOS cannot write to the template cache directory. Please check the permissions for the directory called <code>[_1]</code> underneath your blog directory.' => 'テンプレートをキャッシュするディレクトリに書き込めません。サイトパスの下にある<code>[_1]</code>ディレクトリのパーミッションを確認してください。',
+	'Error: MyMTOS was not able to create a directory to cache your dynamic templates. You should create a directory called <code>[_1]</code> underneath your blog directory.' => 'テンプレートをキャッシュするディレクトリを作成できません。サイトパスの下に<code>[_1]</code>ディレクトリを作成してください。',
 	'No blog was selected to clone.' => '複製するブログが選択されていません。',
 	'This action can only be run on a single blog at a time.' => 'このアクションは同時に1つのブログでしか実行できません。',
 	'Invalid blog_id' => '不正なブログID',
@@ -1535,11 +1529,11 @@ use vars qw( @ISA %Lexicon );
 	'That action ([_1]) is apparently not implemented!' => 'アクション([_1])が実装されていません。',
 	'Error occurred while attempting to [_1]: [_2]' => '[_1]の実行中にエラーが発生しました: [_2]',
 	'You do not have a system email address configured.  Please set this first, save it, then try the test email again.' => 'システムメールアドレスの設定がされていません。最初に設定を保存してから、再度テストメール送信を行ってください。',
-	'Test email from Movable Type' => 'Movable Typeからのテストメール',
-	'This is the test email sent by Movable Type.' => 'このメールはMovable Typeから送信されたテストメールです。',
+	'Test email from MyMTOS' => 'MyMTOSからのテストメール',
+	'This is the test email sent by MyMTOS.' => 'このメールはMyMTOSから送信されたテストメールです。',
 	'Test e-mail was successfully sent to [_1]' => '[_1]へのテストメールは正しく送信されました。',
 	'E-mail was not properly sent. [_1]' => 'メールが正しく送信されませんでした: [_1]',
-	'These setting(s) are overridden by a value in the Movable Type configuration file: [_1]. Remove the value from the configuration file in order to control the value on this page.' => 'MTの設定ファイルによって設定されている値([_1])が優先されます。このページで設定した値を利用するためには、設定ファイルでの設定を削除してください。',
+	'These setting(s) are overridden by a value in the MyMTOS configuration file: [_1]. Remove the value from the configuration file in order to control the value on this page.' => 'MyMTOSの設定ファイルによって設定されている値([_1])が優先されます。このページで設定した値を利用するためには、設定ファイルでの設定を削除してください。',
 	'Email address is [_1]' => 'メールアドレスは[_1]です',
 	'Debug mode is [_1]' => 'デバッグモードは[_1]です',
 	'Performance logging is on' => 'パフォーマンスログはオンです',
@@ -1576,7 +1570,7 @@ use vars qw( @ISA %Lexicon );
 	'File was not uploaded.' => 'ファイルがアップロードされませんでした。',
 	'Restoring a file failed: ' => 'ファイルから復元できませんでした。',
 	'Some of the files were not restored correctly.' => '復元できなかったファイルがあります。',
-	'Successfully restored objects to Movable Type system by user \'[_1]\'' => '\'[_1]\'がMovable Typeシステムを復元しました。',
+	'Successfully restored objects to MyMTOS system by user \'[_1]\'' => '\'[_1]\'がMyMTOSシステムを復元しました。',
 	'Invalid password recovery attempt; cannot recover password in this configuration' => 'パスワードの再設定に失敗しました。この構成では再設定はできません。',
 	'Cannot recover password in this configuration' => 'この構成ではパスワードの再設定はできません。',
 	'Invalid user name \'[_1]\' in password recovery attempt' => 'パスワードの再設定でエラーが発生しました。\'[_1]\'は不正なユーザー名です。',
@@ -1589,10 +1583,10 @@ use vars qw( @ISA %Lexicon );
 	'[_1] is not a directory.' => '[_1]はディレクトリではありません。',
 	'Error occured during restore process.' => '復元中にエラーがありました。',
 	'Some of files could not be restored.' => '復元できなかったファイルがあります。',
-	'Uploaded file was not a valid Movable Type backup manifest file.' => 'アップロードされたファイルはMovable Typeバックアップで作成されたマニフェストファイルではありません。',
+	'Uploaded file was not a valid MyMTOS backup manifest file.' => 'アップロードされたファイルはMyMTOSバックアップで作成されたマニフェストファイルではありません。',
 	'Manifest file \'[_1]\' is too large. Please use import direcotry for restore.' => 'バックアップファイル\'[_1]\'が大きすぎます。インポートディレクトリを利用して復元してください。',
 	'Blog(s) (ID:[_1]) was/were successfully backed up by user \'[_2]\'' => '\'[_2]\'がブログ(ID:[_1])をバックアップしました。',
-	'Movable Type system was successfully backed up by user \'[_1]\'' => '\'[_1]\'がMovable Typeのシステムをバックアップしました。',
+	'MyMTOS system was successfully backed up by user \'[_1]\'' => '\'[_1]\'がMyMTOSのシステムをバックアップしました。',
 	'Some [_1] were not restored because their parent objects were not restored.' => '親となるオブジェクトがないため[_1]を復元できませんでした。',
 	'Recipients for lockout notification' => '通知メール受信者',
 	'User lockout limit' => 'サインイン試行回数',
@@ -1766,7 +1760,7 @@ use vars qw( @ISA %Lexicon );
 	'Filter' => 'フィルタ',
 	'Convert Line Breaks' => '改行を変換',
 	'Rich Text' => 'リッチテキスト',
-	'Movable Type Default' => 'Movable Type 既定',
+	'MyMTOS Default' => 'MyMTOS 既定',
 	'weblogs.com' => 'weblogs.com',
 	'google.com' => 'google.com',
 	'Classic Blog' => 'クラシックブログ',
@@ -1963,8 +1957,7 @@ use vars qw( @ISA %Lexicon );
 	'No readable files could be found in your import directory [_1].' => '読み取れないファイルがありました: [_1]',
 	'Importing entries from file \'[_1]\'' => 'ファイル\'[_1]\'からインポートしています。',
 	'Could not resolve import format [_1]' => 'インポート形式[_1]を処理できませんでした。',
-	'Movable Type' => 'Movable Type',
-	'Another system (Movable Type format)' => '他のシステム(Movable Type形式)',
+	'Another system (MyMTOS format)' => '他のシステム(MyMTOS形式)',
 
 ## lib/MT/ImportExport.pm
 	'No Blog' => 'ブログがありません。',
@@ -2209,7 +2202,6 @@ use vars qw( @ISA %Lexicon );
 	'[_1]Publish[_2] your [_3] to see these changes take effect.' => '変更を反映するために、対象の[_3]を[_1]再構築[_2]してください。',
 	'[_1]Publish[_2] your site to see these changes take effect.' => '設定を有効にするために[_1]再構築[_2]してください。',
 	'Actions' => 'アクション',
-	'http://www.movabletype.org/documentation/appendices/tags/%t.html' => 'http://www.movabletype.jp/documentation/appendices/tags/%t.html',
 	'You used an [_1] tag without a date context set up.' => '[_1]を日付コンテキストの外部で利用しようとしました。',
 	'Division by zero.' => 'ゼロ除算エラー',
 	'[_1] is not a hash.' => '[_1]はハッシュではありません。',
@@ -2391,7 +2383,7 @@ use vars qw( @ISA %Lexicon );
 
 ## lib/MT/Upgrade/v3.pm
 	'Custom ([_1])' => 'カスタム ([_1])',
-	'This role was generated by Movable Type upon upgrade.' => 'このロールはアップグレード時にMovable Typeが作成しました。',
+	'This role was generated by MyMTOS upon upgrade.' => 'このロールはアップグレード時にMyMTOSが作成しました。',
 	'Removing Dynamic Site Bootstrapper index template...' => 'Dynamic Site Bootstrapperテンプレートを削除しています...',
 	'Creating configuration record.' => '構成データを作成しています。',
 	'Setting your permissions to administrator.' => '管理者権限にしています。',
@@ -2527,7 +2519,7 @@ use vars qw( @ISA %Lexicon );
 	'File [_1] is not a zip file.' => '[_1]はZIPファイルではありません。',
 
 ## lib/MT/Util/Captcha.pm
-	'Movable Type default CAPTCHA provider requires Image::Magick.' => 'Movable Type 既定のCAPTCHAプロバイダはImage::Magickをインストールしないと使えません。',
+	'MyMTOS default CAPTCHA provider requires Image::Magick.' => 'MyMTOS 既定のCAPTCHAプロバイダはImage::Magickをインストールしないと使えません。',
 	'You need to configure CaptchaSourceImageBase.' => '構成ファイルでCaptchaSourceImageBaseを設定してください。',
 	'Type the characters you see in the picture above.' => '画像の中に見える文字を入力してください。',
 	'Image creation failed.' => '画像を作成できませんでした。',
@@ -2584,7 +2576,7 @@ use vars qw( @ISA %Lexicon );
 	'No filename provided' => 'ファイル名がありません。',
 	'Error writing uploaded file: [_1]' => 'アップロードされたファイルを書き込めませんでした: [_1]',
 	'Perl module Image::Size is required to determine width and height of uploaded images.' => 'Image::Sizeをインストールしないと、画像の幅と高さを検出できません。',
-	'Template methods are not implemented, due to differences between the Blogger API and the Movable Type API.' => 'Templateメソッドは実装されていません。',
+	'Template methods are not implemented, due to differences between the Blogger API and the MyMTOS API.' => 'Templateメソッドは実装されていません。',
 
 ## mt-static/jquery/jquery.mt.js
 	'Invalid value' => '入力された値が正しくありません',
@@ -3124,7 +3116,7 @@ use vars qw( @ISA %Lexicon );
 	'([_1])' => '([_1])',
 	'Use my settings' => 'カスタム設定',
 	'E-mail Notification' => 'メール通知',
-	'Specify when Movable Type should notify you of new comments.' => '新しいコメントの通知を指定します。',
+	'Specify when MyMTOS should notify you of new comments.' => '新しいコメントの通知を指定します。',
 	'On' => '有効にする',
 	'Only when attention is required' => '注意が必要な場合のみ',
 	'Off' => '行わない',
@@ -3146,7 +3138,7 @@ use vars qw( @ISA %Lexicon );
 	'TrackBack Policy' => 'トラックバックポリシー',
 	'Moderation' => '事前確認',
 	'Hold all TrackBacks for approval before they are published.' => '公開前に許可を必要とするように、トラックバックを保留する',
-	'Specify when Movable Type should notify you of new TrackBacks.' => '新しいトラックバックの通知を指定します。',
+	'Specify when MyMTOS should notify you of new TrackBacks.' => '新しいトラックバックの通知を指定します。',
 	'TrackBack Options' => 'トラックバックオプション',
 	'TrackBack Auto-Discovery' => '自動検知',
 	'When auto-discovery is turned on, any external HTML links in new entries will be extracted and the appropriate sites will automatically be sent a TrackBack ping.' => '自動検出を有効にすると、新しいブログ記事を書いたときに、外部へのリンクが抽出されて、自動的にトラックバックを送信します。',
@@ -3159,12 +3151,11 @@ use vars qw( @ISA %Lexicon );
 ## tmpl/cms/cfg_plugin.tmpl
 	'[_1] Plugin Settings' => '[_1]のプラグイン設定',
 	'Plugin System' => 'プラグインシステム',
-	'Enable or disable plugin functionality for the entire Movable Type installation.' => 'プラグインの利用をシステムレベルで設定します。',
+	'Enable or disable plugin functionality for the entire MyMTOS installation.' => 'プラグインの利用をシステムレベルで設定します。',
 	'Disable plugin functionality' => 'プラグインの機能を無効化する',
 	'Disable Plugins' => 'プラグインを利用しない',
 	'Enable plugin functionality' => 'プラグインの機能を有効化する',
 	'Enable Plugins' => 'プラグインを利用する',
-	'_PLUGIN_DIRECTORY_URL' => 'http://communities.movabletype.jp/plugins/',
 	'Find Plugins' => 'プラグインを探す',
 	'Your plugin settings have been saved.' => 'プラグインの設定を保存しました。',
 	'Your plugin settings have been reset.' => 'プラグインの設定をリセットしました。',
@@ -3172,13 +3163,13 @@ use vars qw( @ISA %Lexicon );
 	'Your plugins have been reconfigured.' => 'プラグインを再設定しました。',
 	q{Your plugins have been reconfigured. Since you're running mod_perl, you will need to restart your web server for these changes to take effect.} => q{プラグインを再設定しました。mod_perl環境下でお使いの場合は、設定を反映させるためにウェブサーバーを再起動してください。},
 	'Are you sure you want to reset the settings for this plugin?' => 'このプラグインの設定を元に戻しますか?',
-	'Are you sure you want to disable plugins for the entire Movable Type installation?' => 'システム全体で、プラグインを無効にしますか?',
+	'Are you sure you want to disable plugins for the entire MyMTOS installation?' => 'システム全体で、プラグインを無効にしますか?',
 	'Are you sure you want to disable this plugin?' => 'プラグインを無効にしますか?',
-	'Are you sure you want to enable plugins for the entire Movable Type installation? (This will restore plugin settings that were in place before all plugins were disabled.)' => 'システム全体で、プラグインを有効にしますか? (各プラグインの設定は、システム全体で無効化される前の状態に戻ります)',
+	'Are you sure you want to enable plugins for the entire MyMTOS installation? (This will restore plugin settings that were in place before all plugins were disabled.)' => 'システム全体で、プラグインを有効にしますか? (各プラグインの設定は、システム全体で無効化される前の状態に戻ります)',
 	'Are you sure you want to enable this plugin?' => 'プラグインを有効にしますか?',
 	'Settings for [_1]' => '[_1]の設定',
 	'Failed to Load' => '読み込みに失敗しました',
-	'This plugin has not been upgraded to support Movable Type [_1]. As such, it may not be completely functional.' => 'このプラグインは、 Mvable Type [_1]向けにアップグレードされていません。そのため、動作しない場合があります。',
+	'This plugin has not been upgraded to support MyMTOS [_1]. As such, it may not be completely functional.' => 'このプラグインは、 MyMTOS [_1]向けにアップグレードされていません。そのため、動作しない場合があります。',
 	'Plugin error:' => 'プラグインエラー:',
 	'Info' => '詳細',
 	'Resources' => 'リソース',
@@ -3196,7 +3187,7 @@ use vars qw( @ISA %Lexicon );
 	'No plugins with configuration settings are installed.' => '設定可能なプラグインがインストールされていません。',
 
 ## tmpl/cms/cfg_prefs.tmpl
-	'Error: Movable Type was not able to create a directory for publishing your [_1]. If you create this directory yourself, grant write permission to the web server.' => 'エラー: [_1]公開用のディレクトリを作成できません。自分でディレクトリが作成できる場合は、ウェブサーバーに書きこみ権限を与えてください。',
+	'Error: MyMTOS was not able to create a directory for publishing your [_1]. If you create this directory yourself, grant write permission to the web server.' => 'エラー: [_1]公開用のディレクトリを作成できません。自分でディレクトリが作成できる場合は、ウェブサーバーに書きこみ権限を与えてください。',
 	'[_1] Settings' => '[_1]設定',
 	'Name your blog. The name can be changed at any time.' => 'ブログ名。ブログ名はいつでも変更できます。',
 	'Enter a description for your blog.' => 'ブログの説明を入力してください。',
@@ -3251,7 +3242,7 @@ use vars qw( @ISA %Lexicon );
 	'Use absolute path' => '絶対パスの利用',
 	'Warning: Changing the [_1] root requires a complete publish of your [_1].' => '警告:[_1]パスを変更した場合には[_1]の再構築が必要です。',
 	q{The path where your index files will be published. Do not end with '/' or '\'.  Example: /home/mt/public_html/blog or C:\www\public_html\blog} => q{インデックスファイルが公開されるパスです。末尾には'/'や'\'を含めません。},
-	q{The path where your index files will be published. An absolute path (starting with '/' for Linux or 'C:\' for Windows) is preferred.  Do not end with '/' or '\'. Example: /home/mt/public_html or C:\www\public_html} => q{インデックスファイルが公開されるパスです。絶対パス(Linuxの時は'/'、Windowsの時は'C:\'などで始まる)を推奨しますが、Movable Typeディレクトリからの相対パスも指定できます。末尾には'/'や'\'を含めません。例: /home/melody/public_html/blogやC:\www\public_html\blog},
+	q{The path where your index files will be published. An absolute path (starting with '/' for Linux or 'C:\' for Windows) is preferred.  Do not end with '/' or '\'. Example: /home/mt/public_html or C:\www\public_html} => q{インデックスファイルが公開されるパスです。絶対パス(Linuxの時は'/'、Windowsの時は'C:\'などで始まる)を推奨しますが、MyMTOSディレクトリからの相対パスも指定できます。末尾には'/'や'\'を含めません。例: /home/melody/public_html/blogやC:\www\public_html\blog},
 	'Advanced Archive Publishing' => '高度な公開の設定',
 	'Select this option only if you need to publish your archives outside of your Blog Root.' => 'アーカイブをサイトパス以外で公開するときにこのオプションを選択してください。',
 	'Publish archives outside of Blog Root' => 'アーカイブをブログパスとは別のパスで公開する',
@@ -3260,7 +3251,7 @@ use vars qw( @ISA %Lexicon );
 	'Warning: Changing the archive URL can result in breaking all the links in your blog.' => '警告: アーカイブURLを変更することでブログ上のすべてのリンクがリンク切れとなる場合があります。',
 	'Warning: Changing the archive path can result in breaking all the links in your blog.' => '警告: アーカイブパスを変更するとブログ上のすべてのリンクがリンク切れとなる場合があります。',
 	q{The path where your archives section index files will be published. Do not end with '/' or '\'.  Example: /home/mt/public_html/blog or C:\www\public_html\blog} => q{アーカイブのインデックスファイルが公開されるパスです。ウェブサイトからの相対パスを指定します。末尾には'/'や'\'を含めません。},
-	q{The path where your archives section index files will be published. An absolute path (starting with '/' for Linux or 'C:\' for Windows) is preferred. Do not end with '/' or '\'. Example: /home/mt/public_html or C:\www\public_html} => q{アーカイブのインデックスファイルが公開されるパスです。絶対パス(Linuxの時は'/'、Windowsの時は'C:\'などで始まる)を推奨しますが、Movable Typeディレクトリからの相対パスも指定できます。末尾には'/'や'\'を含めません。例: /home/melody/public_html/blogやC:\www\public_html\blog},
+	q{The path where your archives section index files will be published. An absolute path (starting with '/' for Linux or 'C:\' for Windows) is preferred. Do not end with '/' or '\'. Example: /home/mt/public_html or C:\www\public_html} => q{アーカイブのインデックスファイルが公開されるパスです。絶対パス(Linuxの時は'/'、Windowsの時は'C:\'などで始まる)を推奨しますが、MyMTOSディレクトリからの相対パスも指定できます。末尾には'/'や'\'を含めません。例: /home/melody/public_html/blogやC:\www\public_html\blog},
 	'Dynamic Publishing Options' => 'ダイナミックパブリッシング設定',
 	'Enable dynamic cache' => 'キャッシュする',
 	'Enable conditional retrieval' => '条件付き取得を有効にする',
@@ -3321,9 +3312,9 @@ use vars qw( @ISA %Lexicon );
 	'(None selected)' => '(選択されていません)',
 	'System Email Address' => 'システムメールアドレス',
 	'Send Test Mail' => 'テストメールの送信',
-	q{This email address is used in the 'From:' header of each email sent by Movable Type.  Email may be sent for password recovery, commenter registration, comment and trackback notification, user or IP address lockout, and a few other minor events.} => q{このメールアドレスはMovable Typeから送られるメールの'From:'アドレスに利用されます。メールはパスワードの再設定、コメント投稿者の登録、コメントやトラックバックの通知、ユーザーまたはIPアドレスのロックアウト、その他の場合に送信されます。},
+	q{This email address is used in the 'From:' header of each email sent by MyMTOS.  Email may be sent for password recovery, commenter registration, comment and trackback notification, user or IP address lockout, and a few other minor events.} => q{このメールアドレスはMyMTOSから送られるメールの'From:'アドレスに利用されます。メールはパスワードの再設定、コメント投稿者の登録、コメントやトラックバックの通知、ユーザーまたはIPアドレスのロックアウト、その他の場合に送信されます。},
 	'Debug Mode' => 'デバッグモード',
-	'Values other than zero provide additional diagnostic information for troubleshooting problems with your Movable Type installation.  More information is available in the <a href="http://www.movabletype.org/documentation/developer/plugins/debug-mode.html">Debug Mode documentation</a>.' => '開発者向けの設定です。0以外の数字を設定すると、Movable Typeのデバッグメッセージを表示します。詳しくは<a href="http://www.movabletype.jp/documentation/appendices/config-directives/debugmode.html">ドキュメントを参照</a>してください。',
+	'Values other than zero provide additional diagnostic information for troubleshooting problems with your MyMTOS installation.' => '開発者向けの設定です。0以外の数字を設定すると、MyMTOSのデバッグメッセージを表示します。',
 	'Performance Logging' => 'パフォーマンスログ',
 	'Turn on performance logging, which will report any system event that takes the number of seconds specified by Logging Threshold.' => 'パフォーマンスログを有効にして、ログ閾値で設定した秒数より時間のかかる処理をログに記録します。',
 	'Turn on performance logging' => 'パフォーマンスログを有効にする',
@@ -3331,7 +3322,7 @@ use vars qw( @ISA %Lexicon );
 	'The filesystem directory where performance logs are written.  The web server must have write permission in this directory.' => 'パフォーマンスログを書き出すフォルダです。ウェブサーバーから書き込み可能な場所を指定してください。',
 	'Logging Threshold' => 'ログ閾値',
 	'The time limit for unlogged events in seconds. Any event that takes this amount of time or longer will be reported.' => '指定した秒数以上、時間がかかった処理をログに記録します。',
-	'Enable this setting to have Movable Type track revisions made by users to entries, pages and templates.' => 'この設定を有効にすると、記事、ページ、テンプレートの変更履歴を保存します。',
+	'Enable this setting to have MyMTOS track revisions made by users to entries, pages and templates.' => 'この設定を有効にすると、記事、ページ、テンプレートの変更履歴を保存します。',
 	'Track revision history' => '変更履歴を保存する',
 	'Site Path Limitation' => 'ウェブサイトパスの制限',
 	'Base Site Path' => 'ウェブサイトパスの規定値',
@@ -3357,13 +3348,13 @@ use vars qw( @ISA %Lexicon );
 	'Clear' => 'クリア',
 	'Select' => '選択',
 	'User lockout policy' => 'ユーザーのロック方針',
-	'A Movable Type user will be locked out if he or she submits an incorrect password [_1] or more times within [_2] seconds.' => 'MTユーザーが、[_2] 秒間に [_1] 回以上サインインに失敗した場合、そのユーザーのサインインを禁止します。',
+	'A MyMTOS user will be locked out if he or she submits an incorrect password [_1] or more times within [_2] seconds.' => 'MyMTOSユーザーが、[_2] 秒間に [_1] 回以上サインインに失敗した場合、そのユーザーのサインインを禁止します。',
 	'IP address lockout policy' => 'IPアドレスのロック方針',
 	'An IP address will be locked out if [_1] or more incorrect login attempts are made within [_2] seconds from the same IP address.' => '同一IPアドレスから、[_2] 秒間に [_1] 回以上サインインに失敗した場合、そのIPアドレスからのアクセスを禁止します。',
 	q{However, the following IP addresses are 'whitelisted' and will never be locked out:} => q{次の一覧で設定されたIPアドレスはアクセスが禁止されることはありません。},
 	'The list of IP addresses. If a remote IP address is included in this list, the failed login will not recorded. You can specify multiple IP addresses separated by commas or line breaks.' => '特定のIPアドレスについて判定を行わない場合、上の一覧にカンマ又は改行区切りで追加してください。',
 	'Send Mail To' => 'メール送信先',
-	'The email address that should receive a test email from Movable Type.' => 'テストメールを受け取るメールアドレス',
+	'The email address that should receive a test email from MyMTOS.' => 'テストメールを受け取るメールアドレス',
 	'Send' => '送信',
 	'You must set a valid absolute Path.' => '正しい絶対パスを設定してください。',
 
@@ -3373,7 +3364,7 @@ use vars qw( @ISA %Lexicon );
 	'Select website' => 'ウェブサイト選択',
 	'Allow Registration' => '登録',
 	'Select a system administrator you wish to notify when commenters successfully registered themselves.' => 'コメント投稿者が登録したことを知らせたいシステム管理者を選択してください。',
-	'Allow commenters to register with blogs on this system.' => 'コメント投稿者がMovable Typeに登録することを許可する',
+	'Allow commenters to register with blogs on this system.' => 'コメント投稿者がMyMTOSに登録することを許可する',
 	'Notify the following system administrators when a commenter registers:' => '以下のシステム管理者に登録を通知する:',
 	'Select system administrators' => 'システム管理者選択',
 	'Note: System Email Address is not set in System > General Settings. Emails will not be sent.' => 'システムのメールアドレスが設定されていないため、メールは送信されません。「設定 &gt; 全般」から設定してください。',
@@ -3417,12 +3408,12 @@ use vars qw( @ISA %Lexicon );
 	q{Please click the 'Save Changes' button below to enable TypePad.} => q{TypePadを利用するために'保存'ボタンをクリックしてください。},
 	'External Notifications' => '更新通知',
 	'Notify ping services of website updates' => 'ウェブサイト更新pingサービス通知',
-	'When this website is updated, Movable Type will automatically notify the selected sites.' => 'ウェブサイトを更すると、選択したサイトに自動通知します。',
+	'When this website is updated, MyMTOS will automatically notify the selected sites.' => 'ウェブサイトを更すると、選択したサイトに自動通知します。',
 	'Note: This option is currently ignored because outbound notification pings are disabled system-wide.' => '備考: システム外部ping通知がシステムレベルで無効のため、このオプションは現在無効となっています。',
 	'Others:' => 'その他:',
 	'(Separate URLs with a carriage return.)' => '(URLは改行で区切ってください)',
 	'Recently Updated Key' => 'Recently Updated Key',
-	'If you received a Recently Updated Key with the purchase of a Movable Type license, enter it here.' => 'Recently Updated Key をお持ちの場合は入力してください。',
+	'If you received a Recently Updated Key with the purchase of a MyMTOS license, enter it here.' => 'Recently Updated Key をお持ちの場合は入力してください。',
 
 ## tmpl/cms/dashboard.tmpl
 	'Dashboard' => 'ダッシュボード',
@@ -3432,9 +3423,9 @@ use vars qw( @ISA %Lexicon );
 	'Add' => '追加',
 	'Your Dashboard has been updated.' => 'ダッシュボードを更新しました。',
 	'The support directory is not writable.' => 'サポートディレクトリに書き込めません。',
-	q{Movable Type was unable to write to its 'support' directory. Please create a directory at this location: [_1], and assign permissions that will allow the web server write access to it.} => q{サポートディレクトリに書き込みできません。[_1]にディレクトリを作成して、ウェブサーバーから書き込みできるパーミッションを与えてください。},
+	q{MyMTOS was unable to write to its 'support' directory. Please create a directory at this location: [_1], and assign permissions that will allow the web server write access to it.} => q{サポートディレクトリに書き込みできません。[_1]にディレクトリを作成して、ウェブサーバーから書き込みできるパーミッションを与えてください。},
 	'ImageDriver is not configured.' => 'イメージドライバーが設定されていません。',
-	'An image processing toolkit, often specified by the ImageDriver configuration directive, is not present on your server or is configured incorrectly. A toolkit must be installed to ensure proper operation of the userpics feature. Please install Image::Magick, NetPBM, GD, or Imager, then set the ImageDriver configuration directive accordingly.' => 'ImageDriverに設定された画像処理ツールが存在しないかまたは正しく設定されていないため、Movable Typeのユーザー画像機能を利用できません。この機能を利用するには、Image::Magick、NetPBM、GD、Imagerのいずれかをインストールする必要があります。',
+	'An image processing toolkit, often specified by the ImageDriver configuration directive, is not present on your server or is configured incorrectly. A toolkit must be installed to ensure proper operation of the userpics feature. Please install Image::Magick, NetPBM, GD, or Imager, then set the ImageDriver configuration directive accordingly.' => 'ImageDriverに設定された画像処理ツールが存在しないかまたは正しく設定されていないため、MyMTOSのユーザー画像機能を利用できません。この機能を利用するには、Image::Magick、NetPBM、GD、Imagerのいずれかをインストールする必要があります。',
 
 ## tmpl/cms/dialog/adjust_sitepath.tmpl
 	'Confirm Publishing Configuration' => '公開設定',
@@ -3568,8 +3559,8 @@ use vars qw( @ISA %Lexicon );
 	'The email address provided is not unique.  Please enter your username.' => '同じメールアドレスを持っているユーザーがいます。ユーザー名を入力してください。',
 	'An email with a link to reset your password has been sent to your email address ([_1]).' => '「[_1]」にパスワードをリセットするためのリンクを含むメールを送信しました。',
 	'Back (x)' => '戻る (x)',
-	'Sign in to Movable Type (s)' => 'Movable Type にサインイン (s)',
-	'Sign in to Movable Type' => 'Movable Type にサインイン',
+	'Sign in to MyMTOS (s)' => 'MyMTOS にサインイン (s)',
+	'Sign in to MyMTOS' => 'MyMTOS にサインイン',
 	'Reset (s)' => 'リセット (s)',
 
 ## tmpl/cms/dialog/refresh_templates.tmpl
@@ -3658,7 +3649,7 @@ use vars qw( @ISA %Lexicon );
 	'External user ID' => '外部ユーザーID',
 	'The name displayed when content from this user is published.' => 'コンテンツの公開時に、この名前が表示されます。',
 	'The email address associated with this user.' => 'ユーザーのメールアドレスです。',
-	q{This User's website (e.g. http://www.movabletype.com/).  If the Website URL and Display Name fields are both populated, Movable Type will by default publish entries and comments with bylines linked to this URL.} => q{ユーザーの個人ホームページのURL。表示する名前とウェブサイトURLは、コンテンツやコメントの公開時に利用されます。},
+	q{This User's website (e.g. https://example.com/).  If the Website URL and Display Name fields are both populated, MyMTOS will by default publish entries and comments with bylines linked to this URL.} => q{ユーザーの個人ホームページのURL。表示する名前とウェブサイトURLは、コンテンツやコメントの公開時に利用されます。},
 	'The image associated with this user.' => 'ユーザーのプロフィール画像です。',
 	'Select Userpic' => 'プロフィール画像の選択',
 	'Remove Userpic' => 'プロフィール画像を削除',
@@ -3671,12 +3662,12 @@ use vars qw( @ISA %Lexicon );
 	'Password recovery word/phrase' => 'パスワード再設定用のフレーズ',
 	'This word or phrase is not used in the password recovery.' => 'パスワード再設定用のフレーズは使用されていません。',
 	'Preferences' => '設定',
-	'Display language for the Movable Type interface.' => '管理画面で使用する言語です。',
+	'Display language for the MyMTOS interface.' => '管理画面で使用する言語です。',
 	'Text Format' => 'テキスト形式',
 	'Default text formatting filter when creating new entries and new pages.' => 'ブログ記事とウェブページを作成する際のテキスト形式を指定します。',
 	'(Use Website/Blog Default)' => '(ウェブサイト/ブログの既定値を利用)',
 	'Date Format' => '日付',
-	'Default date formatting in the Movable Type interface.' => '管理画面で使用する日付の表示フォーマットです。',
+	'Default date formatting in the MyMTOS interface.' => '管理画面で使用する日付の表示フォーマットです。',
 	'Relative' => '経過',
 	'Full' => '年月日',
 	'Tag Delimiter' => 'タグの区切り',
@@ -3983,7 +3974,6 @@ use vars qw( @ISA %Lexicon );
 	'Template Type' => 'テンプレートの種類',
 	'Custom Index Template' => 'カスタムインデックステンプレート',
 	'Link to File' => 'ファイルへのリンク',
-	'Learn more about <a href="http://www.movabletype.org/documentation/administrator/publishing/settings.html" target="_blank">publishing settings</a>' => '<a href="http://www.movabletype.jp/documentation/administrator/publishing/settings.html" target="_blank">公開プロファイルについて</a>',
 	'Create Archive Mapping' => '新しいアーカイブマッピングを作成',
 	'Statically (default)' => 'スタティック(既定)',
 	'Via Publish Queue' => '公開キュー経由',
@@ -4009,7 +3999,7 @@ use vars qw( @ISA %Lexicon );
 	'Name your website. The website name can be changed at any time.' => 'ウェブサイト名。ウェブサイト名はいつでも変更できます。',
 	'Enter the URL of your website. Exclude the filename (i.e. index.html). Example: http://www.example.com/' => 'ウェブサイトを公開するURLを入力してください。ファイル名(index.htmlなど)は含めないでください。例: http://www.example.com/',
 	'Website Root' => 'ウェブサイトパス',
-	q{Enter the path where your main index file will be located. An absolute path (starting with '/' for Linux or 'C:\' for Windows) is preferred, but you can also use a path relative to the Movable Type directory. Example: /home/melody/public_html/ or C:\www\public_html} => q{インデックスファイルが公開されるパスを入力してください。絶対パス(Linuxの時は'/'、Windowsの時は'C:\'などで始まる)を推奨しますが、Movable Typeディレクトリからの相対パスも指定できます。末尾には'/'や'\'を含めません。例: /home/melody/public_html/blogやC:\www\public_html\blog},
+	q{Enter the path where your main index file will be located. An absolute path (starting with '/' for Linux or 'C:\' for Windows) is preferred, but you can also use a path relative to the MyMTOS directory. Example: /home/melody/public_html/ or C:\www\public_html} => q{インデックスファイルが公開されるパスを入力してください。絶対パス(Linuxの時は'/'、Windowsの時は'C:\'などで始まる)を推奨しますが、MyMTOSディレクトリからの相対パスも指定できます。末尾には'/'や'\'を含めません。例: /home/melody/public_html/blogやC:\www\public_html\blog},
 	'Create Website (s)' => 'ウェブサイト作成',
 	'This field is required.' => 'このフィールドは必須です。',
 	'Please enter a valid URL.' => '正しいURLを入力してください。',
@@ -4032,7 +4022,7 @@ use vars qw( @ISA %Lexicon );
 ## tmpl/cms/export.tmpl
 	'Export Blog Entries' => 'ブログ記事のエクスポート',
 	'You must select a blog to export.' => 'エクスポートするブログを選択してください。',
-	'_USAGE_EXPORT_1' => 'Movable Typeからブログ記事をエクスポートして、基本的なデータ(記事、コメント、トラックバック)を保存できます。',
+	'_USAGE_EXPORT_1' => 'MyMTOSからブログ記事をエクスポートして、基本的なデータ(記事、コメント、トラックバック)を保存できます。',
 	'Blog to Export' => 'エクスポートするブログ',
 	'Select a blog for exporting.' => 'エクスポートするブログを選択してください。',
 	'Change blog' => 'ブログを変更',
@@ -4064,7 +4054,7 @@ use vars qw( @ISA %Lexicon );
 ## tmpl/cms/import.tmpl
 	'Import Blog Entries' => 'ブログ記事のインポート',
 	'You must select a blog to import.' => 'インポート先のブログを選択してください。',
-	'Transfer weblog entries into Movable Type from other Movable Type installations or even other blogging tools or export your entries to create a backup or copy.' => '他のMovable Typeやブログツールからブログ記事を移行したり、ブログ記事のコピーを作成します。',
+	'Transfer weblog entries into MyMTOS from other MyMTOS installations or even other blogging tools or export your entries to create a backup or copy.' => '他のMyMTOSやブログツールからブログ記事を移行したり、ブログ記事のコピーを作成します。',
 	'Import data into' => 'インポート先',
 	'Select a blog to import.' => 'インポート先のブログを選択してください。',
 	'Importing from' => 'インポート元',
@@ -4075,9 +4065,9 @@ use vars qw( @ISA %Lexicon );
 	'Default password for new users:' => '新しいユーザーの初期パスワード',
 	'You will be assigned the user of all imported entries.  If you wish the original user to keep ownership, you must contact your MT system administrator to perform the import so that new users can be created if necessary.' => 'あなたがインポートしたブログ記事を作成したことになります。元の著者を変更せずにインポートしたい場合には、システム管理者がインポート作業を行ってください。その場合には必要に応じて新しいユーザーを作成できます。',
 	'Upload import file (optional)' => 'インポートファイルをアップロード(オプション)',
-	q{If your import file is located on your computer, you can upload it here.  Otherwise, Movable Type will automatically look in the 'import' folder of your Movable Type directory.} => q{インポートするファイルがローカルのコンピュータ内にある場合にはここにアップロードしてください。アップロードしない場合には、Movable Typeは自動的にアプリケーションディレクトリのimportフォルダ内から探します。},
+	q{If your import file is located on your computer, you can upload it here.  Otherwise, MyMTOS will automatically look in the 'import' folder of your MyMTOS directory.} => q{インポートするファイルがローカルのコンピュータ内にある場合にはここにアップロードしてください。アップロードしない場合には、MyMTOSは自動的にアプリケーションディレクトリのimportフォルダ内から探します。},
 	'Import File Encoding' => 'インポートするファイルの文字コード',
-	'By default, Movable Type will attempt to automatically detect the character encoding of your import file.  However, if you experience difficulties, you can set it explicitly.' => 'Movable Typeはインポートするファイルの文字コードを自動的に検出します。問題が起きたときには、明示的に文字コードを指定することもできます。',
+	'By default, MyMTOS will attempt to automatically detect the character encoding of your import file.  However, if you experience difficulties, you can set it explicitly.' => 'MyMTOSはインポートするファイルの文字コードを自動的に検出します。問題が起きたときには、明示的に文字コードを指定することもできます。',
 	'<mt:var name="display_name" escape="html">' => '<mt:var name="display_name" escape="html">',
 	'Default category for entries (optional)' => 'ブログ記事の既定カテゴリ(オプション)',
 	'You can specify a default category for imported entries which have none assigned.' => 'カテゴリが設定されていないブログ記事に既定のカテゴリを設定できます。',
@@ -4156,7 +4146,7 @@ use vars qw( @ISA %Lexicon );
 	'_USER_DISABLE' => '無効',
 	'user' => 'ユーザー',
 	'users' => 'ユーザー',
-	'_NO_SUPERUSER_DISABLE' => 'Movable Typeのシステム管理者は自分自身を無効にはできません。',
+	'_NO_SUPERUSER_DISABLE' => 'MyMTOSのシステム管理者は自分自身を無効にはできません。',
 
 ## tmpl/cms/include/backup_end.tmpl
 	'All of the data has been backed up successfully!' => 'すべてのデータは正常にバックアップされました。',
@@ -4168,7 +4158,7 @@ use vars qw( @ISA %Lexicon );
 	'An error occurred during the backup process: [_1]' => 'バックアップの途中でエラーが発生しました: [_1]',
 
 ## tmpl/cms/include/backup_start.tmpl
-	'Backing up Movable Type' => 'バックアップを開始',
+	'Backing up MyMTOS' => 'バックアップを開始',
 
 ## tmpl/cms/include/basic_filter_forms.tmpl
 	'contains' => 'を含む',
@@ -4266,14 +4256,9 @@ use vars qw( @ISA %Lexicon );
 	'Set Web Services Password' => 'Webサービスのパスワードを設定',
 
 ## tmpl/cms/include/footer.tmpl
-	'This is a beta version of Movable Type and is not recommended for production use.' => 'このMovable Typeはベータ版です。',
-	'http://www.movabletype.org' => 'http://www.movabletype.jp',
-	'MovableType.org' => 'MovableType.jp',
-	'http://plugins.movabletype.org/' => 'http://communities.movabletype.jp/plugins/',
-	'http://wiki.movabletype.org/' => 'http://wiki.movabletype.org/',
+	'This is a beta version of MyMTOS and is not recommended for production use.' => 'このMyMTOSはベータ版です。',
 	'Wiki' => 'Wiki(英語)',
 	'Support' => 'サポート',
-	'http://forums.movabletype.org/' => 'http://communities.movabletype.jp/',
 	'Forums' => 'ユーザーコミュニティ',
 	'Send Us Feedback' => 'フィードバックはこちらへ',
 	'<a href="[_1]"><mt:var name="mt_product_name"></a> version [_2]' => '<a href="[_1]"><mt:var name="mt_product_name"></a> version [_2]',
@@ -4289,7 +4274,7 @@ use vars qw( @ISA %Lexicon );
 	'Search (q)' => '検索 (q)',
 	'Create New' => '新規作成',
 	'Select an action' => 'アクションを選択',
-	q{This website was created during the upgrade from a previous version of Movable Type. 'Site Root' and 'Site URL' are left blank to retain 'Publishing Paths' compatibility for blogs that were created in a previous version. You can post and publish on existing blogs, but you cannot publish this website itself because of the blank 'Site Root' and 'Site URL'.} => q{このウェブサイトは、以前のバージョンのMovable Typeからのバージョンアップ時に作成されました。バージョンアップ前に作成されたブログの公開設定の互換性を保持するために、ウェブサイトのサイト URLとサイトパスは空白になっています。そのため、既存のブログに投稿、公開はできますが、ウェブサイト自体にコンテンツを投稿することはできません。},
+	q{This website was created during the upgrade from a previous version of MyMTOS. 'Site Root' and 'Site URL' are left blank to retain 'Publishing Paths' compatibility for blogs that were created in a previous version. You can post and publish on existing blogs, but you cannot publish this website itself because of the blank 'Site Root' and 'Site URL'.} => q{このウェブサイトは、以前のバージョンのMyMTOSからのバージョンアップ時に作成されました。バージョンアップ前に作成されたブログの公開設定の互換性を保持するために、ウェブサイトのサイト URLとサイトパスは空白になっています。そのため、既存のブログに投稿、公開はできますが、ウェブサイト自体にコンテンツを投稿することはできません。},
 	'from Revision History' => '履歴データ',
 
 ## tmpl/cms/include/import_end.tmpl
@@ -4398,13 +4383,13 @@ use vars qw( @ISA %Lexicon );
 	'<span class="count">[_1]</span> [_2] are included' => '<span class="count">[_1]</span>件の[_2]が含まれます',
 
 ## tmpl/cms/install.tmpl
-	'Welcome to Movable Type' => 'Movable Typeへようこそ',
+	'Welcome to MyMTOS' => 'MyMTOSへようこそ',
 	'Create Your Account' => 'アカウントの作成',
-	'The version of Perl installed on your server ([_1]) is lower than the minimum supported version ([_2]).' => 'サーバーにインストールされているPerlのバージョン([_1])が、Movable Type がサポートしているバージョン([_2])より低いため正常に動作しない可能性があります。',
-	'While Movable Type may run, it is an <strong>untested and unsupported environment</strong>.  We strongly recommend upgrading to at least Perl [_1].' => 'Movable Type が動作する場合でも、<strong>動作確認を行っていない、サポート対象外の環境となります</strong>。少なくともPerl[_1]以上へアップグレードすることを強くお勧めします。',
+	'The version of Perl installed on your server ([_1]) is lower than the minimum supported version ([_2]).' => 'サーバーにインストールされているPerlのバージョン([_1])が、MyMTOS がサポートしているバージョン([_2])より低いため正常に動作しない可能性があります。',
+	'While MyMTOS may run, it is an <strong>untested and unsupported environment</strong>.  We strongly recommend upgrading to at least Perl [_1].' => 'MyMTOS が動作する場合でも、<strong>動作確認を行っていない、サポート対象外の環境となります</strong>。少なくともPerl[_1]以上へアップグレードすることを強くお勧めします。',
 	'Do you want to proceed with the installation anyway?' => 'インストールを続けますか?',
 	'View MT-Check (x)' => 'システムチェック (x)',
-	'Please create an administrator account for your system. When you are done, Movable Type will initialize your database.' => 'システム管理者のアカウントを作成してください。作成が完了すると、データベースを初期化します。',
+	'Please create an administrator account for your system. When you are done, MyMTOS will initialize your database.' => 'システム管理者のアカウントを作成してください。作成が完了すると、データベースを初期化します。',
 	'To proceed, you must authenticate properly with your LDAP server.' => 'LDAPサーバーで認証を受けないと先に進めません。',
 	'The name used by this user to login.' => 'サインイン時に使用するユーザー名です。',
 	'The name used when published.' => '表示名です。',
@@ -4509,7 +4494,6 @@ use vars qw( @ISA %Lexicon );
 ## tmpl/cms/list_theme.tmpl
 	'[_1] Themes' => '[_1]テーマの一覧',
 	'All Themes' => 'テーマの一覧',
-	'_THEME_DIRECTORY_URL' => 'http://communities.movabletype.jp/themes/',
 	'Find Themes' => 'テーマを探す',
 	'Theme [_1] has been uninstalled.' => 'テーマ "[_1]"をアンインストールしました。',
 	'Theme [_1] has been applied (<a href="[_2]">[quant,_3,warning,warnings]</a>).' => 'テーマ "[_1]"を適用しました(<a href="[_2]">[quant,_3,つの警告,つの警告]</a>)。',
@@ -4557,8 +4541,7 @@ use vars qw( @ISA %Lexicon );
 	'You have successfully disabled the selected user(s).' => '選択したユーザーを無効にしました。',
 	'You have successfully enabled the selected user(s).' => '選択したユーザーを有効にしました。',
 	'You have successfully unlocked the selected user(s).' => '選択したユーザーのロックを解除しました。',
-	'You have successfully deleted the user(s) from the Movable Type system.' => 'システムからユーザーを削除しました。',
-	'The deleted user(s) still exist in the external directory. As such, they will still be able to login to Movable Type Advanced.' => '削除されたユーザーが外部ディレクトリ上にまだ存在するので、このままではユーザーは再度サインインできてしまいます。',
+	'You have successfully deleted the user(s) from the MyMTOS system.' => 'システムからユーザーを削除しました。',
 	q{You have successfully synchronized users' information with the external directory.} => q{外部のディレクトリとユーザーの情報を同期しました。},
 	'Some ([_1]) of the selected user(s) could not be re-enabled because they were no longer found in the external directory.' => '選択されたユーザーのうち[_1]人は外部ディレクトリ上に存在しないので有効にできませんでした。',
 	q{An error occured during synchronization.  See the <a href='[_1]'>activity log</a> for detailed information.} => q{同期中にエラーが発生しました。エラーの詳細を<a href='[_1]'>ログ</a>で確認して>ください。},
@@ -4569,7 +4552,7 @@ use vars qw( @ISA %Lexicon );
 	'Invalid IP address.' => '不正なIPアドレスです。',
 
 ## tmpl/cms/listing/blog_list_header.tmpl
-	'You have successfully deleted the website from the Movable Type system.' => 'システムからウェブサイトの削除が完了しました。',
+	'You have successfully deleted the website from the MyMTOS system.' => 'システムからウェブサイトの削除が完了しました。',
 	'You have successfully deleted the blog from the website.' => 'ウェブサイトからブログの削除が完了しました。',
 	'You have successfully moved selected blogs to another website.' => '他のウェブサイトへのブログの移動が完了しました。',
 	'Warning: You need to copy uploaded assets to new locations manually. You should consider maintaining copies of uploaded assets in their original locations to avoid broken links.' => '警告: アップロード済みのファイルは、新しいウェブサイトのパスに手動でコピーする必要があります。また、リンク切れを防止するために、旧パスのファイルも残すことを検討してください。',
@@ -4618,9 +4601,9 @@ use vars qw( @ISA %Lexicon );
 
 ## tmpl/cms/login.tmpl
 	'Sign in' => 'サインイン',
-	'Your Movable Type session has ended.' => 'Movable Typeからサインアウトしました。',
-	'Your Movable Type session has ended. If you wish to sign in again, you can do so below.' => 'Movable Typeからサインアウトしました。以下から再度サインインできます。',
-	'Your Movable Type session has ended. Please sign in again to continue this action.' => 'Movable Typeからサインアウトしました。続けるには再度サインインして下さい。',
+	'Your MyMTOS session has ended.' => 'MyMTOSからサインアウトしました。',
+	'Your MyMTOS session has ended. If you wish to sign in again, you can do so below.' => 'MyMTOSからサインアウトしました。以下から再度サインインできます。',
+	'Your MyMTOS session has ended. Please sign in again to continue this action.' => 'MyMTOSからサインアウトしました。続けるには再度サインインして下さい。',
 	'Sign In (s)' => 'サインイン (s)',
 	'Forgot your password?' => 'パスワードをお忘れですか?',
 
@@ -4709,10 +4692,10 @@ use vars qw( @ISA %Lexicon );
 
 ## tmpl/cms/restore.tmpl
 	'Restore from a Backup' => 'バックアップの復元',
-	'Perl module XML::SAX and/or some of its dependencies are missing.  Movable Type cannot restore the system without these modules.' => 'バックアップと復元をするために必要なPerlモジュール(XML::SAXおよび依存モジュール)が見つかりません。',
+	'Perl module XML::SAX and/or some of its dependencies are missing.  MyMTOS cannot restore the system without these modules.' => 'バックアップと復元をするために必要なPerlモジュール(XML::SAXおよび依存モジュール)が見つかりません。',
 	'Backup File' => 'バックアップファイル',
-	q{If your backup file is located on a remote computer, you can upload it here.  Otherwise, Movable Type will automatically look in the 'import' folder within your Movable Type directory.} => q{バックアップファイルをアップロードします。アップロードがない場合は、Movable Typeは自動で 'import'フォルダをチェックします。},
-	'Check this and files backed up from newer versions can be restored to this system.  NOTE: Ignoring Schema Version can damage Movable Type permanently.' => 'チェックすると現在のシステムより新しいシステムからバックアップされたデータをこのシステムに復元できます。注意: バージョンの衝突を無視すると、Movable Typeのシステムに回復不可能なダメージを与える可能性があります。',
+	q{If your backup file is located on a remote computer, you can upload it here.  Otherwise, MyMTOS will automatically look in the 'import' folder within your MyMTOS directory.} => q{バックアップファイルをアップロードします。アップロードがない場合は、MyMTOSは自動で 'import'フォルダをチェックします。},
+	'Check this and files backed up from newer versions can be restored to this system.  NOTE: Ignoring Schema Version can damage MyMTOS permanently.' => 'チェックすると現在のシステムより新しいシステムからバックアップされたデータをこのシステムに復元できます。注意: バージョンの衝突を無視すると、MyMTOSのシステムに回復不可能なダメージを与える可能性があります。',
 	'Ignore schema version conflicts' => 'バージョンの衝突を無視する',
 	'Allow existing global templates to be overwritten by global templates in the backup file.' => 'バックアップ内のファイルで、グローバルテンプレートを上書きする。',
 	'Overwrite global templates.' => 'グローバルテンプレートを上書きする',
@@ -4723,7 +4706,7 @@ use vars qw( @ISA %Lexicon );
 	'An error occurred during the restore process: [_1] Please check activity log for more details.' => '復元の過程でエラーが発生しました。[_1] 詳細についてはログを確認してください。',
 
 ## tmpl/cms/restore_start.tmpl
-	'Restoring Movable Type' => '復元を開始',
+	'Restoring MyMTOS' => '復元を開始',
 
 ## tmpl/cms/search_replace.tmpl
 	'You must select one or more item to replace.' => '置き換えるアイテムを1つ以上選択してください。',
@@ -4746,9 +4729,9 @@ use vars qw( @ISA %Lexicon );
 
 ## tmpl/cms/setup_initial_website.tmpl
 	'Create Your First Website' => '最初のウェブサイトを作成',
-	q{In order to properly publish your website, you must provide Movable Type with your website's URL and the filesystem path where its files should be published.} => q{ウェブサイトを構築するには、ウェブサイトURLとファイルパスが正しく設定しなければなりません。},
+	q{In order to properly publish your website, you must provide MyMTOS with your website's URL and the filesystem path where its files should be published.} => q{ウェブサイトを構築するには、ウェブサイトURLとファイルパスが正しく設定しなければなりません。},
 	'My First Website' => 'First Website',
-	q{The 'Website Root' is the directory in your web server's filesystem where Movable Type will publish the files for your website. The web server must have write access to this directory.} => q{'ウェブサイトパス'はウェブサーバーがウェブサイトの構築時に使うディレクトリです。ディレクトリにはウェブサーバーの書き込み権限が必要です。},
+	q{The 'Website Root' is the directory in your web server's filesystem where MyMTOS will publish the files for your website. The web server must have write access to this directory.} => q{'ウェブサイトパス'はウェブサーバーがウェブサイトの構築時に使うディレクトリです。ディレクトリにはウェブサーバーの書き込み権限が必要です。},
 	'Select the theme you wish to use for this new website.' => '新しいウェブサイトで利用するテーマを選んでください。',
 	'Finish install (s)' => 'インストール (s)',
 	'Finish install' => 'インストール',
@@ -4768,7 +4751,7 @@ use vars qw( @ISA %Lexicon );
 	'unavailable' => '利用不可',
 	'Memcache Server is [_1].' => 'Memcacheサーバーは[_1]です。',
 	'Server Model' => 'サーバーモデル',
-	q{Movable Type could not find the script named 'mt-check.cgi'. To resolve this issue, ensure that the mt-check.cgi script exists and that the CheckScript configuration parameter (if it is necessary) references it properly.} => q{mt-check.cgiが見つかりませんでした。mt-check.cgiが存在すること、名前を変えた場合は構成ファイルのCheckScriptディレクティブに名前を指定してください。},
+	q{MyMTOS could not find the script named 'mt-check.cgi'. To resolve this issue, ensure that the mt-check.cgi script exists and that the CheckScript configuration parameter (if it is necessary) references it properly.} => q{mt-check.cgiが見つかりませんでした。mt-check.cgiが存在すること、名前を変えた場合は構成ファイルのCheckScriptディレクティブに名前を指定してください。},
 
 ## tmpl/cms/theme_export_replace.tmpl
 	q{Export theme folder already exists '[_1]'. You can overwrite a existing theme, or cancel to change the Basename?} => q{テーマをエクスポートするフォルダ([_1])は既に存在します。上書き保存するか、キャンセルして出力ファイル名を変更してください。},
@@ -4778,21 +4761,20 @@ use vars qw( @ISA %Lexicon );
 	'Time to Upgrade!' => 'アップグレード開始',
 	'Upgrade Check' => 'アップグレードのチェック',
 	'Do you want to proceed with the upgrade anyway?' => 'アップグレードを実行しますか?',
-	q{A new version of Movable Type has been installed.  We'll need to complete a few tasks to update your database.} => q{新しいバージョンの Movable Type をインストールしました。データベースのアップグレードを実行してください。},
-	q{The Movable Type Upgrade Guide can be found <a href='[_1]' target='_blank'>here</a>.} => q{Movable Typeアップグレードガイドは<a href='http://www.movabletype.jp/documentation/upgrade/' target='_blank'>こちらを</a>参照ください。},
-	'In addition, the following Movable Type components require upgrading or installation:' => '加えて、以下のコンポーネントのアップグレード、またはインストールが必要です。',
-	'The following Movable Type components require upgrading or installation:' => '以下のコンポーネントのアップグレード、またはインストールが必要です。',
+	q{A new version of MyMTOS has been installed.  We'll need to complete a few tasks to update your database.} => q{新しいバージョンの MyMTOS をインストールしました。データベースのアップグレードを実行してください。},
+	'In addition, the following MyMTOS components require upgrading or installation:' => '加えて、以下のコンポーネントのアップグレード、またはインストールが必要です。',
+	'The following MyMTOS components require upgrading or installation:' => '以下のコンポーネントのアップグレード、またはインストールが必要です。',
 	'Begin Upgrade' => 'アップグレード開始',
-	'Congratulations, you have successfully upgraded to Movable Type [_1].' => 'Movable Type [_1]へのアップグレードを完了しました。',
-	'Return to Movable Type' => 'Movable Type に戻る',
-	'Your Movable Type installation is already up to date.' => 'Movable Type は最新版です。',
+	'Congratulations, you have successfully upgraded to MyMTOS [_1].' => 'MyMTOS [_1]へのアップグレードを完了しました。',
+	'Return to MyMTOS' => 'MyMTOS に戻る',
+	'Your MyMTOS installation is already up to date.' => 'MyMTOS は最新版です。',
 
 ## tmpl/cms/upgrade_runner.tmpl
 	'Initializing database...' => 'データベースの初期化中･･･',
 	'Upgrading database...' => 'データベースをアップグレードしています･･･',
 	'Error during installation:' => 'インストール中にエラーが発生しました',
 	'Error during upgrade:' => 'アップグレード中にエラーが発生しました',
-	'Return to Movable Type (s)' => 'Movable Typeに戻る (s)',
+	'Return to MyMTOS (s)' => 'MyMTOSに戻る (s)',
 	'Your database is already current.' => 'データベースは最新の状態です。',
 	'Installation complete!' => 'インストールを完了しました！',
 	'Upgrade complete!' => 'アップグレードを完了しました！',
@@ -4857,10 +4839,6 @@ use vars qw( @ISA %Lexicon );
 	'Welcome to [_1].' => '[_1]へようこそ',
 	'You can manage your blog by selecting an option from the menu located to the left of this message.' => 'このメッセージの左側のメニューでオプションを選択することでブログの管理ができます。',
 	'If you need assistance, try:' => 'サポートが必要な場合は以下を参照してください。',
-	'Movable Type User Manual' => 'Movable Type ユーザーマニュアル',
-	'http://www.sixapart.com/movabletype/support' => 'http://www.sixapart.jp/movabletype/support',
-	'Movable Type Technical Support' => 'Movable Type テクニカルサポート',
-	'Movable Type Community Forums' => 'Movable Type コミュニティフォーラム',
 	'Change this message.' => 'このメッセージを変更',
 	'Edit this message.' => 'このメッセージを編集',
 
@@ -4880,28 +4858,13 @@ use vars qw( @ISA %Lexicon );
 	'Learning MT' => 'Learning MT',
 	'Hacking MT' => 'Hacking MT',
 	'Pronet' => 'ProNet',
-	'No Movable Type news available.' => 'Movable Typeニュースはありません。',
-	'No Learning Movable Type news available.' => 'Learning Movable Typeに新着ブログ記事はありません。',
+	'No MyMTOS news available.' => 'MyMTOSニュースはありません。',
+	'No Learning MyMTOS news available.' => 'Learning MyMTOSに新着ブログ記事はありません。',
 
 ## tmpl/cms/widget/mt_shortcuts.tmpl
 	'Handy Shortcuts' => 'ショートカット',
 	'Import Content' => 'インポート',
 	'Blog Preferences' => 'ブログの設定',
-
-## tmpl/cms/widget/new_install.tmpl
-	'Thank you for installing Movable Type' => 'Movable Type をご利用いただき、ありがとうございます。',
-	'You are now ready to:' => '次の方法で、ウェブサイトにコンテンツを公開できます。',
-	'Create a new page on your website' => 'ウェブサイトに新しいページを作成',
-	'Create a blog on your website' => 'ウェブサイトにブログを作成',
-	'Create a blog (many blogs can exist in one website) to start posting.' => 'ブログを作成して(ひとつのウェブサイト内に複数のブログを作成できます)、ブログ記事を投稿します。',
-	'Movable Type Online Manual' => 'Movable Typeオンラインマニュアル',
-	q{Whether you're new to Movable Type or using it for the first time, learn more about what this tool can do for you.} => q{Movable Typeで何ができるか、詳しくはこちら。},
-
-## tmpl/cms/widget/new_user.tmpl
-	q{Welcome to Movable Type, the world's most powerful blogging, publishing and social media platform:} => q{世界で最もパワフルなブログ、ウェブサイト、ソーシャルメディアプラットフォームであるMovable Typeへようこそ:},
-
-## tmpl/cms/widget/new_version.tmpl
-	q{What's new in Movable Type [_1]} => q{Movable Type [_1] の新機能},
 
 ## tmpl/cms/widget/recent_blogs.tmpl
 	'No blogs could be found. [_1]' => 'ブログがありません。[_1]',
@@ -4937,7 +4900,7 @@ use vars qw( @ISA %Lexicon );
 
 ## tmpl/comment/auth_googleopenid.tmpl
 	'Sign in using your Gmail account' => 'Gmailのアカウントでサインインする',
-	'Sign in to Movable Type with your[_1] Account[_2]' => '[_1] アカウント[_2]',
+	'Sign in to MyMTOS with your[_1] Account[_2]' => '[_1] アカウント[_2]',
 
 ## tmpl/comment/auth_hatena.tmpl
 	'Your Hatena ID' => 'はてなID',
@@ -5006,14 +4969,14 @@ use vars qw( @ISA %Lexicon );
 
 ## tmpl/error.tmpl
 	'Missing Configuration File' => '環境設定ファイルが見つかりません。',
-	'_ERROR_CONFIG_FILE' => 'Movable Type の環境設定ファイルが存在しないか、または読み込みに失敗しました。詳細については、Movable Type マニュアルの<a href="javascript:void(0)">インストールと設定</a>の章を確認してください。',
+	'_ERROR_CONFIG_FILE' => 'MyMTOS の環境設定ファイルが存在しないか、または読み込みに失敗しました。詳細については、MyMTOS マニュアルの<a href="javascript:void(0)">インストールと設定</a>の章を確認してください。',
 	'Database Connection Error' => 'データベースへの接続でエラーが発生しました。',
-	'_ERROR_DATABASE_CONNECTION' => '環境設定ファイルのデータベース設定に問題があるか、または設定がありません。詳細については、Movable Type マニュアルの<a href="javascript:void(0)">インストールと設定</a>の章を確認してください。',
+	'_ERROR_DATABASE_CONNECTION' => '環境設定ファイルのデータベース設定に問題があるか、または設定がありません。詳細については、MyMTOS マニュアルの<a href="javascript:void(0)">インストールと設定</a>の章を確認してください。',
 	'CGI Path Configuration Required' => 'CGIPath の設定が必要です。',
-	'_ERROR_CGI_PATH' => '環境設定ファイルの CGIPath の項目の設定に問題があるか、または設定がありません。詳細については、Movable Type マニュアルの<a href="javascript:void(0)">インストールと設定</a>の章を確認してください。',
+	'_ERROR_CGI_PATH' => '環境設定ファイルの CGIPath の項目の設定に問題があるか、または設定がありません。詳細については、MyMTOS マニュアルの<a href="javascript:void(0)">インストールと設定</a>の章を確認してください。',
 
 ## tmpl/feeds/error.tmpl
-	'Movable Type Activity Log' => 'Movable Type システムログ',
+	'MyMTOS Activity Log' => 'MyMTOS システムログ',
 
 ## tmpl/feeds/feed_comment.tmpl
 	'Unpublish' => '公開取り消し',
@@ -5042,10 +5005,10 @@ use vars qw( @ISA %Lexicon );
 
 ## tmpl/wizard/blog.tmpl
 	'Setup Your First Blog' => 'First Blogのセットアップ',
-	q{In order to properly publish your blog, you must provide Movable Type with your blog's URL and the path on the filesystem where its files should be published.} => q{ブログを公開するためのURLと、公開されるファイルのパスを設定する必要があります。},
+	q{In order to properly publish your blog, you must provide MyMTOS with your blog's URL and the path on the filesystem where its files should be published.} => q{ブログを公開するためのURLと、公開されるファイルのパスを設定する必要があります。},
 	'My First Blog' => 'My First Blog',
 	'Publishing Path' => '公開パス',
-	q{Your 'Publishing Path' is the path on your web server's file system where Movable Type will publish all the files for your blog. Your web server must have write access to this directory.} => q{Movable Typeは、出力するすべてのファイルを「公開パス」以下に配置します。このディレクトリにはWebサーバーから書き込みできなければなりません。},
+	q{Your 'Publishing Path' is the path on your web server's file system where MyMTOS will publish all the files for your blog. Your web server must have write access to this directory.} => q{MyMTOSは、出力するすべてのファイルを「公開パス」以下に配置します。このディレクトリにはWebサーバーから書き込みできなければなりません。},
 
 ## tmpl/wizard/cfg_dir.tmpl
 	'Temporary Directory Configuration' => 'テンポラリディレクトリの設定',
@@ -5075,9 +5038,8 @@ use vars qw( @ISA %Lexicon );
 	'Please enter the parameters necessary for connecting to your database.' => 'データベース接続に必要な情報を入力してください。',
 	'Database Type' => 'データベースの種類',
 	'Select One...' => '選択してください',
-	'Is your preferred database not listed? View the <a href="[_1]" target="_blank">Movable Type System Check</a> see if additional modules are necessary.' => '<a href="[_1]" target="_blank">Movable Type システムチェック</a>を実行して、必要なモジュールを確認してください。',
+	'Is your preferred database not listed? View the <a href="[_1]" target="_blank">MyMTOS System Check</a> see if additional modules are necessary.' => '<a href="[_1]" target="_blank">MyMTOS システムチェック</a>を実行して、必要なモジュールを確認してください。',
 	'Once installed, <a href="javascript:void(0)" onclick="[_1]">click here to refresh this screen</a>.' => 'モジュールをインストールしたら<a href="javascript:void(0)" onclick="[_1]">ここをクリック</a>して表示を更新してください。',
-	'Read more: <a href="[_1]" target="_blank">Setting Up Your Database</a>' => '詳しくは<a href="[_1]" target="_blank">こちら</a>を参照してください。',
 	'Show Advanced Configuration Options' => '高度な設定',
 	'Test Connection' => '接続テスト',
 	'You must set your Database Path.' => 'データベースのパスを設定します。',
@@ -5087,9 +5049,9 @@ use vars qw( @ISA %Lexicon );
 ## tmpl/wizard/optional.tmpl
 	'Mail Configuration' => 'メール設定',
 	'Your mail configuration is complete.' => 'メール設定を完了しました。',
-	'Check your email to confirm receipt of a test email from Movable Type and then proceed to the next step.' => 'Movable Typeからのテストメールを受信したことを確認して、次のステップへ進んでください。',
+	'Check your email to confirm receipt of a test email from MyMTOS and then proceed to the next step.' => 'MyMTOSからのテストメールを受信したことを確認して、次のステップへ進んでください。',
 	'Show current mail settings' => '現在のメール設定を表示',
-	'Periodically Movable Type will send email for password recovery, to inform authors of new comments, and other events. If not using Sendmail (default on unix servers), an SMTP Server must be specified.' => 'Movable Typeはパスワードの再設定や、新しいコメントの通知などをメールでお知らせします。これらのメールが正しく送信されるよう設定してください。',
+	'Periodically MyMTOS will send email for password recovery, to inform authors of new comments, and other events. If not using Sendmail (default on unix servers), an SMTP Server must be specified.' => 'MyMTOSはパスワードの再設定や、新しいコメントの通知などをメールでお知らせします。これらのメールが正しく送信されるよう設定してください。',
 	'An error occurred while attempting to send mail: ' => 'メール送信の過程でエラーが発生しました。',
 	'Send mail via:' => 'メール送信プログラム',
 	'Sendmail Path' => 'sendmailのパス',
@@ -5121,38 +5083,36 @@ use vars qw( @ISA %Lexicon );
 
 ## tmpl/wizard/packages.tmpl
 	'Requirements Check' => 'システムチェック',
-	q{The following Perl modules are required in order to make a database connection.  Movable Type requires a database in order to store your blog's data.  Please install one of the packages listed here in order to proceed.  When you are ready, click the 'Retry' button.} => q{データベース接続のための以下のPerlモジュールが必要です。Movable Typeはブログのデータを保存するためにデータベースを使用します。この一覧のパッケージのいずれかをインストールしてください。準備ができたら「再試行」のボタンをクリックしてください。},
+	q{The following Perl modules are required in order to make a database connection.  MyMTOS requires a database in order to store your blog's data.  Please install one of the packages listed here in order to proceed.  When you are ready, click the 'Retry' button.} => q{データベース接続のための以下のPerlモジュールが必要です。MyMTOSはブログのデータを保存するためにデータベースを使用します。この一覧のパッケージのいずれかをインストールしてください。準備ができたら「再試行」のボタンをクリックしてください。},
 	'All required Perl modules were found.' => '必要なPerlモジュールは揃っています。',
-	'You are ready to proceed with the installation of Movable Type.' => 'Movable Typeのインストールを続行する準備が整いました。',
+	'You are ready to proceed with the installation of MyMTOS.' => 'MyMTOSのインストールを続行する準備が整いました。',
 	'Some optional Perl modules could not be found. <a href="javascript:void(0)" onclick="[_1]">Display list of optional modules</a>' => 'オプションのPerlモジュールのうちいくつかが見つかりませんでした。<a href="javascript:void(0)" onclick="[_1]">オプションモジュールを表示</a>',
-	'One or more Perl modules required by Movable Type could not be found.' => 'ひとつ以上の必須Perlモジュールが見つかりませんでした。',
-	q{The following Perl modules are required for Movable Type to run properly. Once you have met these requirements, click the 'Retry' button to re-test for these packages.} => q{以下のPerlモジュールはMovable Typeの正常な動作に必要です。必要なモジュールは「再試行」ボタンをクリックすることで確認できます。},
+	'One or more Perl modules required by MyMTOS could not be found.' => 'ひとつ以上の必須Perlモジュールが見つかりませんでした。',
+	q{The following Perl modules are required for MyMTOS to run properly. Once you have met these requirements, click the 'Retry' button to re-test for these packages.} => q{以下のPerlモジュールはMyMTOSの正常な動作に必要です。必要なモジュールは「再試行」ボタンをクリックすることで確認できます。},
 	q{Some optional Perl modules could not be found. You may continue without installing these optional Perl modules. They may be installed at any time if they are needed. Click 'Retry' to test for the modules again.} => q{オプションのPerlモジュールのうちいくつかが見つかりませんでしたが、インストールはこのまま続行できます。オプションのPerlモジュールは、必要な場合にいつでもインストールできます。},
 	'Missing Database Modules' => 'データベースモジュールが見つかりません',
 	'Missing Optional Modules' => 'オプションのモジュールが見つかりません',
 	'Missing Required Modules' => '必要なモジュールが見つかりません',
 	'Minimal version requirement: [_1]' => '必須バージョン: [_1]',
-	'http://www.movabletype.org/documentation/installation/perl-modules.html' => 'http://www.movabletype.jp/documentation/check_configuration.html',
-	'Learn more about installing Perl modules.' => 'Perlモジュールのインストールについて',
 	'Your server has all of the required modules installed; you do not need to perform any additional module installations.' => 'すべての必要なモジュールはインストールされています。モジュールの追加インストールは必要ありません。',
 
 ## tmpl/wizard/start.tmpl
 	'Configuration File Exists' => '構成ファイルが見つかりました',
-	'Movable Type requires that you enable JavaScript in your browser. Please enable it and refresh this page to proceed.' => 'ブラウザのJavaScriptを有効にする必要があります。続けるにはブラウザのJavaScriptを有効にし、このページの表示を更新してください。',
-	'This wizard will help you configure the basic settings needed to run Movable Type.' => 'このウィザードでは、Movable Typeを利用するために必要となる基本的な環境設定を行います。',
+	'MyMTOS requires that you enable JavaScript in your browser. Please enable it and refresh this page to proceed.' => 'ブラウザのJavaScriptを有効にする必要があります。続けるにはブラウザのJavaScriptを有効にし、このページの表示を更新してください。',
+	'This wizard will help you configure the basic settings needed to run MyMTOS.' => 'このウィザードでは、MyMTOSを利用するために必要となる基本的な環境設定を行います。',
 	'Default language.' => '既定の使用言語',
 	'Configure Static Web Path' => 'スタティックウェブパスの設定',
 	q{<strong>Error: '[_1]' could not be found.</strong>  Please move your static files to the directory first or correct the setting if it is incorrect.} => q{エラー: '[_1]'が見つかりませんでした。ファイルをmt-staticディレクトリに移動するか、設定を修正してください。},
-	'Movable Type ships with directory named [_1] which contains a number of important files such as images, javascript files and stylesheets.' => 'Movable Typeには、[_1]ディレクトリが標準で含まれています。この中には画像ファイルやJavaScript、スタイルシートなどの重要なファイルが含まれています。',
-	q{The [_1] directory is in the main Movable Type directory which this wizard script resides, but due to your web server's configuration, the [_1] directory is not accessible in this location and must be moved to a web-accessible location (e.g., your web document root directory).} => q{[_1]ディレクトリは、Movable Typeのメインディレクトリ(このウィザード自身も含まれている)以下で見つかりました。しかし現在のサーバーの構成上、その場所にはWebブラウザからアクセスできません。ウェブサイトのルートディレクトリの下など、Webブラウザからアクセスできる場所に移動してください。},
-	'This directory has either been renamed or moved to a location outside of the Movable Type directory.' => 'mt-static ディレクトリはMovable Typeのインストールディレクトリの外部に移動されたかまたは名前が変更されているようです。',
+	'MyMTOS ships with directory named [_1] which contains a number of important files such as images, javascript files and stylesheets.' => 'MyMTOSには、[_1]ディレクトリが標準で含まれています。この中には画像ファイルやJavaScript、スタイルシートなどの重要なファイルが含まれています。',
+	q{The [_1] directory is in the main MyMTOS directory which this wizard script resides, but due to your web server's configuration, the [_1] directory is not accessible in this location and must be moved to a web-accessible location (e.g., your web document root directory).} => q{[_1]ディレクトリは、MyMTOSのメインディレクトリ(このウィザード自身も含まれている)以下で見つかりました。しかし現在のサーバーの構成上、その場所にはWebブラウザからアクセスできません。ウェブサイトのルートディレクトリの下など、Webブラウザからアクセスできる場所に移動してください。},
+	'This directory has either been renamed or moved to a location outside of the MyMTOS directory.' => 'mt-static ディレクトリはMyMTOSのインストールディレクトリの外部に移動されたかまたは名前が変更されているようです。',
 	'Once the [_1] directory is in a web-accessible location, specify the location below.' => '[_1]ディレクトリをウェブアクセス可能な場所に置く場合には、以下にその場所を指定してください。',
 	'This URL path can be in the form of [_1] or simply [_2]' => 'このURLは[_1]のように記述するか、または簡略化して[_2]のように記述できます。',
 	'This path must be in the form of [_1]' => 'このパスは[_1]のように記述してください。',
 	'Static web path' => 'スタティックウェブパス',
 	'Static file path' => 'スタティックファイルパス',
 	'Begin' => '開始',
-	'A configuration (mt-config.cgi) file already exists, <a href="[_1]">sign in</a> to Movable Type.' => '構成ファイル(mt-config.cgi)はすでに存在します。Movable Typeに<a href="[_1]">サインイン</a>してください。',
+	'A configuration (mt-config.cgi) file already exists, <a href="[_1]">sign in</a> to MyMTOS.' => '構成ファイル(mt-config.cgi)はすでに存在します。MyMTOSに<a href="[_1]">サインイン</a>してください。',
 	'To create a new configuration file using the Wizard, remove the current configuration file and then refresh this page' => 'ウィザードで新しく構成ファイルを作るときは、現在の構成ファイルを別の場所に移動してこのページを更新してください。',
 
 ## plugins/FormattedText/config.yaml
@@ -5224,7 +5184,7 @@ use vars qw( @ISA %Lexicon );
 	'Action' => 'アクション',
 	'Weblog' => 'ブログ',
 	'Content Privacy' => 'コンテンツのセキュリティ',
-	'Specify whether other blogs in the installation may publish content from this blog. This setting takes precedence over the default system aggregation policy found in the system-level MultiBlog configuration.' => '同じMovable Type内の他のブログがこのブログのコンテンツを公開できるかどうかを指定します。この設定はシステムレベルのMultiBlogの構成で指定された既定のアグリゲーションポリシーよりも優先されます。',
+	'Specify whether other blogs in the installation may publish content from this blog. This setting takes precedence over the default system aggregation policy found in the system-level MultiBlog configuration.' => '同じMyMTOS内の他のブログがこのブログのコンテンツを公開できるかどうかを指定します。この設定はシステムレベルのMultiBlogの構成で指定された既定のアグリゲーションポリシーよりも優先されます。',
 	'Use system default' => 'システムの既定値を使用',
 	'Allow' => '許可',
 	'Disallow' => '許可しない',
@@ -5247,7 +5207,6 @@ use vars qw( @ISA %Lexicon );
 ## plugins/StyleCatcher/config.yaml
 	'StyleCatcher lets you easily browse through styles and then apply them to your blog in just a few clicks.' => 'StyleCatcherを使うと、ウェブサイトやブログのスタイルを探して、数クリックで変更することができます。',
 	'MT 4 Style Library' => 'MT 4 スタイルライブラリ',
-	'A collection of styles compatible with Movable Type 4 default templates.' => 'Movable Type 4のデフォルトテンプレートと互換性のあるスタイルです。',
 	'Styles' => 'スタイル',
 	'Moving current style to blog_meta for website...' => 'ウェブサイトの現在のスタイルの格納場所を移動しています...',
 	'Moving current style to blog_meta for blog...' => 'ブログの現在のスタイルの格納場所を移動しています...',

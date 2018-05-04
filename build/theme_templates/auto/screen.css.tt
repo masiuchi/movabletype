@@ -1,7 +1,7 @@
 [% PROCESS config.tt %]
 /*
 
-A Six Apart theme adapted for Movable Type default templates
+A Six Apart theme adapted for MyMTOS default templates
 
 [% IF theme.name %]
 name: [% theme.name %]

@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2016, 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -1892,10 +1892,10 @@ sub external_authenticators {
     foreach my $key (@auths) {
         my $id = lc $key;
         $id =~ s/[^a-z0-9-]//;
-        if ( $key eq 'MovableType' ) {
-            $param->{default_id}          = $id;
-            $param->{enabled_MovableType} = 1;
-            $param->{default_signin}      = 'MovableType';
+        if ( $key eq 'MovableType' || $key eq 'MyMTOS' ) {
+            $param->{default_id}     = $id;
+            $param->{enabled_MyMTOS}     = 1;
+            $param->{default_signin} = 'MyMTOS';
             my $cfg = $app->config;
             if ( my $registration = $cfg->CommenterRegistration ) {
                 if ( $cfg->AuthenticationModule eq 'MT' ) {
@@ -1984,7 +1984,7 @@ sub _is_commenter {
         }
         return $app->error(
             $app->translate(
-                'Sorry, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your Movable Type system administrator.'
+                'Sorry, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your MyMTOS system administrator.'
             )
         ) unless $has_system_permission;
         return -1;
@@ -2069,7 +2069,7 @@ sub login {
         );
         return $app->error(
             $app->translate(
-                'This account has been disabled. Please see your Movable Type system administrator for access.'
+                'This account has been disabled. Please see your MyMTOS system administrator for access.'
             )
         );
     }
@@ -2085,7 +2085,7 @@ sub login {
         }
         $message
             ||= $app->translate(
-            'This account has been disabled. Please see your Movable Type system administrator for access.'
+            'This account has been disabled. Please see your MyMTOS system administrator for access.'
             );
         $app->user(undef);
         $app->log(
@@ -2111,7 +2111,7 @@ sub login {
         # Login invalid; auth layer says user record has been removed
         return $app->error(
             $app->translate(
-                'This account has been deleted. Please see your Movable Type system administrator for access.'
+                'This account has been deleted. Please see your MyMTOS system administrator for access.'
             )
         );
     }
@@ -2208,7 +2208,7 @@ sub login {
 
             return $app->error(
                 $app->translate(
-                    'Our apologies, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your Movable Type system administrator.'
+                    'Our apologies, but you do not have permission to access any blogs or websites within this installation. If you feel you have reached this message in error, please contact your MyMTOS system administrator.'
                 )
             ) if !defined $commenter_blog_id || $commenter_blog_id > 0;
 
@@ -4333,7 +4333,7 @@ __END__
 
 =head1 NAME
 
-MT::App - Movable Type base web application class
+MT::App - MyMTOS base web application class
 
 =head1 SYNOPSIS
 
@@ -4347,11 +4347,11 @@ MT::App - Movable Type base web application class
 
 =head1 DESCRIPTION
 
-L<MT::App> is the base class for Movable Type web applications. It provides
+L<MT::App> is the base class for MyMTOS web applications. It provides
 support for an application running using standard CGI, or under
 L<Apache::Registry>, or as a L<mod_perl> handler. L<MT::App> is not meant to
 be used directly, but rather as a base class for other web applications using
-the Movable Type framework (for example, L<MT::App::CMS>).
+the MyMTOS framework (for example, L<MT::App::CMS>).
 
 =head1 USAGE
 
@@ -5070,11 +5070,7 @@ an identifying suffix (ie "3.2b").
 
 =item * MT_PRODUCT_CODE
 
-A product code defined by Six Apart to identify the edition of Movable Type.
-Currently, the valid values include:
-
-    MT  - Movable Type Personal or Movable Type Commercial editions
-    MTE - Movable Type Advanced
+A product code to identify the edition of MyMTOS.
 
 =item * MT_PRODUCT_NAME
 
@@ -5136,7 +5132,7 @@ which may output:
 
 =item * MT_URI
 
-Yields the relative URL to the primary Movable Type application script
+Yields the relative URL to the primary MyMTOS application script
 (mt.cgi or the configured 'AdminScript').
 
 Sample usage:

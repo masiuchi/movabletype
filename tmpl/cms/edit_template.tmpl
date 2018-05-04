@@ -652,8 +652,6 @@ function toggleCache(id) {
         <input type="text" name="linked_file" id="linked_file" class="text" tabindex="8" value="<mt:var name="linked_file" escape="html">" maxlength="255" mt:watch-change="1" />
       </mtapp:setting>
 
-<mt:setvarblock name="publishing_hint"><__trans phrase="Learn more about <a href="http://www.movabletype.org/documentation/administrator/publishing/settings.html" target="_blank">publishing settings</a>"></mt:setvarblock>
-
     <mt:if name="archive_types">
     <mtapp:setting
        id="archive_mapping"
@@ -684,7 +682,6 @@ function toggleCache(id) {
       </div>
       <div id="template-maps">
         <mt:include name="include/archive_maps.tmpl">
-        <div class="hint"><$mt:var name="publishing_hint"$></div>
       </div>
     </mtapp:setting>
     <mt:else>

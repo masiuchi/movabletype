@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -69,7 +69,7 @@ __END__
 
 =head1 NAME
 
-MT::Task - Movable Type class for registering runnable tasks.
+MT::Task - MyMTOS class for registering runnable tasks.
 
 =head1 SYNOPSIS
 
@@ -85,7 +85,7 @@ MT::Task - Movable Type class for registering runnable tasks.
 =head1 DESCRIPTION
 
 An I<MT::Task> object is used to define a runnable task that can be executed
-by Movable Type. The base object defines common characteristics of all tasks
+by MyMTOS. The base object defines common characteristics of all tasks
 as well as the method to invoke it.
 
 Normally, a plugin will construct an I<MT::Task> object and pass it

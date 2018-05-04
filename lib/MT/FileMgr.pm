@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -63,7 +63,7 @@ MT::FileMgr - Base class for file management drivers
 =head1 DESCRIPTION
 
 I<MT::FileMgr> is a base class for file management driver implementations;
-it provides an abstraction of file management such that other Movable Type
+it provides an abstraction of file management such that other MyMTOS
 classes do not have to worry if files should be built locally or through
 FTP. For example, the process that rebuilds a user's site only has to build
 the content, then pass it off to the I<MT::FileMgr> driver; it does not have

@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -66,7 +66,7 @@ __END__
 
 =head1 NAME
 
-MT::Template::Handler - Movable Type Template Handler
+MT::Template::Handler - MyMTOS Template Handler
 
 =head1 SYNOPSIS
 
@@ -96,7 +96,7 @@ invoke parent handler. takes $ctx, $args, $cond for handling context.
 
 =head2 $hdlr->code
 
-set/get handlers coderef. it's able to set Movable Type handler string (e.g. $MyPlugin::MyPlugin::Module::foo) too.
+set/get handlers coderef. it's able to set MyMTOS handler string (e.g. $MyPlugin::MyPlugin::Module::foo) too.
 
 =head2 $hdlr->type
 

@@ -1,6 +1,6 @@
 /*
 
-A Six Apart theme adapted for Movable Type default templates 
+A Six Apart theme adapted for MyMTOS default templates 
 name: Cityscape Tokyo  
 designer: Tiffany Chow  
 designer_url: http://tiffany.vox.com/ 
@@ -342,7 +342,6 @@ a:hover {
 
 .widget-powered .widget-content a {
     display: block;
-    background: url(../../images/bug-pbmt-black.png) no-repeat 50% 50%;
 }
 
 .widget-powered .widget-content img {

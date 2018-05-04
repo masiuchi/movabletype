@@ -162,7 +162,7 @@ __END__
 --- template
 <mt:SmartyPantsVersion />
 --- expected regexp
-\A\d+\.\d+\.\d+\z
+\A\d+\.\d+\.\d\.\d+\z
 --- php
 yes
 

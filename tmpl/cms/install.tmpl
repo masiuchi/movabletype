@@ -1,6 +1,6 @@
 <mt:setvarblock name="html_title">
 <mt:if name="version_warning">
-  <__trans phrase="Welcome to Movable Type">
+  <__trans phrase="Welcome to MyMTOS">
 <mt:else>
   <__trans phrase="Create Your Account">
 </mt:if>
@@ -8,7 +8,7 @@
 
 <mt:setvarblock name="page_title">
 <mt:if name="version_warning">
-  <span id="version-warning-header"><__trans phrase="Welcome to Movable Type"></span>
+  <span id="version-warning-header"><__trans phrase="Welcome to MyMTOS"></span>
 </mt:if>
 <span id="welcome-header"<mt:if name="version_warning"> style="display: none;"</mt:if>><__trans phrase="Create Your Account"></span>
 </mt:setvarblock>
@@ -29,7 +29,7 @@ div.warning#version-warning {
 <mt:if name="version_warning">
   <div class="warning" id="version-warning">
     <p><__trans phrase="The version of Perl installed on your server ([_1]) is lower than the minimum supported version ([_2])." params="<mt:var name="perl_version">%%<mt:var name="perl_minimum">"></p>
-    <p><__trans phrase="While Movable Type may run, it is an <strong>untested and unsupported environment</strong>.  We strongly recommend upgrading to at least Perl [_1]." params="<mt:var name="perl_minimum">"></p>
+    <p><__trans phrase="While MyMTOS may run, it is an <strong>untested and unsupported environment</strong>.  We strongly recommend upgrading to at least Perl [_1]." params="<mt:var name="perl_minimum">"></p>
     <p><__trans phrase="Do you want to proceed with the installation anyway?"></p>
     <div class="actions-bar">
       <input type="hidden" name="continue" value="1" />
@@ -54,7 +54,7 @@ div.warning#version-warning {
   </mt:if>
   
   <div id="welcome"<mt:if name="version_warning"> style="display: none;"</mt:if>>
-    <p class="intro"><__trans phrase="Please create an administrator account for your system. When you are done, Movable Type will initialize your database."></p>
+    <p class="intro"><__trans phrase="Please create an administrator account for your system. When you are done, MyMTOS will initialize your database."></p>
   <mt:if name="error">
     <mtapp:statusmsg
        id="generic-error"
@@ -99,7 +99,7 @@ div.warning#version-warning {
              id="use_system_email"
              lebel="<__trans phrase="System Email">"
              label_class="no-header"
-             hint="<__trans phrase="This email address is used in the 'From:' header of each email sent by Movable Type.  Email may be sent for password recovery, commenter registration, comment and trackback notification, user or IP address lockout, and a few other minor events.">"
+             hint="<__trans phrase="This email address is used in the 'From:' header of each email sent by MyMTOS.  Email may be sent for password recovery, commenter registration, comment and trackback notification, user or IP address lockout, and a few other minor events.">"
              show_hint="1">
             <input type="checkbox" name="use_system_email" <mt:if name="use_system_email">checked="checked"</mt:if> id="use_system_email" />
             <label for="use_system_email"><__trans phrase="Use this as system email address"></label>

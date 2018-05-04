@@ -1,8 +1,8 @@
 /*
- * CodePress regular expressions for Movable Type syntax highlighting
+ * CodePress regular expressions for MyMTOS syntax highlighting
  */
 
-// Movable Type (always supplemental to an existing language, so we
+// MyMTOS (always supplemental to an existing language, so we
 // don't replace Language.syntax, we add to it)
 Language.syntax.unshift(
 	{ input : /(\$)&gt;/g, output : '<u>$1</u>&gt;' }

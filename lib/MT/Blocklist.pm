@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -60,8 +60,7 @@ and for the specified I<$blog_id>.
 
 =head1 LICENSE
 
-The license that applies is the one you agreed to when downloading
-Movable Type.
+GPL v2.0
 
 =head1 AUTHOR & COPYRIGHT
 

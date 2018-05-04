@@ -1,17 +1,14 @@
-##          Movable Type configuration file                   ##
+##          MyMTOS configuration file                         ##
 ##                                                            ##
-## This file defines system-wide settings for Movable Type    ##
+## This file defines system-wide settings for MyMTOS          ##
 ## In total, there are over a hundred options, but only those ##
 ## critical for everyone are listed below.                    ##
-##                                                            ##
-## Information on all others can be found at:                 ##
-## http://www.movabletype.org/documentation/appendices/config-directives/ ##
 
 ################################################################
 ##################### REQUIRED SETTINGS ########################
 ################################################################
 
-# The CGIPath is the URL to your Movable Type directory
+# The CGIPath is the URL to your MyMTOS directory
 CGIPath    http://www.example.com/cgi-bin/mt/
 
 # The StaticWebPath is the URL to your mt-static directory

@@ -1,3 +1,8 @@
+2.051  2018-05-04  Masahiro IUCHI
+
+    * Remove lexicon files other than Japanese
+    * Remove "Movable Type" from files
+
 2.05 - Changed help URLs to point to new home for docs at movabletype.org.
 
 2.0.3 - Updated for bundling with MT.

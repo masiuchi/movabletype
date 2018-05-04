@@ -1,6 +1,6 @@
 #! /usr/bin/env perl
 
-# Movable Type (r) Open Source (C) 2005-2013 Six Apart, Ltd.
+# Copyright (C) 2005-2013 Six Apart, Ltd.
 # Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -17,7 +17,7 @@ BEGIN {
     shift @ARGV unless (-e $LANG);
     my $year = (localtime(time))[5] + 1900;
     print <<EOF;
-# Movable Type (r) Open Source (C) 2005-$year Six Apart, Ltd.
+# Copyright (C) 2005-$year Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #

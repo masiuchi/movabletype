@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -27,7 +27,7 @@ use MT::Asset;
 
 =head2 IfImageSupport
 
-A conditional tag that returns true when the Movable Type installation
+A conditional tag that returns true when the MyMTOS installation
 has the Perl modules necessary for manipulating image files.
 
 =cut

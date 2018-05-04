@@ -1,4 +1,5 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -9,7 +10,7 @@ our $VERSION = '0.09';
 
 =head1 NAME
 
-Build - Movable Type build functionality
+Build - MyMTOS build functionality
 
 =head1 SYNOPSIS
 
@@ -29,7 +30,7 @@ Build - Movable Type build functionality
 =head1 DESCRIPTION
 
 A C<Build> object contains the internal routines needed to build
-Movable Type distributions in multiple languages.
+MyMTOS distributions in multiple languages.
 
 =cut
 

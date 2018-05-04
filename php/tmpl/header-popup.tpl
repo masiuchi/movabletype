@@ -15,7 +15,7 @@ StaticURI = '<$MTStaticWebPath>';
 
 <body>
 
-<div id="topnav-img"><h1><img alt="Movable Type" src="<$MTStaticWebPath$>images/topnav-logo.gif" width="224" height="66" border="0" /></h1></div>
+<div id="topnav-img"><h1>MyMTOS</h1></div>
 
 <div class="body-pop">
 

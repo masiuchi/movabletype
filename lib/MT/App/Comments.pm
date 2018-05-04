@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -234,10 +234,10 @@ sub do_login {
         or return $app->error(
         $app->translate( 'Cannot load blog #[_1].', $blog_id ) );
     my $auths = $blog->commenter_authenticators;
-    if ( $auths !~ /MovableType/ ) {
+    if ( $auths !~ /MovableType|MyMTOS/ ) {
         $app->log(
             {   message => $app->translate(
-                    'Invalid commenter login attempt from [_1] to blog [_2](ID: [_3]) which does not allow Movable Type native authentication.',
+                    'Invalid commenter login attempt from [_1] to blog [_2](ID: [_3]) which does not allow MyMTOS native authentication.',
                     $name, $blog->name, $blog_id
                 ),
                 level    => MT::Log::WARNING(),
@@ -277,7 +277,7 @@ sub do_login {
                 {
                     return $app->login_form(
                         error => $app->translate(
-                            'Successfully authenticated, but signing up is not allowed.  Please contact your Movable Type system administrator.'
+                            'Successfully authenticated, but signing up is not allowed.  Please contact your MyMTOS system administrator.'
                         )
                     ) unless $commenter;
                 }
@@ -466,7 +466,7 @@ sub _send_signup_confirmation {
 
     my $token = $app->make_magic_token;
 
-    my $subject  = $app->translate('Movable Type Account Confirmation');
+    my $subject  = $app->translate('MyMTOS Account Confirmation');
     my $cgi_path = $app->config('CGIPath');
     $cgi_path .= '/' unless $cgi_path =~ m!/$!;
     my $url 
@@ -1317,7 +1317,7 @@ sub _make_comment {
     }
     if ( $commenter && ( 'do_reply' ne $app->mode ) ) {
         if ( MT::Author::AUTHOR() == $commenter->type ) {
-            if ( $blog->commenter_authenticators !~ /MovableType/ ) {
+            if ( $blog->commenter_authenticators !~ /MovableType|MyMTOS/ ) {
                 $commenter = undef;
             }
             else {

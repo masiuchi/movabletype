@@ -1,10 +1,11 @@
 name: StyleCatcher
 id: StyleCatcher
 key: StyleCatcher
-author_link: http://www.movabletype.org/
+author_link: https://www.movabletype.org/
 author_name: Six Apart, Ltd.
+plugin_link: https://github.com/masiuchi/movabletype
 description: <MT_TRANS phrase="StyleCatcher lets you easily browse through styles and then apply them to your blog in just a few clicks.">
-version: 2.44
+version: 2.441
 schema_version: 1.0
 l10n_class: StyleCatcher::L10N
 stylecatcher_libraries:
@@ -19,7 +20,7 @@ stylecatcher_libraries:
     sixapart_mt4:
         url: http://www.sixapart.com/movabletype/styles/mt4/library
         label: MT 4 Style Library
-        description_label: A collection of styles compatible with Movable Type 4 default templates.
+        description_label: A collection of styles compatible with MT 4 default templates.
         order: 1
 
 template_sets:

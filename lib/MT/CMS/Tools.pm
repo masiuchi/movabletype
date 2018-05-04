@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -434,11 +434,11 @@ sub test_system_mail {
     my %head = (
         To      => $app->param('to_email_address'),
         From    => $cfg->EmailAddressMain,
-        Subject => $app->translate("Test email from Movable Type")
+        Subject => $app->translate("Test email from MyMTOS")
     );
 
     my $body
-        = $app->translate("This is the test email sent by Movable Type.");
+        = $app->translate("This is the test email sent by MyMTOS.");
 
     require MT::Mail;
     if ( MT::Mail->send( \%head, $body ) ) {
@@ -522,7 +522,7 @@ sub cfg_system_general {
         my $config_warning = join( ", ", @config_warnings );
 
         $param{config_warning} = $app->translate(
-            "These setting(s) are overridden by a value in the Movable Type configuration file: [_1]. Remove the value from the configuration file in order to control the value on this page.",
+            "These setting(s) are overridden by a value in the MyMTOS configuration file: [_1]. Remove the value from the configuration file in order to control the value on this page.",
             $config_warning
         );
     }
@@ -1032,7 +1032,7 @@ sub backup {
     my $ts      = sprintf "%04d-%02d-%02d-%02d-%02d-%02d", $ts[5] + 1900,
         $ts[4] + 1,
         @ts[ 3, 2, 1, 0 ];
-    my $file = "Movable_Type-$ts" . '-Backup';
+    my $file = "MyMTOS-$ts" . '-Backup';
 
     my $param = { return_args => '__mode=start_backup' };
     $app->{no_print_body} = 1;
@@ -1109,7 +1109,7 @@ sub backup {
                     "$file.xml" );
                 $arc->add_string(
                     "<manifest xmlns='"
-                        . MT::BackupRestore::NS_MOVABLETYPE()
+                        . MT::BackupRestore::NS_MYMTOS()
                         . "'><file type='backup' name='$file.xml' /></manifest>",
                     "$file.manifest"
                 );
@@ -1144,7 +1144,7 @@ sub backup {
         $splitter = sub {
             my ( $findex, $header ) = @_;
 
-            print $fh '</movabletype>';
+            print $fh '</mymtos>';
             close $fh;
             my $filename
                 = File::Spec->catfile( $temp_dir, $file . "-$findex.xml" );
@@ -1169,7 +1169,7 @@ sub backup {
             $fh = gensym();
             open $fh, ">$filename";
             print $fh "<manifest xmlns='"
-                . MT::BackupRestore::NS_MOVABLETYPE() . "'>\n";
+                . MT::BackupRestore::NS_MYMTOS() . "'>\n";
             for my $file (@files) {
                 my $name = $file->{filename};
                 print $fh "<file type='backup' name='$name' />\n";
@@ -1328,14 +1328,14 @@ sub backup_download {
         my @ts = gmtime( $sess->start );
         my $ts = sprintf "%04d-%02d-%02d-%02d-%02d-%02d", $ts[5] + 1900,
             $ts[4] + 1, @ts[ 3, 2, 1, 0 ];
-        $newfilename = "Movable_Type-$ts" . '-Backup';
+        $newfilename = "MyMTOS-$ts" . '-Backup';
         $sess->remove;
     }
     else {
         $newfilename = $app->param('name');
         return
             if $newfilename
-                !~ /Movable_Type-\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}-Backup(?:-\d+)?\.\w+/;
+                !~ /MyMTOS-\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}-Backup(?:-\d+)?\.\w+/;
         $filename = $newfilename;
     }
 
@@ -2131,7 +2131,7 @@ sub dialog_restore_upload {
         else {
             $app->log(
                 {   message => $app->translate(
-                        "Successfully restored objects to Movable Type system by user '[_1]'",
+                        "Successfully restored objects to MyMTOS system by user '[_1]'",
                         $app->user->name
                     ),
                     level    => MT::Log::INFO(),
@@ -2502,7 +2502,7 @@ sub restore_file {
 
     $app->log(
         {   message => $app->translate(
-                "Successfully restored objects to Movable Type system by user '[_1]'",
+                "Successfully restored objects to MyMTOS system by user '[_1]'",
                 $app->user->name
             ),
             level    => MT::Log::INFO(),
@@ -2587,7 +2587,7 @@ sub restore_directory {
 
     $app->log(
         {   message => $app->translate(
-                "Successfully restored objects to Movable Type system by user '[_1]'",
+                "Successfully restored objects to MyMTOS system by user '[_1]'",
                 $app->user->name
             ),
             level    => MT::Log::INFO(),
@@ -2611,7 +2611,7 @@ sub restore_upload_manifest {
     require MT::BackupRestore;
     my $backups = MT::BackupRestore->process_manifest($fh);
     return $app->errtrans(
-        "Uploaded file was not a valid Movable Type backup manifest file.")
+        "Uploaded file was not a valid MyMTOS backup manifest file.")
         if !defined($backups);
 
     my $files     = $backups->{files};
@@ -2704,7 +2704,7 @@ sub _backup_finisher {
     else {
         $message
             = $app->translate(
-            "Movable Type system was successfully backed up by user '[_1]'",
+            "MyMTOS system was successfully backed up by user '[_1]'",
             $app->user->name );
     }
     $app->log(

@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -902,7 +902,7 @@ sub _hdlr_asset_file_path {
 
 =head2 AssetDateAdded
 
-The date the asset in context was added to Movable Type.
+The date the asset in context was added to MyMTOS.
 
 B<Attributes:>
 

@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -2434,7 +2434,7 @@ sub _hdlr_entry_blog_url {
 
 =head2 EntryEditLink
 
-A link to edit the entry in context from the Movable Type CMS. This tag is
+A link to edit the entry in context from the MyMTOS CMS. This tag is
 only recognized in system templates where an authenticated user is
 logged-in.
 

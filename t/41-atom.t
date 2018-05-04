@@ -156,7 +156,7 @@ foreach my $base_uri ( qw{/mt-atom.cgi/weblog } ) { #/mt-atom.cgi/1.0 } ) {
         # check if entries have replies link relation
         my $failed = 0;
         foreach my $entry (@entries) {
-            next if !$entry->id && $entry->title =~ /^I just finished installing Movable Type/;
+            next if !$entry->id && $entry->title =~ /^I just finished installing MyMTOS/;
             my $mt_entry = MT::Entry->load({
                 atom_id => $entry->id,
                 blog_id => 1,

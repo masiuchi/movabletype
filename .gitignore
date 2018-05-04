@@ -57,3 +57,5 @@ t/db/mt.db
 
 .DS_Store
 
+node_modules/
+

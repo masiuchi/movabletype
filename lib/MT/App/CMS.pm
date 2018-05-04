@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2016, 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -337,14 +337,6 @@ sub core_widgets {
             set      => 'main',
             singular => 1,
             view     => 'user',
-        },
-        mt_news => {
-            label    => 'Movable Type News',
-            template => 'widget/mt_news.tmpl',
-            handler  => "${pkg}Dashboard::mt_news_widget",
-            singular => 1,
-            set      => 'sidebar',
-            view     => [],
         },
         blog_stats => {
             label    => 'Blog Stats',
@@ -2958,9 +2950,6 @@ sub set_default_tmpl_params {
     $param->{athena_nav}       = 1;
 
     $param->{"auth_mode_$pref"} = 1;
-    $param->{mt_news}           = $app->config('NewsURL');
-    $param->{mt_support}        = $app->config('SupportURL');
-    $param->{mt_feedback_url}   = $app->config('FeedbackURL');
     my $lang = lc MT->current_language || 'en_us';
     $param->{language_id} = ( $lang !~ /en[_-]us/ ) ? $lang : '';
     $param->{mode} = $app->mode;
@@ -5113,7 +5102,7 @@ MT::App::CMS
 =head1 SYNOPSIS
 
 The I<MT::App::CMS> module is the primary application module for
-Movable Type. It is the administrative interface that is used to
+MyMTOS. It is the administrative interface that is used to
 manage blogs, entries, comments, trackbacks, templates, etc.
 
 =cut

@@ -1,5 +1,5 @@
 <?php
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -36,7 +36,7 @@ function _auth_icon_url($static_path, $author) {
     }
 
     if ( $author->author_type == 1 ) {
-        return $static_path . 'images/comment/mt_logo.png';
+        return $static_path . 'images/comment/mymtos_logo.png';
     }
 
     global $_commenter_auths;

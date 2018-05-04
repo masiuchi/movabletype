@@ -119,11 +119,7 @@ h3 {
     height: 37px;
     margin: 0 0 20px;
     font-size: 26px;
-    background: #fff url(../images/chromeless/mt_logo.png) center no-repeat;
-}
-#brand img, 
-#brand span {
-    display: none;
+    font-family: 'Montserrat', sans-serif;
 }
 #nav {
     position: absolute;

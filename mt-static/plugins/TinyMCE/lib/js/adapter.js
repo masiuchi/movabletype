@@ -1,5 +1,5 @@
 /*
- * Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+ * Copyright (C) 2001-2013 Six Apart, Ltd.
  * This program is distributed under the terms of the
  * GNU General Public License, version 2.
  *
@@ -34,7 +34,7 @@ $.extend(MT.Editor.TinyMCE, MT.Editor, {
         indent_before : 'p,h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,ul,ol,li,dl,dt,dd,area,table,thead,tfoot,tbody,tr,iframe,section,article,hgroup,aside,figure,option,optgroup,datalist',
         indent_after : 'p,h1,h2,h3,h4,h5,h6,blockquote,div,title,style,pre,script,td,ul,ol,li,dl,dt,dd,area,table,thead,tfoot,tbody,tr,iframe,section,article,hgroup,aside,figure,option,optgroup,datalist',
 
-        // The "theme_advanced_buttons" should not use in Movable Type.
+        // The "theme_advanced_buttons" should not use in MyMTOS.
         // Use "plugin_mt_*_buttons" instead.
         // theme_advanced_buttons1: '',
 

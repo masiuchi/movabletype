@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -690,7 +690,7 @@ sub _feed_system {
     my $link = $app->base . $app->mt_uri( mode => 'list', args => $args );
     my $param = {
         feed_link  => $link,
-        feed_title => $app->translate('Movable Type System Activity')
+        feed_title => $app->translate('MyMTOS System Activity')
     };
     my $terms = $app->apply_log_filter($args);
     $$feed = $app->process_log_feed( $terms, $param );
@@ -712,7 +712,7 @@ sub _feed_debug {
     my $link  = $app->base . $app->mt_uri( mode => 'list', args => $args );
     my $param = {
         feed_link  => $link,
-        feed_title => $app->translate('Movable Type Debug Activity'),
+        feed_title => $app->translate('MyMTOS Debug Activity'),
     };
     $$feed = $app->process_log_feed( $terms, $param );
 }
@@ -904,7 +904,7 @@ MT::App::ActivityFeeds
 
 =head1 DESCRIPTION
 
-Movable Type application for producing activity feeds. Activity feeds
+MyMTOS application for producing activity feeds. Activity feeds
 are typically produced from the user's log table, but the application
 relies heavily on the MT callback architecture for generating the
 feed content.

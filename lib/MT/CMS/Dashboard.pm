@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -308,22 +308,6 @@ sub recent_blogs_widget {
     $terms{class} = 'blog';
     my $count = MT::Blog->count( \%terms, \%args );
     $param->{has_more_blogs} = 1 if $count > 10;
-}
-
-sub mt_news_widget {
-    my $app = shift;
-    my ( $tmpl, $param ) = @_;
-
-    $param->{news_html} = get_newsbox_content($app) || '';
-}
-
-sub get_newsbox_content {
-    my $app         = shift;
-    my $newsbox_url = $app->config('NewsboxURL');
-    if ( $newsbox_url && $newsbox_url ne 'disable' ) {
-        return MT::Util::get_newsbox_html( $newsbox_url, 'NW' );
-    }
-    return q();
 }
 
 sub mt_blog_stats_widget {

@@ -253,7 +253,7 @@ TC.attachLoadEvent(init);
        id="url"
        label="<__trans phrase="Website URL">"
        show_hint="1"
-       hint="<__trans phrase="This User's website (e.g. http://www.movabletype.com/).  If the Website URL and Display Name fields are both populated, Movable Type will by default publish entries and comments with bylines linked to this URL.">">
+       hint="<__trans phrase="This User's website (e.g. https://example.com/).  If the Website URL and Display Name fields are both populated, MyMTOS will by default publish entries and comments with bylines linked to this URL.">">
       <input type="text" name="url" id="url" class="text" value="<mt:var name="url" escape="html">" />
     </mtapp:setting>
 
@@ -344,7 +344,7 @@ TC.attachLoadEvent(init);
        id="preferred_language"
        label="<__trans phrase="Language">"
        show_hint="1"
-       hint="<__trans phrase="Display language for the Movable Type interface.">">
+       hint="<__trans phrase="Display language for the MyMTOS interface.">">
       <select name="preferred_language" id="preferred_language">
       <mt:loop name="languages">
         <option value="<mt:var name="l_tag">"<mt:if name="l_selected"> selected="selected"</mt:if>><mt:var name="l_name"></option>
@@ -368,7 +368,7 @@ TC.attachLoadEvent(init);
        id="date_format"
        label="<__trans phrase="Date Format">"
        show_hint="1"
-       hint="<__trans phrase="Default date formatting in the Movable Type interface.">">
+       hint="<__trans phrase="Default date formatting in the MyMTOS interface.">">
       <select name="date_format" id="date_format">
         <option value="relative"<mt:if name="date_format" eq="relative"> selected="selected"</mt:if>><__trans phrase="Relative"></option>
         <option value="full"<mt:if name="date_format" eq="full"> selected="selected"</mt:if>><__trans phrase="Full"></option>

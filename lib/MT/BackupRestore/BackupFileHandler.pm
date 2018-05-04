@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -44,11 +44,10 @@ sub start_element {
 
     if ( $self->{start} ) {
         die MT->translate(
-            'The uploaded file was not a valid Movable Type backup manifest file.'
-            )
-            if !(      ( 'movabletype' eq $name )
-                    && ( MT::BackupRestore::NS_MOVABLETYPE() eq $ns )
-            );
+            'The uploaded file was not a valid MyMTOS backup manifest file.')
+            unless ( 'movabletype' eq $name
+            && MT::BackupRestore::NS_MOVABLETYPE() eq $ns )
+            || ( 'mymtos' eq $name && MT::BackupRestore::NS_MYMTOS() eq $ns );
 
         $self->{backup_what} = $attrs->{'{}backup_what'}->{Value};
 
@@ -59,7 +58,7 @@ sub start_element {
         if ( $schema != $self->{schema_version} ) {
             $self->{critical} = 1;
             my $message = MT->translate(
-                'The uploaded backup manifest file was created with Movable Type, but the schema version ([_1]) differs from the one used by this system ([_2]).  You should not restore this backup to this version of Movable Type.',
+                'The uploaded backup manifest file was created with MyMTOS, but the schema version ([_1]) differs from the one used by this system ([_2]).  You should not restore this backup to this version of MyMTOS.',
                 $schema, $self->{schema_version}
             );
             MT->log(
@@ -87,12 +86,14 @@ sub start_element {
         $self->{current_text} = [$name];
     }
     else {
-        if ( MT::BackupRestore::NS_MOVABLETYPE() eq $ns ) {
+        if (   MT::BackupRestore::NS_MOVABLETYPE() eq $ns
+            || MT::BackupRestore::NS_MYMTOS() eq $ns )
+        {
             my $class = MT->model($name);
             unless ($class) {
                 push @{ $self->{errors} },
                     MT->translate(
-                    '[_1] is not a subject to be restored by Movable Type.',
+                    '[_1] is not a subject to be restored by MyMTOS.',
                     $name );
             }
             else {
@@ -222,8 +223,8 @@ sub start_element {
                     }
                 }
                 elsif ( 'filter' eq $name ) {
-                    if ($objects->{ "MT::Author#"
-                                . $column_data{author_id} } )
+                    if ( $objects->{ "MT::Author#" . $column_data{author_id} }
+                        )
                     {
                         $obj = $class->load(
                             {   author_id => $column_data{author_id},
@@ -329,7 +330,7 @@ sub start_element {
                         $obj->column( 'external_id',
                             $realcolumn_data{external_id} )
                             if $name eq 'author'
-                                && defined $realcolumn_data{external_id};
+                            && defined $realcolumn_data{external_id};
                         foreach my $metacol ( keys %metacolumns ) {
                             next
                                 if ( 'vclob' eq $metacolumns{$metacol} )
@@ -413,9 +414,13 @@ sub end_element {
                             = MT::Serialize->serializer_version($text);
                         if ( $ser_ver == 3 ) {
                             my $conf_ver = lc MT->config->Serializer;
-                            if ( ( $conf_ver ne 'storable' ) && ( $conf_ver ne 'mts' ) ) {
+                            if (   ( $conf_ver ne 'storable' )
+                                && ( $conf_ver ne 'mts' ) )
+                            {
                                 $self->{critical} = 1;
-                                die MT->translate('Invalid serializer version was specified.');
+                                die MT->translate(
+                                    'Invalid serializer version was specified.'
+                                );
                             }
                         }
                         $text = MT::Serialize->unserialize($text);
@@ -437,9 +442,13 @@ sub end_element {
                             = MT::Serialize->serializer_version($text);
                         if ( $ser_ver == 3 ) {
                             my $conf_ver = lc MT->config->Serializer;
-                            if ( ( $conf_ver ne 'storable' ) && ( $conf_ver ne 'mts' ) ) {
+                            if (   ( $conf_ver ne 'storable' )
+                                && ( $conf_ver ne 'mts' ) )
+                            {
                                 $self->{critical} = 1;
-                                die MT->translate('Invalid serializer version was specified.');
+                                die MT->translate(
+                                    'Invalid serializer version was specified.'
+                                );
                             }
                         }
                         $text = MT::Serialize->unserialize($text);
@@ -455,9 +464,9 @@ sub end_element {
             my $old_id = $obj->id;
             unless (
                 (      ( 'author' eq $name )
-                    || ( 'template'   eq $name )
-                    || ( 'filter'     eq $name )
-                    || ( 'image'      eq $name )
+                    || ( 'template' eq $name )
+                    || ( 'filter' eq $name )
+                    || ( 'image' eq $name )
                     || ( 'plugindata' eq $name )
                 )
                 && ( exists $self->{loaded} )
@@ -481,7 +490,8 @@ sub end_element {
                     $self->{callback}->("\n");
                     $self->{callback}->(
                         MT->translate(
-                            "Tag '[_1]' exists in the system.", $obj->name
+                            "Tag '[_1]' exists in the system.",
+                            $obj->name
                         )
                     );
                 }
@@ -634,7 +644,8 @@ sub end_element {
                     $self->{records} = $records + 1;
                     my $cb = "restored.$name";
                     $cb .= ":$ns"
-                        if MT::BackupRestore::NS_MOVABLETYPE() ne $ns;
+                        if ( MT::BackupRestore::NS_MOVABLETYPE() ne $ns
+                        || MT::BackupRestore::NS_MYMTOS() ne $ns );
                     MT->run_callbacks( $cb, $obj, $self->{callback} );
                     $obj->call_trigger( 'post_save', $obj );
                 }

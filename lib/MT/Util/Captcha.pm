@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -24,7 +24,7 @@ sub check_availability {
     eval "require Image::Magick;";
     if ($@) {
         return MT->translate(
-            'Movable Type default CAPTCHA provider requires Image::Magick.');
+            'MyMTOS default CAPTCHA provider requires Image::Magick.');
     }
 
     my $cfg  = MT->config;

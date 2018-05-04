@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -507,7 +507,7 @@ MT::ObjectDriver::DDL - Data Definition Language driver
 =head1 DESCRIPTION
 
 The Data Definition Language (DDL) drivers provide compatible SQL for creating
-and changing the database tables that contain Movable Type's data. The DDL
+and changing the database tables that contain MyMTOS's data. The DDL
 drivers are mainly used by MT::Upgrade, the automatic upgrader.
 
 =head1 METHODS

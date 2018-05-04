@@ -7,7 +7,7 @@
   <input type="hidden" name="default_language" value="<mt:var name="default_language" escape="html">" />
   <input type="hidden" name="config" value="<mt:var name="config" escape="html">" />
 <mt:if name="success">
-  <p class="intro"><span class="ready"><__trans phrase="Your mail configuration is complete."></span> <__trans phrase="Check your email to confirm receipt of a test email from Movable Type and then proceed to the next step."></p>
+  <p class="intro"><span class="ready"><__trans phrase="Your mail configuration is complete."></span> <__trans phrase="Check your email to confirm receipt of a test email from MyMTOS and then proceed to the next step."></p>
   <p id="more"><a href="javascript:void(0)" onclick="hideByID('buttons'); hideByID('more'); showByID('settings');"><__trans phrase="Show current mail settings"></a></p>
   <div id="buttons" class="actions-bar">
     <button
@@ -28,7 +28,7 @@
 </mt:if>
 
   <div id="settings"<mt:if name="success"> style="display: none;"</mt:if>>
-    <p class="intro"><__trans phrase="Periodically Movable Type will send email for password recovery, to inform authors of new comments, and other events. If not using Sendmail (default on unix servers), an SMTP Server must be specified."></p>
+    <p class="intro"><__trans phrase="Periodically MyMTOS will send email for password recovery, to inform authors of new comments, and other events. If not using Sendmail (default on unix servers), an SMTP Server must be specified."></p>
   <mt:if name="send_error">
     <mtapp:statusmsg
        id="send_error"
@@ -53,7 +53,7 @@
          label="<__trans phrase="System Email Address">"
          label_class="top-label"
          required="1"
-         hint="<__trans phrase="This email address is used in the 'From:' header of each email sent by Movable Type.  Email may be sent for password recovery, commenter registration, comment and trackback notification, user or IP address lockout, and a few other minor events.">"
+         hint="<__trans phrase="This email address is used in the 'From:' header of each email sent by MyMTOS.  Email may be sent for password recovery, commenter registration, comment and trackback notification, user or IP address lockout, and a few other minor events.">"
          show_hint="1">
         <input type="text" id="email_address_main" class="text full email required" name="email_address_main" value="<mt:if name="email_address_main"><mt:var name="email_address_main" escape="html"></mt:if>" />
       </mtapp:setting>

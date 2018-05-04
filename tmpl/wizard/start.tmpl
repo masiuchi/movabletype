@@ -59,7 +59,7 @@ label {
 </mt:setvarblock>
 
 <mt:unless name="cfg_exists">
-<mt:setvarblock name="page_title"><__trans phrase="Welcome to Movable Type"></mt:setvarblock>
+<mt:setvarblock name="page_title"><__trans phrase="Welcome to MyMTOS"></mt:setvarblock>
   <mt:unless name="valid_static_path">
     <mt:unless name="file_invalid">
 <mt:setvarblock name="html_head" append="1">
@@ -82,9 +82,9 @@ label {
   <input type="hidden" name="step" value="pre_start" />
   <input type="hidden" name="config" value="<mt:var name="config" escape="html">" />
   <noscript>
-    <p><__trans phrase="Movable Type requires that you enable JavaScript in your browser. Please enable it and refresh this page to proceed."></p>
+    <p><__trans phrase="MyMTOS requires that you enable JavaScript in your browser. Please enable it and refresh this page to proceed."></p>
   </noscript>
-  <p class="intro"><__trans phrase="This wizard will help you configure the basic settings needed to run Movable Type."></p>
+  <p class="intro"><__trans phrase="This wizard will help you configure the basic settings needed to run MyMTOS."></p>
   <mtapp:setting
      id="default_language"
      label="<__trans phrase="Language">"
@@ -117,11 +117,11 @@ label {
   </mtapp:statusmsg>
   </mt:if>
 
-    <p><__trans phrase="Movable Type ships with directory named [_1] which contains a number of important files such as images, javascript files and stylesheets." params="<strong>mt-static</strong>"></p>
+    <p><__trans phrase="MyMTOS ships with directory named [_1] which contains a number of important files such as images, javascript files and stylesheets." params="<strong>mt-static</strong>"></p>
   <mt:if name="mt_static_exists">
-    <p><__trans phrase="The [_1] directory is in the main Movable Type directory which this wizard script resides, but due to your web server's configuration, the [_1] directory is not accessible in this location and must be moved to a web-accessible location (e.g., your web document root directory)." params="<strong>mt-static</strong>"></p>
+    <p><__trans phrase="The [_1] directory is in the main MyMTOS directory which this wizard script resides, but due to your web server's configuration, the [_1] directory is not accessible in this location and must be moved to a web-accessible location (e.g., your web document root directory)." params="<strong>mt-static</strong>"></p>
   <mt:else>
-    <p><__trans phrase="This directory has either been renamed or moved to a location outside of the Movable Type directory."></p>
+    <p><__trans phrase="This directory has either been renamed or moved to a location outside of the MyMTOS directory."></p>
   </mt:if>
     <p><__trans phrase="Once the [_1] directory is in a web-accessible location, specify the location below." params="<strong>mt-static</strong>"></p>
   </div>
@@ -161,7 +161,7 @@ label {
   </div>
 </form>
 <mt:else>
-<p><__trans phrase="A configuration (mt-config.cgi) file already exists, <a href="[_1]">sign in</a> to Movable Type." params="mt.cgi"></p>
+<p><__trans phrase="A configuration (mt-config.cgi) file already exists, <a href="[_1]">sign in</a> to MyMTOS." params="mt.cgi"></p>
 <p><__trans phrase="To create a new configuration file using the Wizard, remove the current configuration file and then refresh this page"></p>
 </mt:unless>
 <mt:setvarblock name="jq_js_include" append="1">

@@ -1,4 +1,4 @@
-# Movable Type (r) Open Source (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2001-2013 Six Apart, Ltd.
 # Copyright (C) 2016, 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
@@ -44,12 +44,12 @@ sub init {
 sub core_import_formats {
     return {
         'import_mt' => {
-            label   => 'Movable Type',
+            label   => 'MyMTOS',
             type    => 'MT::ImportExport',
             handler => 'MT::ImportExport::import_contents',
         },
         'import_mt_format' => {
-            label   => 'Another system (Movable Type format)',
+            label   => 'Another system (MyMTOS format)',
             type    => 'MT::ImportExport',
             handler => 'MT::ImportExport::import_contents',
             options => [ 'title_start', 'title_end', 'default_status' ],

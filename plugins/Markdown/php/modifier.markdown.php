@@ -4,10 +4,12 @@
 # Markdown  -  A text-to-HTML conversion tool for web writers
 #
 # Copyright (c) 2004-2005 John Gruber  
-# <http://daringfireball.net/projects/markdown/>
+# <https://daringfireball.net/projects/markdown/>
 #
 # Copyright (c) 2004-2005 Michel Fortin - PHP Port  
-# <http://www.michelf.com/projects/php-markdown/>
+# <https://www.michelf.com/projects/php-markdown/>
+#
+# Copyright (c) 2018 Masahiro IUCHI
 #
 
 
@@ -17,8 +19,8 @@ global	$MarkdownPHPVersion, $MarkdownSyntaxVersion,
 		$md_escape_table, $md_backslash_escape_table, 
 		$md_list_level;
 
-$MarkdownPHPVersion    = '1.0.1c'; # Fri 9 Dec 2005
-$MarkdownSyntaxVersion = '1.0.1';  # Sun 12 Dec 2004
+$MarkdownPHPVersion    = '1.0.1.1';
+$MarkdownSyntaxVersion = '1.0.1.1';
 
 
 #
