@@ -1,8 +1,9 @@
 id: TinyMCE
-name: TinyMCE
-version: 1.11
-author_link: http://www.movabletype.org/
+name: TinyMCE for MyMTOS
+version: 1.12
+author_link: https://www.movabletype.org/
 author_name: Six Apart, Ltd.
+plugin_link: https://github.com/masiuchi/movabletype
 description: <MT_TRANS phrase="Default WYSIWYG editor.">
 l10n_class: TinyMCE::L10N
 

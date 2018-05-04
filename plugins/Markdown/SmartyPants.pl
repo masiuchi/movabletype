@@ -8,11 +8,13 @@
 #
 # Copyright (c) 2003-2004 John Gruber
 #
+# Copyright (c) 2018 Masahiro IUCHI
+#
 
 package SmartyPants;
 use strict;
 use vars qw($VERSION);
-$VERSION = "1.5.1";
+$VERSION = "1.5.2";
 
 # Fri 12 Mar 2004
 
@@ -31,13 +33,13 @@ my $tags_to_skip = qr!<(/?)(?:pre|code|kbd|script|math)[\s>]!;
 
 require MT;
 MT->add_plugin(
-    {   name => "SmartyPants",
+    {   name => "SmartyPants for MyMTOS",
         description =>
             q(<MT_TRANS phrase="Easily translates plain punctuation characters into 'smart' typographic punctuation.">),
         version     => $VERSION,
         author_name => "John Gruber",
-        author_link => "http://daringfireball.net/",
-        plugin_link => "http://daringfireball.net/projects/smartypants/",
+        author_link => "https://daringfireball.net/",
+        plugin_link => "https://github.com/masiuchi/movabletype",
         registry    => {
             tags => {
                 modifier => {

@@ -17,16 +17,16 @@ use vars qw($VERSION);
 
 sub BEGIN {
     @MT::Plugin::SpamLookup::KeywordFilter::ISA = ('MT::Plugin');
-    $VERSION                                    = '2.1';
+    $VERSION                                    = '2.11';
     my $plugin;
     $plugin = new MT::Plugin::SpamLookup::KeywordFilter(
-        {   name    => 'SpamLookup - Keyword Filter',
+        {   name    => 'SpamLookup for MyMTOS - Keyword Filter',
             version => $VERSION,
             description =>
                 '<MT_TRANS phrase="SpamLookup module for moderating and junking feedback using keyword filters.">',
-            doc_link        => 'http://www.spamlookup.com/wiki/KeywordFilter',
             author_name     => 'Six Apart, Ltd.',
-            author_link     => 'http://www.movabletype.org/',
+            author_link     => 'https://www.movabletype.org/',
+            plugin_link     => 'https://github.com/masiuchi/movabletype',
             config_template => 'word_config.tmpl',
             l10n_class      => 'spamlookup::L10N',
             settings        => new MT::PluginSettings(

@@ -2,7 +2,7 @@
 # MT-Textile Text Formatter
 # A plugin for MT
 #
-# Release 2.05
+# Release 2.06
 #
 # Brad Choate
 # http://www.bradchoate.com/
@@ -12,6 +12,8 @@
 # If you distribute it, please keep this notice intact.
 #
 # Copyright (c) 2003-2008 Brad Choate
+#
+# Copyright (c) 2018 Masahiro IUCHI
 # ---------------------------------------------------------------------------
 # $Id$
 # ---------------------------------------------------------------------------
@@ -22,15 +24,16 @@ use strict;
 use MT;
 use base qw( MT::Plugin );
 
-our $VERSION = 2.05;
+our $VERSION = 2.06;
 our ( $_initialized, $Have_SmartyPants );
 
 MT->add_plugin(
     __PACKAGE__->new(
-        {   name        => "Textile",
+        {   name        => "Textile for MyMTOS",
             description => '<MT_TRANS phrase="A humane web text generator.">',
             author_name => "Brad Choate",
-            author_link => "http://bradchoate.com/",
+            author_link => "https://bradchoate.com/",
+            plugin_link => 'https://github.com/masiuchi/movabletype',
             version     => $VERSION,
             registry    => {
                 text_filters => {

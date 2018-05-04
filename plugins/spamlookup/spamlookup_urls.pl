@@ -17,16 +17,16 @@ use vars qw($VERSION);
 
 sub BEGIN {
     @MT::Plugin::SpamLookup::Link::ISA = ('MT::Plugin');
-    $VERSION                           = '2.11';
+    $VERSION                           = '2.12';
     my $plugin;
     $plugin = new MT::Plugin::SpamLookup::Link(
-        {   name    => 'SpamLookup - Link',
+        {   name    => 'SpamLookup for MyMTOS - Link',
             version => $VERSION,
             description =>
                 '<__trans phrase="SpamLookup module for junking and moderating feedback based on link filters.">',
-            doc_link        => 'http://www.spamlookup.com/wiki/LinkFilter',
             author_name     => 'Six Apart, Ltd.',
-            author_link     => 'http://www.movabletype.org/',
+            author_link     => 'https://www.movabletype.org/',
+            plugin_link     => 'https://github.com/masiuchi/movabletype',
             config_template => 'url_config.tmpl',
             l10n_class      => 'spamlookup::L10N',
             settings        => new MT::PluginSettings(

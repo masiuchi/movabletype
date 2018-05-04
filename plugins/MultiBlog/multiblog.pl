@@ -14,20 +14,19 @@ use warnings;
 
 use base qw( MT::Plugin );
 
-our $VERSION = '2.3';
+our $VERSION = '2.31';
 my $plugin;
 $plugin = MT::Plugin::MultiBlog->new(
     {   id   => 'multiblog',
-        name => 'MultiBlog',
+        name => 'MultiBlog for MyMTOS',
         description =>
             '<MT_TRANS phrase="MultiBlog allows you to publish content from other blogs and define publishing rules and access controls between them.">',
         version                => $VERSION,
         schema_version         => $VERSION,
         author_name            => 'Six Apart, Ltd.',
-        author_link            => 'http://www.movabletype.org/',
+        author_link            => 'https://www.movabletype.org/',
+        plugin_link            => 'https://github.com/masiuchi/movabletype',
         system_config_template => 'system_config.tmpl',
-        doc_link =>
-            'http://www.movabletype.org/documentation/appendices/tags/multiblog.html',
         blog_config_template => 'blog_config.tmpl',
         settings             => new MT::PluginSettings(
             [   [   'default_access_allowed',
@@ -351,7 +350,7 @@ sub update_trigger_cache {
                     $scope = "system";
                 }
                 elsif ( $id eq '_blogs_in_website' ) {
-                    my $app        = MT::instance;
+                    my $app        = MT->instance;
                     my $website_id = $app->param('blog_id');
                     next unless $website_id;
                     if ( my $website
@@ -380,7 +379,7 @@ sub update_trigger_cache {
                 $scope = "system";
             }
             elsif ( $id eq '_blogs_in_website' ) {
-                my $app        = MT::instance;
+                my $app        = MT->instance;
                 my $website_id = $app->param('blog_id');
                 next unless $website_id;
                 if ( my $website = $app->model('website')->load($website_id) )

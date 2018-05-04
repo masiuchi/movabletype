@@ -1,8 +1,9 @@
 id: FormattedText
-name: FormattedText
-version: 1.01
-author_link: http://www.movabletype.org/
+name: FormattedText for MyMTOS
+version: 1.02
+author_link: https://www.movabletype.org/
 author_name: Six Apart, Ltd.
+plugin_link: https://github.com/masiuchi/movabletype
 description: <MT_TRANS phrase="Manage boilerplate.">
 l10n_class: FormattedText::L10N
 
