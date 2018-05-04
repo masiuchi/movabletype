@@ -202,7 +202,7 @@ sub ascii_only { ( ( ref $_[0] ) || $_[0] ) eq __PACKAGE__ }
     '_DATE_FROM'            => 'From',
     '_DATE_TO'              => 'To',
     '_SHORT_MAY'            => 'May',
-    '_MTCOM_URL'            => 'https://github.com/masiuchi/movabletype',
+    '_MTCOM_URL'            => 'https://github.com/mymtos/mymtos',
     '_CATEGORY_BASENAME'    => 'Basename',
 
     '_AUTO'                => 1,
@@ -227,7 +227,7 @@ sub ascii_only { ( ( ref $_[0] ) || $_[0] ) eq __PACKAGE__ }
     'UTC+10' => 'UTC+10 (East Australian Standard Time)',
 
     '_POWERED_BY' =>
-        'Powered by <a href="https://github.com/masiuchi/movabletype"><$MTProductName$></a>',
+        'Powered by <a href="https://github.com/mymtos/mymtos"><$MTProductName$></a>',
     '_DISPLAY_OPTIONS_SHOW' => 'Show',
     '_WARNING_DELETE_USER_EUM' =>
         'Deleting a user is an irrevocable action which creates orphans of the user\'s entries. If you wish to retire a user or remove their access to the system, disabling their account is the recommended course of action. Are you sure you want to delete the selected user(s)? They will be able to re-create themselves if selected user(s) still exist in your external directory.',

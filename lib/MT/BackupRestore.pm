@@ -12,7 +12,7 @@ use Symbol;
 use base qw( MT::ErrorHandler );
 
 sub NS_MOVABLETYPE {'http://www.sixapart.com/ns/movabletype'}
-sub NS_MYMTOS {'https://github.com/masiuchi/movabletype'}
+sub NS_MYMTOS {'https://github.com/mymtos/mymtos'}
 
 use File::Spec;
 use File::Copy;

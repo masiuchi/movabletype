@@ -33,7 +33,7 @@ MT->add_plugin(
             description => '<MT_TRANS phrase="A humane web text generator.">',
             author_name => "Brad Choate",
             author_link => "https://bradchoate.com/",
-            plugin_link => 'https://github.com/masiuchi/movabletype',
+            plugin_link => 'https://github.com/mymtos/mymtos',
             version     => $VERSION,
             registry    => {
                 text_filters => {

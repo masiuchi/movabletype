@@ -3,7 +3,7 @@ name: TinyMCE
 version: 1.111
 author_link: https://www.movabletype.org/
 author_name: Six Apart, Ltd.
-plugin_link: https://github.com/masiuchi/movabletype
+plugin_link: https://github.com/mymtos/mymtos
 description: <MT_TRANS phrase="Default WYSIWYG editor.">
 l10n_class: TinyMCE::L10N
 

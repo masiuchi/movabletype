@@ -3,7 +3,7 @@ name: FormattedText
 version: 1.011
 author_link: https://www.movabletype.org/
 author_name: Six Apart, Ltd.
-plugin_link: https://github.com/masiuchi/movabletype
+plugin_link: https://github.com/mymtos/mymtos
 description: <MT_TRANS phrase="Manage boilerplate.">
 l10n_class: FormattedText::L10N
 
