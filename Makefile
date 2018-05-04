@@ -1,5 +1,5 @@
 BUILD_LANGUAGE ?= en_US
-BUILD_PACKAGE ?= MTOS
+BUILD_PACKAGE ?= MyMTOS
 
 -include build/mt-dists/default.mk
 -include build/mt-dists/$(BUILD_PACKAGE).mk
@@ -7,11 +7,7 @@ BUILD_PACKAGE ?= MTOS
 
 BUILD_VERSION_ID ?= $(PRODUCT_VERSION)
 
-local_js = mt-static/mt_de.js \
-        mt-static/mt_fr.js \
-        mt-static/mt_nl.js \
-        mt-static/mt_ja.js \
-        mt-static/mt_es.js
+local_js = mt-static/mt_ja.js
 
 core_js = mt-static/js/common/Core.js \
           mt-static/js/common/JSON.js \
@@ -76,8 +72,7 @@ mt-static/css/simple.css: $(simple_css)
 	cat $(simple_css) > mt-static/css/simple.css
 	./build/minifier.pl mt-static/css/simple.css
 
-.PHONY: code-common code code-en_US code-de code-fr code-nl \
-	code-es code-ja
+.PHONY: code-common code code-en_US code-ja
 code_common = lib/MT.pm php/mt.php mt-check.cgi version_file \
         mt-static/js/mt_core_compact.js \
         mt-static/js/editor.js \
@@ -85,8 +80,7 @@ code_common = lib/MT.pm php/mt.php mt-check.cgi version_file \
         mt-static/css/simple.css
 
 code: check code-$(BUILD_LANGUAGE)
-code-en_US code-de code-fr code-nl code-es: check $(code_common) \
-	$(local_js)
+code-en_US: check $(code_common) $(local_js)
 code-ja: check $(code_common) mt-static/mt_ja.js
 
 build-language-stamp:

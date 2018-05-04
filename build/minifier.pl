@@ -3,14 +3,10 @@
 use strict;
 use warnings;
 
-my $copyright;
 my $year = (localtime(time))[5] + 1900;
-
-if (($ENV{BUILD_PACKAGE} || 'MTOS') ne 'MTOS') {
-    $copyright = "Copyright (C) 2001-$year Six Apart, Ltd. All Rights Reserved";
-} else {
-    $copyright = "Copyright (C) 2001-$year Six Apart, Ltd.";
-}
+my $year_masiuchi = $year == 2018 ? '2018' : "2018-$year";
+my $copyright = qq{Copyright (c) 2001-$year Six Apart, Ltd.
+Copyright (c) $year_masiuchi Masahiro IUCHI};
 
 my %types = (
     css => 'CSS::Minifier',
