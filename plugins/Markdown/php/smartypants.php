@@ -3,18 +3,19 @@
 #
 # SmartyPants  -  Smart punctuation for web sites
 # by John Gruber
-# <http://daringfireball.net>
+# <https://daringfireball.net>
 #
 # Copyright (c) 2003-2004 John Gruber
 # Copyright (c) 2004 Michel Fortin - Translation to PHP
+# Copyright (c) 2018 Masahiro IUCHI
 #
 
 
 global  $SmartyPantsPHPVersion, $SmartyPantsSyntaxVersion,
 		$smartypants_attr, $sp_tags_to_skip;
 
-$SmartyPantsPHPVersion    = '1.5.1a'; # Sun 30 Jun 2004
-$SmartyPantsSyntaxVersion = '1.5.1'; # Fri 12 Mar 2004
+$SmartyPantsPHPVersion    = '1.5.1.1';
+$SmartyPantsSyntaxVersion = '1.5.1.1';
 
 
 # Configurable variables:
