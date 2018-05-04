@@ -14,11 +14,11 @@ use warnings;
 
 use base qw( MT::Plugin );
 
-our $VERSION = '2.31';
+our $VERSION = '2.301';
 my $plugin;
 $plugin = MT::Plugin::MultiBlog->new(
     {   id   => 'multiblog',
-        name => 'MultiBlog for MyMTOS',
+        name => 'MultiBlog',
         description =>
             '<MT_TRANS phrase="MultiBlog allows you to publish content from other blogs and define publishing rules and access controls between them.">',
         version                => $VERSION,

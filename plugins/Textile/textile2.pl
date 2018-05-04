@@ -2,7 +2,7 @@
 # MT-Textile Text Formatter
 # A plugin for MT
 #
-# Release 2.06
+# Release 2.051
 #
 # Brad Choate
 # http://www.bradchoate.com/
@@ -24,12 +24,12 @@ use strict;
 use MT;
 use base qw( MT::Plugin );
 
-our $VERSION = 2.06;
+our $VERSION = 2.051;
 our ( $_initialized, $Have_SmartyPants );
 
 MT->add_plugin(
     __PACKAGE__->new(
-        {   name        => "Textile for MyMTOS",
+        {   name        => "Textile",
             description => '<MT_TRANS phrase="A humane web text generator.">',
             author_name => "Brad Choate",
             author_link => "https://bradchoate.com/",

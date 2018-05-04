@@ -17,10 +17,10 @@ use vars qw($VERSION);
 
 sub BEGIN {
     @MT::Plugin::SpamLookup::KeywordFilter::ISA = ('MT::Plugin');
-    $VERSION                                    = '2.11';
+    $VERSION                                    = '2.101';
     my $plugin;
     $plugin = new MT::Plugin::SpamLookup::KeywordFilter(
-        {   name    => 'SpamLookup for MyMTOS - Keyword Filter',
+        {   name    => 'SpamLookup - Keyword Filter',
             version => $VERSION,
             description =>
                 '<MT_TRANS phrase="SpamLookup module for moderating and junking feedback using keyword filters.">',

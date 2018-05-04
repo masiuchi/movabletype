@@ -14,7 +14,7 @@
 package SmartyPants;
 use strict;
 use vars qw($VERSION);
-$VERSION = "1.5.2";
+$VERSION = "1.5.1.1";
 
 # Fri 12 Mar 2004
 
@@ -33,7 +33,7 @@ my $tags_to_skip = qr!<(/?)(?:pre|code|kbd|script|math)[\s>]!;
 
 require MT;
 MT->add_plugin(
-    {   name => "SmartyPants for MyMTOS",
+    {   name => "SmartyPants",
         description =>
             q(<MT_TRANS phrase="Easily translates plain punctuation characters into 'smart' typographic punctuation.">),
         version     => $VERSION,

@@ -17,10 +17,10 @@ use vars qw($VERSION);
 
 sub BEGIN {
     @MT::Plugin::SpamLookup::Link::ISA = ('MT::Plugin');
-    $VERSION                           = '2.12';
+    $VERSION                           = '2.111';
     my $plugin;
     $plugin = new MT::Plugin::SpamLookup::Link(
-        {   name    => 'SpamLookup for MyMTOS - Link',
+        {   name    => 'SpamLookup - Link',
             version => $VERSION,
             description =>
                 '<__trans phrase="SpamLookup module for junking and moderating feedback based on link filters.">',

@@ -15,7 +15,7 @@ use bytes;
 
 use Digest::MD5 qw(md5_hex);
 use vars qw($VERSION);
-$VERSION = '1.04';
+$VERSION = '1.031';
 
 # Tue 14 Dec 2004
 
@@ -67,7 +67,7 @@ require MT;
 require MT::Plugin;
 
 my $plugin = new MT::Plugin(
-    {   name        => "Markdown for MyMTOS",
+    {   name        => "Markdown",
         author_name => "John Gruber",
         author_link => "https://daringfireball.net/",
         plugin_link => "https://github.com/masiuchi/movabletype",
