@@ -39,7 +39,7 @@ BEGIN {
         )
         = (
         'MyMTOS', 'MyMTOS', '5.2.13', '5.2.13',
-        '13', 'https://github.com/masiuchi/movabletype'
+        '13', 'https://github.com/mymtos/mymtos'
         );
 
     $DebugMode = 0;
@@ -4056,7 +4056,7 @@ Returns a help URL for the application. This method is used to construct
 the URL directing users to online documentation. If called without any
 parameters, it returns the base URL for providing help. If a parameter is
 given, the URL is appended with the given subpath. The base URL by default
-is 'https://github.com/masiuchi/movabletype'. This string is passed
+is 'https://github.com/mymtos/mymtos'. This string is passed
 through MT's localization modules, so it can be changed on a per-language
 basis. The C<$suffix> parameter, however, is always appended to this base URL.
 

@@ -24,7 +24,7 @@ my ($app, $out);
 # __mode=search_replace&_type=template&do_search=1&search=hello
 $app = _run_app( 
 	'MT::App::CMS', 
-	{ __test_user => $user, __mode => 'search_replace', do_search => 1, search => 'movable', _type => 'template' } 
+	{ __test_user => $user, __mode => 'search_replace', do_search => 1, search => 'mymtos', _type => 'template' } 
 );
 $out = delete $app->{__test_output};
 ok ($out, "Global template search results are present");

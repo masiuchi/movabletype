@@ -26,7 +26,7 @@ sub BEGIN {
                 '<__trans phrase="SpamLookup module for junking and moderating feedback based on link filters.">',
             author_name     => 'Six Apart, Ltd.',
             author_link     => 'https://www.movabletype.org/',
-            plugin_link     => 'https://github.com/masiuchi/movabletype',
+            plugin_link     => 'https://github.com/mymtos/mymtos',
             config_template => 'url_config.tmpl',
             l10n_class      => 'spamlookup::L10N',
             settings        => new MT::PluginSettings(

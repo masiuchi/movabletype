@@ -39,7 +39,7 @@ MT->add_plugin(
         version     => $VERSION,
         author_name => "John Gruber",
         author_link => "https://daringfireball.net/",
-        plugin_link => "https://github.com/masiuchi/movabletype",
+        plugin_link => "https://github.com/mymtos/mymtos",
         registry    => {
             tags => {
                 modifier => {

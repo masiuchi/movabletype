@@ -1,5 +1,7 @@
-1.5.1.1  2018-05-04  Masahiro IUCHI
+2018-05-04  Masahiro IUCHI
 
+	* Change repository url
+	* Bump up version to 1.5.1.1
 	* Remove lexicon files other than Japanese
 	* Remove "Movable Type"
 

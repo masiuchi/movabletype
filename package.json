@@ -2,17 +2,16 @@
     "name": "MyMTOS",
     "version": "5.2.13",
     "description": "Yet another MTOS fork",
-    "scripts": {},
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/masiuchi/movabletype.git"
+        "url": "git+https://github.com/mymtos/mymtos.git"
     },
     "license": "GPL-2.0",
     "author": "Masahiro IUCHI",
     "bugs": {
-        "url": "https://github.com/masiuchi/movabletype/issues"
+        "url": "https://github.com/mymtos/mymtos/issues"
     },
-    "homepage": "https://github.com/masiuchi/movabletype",
+    "homepage": "https://github.com/mymtos/mymtos",
     "scripts": {
         "build-tinymce-plugin": "cd mt-static/plugins/TinyMCE/tiny_mce/plugins/mt && uglifyjs editor_plugin_src.js -o editor_plugin.js"
     },
