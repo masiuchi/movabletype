@@ -1,5 +1,7 @@
-2.441  2018-05-04  Masahiro IUCHI
+2018-05-04  Masahiro IUCHI
 
+	* Change repository url
+	* Bump up version to 2.441
 	* Remove lexicon files other than Japanese
 	* Remove "Movable Type" from files
 

@@ -1,5 +1,6 @@
 2018-05-04  Masahiro IUCHI
 
+	* Change repository url (#82)
 	* Rename product (#81)
 		- Remove "Movable Type" and old logos
 		- Use "MyMTOS" and new logo
