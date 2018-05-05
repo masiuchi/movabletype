@@ -1,3 +1,7 @@
+2018-05-06  Masahiro IUCHI
+
+	* Fix build script (#83)
+
 2018-05-04  Masahiro IUCHI
 
 	* Change repository url (#82)
