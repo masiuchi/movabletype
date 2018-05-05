@@ -105,4 +105,9 @@ build:
         name: PHP lint
         code: |
           find . -name "*.php" | xargs -n1 php -l
+    - script:
+        name: Build package
+        code: |
+          perl build/exportmt.pl --local --no-lang-stamp --rel_num=13
+          cp -r MyMTOS-5.2.13-*.zip ${WERCKER_REPORT_ARTIFACTS_DIR}/
 
