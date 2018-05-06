@@ -69,7 +69,10 @@ sub user {
         }
     );
 }
-*author = *user;
+{
+    no warnings 'once';
+    *author = *user;
+}
 
 sub blog {
     my $perm = shift;
@@ -359,9 +362,9 @@ sub global_perms {
             # test for global-level permission
             return 1
                 if $_[0]->author_id
-                    && $_[0]->blog_id
-                    && $_[0]->global_perms
-                    && $_[0]->global_perms->has($perm);
+                && $_[0]->blog_id
+                && $_[0]->global_perms
+                && $_[0]->global_perms->has($perm);
             return undef;
         };
     }
