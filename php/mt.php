@@ -12,11 +12,7 @@ require_once('lib/class.exception.php');
 
 define('VERSION', '5.2');
 define('PRODUCT_VERSION', '5.2.13');
-
-$PRODUCT_NAME = '__PRODUCT_NAME__';
-if($PRODUCT_NAME == '__PRODUCT' . '_NAME__')
-    $PRODUCT_NAME = 'MyMTOS';
-define('PRODUCT_NAME', $PRODUCT_NAME);
+define('PRODUCT_NAME', 'MyMTOS');
 
 $RELEASE_NUMBER = '__RELEASE_NUMBER__';
 if ( $RELEASE_NUMBER == '__RELEASE_' . 'NUMBER__' )

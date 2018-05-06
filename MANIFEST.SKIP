@@ -83,6 +83,35 @@ themes/broken_blog_theme
 #?package=MTOS ^mt-static/plugins/SmartphoneOption
 #?package=MTOS ^mt-sp.cgi
 
+#?package=MyMTOS ^addons
+#?package=MyMTOS ^mt-cp.cgi
+#?package=MyMTOS ^mt-static/addons
+#?package=MyMTOS ^mt-static/themes/tristan-blue
+#?package=MyMTOS ^mt-static/themes/tristan-blue-4.2
+#?package=MyMTOS ^mt-static/plugins/feeds-app-lite
+#?package=MyMTOS ^mt-static/plugins/Motion
+#?package=MyMTOS ^mt-static/jquery/themes/Motion
+#?package=MyMTOS ^mt-static/plugins/ActionStreams
+#?package=MyMTOS ^mt-static/plugins/FacebookCommenters
+#?package=MyMTOS ^mt-static/plugins/mixiComment
+#?package=MyMTOS ^plugins/feeds-app-lite
+#?package=MyMTOS ^plugins/Motion
+#?package=MyMTOS ^plugins/ActionStreams
+#?package=MyMTOS ^plugins/FacebookCommenters
+#?package=MyMTOS ^plugins/CommunityActionStreams
+#?package=MyMTOS ^plugins/mixiComment
+#?package=MyMTOS ^plugins/CustomFields
+#?package=MyMTOS ^tools/migrate-mssql
+#?package=MyMTOS ^addons/Cloud.pack
+#?package=MyMTOS ^mt-hb.cgi
+#?package=MyMTOS ^VERSIONS
+#?package=MyMTOS ^lib/MT/FileMgr/FTP.pm
+#?package=MyMTOS ^lib/MT/FileMgr/FTPS.pm
+#?package=MyMTOS ^themes/eiger
+#?package=MyMTOS ^plugins/SmartphoneOption
+#?package=MyMTOS ^mt-static/plugins/SmartphoneOption
+#?package=MyMTOS ^mt-sp.cgi
+
 #?package=MTCOM ^COPYING
 #?package=MTCOM ^COPYRIGHT
 #?package=MTCOM ^addons/Enterprise.pack
@@ -245,4 +274,19 @@ Dockerfile
 # Travis CI
 ^cpanfile
 \.travis\.yml
+
+# Wercker
+^wercker.yml
+
+# Composer
+^composer.json
+^composer.lock
+^vendor
+
+# Yarn
+^package.json
+^yarn.lock
+^node_modules
+
+.DS_Store
 

@@ -162,7 +162,7 @@ sub setup {
     ( $self->{'short-lang=s'} = $self->{'lang=s'} )
         =~ s/([a-z]{2})_[A-Z]{2}$/$1/o;
 
-    $self->{'pack=s'} ||= 'MTOS';
+    $self->{'pack=s'} ||= 'MyMTOS';
     $ENV{BUILD_PACKAGE}  = $self->{'pack=s'};
     $ENV{BUILD_LANGUAGE} = $self->{'lang=s'};
 
