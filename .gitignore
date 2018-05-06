@@ -60,3 +60,6 @@ t/db/mt.db
 node_modules/
 
 *.sw?
+
+.vstags
+
