@@ -243,6 +243,19 @@ UPDATE mt_blog SET
 __SQL__
             },
         },
+        'v5_rebuild_blog_permissions' => {
+            version_limit => 5.0037,
+            priority      => 3.0,
+            updater       => {
+                type      => 'permission',
+                label     => 'Rebuilding blog permissions...',
+                condition => sub {
+                    my $perm = shift;
+                    $perm->blog_id;
+                },
+                code => sub { },
+            },
+        },
     };
 }
 
