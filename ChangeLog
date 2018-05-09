@@ -1,3 +1,7 @@
+2018-05-10  Masahiro IUCHI
+
+	* Fix permission bug (#84)
+
 2018-05-06  Masahiro IUCHI
 
 	* Fix build script (#83)
