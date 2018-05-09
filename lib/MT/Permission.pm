@@ -252,7 +252,7 @@ sub global_perms {
     # Clears all permissions or those in a particular set
     sub clear_full_permissions {
         my $perms = shift;
-        $perms->clear_permissions('blog');
+        $perms->clear_permissions('*');
     }
 
     sub clear_permissions {
@@ -669,7 +669,7 @@ sub rebuild {
     }
 
     if ($has_permissions) {
-        $perm->save;
+        $perm->SUPER::save;
     }
     else {
         $perm->remove if $perm->id;
@@ -775,6 +775,12 @@ sub load_permissions_from_action {
             if $pkg->_confirm_action( $p, $action, $permissions );
     }
     return $perms;
+}
+
+sub save {
+    my $self = shift;
+    $self->rebuild;
+    $self->SUPER::save(@_);
 }
 
 1;
