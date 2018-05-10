@@ -1,0 +1,26 @@
+{
+    "editor.renderControlCharacters": true,
+    "files.associations": {
+        "*.cgi": "perl",
+        "*.mtml": "html",
+        "*.tmpl": "html"
+    },
+    "perl.ctagsFile": ".vscode/.vstags",
+    "perlSyntax.includePaths": [
+        "lib",
+        "extlib",
+        "t/lib"
+    ],
+    "perlSyntax.prependCode": [
+        "use strict;",
+        "use warnings;",
+        "use lib glob('plugins/*/lib');",
+        "use lib glob('addons/*/lib');"
+    ],
+    "cSpell.words": [
+        "errstr",
+        "iuchi",
+        "masahiro",
+        "mtos"
+    ]
+}

@@ -120,8 +120,8 @@ sub upgrade_functions {
                     if ( $user->type == MT::Author::AUTHOR() ) {
                         return 1
                             if $App
-                                && UNIVERSAL::isa( $App, 'MT::App' )
-                                && ( $user->id == $App->user->id );
+                            && UNIVERSAL::isa( $App, 'MT::App' )
+                            && ( $user->id == $App->user->id );
                     }
                     return 0;
                 },
@@ -197,9 +197,10 @@ sub upgrade_functions {
             version_limit => 5.0035,
             priority      => 3.0,
             updater       => {
-                type  => 'author',
-                label => 'Assigning ID of user who created for initial user...',
-                code  => sub {
+                type => 'author',
+                label =>
+                    'Assigning ID of user who created for initial user...',
+                code => sub {
                     $_[0]->created_by( $_[0]->id )
                         if !defined $_[0]->created_by;
                 },
@@ -210,7 +211,7 @@ sub upgrade_functions {
         'v5_assign_blog_date_language' => {
             version_limit => 5.0036,
             priority      => 3.0,
-            updater => {
+            updater       => {
                 type  => 'blog',
                 terms => { class => '*' },
                 label =>
@@ -220,9 +221,11 @@ sub upgrade_functions {
                         = map { $_->{l_tag} } @{ MT::I18N::languages_list() };
                     my $language = $_[0]->language;
                     $_[0]->date_language($language);
-                    $_[0]->language( ( grep { $_ eq $language } @supporteds )
+                    $_[0]->language(
+                        ( grep { $_ eq $language } @supporteds )
                         ? $language
-                        : MT->config('DefaultLanguage') );
+                        : MT->config('DefaultLanguage')
+                    );
                 },
                 sql => <<__SQL__,
 UPDATE mt_blog SET
@@ -238,6 +241,19 @@ UPDATE mt_blog SET
             THEN blog_language
         ELSE '@{[ MT->config('DefaultLanguage') ]}' END;
 __SQL__
+            },
+        },
+        'v5_rebuild_blog_permissions' => {
+            version_limit => 5.0037,
+            priority      => 3.0,
+            updater       => {
+                type      => 'permission',
+                label     => 'Rebuilding blog permissions...',
+                condition => sub {
+                    my $perm = shift;
+                    $perm->blog_id;
+                },
+                code => sub { },
             },
         },
     };
@@ -703,7 +719,7 @@ sub _v5_generate_websites_place_blogs {
                 my $part = $blogs_dirs[0]->[$i];
                 last
                     unless scalar(@blogs_dirs) == grep { $part eq $_->[$i] }
-                        @blogs_dirs;
+                    @blogs_dirs;
                 push @built_path, $part;
             }
             unless ( grep length($_), @built_path ) {
