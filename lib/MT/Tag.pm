@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -638,32 +639,23 @@ sub __load_tags {
     }
     return if exists $obj->{__tag_objects};
 
-    require MT::Memcached;
-    my $cache  = MT::Memcached->instance;
-    my $memkey = $obj->tag_cache_key;
-    my @tags;
-    if ( my $tag_ids = $cache->get($memkey) ) {
-        @tags = grep {defined} @{ MT::Tag->lookup_multi($tag_ids) };
-    }
-    else {
-        require MT::ObjectTag;
-        my $iter = MT::Tag->load_iter(
-            undef,
-            {   sort => 'name',
-                join => [
-                    'MT::ObjectTag',
-                    'tag_id',
-                    {   object_id         => $obj->id,
-                        object_datasource => $obj->datasource
-                    },
-                    { unique => 1 }
-                ],
-            }
-        );
-        while ( my $tag = $iter->() ) {
-            push @tags, $tag;
+    require MT::ObjectTag;
+    my $iter = MT::Tag->load_iter(
+        undef,
+        {   sort => 'name',
+            join => [
+                'MT::ObjectTag',
+                'tag_id',
+                {   object_id         => $obj->id,
+                    object_datasource => $obj->datasource
+                },
+                { unique => 1 }
+            ],
         }
-        $cache->set( $memkey, [ map { $_->id } @tags ], TAG_CACHE_TIME );
+    );
+    my @tags;
+    while ( my $tag = $iter->() ) {
+        push @tags, $tag;
     }
     $obj->{__tags} = [ map { $_->name } @tags ];
     $t->mark('MT::Tag::__load_tags') if $t;
@@ -756,9 +748,6 @@ sub save_tags {
             datasource => $obj->datasource,
             ( $blog_id ? ( blog_id => $blog_id ) : () )
         );
-
-        require MT::Memcached;
-        MT::Memcached->instance->delete( $obj->tag_cache_key );
     }
     $t->mark('MT::Tag::save_tags') if $t;
     1;
@@ -806,9 +795,6 @@ sub remove_tags {
         datasource => $obj->datasource,
         ( $obj->blog_id ? ( blog_id => $obj->blog_id ) : () )
     ) if @et;
-
-    require MT::Memcached;
-    MT::Memcached->instance->delete( $obj->tag_cache_key );
 }
 
 sub has_tag {

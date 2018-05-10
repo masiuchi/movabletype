@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -30,18 +31,6 @@ sub system_check {
 
     $param{commenter_count} = 0;
     $param{screen_id}       = "system-check";
-
-    require MT::Memcached;
-    if ( MT::Memcached->is_available ) {
-        $param{memcached_enabled} = 1;
-        my $inst = MT::Memcached->instance;
-        my $key  = 'syscheck-' . $$;
-        $inst->add( $key, $$ );
-        if ( $inst->get($key) == $$ ) {
-            $inst->delete($key);
-            $param{memcached_active} = 1;
-        }
-    }
 
     $param{server_modperl} = 1 if $ENV{MOD_PERL};
     $param{server_fastcgi} = 1 if $ENV{FAST_CGI};

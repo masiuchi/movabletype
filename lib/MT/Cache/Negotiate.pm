@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -13,20 +14,8 @@ sub new {
     my (%param) = @_;
     $param{'ttl'} ||= 0;
 
-    require MT::Memcached;
-    if ( MT::Memcached->is_available ) {
-        $param{'__cache_driver'} = MT::Memcached->instance;
-        if ( $param{'expirable'} ) {
-            require MT::Memcached::ExpirableProxy;
-            $param{'__cache_driver'}
-                = MT::Memcached::ExpirableProxy->new( %param,
-                'memcached' => $param{'__cache_driver'} );
-        }
-    }
-    else {
-        require MT::Cache::Session;
-        $param{'__cache_driver'} = MT::Cache::Session->new(%param);
-    }
+    require MT::Cache::Session;
+    $param{'__cache_driver'} = MT::Cache::Session->new(%param);
 
     my $self = bless \%param, $class;
     return $self;
@@ -45,7 +34,7 @@ __END__
 =head1 NAME
 
 MT::Cache::Negotiate - Utility package to decide whether to cache data
-in memcached or in MT::Session table.
+in MT::Session table.
 
 =head1 SYNOPSIS
 

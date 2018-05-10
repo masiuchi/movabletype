@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -490,11 +491,11 @@ For an ARRAY type, C<$value> should be an array reference; if it is a
 SCALAR value, then it is added to any existing array held for the
 directive.
 
-    # Replaces any existing array value for 'MemcachedServers':
-    $cfg->set('MemcachedServers', ['127.0.0.1', '127.0.0.2']);
+    # Replaces any existing array value for 'PluginPath':
+    $cfg->set('PluginPath', ['plugins', 'non_official_plugins']);
 
-    # Adds '127.0.0.3' to the existing array held for 'MemcachedServers':
-    $cfg->set('MemcachedServers', '127.0.0.3');
+    # Adds 'mymtos_plugins' to the existing array held for 'PluginPath':
+    $cfg->set('PluginPath', 'mymtos_plugins');
 
 For a HASH type, C<$value> should be a hash reference; if it is a SCALAR
 value, it should be in the format "key=value", and will be added any
