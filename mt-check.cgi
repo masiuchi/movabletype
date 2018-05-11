@@ -635,13 +635,6 @@ my @CORE_OPT = (
         translate('XML::Atom is required in order to use the Atom API.')
     ],
 
-    [   'Cache::Memcached',
-        0, 0,
-        translate(
-            'Cache::Memcached and a memcached server are required to use in-memory object caching on the servers where MyMTOS is deployed.'
-        )
-    ],
-
     [   'Archive::Tar',
         0, 0,
         translate(

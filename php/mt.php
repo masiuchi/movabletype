@@ -224,8 +224,6 @@ class MT {
      */
     public function cache_driver() {
         if (isset($this->cache_driver)) return $this->cache_driver;
-    
-        # Check for memcached enabled
         require_once("class.basecache.php");
         $this->cache_driver = CacheProviderFactory::get_provider('session');
         return $this->cache_driver;

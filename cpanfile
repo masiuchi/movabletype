@@ -29,7 +29,6 @@ requires 'XML::Parser';
 requires 'YAML::Syck';     # MT::Util::YAML::Syck
 requires 'Net::FTPSSL';    # MT::FileMgr::FTPS
 requires 'DBD::SQLite';
-requires 'Cache::Memcached';
 requires 'GD';
 
 ## recommends
