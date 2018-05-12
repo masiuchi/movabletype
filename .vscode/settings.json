@@ -18,9 +18,15 @@
         "use lib glob('addons/*/lib');"
     ],
     "cSpell.words": [
+        "datasource",
         "errstr",
         "iuchi",
         "masahiro",
-        "mtos"
+        "mtos",
+        "revisioned",
+        "scorable",
+        "summarizable",
+        "taggable",
+        "tbping"
     ]
 }

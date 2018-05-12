@@ -1,5 +1,6 @@
 <?php
 # Copyright (C) 2004-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -223,15 +224,8 @@ class MT {
      */
     public function cache_driver() {
         if (isset($this->cache_driver)) return $this->cache_driver;
-    
-        # Check for memcached enabled
         require_once("class.basecache.php");
-        try {
-            $this->cache_driver = CacheProviderFactory::get_provider('memcached');
-        } catch (Exception $e) {
-            # Memcached not supported.
-            $this->cache_driver = CacheProviderFactory::get_provider('session');
-        }
+        $this->cache_driver = CacheProviderFactory::get_provider('session');
         return $this->cache_driver;
     }
 
@@ -252,7 +246,7 @@ class MT {
         $this->cfg_file = $file;
 
         $cfg = array();
-        $type_array = array('pluginpath', 'alttemplate', 'outboundtrackbackdomains', 'memcachedservers', 'userpasswordvalidation');
+        $type_array = array('pluginpath', 'alttemplate', 'outboundtrackbackdomains', 'userpasswordvalidation');
         $type_hash  = array('commenterregistration');
         if ($fp = file($file)) {
             foreach ($fp as $line) {

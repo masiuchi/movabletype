@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -44,29 +45,9 @@ sub wrap {
             $ram_cache = 'MT::ObjectDriver::Driver::Cache::RAM';
         }
 
-        my $driver;
-
-        require MT::Memcached;
-        if ( MT::Memcached->is_available ) {
-            $driver = sub {
-                ## Look first in mod_perl/memory; then in memcached; then fall back
-                ## to hitting the database.
-                require Data::ObjectDriver::Driver::Cache::Memcached;
-                $ram_cache->new(
-                    fallback =>
-                        Data::ObjectDriver::Driver::Cache::Memcached->new(
-                        cache    => MT::Memcached->instance,
-                        fallback => $fallback->(),
-                        )
-                );
-            };
-        }
-        else {
-            $driver = sub {
-                return $ram_cache->new( fallback => $fallback->(), );
-            };
-        }
-        return $driver;
+        return sub {
+            return $ram_cache->new( fallback => $fallback->(), );
+        };
     }
     else {
         return $fallback;

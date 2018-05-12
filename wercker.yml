@@ -55,10 +55,9 @@ build:
         code: |
           cp t/mysql-test.cfg mt-config.cgi
     - script:
-        name: Start mysql and memcached
+        name: Start mysql
         code: |
           service mysqld start
-          service memcached start
     - script:
         name: Run t/0*.t test
         code: |

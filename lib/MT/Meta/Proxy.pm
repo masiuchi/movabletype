@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -299,10 +300,6 @@ sub lazy_load_objects {
 sub lazier_load_objects {
     my $proxy = shift;
     my ($col) = @_;
-
-    require MT::Memcached;
-    return $proxy->lazy_load_objects($col) if MT::Memcached->is_available;
-
     if ( !exists $proxy->{__objects} && $proxy->{__pkeys} ) {
         my $meta_pkg = $proxy->meta_pkg;
         my @objs     = $meta_pkg->search( $proxy->{__pkeys},
@@ -396,13 +393,6 @@ sub bulk_load_meta_objects {
                 = { not => [ keys %{ $proxy->{__loaded} } ] };
         }
         $proxy->{__loaded_all_objects} = 1;
-    }
-
-    if ( MT::Memcached->is_available ) {
-        foreach my $obj (@$objs) {
-            $obj->driver->uncache_object($obj);
-            $obj->driver->cache_object($obj);
-        }
     }
 }
 

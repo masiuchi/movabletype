@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -10,9 +11,6 @@ package MT::Scorable;
 
 use strict;
 use MT::ObjectScore;
-use MT::Memcached;
-
-use constant SCORE_CACHE_TIME => 7 * 24 * 60 * 60;    ## 1 week
 
 sub install_properties {
     my $pkg = shift;
@@ -158,7 +156,11 @@ sub votes_for {
     }
     return scalar @$scores;
 }
-*vote_for = \&votes_for;    # backward-compatible mapping for typo
+
+{
+    no warnings 'once';
+    *vote_for = \&votes_for;    # backward-compatible mapping for typo
+}
 
 sub _score_top {
     my $obj = shift;
@@ -274,48 +276,31 @@ sub _cache_key {
 sub _load_score_data {
     my $obj    = shift;
     my ($term) = @_;
-    my $cache  = MT::Memcached->instance;
-    my $memkey = $obj->_cache_key($term);
-    my $scores = $cache->get($memkey);
-    unless ($scores) {
-        $scores = [ grep {defined} MT::ObjectScore->load($term) ];
-        $cache->set( $memkey, $scores, SCORE_CACHE_TIME );
-    }
-    return $scores;
+    return +[ grep {defined} MT::ObjectScore->load($term) ];
 }
 
 sub _load_rank_data {
     my $obj = shift;
     my ( $term, $score, $dbd_args ) = @_;
-    my $cache  = MT::Memcached->instance;
-    my $memkey = $obj->_cache_key($term);
-    my $total  = $cache->get( $memkey . "_total" );
-    my $high   = $cache->get( $memkey . "_high" );
-    my $low    = $cache->get( $memkey . "_low" );
-    unless ( $total && $high && $low ) {
-        my $sgb_iter = MT::ObjectScore->sum_group_by(
-            $term,
-            {   'sum' => 'score',
-                group => ['object_id'],
-                ( defined($dbd_args) && %$dbd_args ) ? (%$dbd_args) : (),
-            }
-        );
-        $total = 0;
-        $high  = 0;
-        $low   = 0;
-
-        while ( my ( $score, $object_id ) = $sgb_iter->() ) {
-            $low = $score
-                if ( ( $score || $score == 0 ) && ( $score < $low ) )
-                || $low == 0;
-            $high = $score
-                if ( ( $score || $score == 0 ) && ( $score > $high ) );
-            $score *= -1 if ( 0 > $score );
-            $total += $score;
+    my $sgb_iter = MT::ObjectScore->sum_group_by(
+        $term,
+        {   'sum' => 'score',
+            group => ['object_id'],
+            ( defined($dbd_args) && %$dbd_args ) ? (%$dbd_args) : (),
         }
-        $cache->set( $memkey . "_total", $total, SCORE_CACHE_TIME );
-        $cache->set( $memkey . "_high",  $high,  SCORE_CACHE_TIME );
-        $cache->set( $memkey . "_low",   $high,  SCORE_CACHE_TIME );
+    );
+    my $total = 0;
+    my $high  = 0;
+    my $low   = 0;
+
+    while ( my ( $score, $object_id ) = $sgb_iter->() ) {
+        $low = $score
+            if ( ( $score || $score == 0 ) && ( $score < $low ) )
+            || $low == 0;
+        $high = $score
+            if ( ( $score || $score == 0 ) && ( $score > $high ) );
+        $score *= -1 if ( 0 > $score );
+        $total += $score;
     }
 
     return ( $total, $high, $low );
@@ -334,20 +319,6 @@ sub _flush_score_cache {
     $req->cache( "${object_ds}_score_total_$namespace",         undef );
     $req->cache( "${object_ds}_score_high_$namespace",          undef );
     $req->cache( "${object_ds}_score_low_$namespace",           undef );
-
-    if ( MT::Memcached->is_available() ) {
-        my $instance = MT::Memcached->instance();
-        my $memkey   = $obj->_cache_key($term);
-        $instance->delete($memkey);
-        delete $term->{author_id};
-        $memkey = $obj->_cache_key($term);
-        $instance->delete($memkey);
-        delete $term->{object_id};
-        $memkey = $obj->_cache_key($term);
-        $instance->delete( $memkey . "_total" );
-        $instance->delete( $memkey . "_high" );
-        $instance->delete( $memkey . "_low" );
-    }
 }
 
 1;

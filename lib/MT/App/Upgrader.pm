@@ -1,4 +1,5 @@
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -27,7 +28,6 @@ sub init {
     $app->{user_class}           = 'MT::BasicAuthor';
     $app->{template_dir}         = 'cms';
     $app->{plugin_template_path} = '';
-    $app->{disable_memcached}    = 1;
     $app->{is_admin}             = 1;
     $app;
 }
@@ -506,14 +506,6 @@ sub init_website {
 
 sub finish {
     my $app = shift;
-
-    delete $app->{disable_memcached}
-        if exists $app->{disable_memcached};
-    require MT::Memcached;
-    if ( MT::Memcached->is_available ) {
-        my $inst = MT::Memcached->instance;
-        $inst->flush_all;
-    }
 
     $app->reboot();
 

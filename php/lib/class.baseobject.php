@@ -1,5 +1,6 @@
 <?php
 # Copyright (C) 2001-2013 Six Apart, Ltd.
+# Copyright (C) 2018 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
@@ -461,12 +462,7 @@ abstract class BaseObject extends ADOdb_Active_Record
     protected function cache_driver() {
         if (empty(self::$_cache_driver)) {
             require_once("class.basecache.php");
-            try {
-                self::$_cache_driver = CacheProviderFactory::get_provider('memcached');
-            } catch (Exception $e) {
-                # Memcached not supported.
-                self::$_cache_driver = CacheProviderFactory::get_provider('memory');
-            }
+            self::$_cache_driver = CacheProviderFactory::get_provider('memory');
         }
         return self::$_cache_driver;
     }

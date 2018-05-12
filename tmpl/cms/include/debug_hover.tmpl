@@ -73,18 +73,12 @@
 
         IF tc.query_profiler;
             queries_db = tc.query_profiler.queries_matching( "^(?!MEMCACHE)" );
-            queries_mc = tc.query_profiler.queries_matching( "^MEMCACHE" );
             debug_panels.push( {
                 name => 'SQL',
                 title => lh.loc( 'SQL Queries' ),
                 nav_title => lh.loc( 'SQL' ),
                 subtitle => lh.loc( '[quant,_1,query,queries]', queries_db.size ),
             },
-            {
-                name => 'Cache',
-                title => lh.loc( 'Memcache Queries' ),
-                nav_title => lh.loc( 'Memcache' ),
-                subtitle => lh.loc( '[quant,_1,query,queries]', queries_mc.size ),
             } );
         END;
 

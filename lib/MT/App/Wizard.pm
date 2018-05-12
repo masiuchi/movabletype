@@ -253,8 +253,7 @@ sub init_core_registry {
                     'This module is needed if you would like to be able to use NetPBM as the image driver for MT.',
             },
             'Storable' => {
-                
-link => 'http://search.cpan.org/dist/Storable',
+                link => 'http://search.cpan.org/dist/Storable',
                 label =>
                     'This module is required by certain MT plugins available from third parties.',
             },
@@ -281,11 +280,6 @@ link => 'http://search.cpan.org/dist/Storable',
             'XML::Atom' => {
                 link  => 'http://search.cpan.org/dist/XML-Atom',
                 label => 'This module enables the use of the Atom API.',
-            },
-            'Cache::Memcached' => {
-                link => 'http://search.cpan.org/dist/Cache-Memcached',
-                label =>
-                    'This module is required in order to use memcached as caching mechanism used by MyMTOS.',
             },
             'Archive::Tar' => {
                 link => 'http://search.cpan.org/dist/Archive-Tar',

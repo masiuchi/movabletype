@@ -17,7 +17,6 @@ use base
 use MT::Blog;
 use MT::Author;
 use MT::Category;
-use MT::Memcached;
 use MT::Placement;
 use MT::Comment;
 use MT::TBPing;
@@ -181,8 +180,7 @@ sub REVIEW ()  {3}
 sub FUTURE ()  {4}
 sub JUNK ()    {5}
 
-use Exporter;
-*import = \&Exporter::import;
+use Exporter 'import';
 use vars qw( @EXPORT_OK %EXPORT_TAGS);
 @EXPORT_OK = qw( HOLD RELEASE FUTURE );
 %EXPORT_TAGS = ( constants => [qw(HOLD RELEASE FUTURE)] );
@@ -339,14 +337,15 @@ sub list_props {
                 ) unless $cat_id;
 
                 $db_args->{joins} ||= [];
-                push @{ $db_args->{joins} }, MT->model('placement')->join_on(
+                push @{ $db_args->{joins} },
+                    MT->model('placement')->join_on(
                     undef,
                     {   category_id => $cat_id,
                         entry_id    => \'= entry_id',
                         blog_id     => $blog_id,
                     },
                     { unique => 1, },
-                );
+                    );
                 return;
             },
             args_via_param => sub {
@@ -499,7 +498,8 @@ sub list_props {
                 elsif ( 'end' eq $option ) {
                     $query = { like => "%$query" };
                 }
-                push @{ $db_args->{joins} }, MT->model('placement')->join_on(
+                push @{ $db_args->{joins} },
+                    MT->model('placement')->join_on(
                     undef,
                     {   entry_id => \'= entry_id',
                         blog_id  => $blog_id,
@@ -514,7 +514,7 @@ sub list_props {
                             { unique => 1, }
                         ),
                     },
-                );
+                    );
                 return;
             },
         },
@@ -636,8 +636,8 @@ sub list_props {
                 my $from   = $args->{from}   || undef;
                 my $to     = $args->{to}     || undef;
                 my $origin = $args->{origin} || undef;
-                $from   =~ s/\D//g;
-                $to     =~ s/\D//g;
+                $from =~ s/\D//g;
+                $to =~ s/\D//g;
                 $origin =~ s/\D//g;
                 $from .= '000000' if $from;
                 $to   .= '235959' if $to;
@@ -725,12 +725,13 @@ sub list_props {
                         ? MT::Author::ACTIVE()
                         : MT::Author::INACTIVE();
                     $db_args->{joins} ||= [];
-                    push @{ $db_args->{joins} }, MT->model('author')->join_on(
+                    push @{ $db_args->{joins} },
+                        MT->model('author')->join_on(
                         undef,
                         {   id     => \'= entry_author_id',
                             status => $status,
                         },
-                    );
+                        );
                 }
             },
         },
@@ -891,7 +892,7 @@ sub _nextprev {
         direction => $direction,
         terms => { blog_id => $obj->blog_id, class => $obj->class, %$terms },
         args  => $args,
-        by => ( $class eq 'MT::Page' ) ? 'modified_on' : 'authored_on',
+        by    => ( $class eq 'MT::Page' ) ? 'modified_on' : 'authored_on',
     );
     weaken( $obj->{$label} = $o ) if $o;
     return $o;
@@ -937,27 +938,12 @@ sub __load_category_data {
     my $entry = shift;
     my $t     = MT->get_timer;
     $t->pause_partial if $t;
-    my $cache  = MT::Memcached->instance;
-    my $memkey = $entry->cache_key('categories');
-    my $rows;
-    unless ( $rows = $cache->get($memkey) ) {
-        require MT::Placement;
-        my @maps = MT::Placement->search( { entry_id => $entry->id } );
-        $rows = [ map { [ $_->category_id, $_->is_primary ] } @maps ];
-        $cache->set( $memkey, $rows, CATEGORY_CACHE_TIME );
-    }
+    require MT::Placement;
+    my @maps = MT::Placement->search( { entry_id => $entry->id } );
+    my $rows = [ map { [ $_->category_id, $_->is_primary ] } @maps ];
     $t->mark('MT::Entry::__load_category_data') if $t;
     return $rows;
 }
-
-sub flush_category_cache {
-    my ( $copy, $place ) = @_;
-    MT::Memcached->instance->delete(
-        MT::Entry->cache_key( $place->entry_id, 'categories' ) );
-}
-
-MT::Placement->add_trigger( post_save   => \&flush_category_cache );
-MT::Placement->add_trigger( post_remove => \&flush_category_cache );
 
 sub category {
     my $entry = shift;
@@ -1453,7 +1439,7 @@ sub save {
         $entry->clear_cache();
 
         my $blog = $entry->blog;
-        my $at 
+        my $at
             = $blog->archive_type_preferred
             || $blog->archive_type
             || 'Individual';
@@ -1672,9 +1658,6 @@ sub unpack_revision {
             datasource => $obj->datasource,
             ( $obj->blog_id ? ( blog_id => $obj->blog_id ) : () )
         );
-
-        require MT::Memcached;
-        MT::Memcached->instance->delete( $obj->tag_cache_key );
 
         if (@$rev_tags) {
             my $lookups = MT::Tag->lookup_multi($rev_tags);
