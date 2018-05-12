@@ -1,3 +1,9 @@
+# Copyright (C) 2018 Masahiro IUCHI
+# This program is distributed under the terms of the
+# GNU General Public License, version 2.
+#
+# $Id$
+
 use strict;
 use warnings;
 
