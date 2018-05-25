@@ -4278,7 +4278,11 @@ sub user_blog_prefs {
     my $prefs = $app->request('user_blog_prefs');
     return $prefs if $prefs && !$app->param('config_view');
 
-    my $perms = $app->permissions;
+    my $perms = MT->model('permission')->load(
+        {   author_id => $app->user->id,
+            blog_id   => $app->blog->id,
+        }
+    );
     return {} unless $perms;
     my @prefs = split /,/, $perms->blog_prefs || '';
     my %prefs;
