@@ -2222,14 +2222,27 @@ sub pinged_urls {
 sub save_entry_prefs {
     my $app = shift;
 
-    my $perms = $app->permissions
-        or return $app->error( $app->translate("No permissions") );
     $app->validate_magic() or return;
+
+    return $app->errtrans('Invalid request.')
+        unless $app->blog;
+    my $perms = $app->model('permission')->load(
+        {   author_id => $app->user->id,
+            blog_id   => $app->blog->id,
+        }
+    ) or return $app->errtrans('No permissions');
+    return $app->permission_denied
+        unless $perms->can_create_post
+        || $perms->can_edit_all_posts
+        || $perms->can_manage_pages;
+
     my $q          = $app->param;
     my $prefs      = $app->_entry_prefs_from_params;
     my $disp       = $q->param('entry_prefs');
     my $sort_only  = $q->param('sort_only');
-    my $prefs_type = $q->param('_type') . '_prefs';
+    my $prefs_type = ( $q->param('_type') || '' ) . '_prefs';
+    return $app->errtrans('Invalid request.')
+        unless $prefs_type eq 'entry_prefs' || $prefs_type eq 'page_prefs';
 
     if ( $disp && lc $disp eq 'custom' && lc $sort_only eq 'true' ) {
         my $current = $perms->$prefs_type;
