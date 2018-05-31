@@ -3190,11 +3190,16 @@ sub restore_widgetmanagers {
 }
 
 sub save_template_prefs {
-    my $app     = shift;
-    my $blog_id = $app->param('blog_id');
-    my $perms   = $app->user->permissions($blog_id)
-        or return $app->error( $app->translate("No permissions") );
+    my $app = shift;
     $app->validate_magic() or return;
+
+    my $perms = $app->model('permission')->load(
+        {   author_id => $app->user->id,
+            blog_id   => $app->blog ? $app->blog->id : 0,
+        }
+    ) or return $app->error( $app->translate("No permissions") );
+    return $app->permission_denied
+        unless $perms->can_edit_templates;
 
     my $prefs = $perms->template_prefs || '';
     my $highlight = $app->param('syntax_highlight');
