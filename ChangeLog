@@ -1,3 +1,15 @@
+2018-06-02  Masahiro IUCHI
+
+	* Forgot to update ChangeLog (#90)
+
+2018-06-01  Masahiro IUCHI
+
+	* Fix save prefs check (#89)
+
+2018-05-25  Masahiro IUCHI
+
+	* Fix that wrong permission is loaded (#88)
+
 2018-05-12  Masahiro IUCHI
 
 	* Update Copyright (#87)
