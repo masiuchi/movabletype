@@ -1,3 +1,7 @@
+2018-06-02  Masahiro IUCHI
+
+	* Forgot to update ChangeLog (#90)
+
 2018-06-01  Masahiro IUCHI
 
 	* Fix save prefs check (#89)
