@@ -151,8 +151,8 @@ sub save {
 
             $values{site_path} = $app->param('site_path_absolute')
                 if !$app->config->BaseSitePath
-                    && $app->param('use_absolute')
-                    && $app->param('site_path_absolute');
+                && $app->param('use_absolute')
+                && $app->param('site_path_absolute');
         }
 
         unless ( $author->is_superuser
@@ -848,9 +848,8 @@ sub list {
     } MT::Component->select;
 
     my @list_headers;
-    my $core_include
-        = File::Spec->catfile( MT->config->TemplatePath, $app->{template_dir},
-        'listing', $type . '_list_header.tmpl' );
+    my $core_include = File::Spec->catfile( MT->config->TemplatePath,
+        $app->{template_dir}, 'listing', $type . '_list_header.tmpl' );
     push @list_headers,
         {
         filename  => $core_include,
@@ -911,7 +910,8 @@ sub list {
             }
         }
         foreach my $p (@act) {
-            $allowed = 1, last
+            $allowed = 1,
+                last
                 if $app->user->can_do(
                 $p,
                 at_least_one => 1,
@@ -1055,9 +1055,9 @@ sub list {
         my $id = $prop->id;
         my $disp = $prop->display || 'optional';
         my $show
-            = $disp eq 'force' ? 1
-            : $disp eq 'none'  ? 0
-            : scalar %cols ? $cols{$id}
+            = $disp eq 'force'   ? 1
+            : $disp eq 'none'    ? 0
+            : scalar %cols       ? $cols{$id}
             : $disp eq 'default' ? 1
             :                      0;
 
@@ -1071,8 +1071,8 @@ sub list {
                 push @subfields,
                     {
                       display => $sdisp eq 'force' ? 1
-                    : $sdisp eq 'none' ? 0
-                    : scalar %cols ? $cols{ $id . '.' . $sub->{class} }
+                    : $sdisp eq 'none'    ? 0
+                    : scalar %cols        ? $cols{ $id . '.' . $sub->{class} }
                     : $sdisp eq 'default' ? 1
                     : 0,
                     class      => $sub->{class},
@@ -1083,15 +1083,15 @@ sub list {
         }
         push @list_columns,
             {
-            id        => $prop->id,
-            type      => $prop->type,
-            label     => $prop->label,
-            primary   => $primary_col{$id} ? 1 : 0,
-            col_class => $prop->col_class,
-            sortable  => $prop->can_sort($scope),
-            sorted    => $prop->id eq $default_sort ? 1 : 0,
-            display   => $show,
-            is_default => $force || $default,
+            id                 => $prop->id,
+            type               => $prop->type,
+            label              => $prop->label,
+            primary            => $primary_col{$id} ? 1 : 0,
+            col_class          => $prop->col_class,
+            sortable           => $prop->can_sort($scope),
+            sorted             => $prop->id eq $default_sort ? 1 : 0,
+            display            => $show,
+            is_default         => $force || $default,
             force_display      => $force,
             default_sort_order => $prop->default_sort_order || 'ascend',
             order              => $prop->order,
@@ -1448,7 +1448,7 @@ sub filtered_list {
     my $cols = defined( $q->param('columns') ) ? $q->param('columns') : '';
     my @cols = grep {/^[^\.]+$/} split( ',', $cols );
     my @subcols = grep {/\./} split( ',', $cols );
-    my $class = MT->model( $setting->{object_type}) || MT->model($ds);
+    my $class = MT->model( $setting->{object_type} ) || MT->model($ds);
     if ( $class->has_column('id') ) {
         unshift @cols,    '__id';
         unshift @subcols, '__id';
