@@ -2421,119 +2421,71 @@ sub core_user_menus {
     };
 }
 
-sub core_disable_object_methods {
+sub core_enable_object_methods {
     my $app = shift;
     return {
-        association => {
-            edit => 1,
-            save => 1,
-        },
-        banlist   => { edit => 1, },
-        blocklist => {
-            save   => 1,
+        asset       => 1,
+        association => { delete => 1 },
+        audio       => undef,
+        author      => 1,
+        banlist     => {
             delete => 1,
-            edit   => 1,
-        },
-        config => {
             save   => 1,
-            delete => 1,
-            edit   => 1,
         },
-        fileinfo => {
+        blog     => 1,
+        category => {
+            delete => 1,
+            edit   => sub { $app->param('id') ? 1 : 0 },
+            save   => sub { $app->param('id') ? 1 : 0 },
+        },
+        comment => {
+            delete => 1,
+            edit   => sub { $app->param('id') ? 1 : 0 },
+            save   => sub { $app->param('id') ? 1 : 0 },
+        },
+        commenter   => undef,
+        config      => undef,
+        entry       => { edit => 1 },
+        failedlogin => undef,
+        file        => undef,
+        fileinfo    => undef,
+        filter      => undef,
+        folder      => {
+            delete => 1,
+            edit   => sub { $app->param('id') ? 1 : 0 },
+            save   => sub { $app->param('id') ? 1 : 0 },
+        },
+        image        => undef,
+        ipbanlist    => undef,
+        log          => undef,
+        notification => {
+            delete => 1,
             save   => 1,
-            delete => 1,
-            edit   => 1,
         },
-        folder => {
-            save => sub {
-                return 0 if $app->param('id');
-                return 1;
-            },
-            edit => sub {
-                return 0 if $app->param('id');
-                return 1;
-            },
-        },
-        log => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        notification => { edit => 1, },
-        objectasset  => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        objectscore => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        objecttag => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        permission => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        placement => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        plugindata => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        session => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        tag => {
-            save => 1,
-            edit => 1,
-        },
-        templatemap => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        touch => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        trackback => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        ts_error => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        ts_exitstatus => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        ts_funcmap => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
-        ts_job => {
-            save   => 1,
-            delete => 1,
-            edit   => 1,
-        },
+        objectasset  => undef,
+        objectscore  => undef,
+        objecttag    => undef,
+        page         => 1,
+        permission   => undef,
+        ping         => 1,
+        ping_cat     => undef,
+        placement    => undef,
+        plugindata   => undef,
+        role         => { delete => 1 },
+        session      => undef,
+        tag          => { delete => 1 },
+        tbping       => undef,
+        template     => 1,
+        templatemap  => undef,
+        touch        => undef,
+        trackback    => undef,
+        ts_error     => undef,
+        ts_exitstaus => undef,
+        ts_funcmap   => undef,
+        ts_job       => undef,
+        user         => undef,
+        video        => undef,
+        website      => 1,
     };
 }
 

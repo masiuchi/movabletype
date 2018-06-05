@@ -1915,6 +1915,8 @@ BEGIN {
             'FailedLoginExpirationFrequency' => { default => 86400 },
             'LockoutIPWhitelist'             => undef,
             'LockoutNotifyTo'                => undef,
+
+            IsDisabledModeDefault => { default => 1 },
         },
         upgrade_functions => \&load_upgrade_fns,
         applications      => {
@@ -1987,8 +1989,8 @@ BEGIN {
                 },
                 compose_menus => sub { MT->app->core_compose_menus() },
                 user_menus    => sub { MT->app->core_user_menus() },
-                disable_object_methods =>
-                    sub { MT->app->core_disable_object_methods() },
+                enable_object_methods =>
+                    sub { MT->app->core_enable_object_methods },
             },
             upgrade => {
                 handler => 'MT::App::Upgrader',

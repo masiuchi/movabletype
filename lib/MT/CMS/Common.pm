@@ -2181,20 +2181,28 @@ sub is_disabled_mode {
     my $app = shift;
     my ( $mode, $type ) = @_;
 
-    my $res;
-    if ( my $reg = $app->registry( 'disable_object_methods', $type ) ) {
-        if ( defined $reg->{$mode} ) {
-            if ( 'CODE' eq ref $reg->{$mode} ) {
-                my $code = $reg->{$mode};
-                $code = MT->handler_to_coderef($code);
-                $res  = $code->();
-            }
-            else {
-                $res = $reg->{$mode};
-            }
-        }
+    my $disable_object_methods
+        = $app->registry('disable_object_methods') || {};
+    my $enable_object_methods = $app->registry('enable_object_methods') || {};
+
+    if ( exists $disable_object_methods->{$type} ) {
+        return _check_mode( $disable_object_methods->{$type}, $mode );
     }
-    return $res;
+    elsif ( exists $enable_object_methods->{$type} ) {
+        return !_check_mode( $enable_object_methods->{$type}, $mode );
+    }
+    $app->config->IsDisabledModeDefault;
+}
+
+sub _check_mode {
+    my ( $reg, $mode ) = @_;
+    if ( ref $reg eq 'HASH' ) {
+        my $mode_reg = $reg->{$mode};
+        ( ref $mode_reg eq 'CODE' ) ? $mode_reg->() : $mode_reg;
+    }
+    else {
+        ref $reg eq 'CODE' ? $reg->() : $reg;
+    }
 }
 
 1;
