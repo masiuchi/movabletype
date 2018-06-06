@@ -1,3 +1,7 @@
+2018-06-06  Masahiro IUCHI
+
+	* Improve disable_object_methods (#91)
+
 2018-06-02  Masahiro IUCHI
 
 	* Forgot to update ChangeLog (#90)
