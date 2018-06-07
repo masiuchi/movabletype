@@ -3211,7 +3211,7 @@ sub run {
         if ( $app->{redirect_use_meta} ) {
             $app->send_http_header();
             $app->print( '<meta http-equiv="refresh" content="0;url='
-                    . $app->{redirect}
+                    . encode_url( $app->{redirect} )
                     . '">' );
         }
         else {
