@@ -276,7 +276,12 @@ sub menu_manage_condition {
 
     # Blog context
     if ( $app->blog ) {
-        return $app->permissions->can_do('access_to_formatted_text_list');
+        my $perm = $app->model('permission')->load(
+            {   author_id => $app->user->id,
+                blog_id   => $app->blog->id,
+            }
+        );
+        return $perm && $perm->can_do('access_to_formatted_text_list');
     }
 
     # System context
