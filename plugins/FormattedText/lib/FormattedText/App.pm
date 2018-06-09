@@ -269,4 +269,29 @@ sub content_actions {
     };
 }
 
+sub menu_manage_condition {
+    my $app = MT->instance;
+
+    return unless is_enabled($app);
+
+    # Blog context
+    if ( $app->blog ) {
+        return $app->permissions->can_do('access_to_formatted_text_list');
+    }
+
+    # System context
+    my $iter = $app->model('permission')->load_iter(
+        {   author_id => $app->user->id,
+            blog_id   => { not => 0 }
+        }
+    );
+
+    while ( my $p = $iter->() ) {
+        return 1
+            if $p->can_do('access_to_formatted_text_list');
+    }
+
+    return;
+}
+
 1;
