@@ -1,3 +1,7 @@
+2018-06-09  Masahiro IUCHI
+
+	* Escape redirect URL (#92)
+
 2018-06-06  Masahiro IUCHI
 
 	* Improve disable_object_methods (#91)
