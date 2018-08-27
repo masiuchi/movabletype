@@ -1,3 +1,7 @@
+2018-08-27  Masahiro IUCHI
+
+	* Test with Perl 5.28 on Travis CI and fix some tests (#93)
+
 2018-06-09  Masahiro IUCHI
 
 	* Escape redirect URL (#92)
