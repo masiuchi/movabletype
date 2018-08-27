@@ -312,7 +312,7 @@ subtest 'mode = complete_upload' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: complete_upload" );
-    ok( $out =~ m!__mode=dashboard&permission=1!i, "complete_upload by other blog" );
+    ok( $out =~ m!__mode=dashboard!i && $out =~ m!permission=1!i, "complete_upload by other blog" );
 
     # By other permission
     $app = _run_app(
@@ -327,7 +327,7 @@ subtest 'mode = complete_upload' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: complete_upload" );
-    ok( $out =~ m!__mode=dashboard&permission=1!i, "complete_upload by other permission" );
+    ok( $out =~ m!__mode=dashboard!i && $out =~ m!permission=1!i, "complete_upload by other permission" );
 };
 
 subtest 'mode = asset_insert' => sub {

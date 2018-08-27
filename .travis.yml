@@ -2,6 +2,8 @@ matrix:
   include:
     # PHP 7.1
     - language: perl
+      perl: "5.28"
+    - language: perl
       perl: "5.26"
     - language: perl
       perl: "5.24"
@@ -97,6 +99,7 @@ before_script:
   - rm t/41-atom.t
   - rm t/61-to_from_xml.t
   - rm t/62-asset.t
+  - rm t/80-serialize-leak.t
   - rm plugins/Markdown/t/00.require.t
   - rm plugins/MultiBlog/t/02.tags_blogs.t
   - rm plugins/Textile/t/00.require.t
