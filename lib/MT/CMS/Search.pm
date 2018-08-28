@@ -73,7 +73,7 @@ sub core_search_apis {
                 }
                 $args->{sort}      = 'authored_on';
                 $args->{direction} = 'descend';
-                }
+            }
         },
         'comment' => {
             'order'     => 200,
@@ -115,12 +115,12 @@ sub core_search_apis {
                 my $author = MT->app->user;
                 return 1
                     if $author->permissions( $_[0]->blog_id )
-                        ->can_do('manage_feedback');
+                    ->can_do('manage_feedback');
 
                 my $entry = MT->model('entry')->load( $_[0]->entry_id );
                 return 1
                     if $author->permissions( $entry->blog_id )
-                        ->can_edit_entry( $entry, $author );
+                    ->can_edit_entry( $entry, $author );
 
                 return 0;
             },
@@ -138,7 +138,7 @@ sub core_search_apis {
                 my ( $terms, $args, $blog_id ) = @_;
                 $args->{sort}      = 'created_on';
                 $args->{direction} = 'descend';
-                }
+            }
         },
         'ping' => {
             'order'     => 300,
@@ -186,14 +186,14 @@ sub core_search_apis {
                     my $entry = MT->model('entry')->load( $tb->entry_id );
                     return 1
                         if $author->permissions( $entry->blog_id )
-                            ->can_do('manage_feedback')
-                            || $author->permissions( $entry->blog_id )
-                            ->can_edit_entry( $entry, $author );
+                        ->can_do('manage_feedback')
+                        || $author->permissions( $entry->blog_id )
+                        ->can_edit_entry( $entry, $author );
                 }
                 elsif ( $tb->category_id ) {
                     return 1
                         if $author->permissions( $tb->blog_id )
-                            ->can_do('search_category_trackbacks');
+                        ->can_do('search_category_trackbacks');
                 }
                 return 0;
             },
@@ -211,7 +211,7 @@ sub core_search_apis {
                 my ( $terms, $args, $blog_id ) = @_;
                 $args->{sort}      = 'created_on';
                 $args->{direction} = 'descend';
-                }
+            }
         },
         'page' => {
             'order'     => 400,
@@ -261,7 +261,7 @@ sub core_search_apis {
                 }
                 $args->{sort}      = 'authored_on';
                 $args->{direction} = 'descend';
-                }
+            }
         },
         'template' => {
             'order'     => 500,
@@ -301,7 +301,7 @@ sub core_search_apis {
                     unless $obj->blog_id;
                 return 1
                     if $author->permissions( $obj->blog_id )
-                        ->can_do('search_templates');
+                    ->can_do('search_templates');
 
                 return 0;
             },
@@ -318,7 +318,7 @@ sub core_search_apis {
                 my ( $terms, $args, $blog_id ) = @_;
                 $args->{sort}      = 'created_on';
                 $args->{direction} = 'ascend';
-                }
+            }
         },
         'asset' => {
             'order'     => 600,
@@ -377,7 +377,7 @@ sub core_search_apis {
                 }
                 $args->{sort}      = 'created_on';
                 $args->{direction} = 'descend';
-                }
+            }
         },
         'log' => {
             'order'     => 700,
@@ -435,7 +435,7 @@ sub core_search_apis {
                 $terms->{class}    = '*';
                 $args->{sort}      = 'created_on';
                 $args->{direction} = 'descend';
-                }
+            }
         },
         'author' => {
             'order'     => 800,
@@ -508,7 +508,7 @@ sub core_search_apis {
                 my $author = MT->app->user;
                 return 1
                     if $author->is_superuser
-                        || $author->permissions(0)->can_do('edit_templates');
+                    || $author->permissions(0)->can_do('edit_templates');
                 my ($obj) = @_;
                 my $perm = $author->permissions( $obj->id );
                 return $perm && ( $perm->blog_id == $obj->id ) ? 1 : 0;
@@ -527,7 +527,7 @@ sub core_search_apis {
                 $terms->{parent_id} = $blog_id if $blog_id;
                 $args->{sort}       = 'name';
                 $args->{direction}  = 'ascend';
-                }
+            }
         },
         'website' => {
             'order'     => 1000,
@@ -563,7 +563,7 @@ sub core_search_apis {
                 my ( $terms, $args, $blog_id ) = @_;
                 $args->{sort}      = 'name';
                 $args->{direction} = 'ascend';
-                }
+            }
         }
     };
     return $types;
@@ -833,7 +833,7 @@ sub do_search_replace {
                     if (   $blog
                         && !$blog->is_blog
                         && ( $author->permissions($blog_id)
-                               ->has('manage_member_blogs')
+                            ->has('manage_member_blogs')
                             || $author->is_superuser )
                         )
                     {
@@ -1015,9 +1015,9 @@ sub do_search_replace {
                         foreach my $iter (@streams) {
                             next
                                 if !exists $iter->{head}
-                                    || !$which
-                                    || !${$which}->{head}
-                                    || !defined( $iter->{head} );
+                                || !$which
+                                || !${$which}->{head}
+                                || !defined( $iter->{head} );
                             if ( $iter->{head}->created_on
                                 > ${$which}->{head}->created_on )
                             {
@@ -1067,7 +1067,7 @@ sub do_search_replace {
         while ( my $obj = $iter->() ) {
             next
                 unless $author->is_superuser
-                    || $app->handler_to_coderef( $api->{perm_check} )->($obj);
+                || $app->handler_to_coderef( $api->{perm_check} )->($obj);
             my $match = 0;
             unless ($show_all) {
                 for my $col (@cols) {
@@ -1214,9 +1214,9 @@ sub do_search_replace {
     }
 
     my %res = (
-        error => $q->param('error') || '',
-        limit => $limit,
-        limit_all => $limit eq 'all',
+        error               => $q->param('error') || '',
+        limit               => $limit,
+        limit_all           => $limit eq 'all',
         count_matches       => $matches,
         replace_count       => $replace_count,
         "search_$type"      => 1,
