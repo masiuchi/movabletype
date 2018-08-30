@@ -366,8 +366,8 @@ sub commenter_list_props {
                         MT->model('permission')->join_on(
                         undef,
                         {   permissions => { like => '%\'comment\'%', },
-                            author_id => \'= author_id',
-                            blog_id   => $blog_id,
+                            author_id   => \'= author_id',
+                            blog_id     => $blog_id,
                         }
                         );
                 }
@@ -376,8 +376,8 @@ sub commenter_list_props {
                         MT->model('permission')->join_on(
                         undef,
                         {   restrictions => { like => '%\'comment\'%', },
-                            author_id => \'= author_id',
-                            blog_id   => $blog_id,
+                            author_id    => \'= author_id',
+                            blog_id      => $blog_id,
                         }
                         );
                 }
@@ -759,7 +759,7 @@ sub set_password {
 
         # Can use SHA512
         $crypt_sha
-            = '$6$' 
+            = '$6$'
             . $salt . '$'
             . Digest::SHA::sha512_base64( $salt . $pass );
     }
@@ -767,7 +767,7 @@ sub set_password {
 
         # Use SHA-1 algorism
         $crypt_sha
-            = '{SHA}' 
+            = '{SHA}'
             . $salt . '$'
             . MT::Util::perl_sha1_digest_hex( $salt . $pass );
     }
@@ -854,8 +854,8 @@ sub commenter_status {
     }
     return APPROVED
         if MT->config->SingleCommunity
-            && ( AUTHOR() == $this->type )
-            && $this->is_active();
+        && ( AUTHOR() == $this->type )
+        && $this->is_active();
     return PENDING;
 }
 
@@ -1350,7 +1350,8 @@ sub group_count {
 sub external_id {
     my $author = shift;
     if (@_) {
-        return $author->column( 'external_id', $author->unpack_external_id(@_) );
+        return $author->column( 'external_id',
+            $author->unpack_external_id(@_) );
     }
     my $value = $author->column('external_id');
     $value = $author->pack_external_id($value) if $value;
@@ -1426,7 +1427,7 @@ sub userpic_thumbnail_options {
     # place whenever userpic_url is called as an instance method on a
     # particular author.
     my %real_userpic_options = (
-        Path => File::Spec->catdir( MT->config->AssetCacheDir, 'userpics' ),
+        Path   => File::Spec->catdir( MT->config->AssetCacheDir, 'userpics' ),
         Format => MT->translate( 'userpic-[_1]-%wx%h%x', $author->id ),
     ) if ref $author;
 
@@ -1471,8 +1472,8 @@ sub userpic_url {
     return if !$asset;
 
     my @info
-        = $asset->thumbnail_url( $author->userpic_thumbnail_options(), %param,
-        );
+        = $asset->thumbnail_url( $author->userpic_thumbnail_options(),
+        %param, );
     if ( ( $info[0] || '' ) !~ m!^https?://! ) {
         my $static_host = MT->instance->static_path;
         if ( $static_host =~ m!^https?://! ) {
