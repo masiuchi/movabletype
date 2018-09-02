@@ -2878,20 +2878,17 @@ sub validate_magic {
 sub is_authorized {
     my $app = shift;
     $app->permissions(undef);
-    return unless my $user = $app->user;
-    my $blog_id = $app->param('blog_id') || 0;
-    return if $blog_id && ( !$app->blog || $app->blog->id != $blog_id );
-    return
+    return   unless my $user    = $app->user;
+    return 1 unless my $blog_id = $app->param('blog_id');
+    return   unless $app->blog;
+    return $app->permission_denied
         unless $app->model('permission')->count(
         {   author_id   => $user->id,
             blog_id     => [ 0, $blog_id ],
             permissions => [ '-and', \'IS NOT NULL', { not => '' } ],
         }
         );
-    my $perms = $app->permissions( $user->permissions($blog_id) );
-    $perms
-        ? 1
-        : $app->errtrans('You are not authorized to log in to this blog.');
+    $app->permissions( $user->permissions($blog_id) );
 }
 
 sub set_default_tmpl_params {
