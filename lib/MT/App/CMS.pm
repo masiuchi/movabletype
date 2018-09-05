@@ -2881,12 +2881,14 @@ sub is_authorized {
     return   unless my $user    = $app->user;
     return 1 unless my $blog_id = $app->param('blog_id');
     return   unless my $blog    = $app->blog;
-    $blog_id = [ $blog_id, map { $_->id } @{ $blog->blogs } ]
-        unless $blog->is_blog;
+    my @blog_ids = (
+        0, $blog_id,
+        $blog->is_blog ? () : ( map { $_->id } @{ $blog->blogs } ),
+    );
     return $app->permission_denied
         unless $app->model('permission')->count(
         {   author_id   => $user->id,
-            blog_id     => [ 0, $blog_id ],
+            blog_id     => \@blog_ids,
             permissions => [ '-and', \'IS NOT NULL', { not => '' } ],
         }
         );
