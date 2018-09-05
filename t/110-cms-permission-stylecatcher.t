@@ -184,7 +184,7 @@ subtest 'mode = stylecatcher_js' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: stylecatcher_js" );
-    ok( $out =~ m!permission denied!i, "stylecatcher_js by other blog" );
+    ok( $out =~ m!permission=1!i, "stylecatcher_js by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',

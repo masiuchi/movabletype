@@ -160,7 +160,7 @@ subtest 'mode = add_map' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: add_map" );
-    ok( $out =~ m!No permissions!i, "add_map by other blog" );
+    ok( $out =~ m!permission=1!i, "add_map by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -242,7 +242,7 @@ subtest 'mode = delete_map' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: delete_map" );
-    ok( $out =~ m!No permissions!i, "delete_map by other blog" );
+    ok( $out =~ m!permission=1!i, "delete_map by other blog" );
 
     $map = MT::Test::Permission->make_templatemap(
         blog_id => $blog->id,
@@ -337,7 +337,7 @@ subtest 'mode = delete_widget' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: delete_widget" );
-    ok( $out =~ m!permission denied!i, "delete_widget by other blog" );
+    ok( $out =~ m!permission=1!i, "delete_widget by other blog" );
 
     $widget = MT::Test::Permission->make_template(
         blog_id        => $blog->id,
@@ -571,7 +571,7 @@ subtest 'mode = edit_widget' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: edit_widget" );
-    ok( $out =~ m!permission denied!i, "edit_widget by other blog" );
+    ok( $out =~ m!permission=1!i, "edit_widget by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -1009,7 +1009,7 @@ subtest 'mode = refresh_all_templates' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: refresh_all_templates" );
-    ok( $out =~ m!error_id=!i, "refresh_all_templates by other blog" );
+    ok( $out =~ m!permission=1!i, "refresh_all_templates by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -1145,7 +1145,7 @@ subtest 'mode = save_widget' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: save_widget" );
-    ok( $out =~ m!permission denied!i, "save_widget by other blog" );
+    ok( $out =~ m!permission=1!i, "save_widget by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -1596,7 +1596,7 @@ subtest 'mode = save (widget)' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: save" );
-    ok( $out =~ m!permission denied!i, "save by other blog" );
+    ok( $out =~ m!permission=1!i, "save by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -1676,7 +1676,7 @@ subtest 'mode = edit (widget)' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: edit" );
-    ok( $out =~ m!permission denied!i, "edit by other blog" );
+    ok( $out =~ m!permission=1!i, "edit by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -1770,7 +1770,7 @@ subtest 'mode = delete (widget)' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: delete" );
-    ok( $out =~ m!permission denied!i, "delete by other blog" );
+    ok( $out =~ m!permission=1!i, "delete by other blog" );
 
     $widget = MT::Test::Permission->make_template(
         blog_id        => $blog->id,
@@ -1884,7 +1884,7 @@ subtest 'mode = refresh_tmpl_templates' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: refresh_tmpl_templates" );
-    ok( $out =~ m!not implemented!i, "refresh_tmpl_templates by other blog" );
+    ok( $out =~ m!permission=1!i, "refresh_tmpl_templates by other blog" );
 
     $tmpl = MT::Test::Permission->make_template(
         blog_id        => $blog->id,
@@ -2002,7 +2002,7 @@ subtest 'mode = copy_templates' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: copy_templates" );
-    ok( $out =~ m!not implemented!i, "copy_templates by other blog" );
+    ok( $out =~ m!permission=1!i, "copy_templates by other blog" );
 
     $tmpl = MT::Test::Permission->make_template(
         blog_id        => $blog->id,

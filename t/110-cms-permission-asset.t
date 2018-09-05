@@ -653,7 +653,7 @@ subtest 'mode = upload_file' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: upload_file" );
-    ok( $out =~ m!Permission denied!i, "upload_file by other blog" );
+    ok( $out =~ m!permission=1!i, "upload_file by other blog" );
 
     # By other permission
     $app = _run_app(
@@ -921,7 +921,7 @@ subtest 'mode = add_tags' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: add_tags" );
-    ok( $out =~ m!not implemented!i, "add_tags by other blog" );
+    ok( $out =~ m!permission=1!i, "add_tags by other blog" );
 
     # By other permission
     $app = _run_app(
@@ -1017,7 +1017,7 @@ subtest 'mode = remove_tags' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: remove_tags" );
-    ok( $out =~ m!not implemented!i, "remove_tags by other blog" );
+    ok( $out =~ m!permission=1!i, "remove_tags by other blog" );
 
     # By other permission
     $app = _run_app(

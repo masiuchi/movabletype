@@ -126,7 +126,7 @@ subtest 'mode = js_recent_entries_for_tag' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: js_recent_entries_for_tag" );
-    ok( $out =~ m!permission denied!i, "js_recent_entries_for_tag by other blog" );
+    ok( $out =~ m!permission=1!i, "js_recent_entries_for_tag by other blog" );
 
     done_testing();
 };
@@ -169,7 +169,7 @@ subtest 'mode = js_tag_check' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: js_tag_check" );
-    ok( $out =~ m!permission denied!i, "js_tag_check by other blog" );
+    ok( $out =~ m!permission=1!i, "js_tag_check by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -222,7 +222,7 @@ subtest 'mode = js_tag_list' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: js_tag_list" );
-    ok( $out =~ m!permission denied!i, "js_tag_list by other blog" );
+    ok( $out =~ m!permission=1!i, "js_tag_list by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
