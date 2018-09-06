@@ -916,7 +916,7 @@ subtest 'action = unapprove_ping' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: unapprove_ping" );
-    ok( $out =~ m!not implemented!i, "unapprove_ping by other blog (manage feedback)" );
+    ok( $out =~ m!permission=1!i, "unapprove_ping by other blog (manage feedback)" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -936,7 +936,7 @@ subtest 'action = unapprove_ping' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: unapprove_ping" );
-    ok( $out =~ m!not implemented!i, "unapprove_ping by other blog (manage pages)" );
+    ok( $out =~ m!permission=1!i, "unapprove_ping by other blog (manage pages)" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -956,7 +956,7 @@ subtest 'action = unapprove_ping' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: unapprove_ping" );
-    ok( $out =~ m!not implemented!i, "unapprove_ping by other blog (publish post)" );
+    ok( $out =~ m!permission=1!i, "unapprove_ping by other blog (publish post)" );
 
     $app = _run_app(
         'MT::App::CMS',

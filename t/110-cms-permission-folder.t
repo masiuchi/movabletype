@@ -181,7 +181,7 @@ subtest 'mode = save (new)' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: save" );
-    ok( $out =~ m!invalid request!i, "save (new) by other blog" );
+    ok( $out =~ m!permission=1!i, "save (new) by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -316,7 +316,7 @@ subtest 'mode = edit (new)' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: edit" );
-    ok( $out =~ m!invalid request!i, "edit (new) by other blog" );
+    ok( $out =~ m!permission=1!i, "edit (new) by other blog" );
 
     $app = _run_app(
         'MT::App::CMS',

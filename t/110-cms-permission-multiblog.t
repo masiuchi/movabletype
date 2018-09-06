@@ -119,7 +119,7 @@ subtest 'mode = multiblog_add_trigger' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: multiblog_add_trigger" );
-    ok( $out =~ m!Permission denied!i, "multiblog_add_trigger by non permitted user (blog)" );
+    ok( $out =~ m!permission=1!i, "multiblog_add_trigger by non permitted user (blog)" );
 
     $app = _run_app(
         'MT::App::CMS',
@@ -131,7 +131,7 @@ subtest 'mode = multiblog_add_trigger' => sub {
     );
     $out = delete $app->{__test_output};
     ok( $out, "Request: multiblog_add_trigger" );
-    ok( $out =~ m!Permission denied!i, "multiblog_add_trigger by non permitted user (website)" );
+    ok( $out =~ m!permission=1!i, "multiblog_add_trigger by non permitted user (website)" );
 
     $app = _run_app(
         'MT::App::CMS',
