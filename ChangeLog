@@ -1,3 +1,7 @@
+2018-09-06  Masahiro IUCHI
+
+	* Check blog_id and permission strictly. (#95)
+
 2018-08-29  Masahiro IUCHI
 
 	* Fix permission check of asset search (#94)
