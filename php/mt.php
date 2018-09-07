@@ -11,8 +11,8 @@
  */
 require_once('lib/class.exception.php');
 
-define('VERSION', '5.2');
-define('PRODUCT_VERSION', '5.2.13');
+define('VERSION', '5.3');
+define('PRODUCT_VERSION', '5.3.0');
 define('PRODUCT_NAME', 'MyMTOS');
 
 $RELEASE_NUMBER = '__RELEASE_NUMBER__';
