@@ -1,3 +1,7 @@
+2018-09-08  Masahiro IUCHI
+
+	* Bump up version to 5.3.0 and fix some files to build package. (#96)
+
 2018-09-06  Masahiro IUCHI
 
 	* Check blog_id and permission strictly. (#95)
