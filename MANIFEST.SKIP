@@ -263,6 +263,9 @@ build-language-stamp
 ^mt-static/jquery/themes/Motion
 ^mt-static/jquery/themes/flora
 ^mt-static/plugins/ActionStreams
+^mt-static/support/dashboard
+^mt-static/support/theme_static
+^mt-static/support/theme_thumbnails
 ^plugins/Motion
 ^plugins/ActionStreams
 ^plugins/CommunityActionStreams
@@ -289,4 +292,5 @@ Dockerfile
 ^node_modules
 
 .DS_Store
+\.vs-code
 

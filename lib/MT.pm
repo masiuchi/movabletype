@@ -34,13 +34,13 @@ our $plugins_installed;
 BEGIN {
     $plugins_installed = 0;
 
-    ( $VERSION, $SCHEMA_VERSION ) = ( '5.2', '5.0037' );
+    ( $VERSION, $SCHEMA_VERSION ) = ( '5.3', '5.0037' );
     (   $PRODUCT_NAME, $PRODUCT_CODE,   $PRODUCT_VERSION,
         $VERSION_ID,   $RELEASE_NUMBER, $PORTAL_URL,
         )
         = (
-        'MyMTOS', 'MyMTOS', '5.2.13', '5.2.13',
-        '13', 'https://github.com/mymtos/mymtos'
+        'MyMTOS', 'MyMTOS', '5.3.0', '5.3.0',
+        '0', 'https://github.com/mymtos/mymtos'
         );
 
     $DebugMode = 0;
