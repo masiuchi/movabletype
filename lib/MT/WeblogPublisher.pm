@@ -1937,7 +1937,6 @@ sub publish_future_posts {
         }
 
         my $changed = 0;
-        my @results;
         my %rebuild_queue;
         my %ping_queue;
         foreach my $entry_id (@queue) {

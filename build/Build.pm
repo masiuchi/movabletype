@@ -505,7 +505,6 @@ sub stage_distro {
     }
 
     # Un-tar the distribution.
-    my $tar;
     unless ( $self->{'debug'} ) {
         $self->verbose("Extract: $dest...");
 
@@ -513,7 +512,7 @@ sub stage_distro {
         # since Archive::Tar is croaking on one of our files.
         `tar xf $dest`;
 
-        # $tar = Archive::Tar->new( $dest );
+        # my $tar = Archive::Tar->new( $dest );
         # $tar->extract();
     }
     $self->verbose("Extract: $dest");

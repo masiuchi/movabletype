@@ -860,7 +860,7 @@ sub system_filters {
 sub is_not_blocked {
     my ( $eh, $cmt ) = @_;
 
-    my ( $host, @hosts );
+    my @hosts;
 
     # other URI schemes?
     require MT::Util;

@@ -1201,7 +1201,6 @@ sub _hdlr_entries {
             $footer = $this_day ne $next_day;
         }
         else { $footer++ }
-        my $allow_comments ||= 0;
         $published->{ $e->id }++;
         my $out = $builder->build(
             $ctx, $tok,

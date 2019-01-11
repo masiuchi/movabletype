@@ -26,7 +26,7 @@ use File::Find;
 use Template::Constants ':chomp';
 
 
-my ($version, $help, $man, $VERBOSE, $app);
+my ($help, $man, $VERBOSE, $app);
 
 GetOptions (
              'h|help'          => \$help,
