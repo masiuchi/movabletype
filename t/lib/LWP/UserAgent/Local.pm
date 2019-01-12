@@ -1,4 +1,5 @@
 package LWP::UserAgent::Local;
+use strict;
 
 use LWP::UserAgent;
 use base 'LWP::UserAgent';

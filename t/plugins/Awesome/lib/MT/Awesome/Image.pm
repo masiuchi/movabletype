@@ -1,4 +1,5 @@
 package MT::Awesome::Image;
+use strict;
 
 use base qw( MT::Awesome );
 
