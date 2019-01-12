@@ -43,6 +43,7 @@ on 'test' => sub {
     requires 'Test::LeakTrace';
     requires 'Test::MockModule';
     requires 'Test::MockObject';
+    requires 'Test::Perl::Critic';
 };
 
 ## % carton exec -- local/bin/start_server --port 8000 --pid-file=log/mt.pid -- plackup -s Starlet --max-workers=2 --access-log=log/access.log mt.psgi >& log/error.log &

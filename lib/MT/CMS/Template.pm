@@ -2098,7 +2098,6 @@ sub refresh_all_templates {
         # refresh templates dialog uses a 'backup' field
         $backup = 1;
     }
-    my $template_set;
     my $refresh_type = $app->param('refresh_type') || 'refresh';
     my $t = time;
 
