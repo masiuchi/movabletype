@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtifcommentparent($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtifcommentparent($args, $content, &$ctx, &$repeat)
+{
     if (!isset($content)) {
         $comment = $ctx->stash('comment');
         $has_parent = 0;
@@ -18,4 +19,3 @@ function smarty_block_mtifcommentparent($args, $content, &$ctx, &$repeat) {
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

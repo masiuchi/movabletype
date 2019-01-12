@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtblogcommentcount($args, &$ctx) {
+function smarty_function_mtblogcommentcount($args, &$ctx)
+{
     if (!(
         isset($args['include_blogs']) ||
         isset($args['include_websites']) ||
@@ -21,4 +22,3 @@ function smarty_function_mtblogcommentcount($args, &$ctx) {
     $count = $ctx->mt->db()->blog_comment_count($args);
     return $ctx->count_format($count, $args);
 }
-?>

@@ -5,15 +5,22 @@
 #
 # $Id$
 
-function smarty_function_mtcommentrepliesrecurse($args, &$ctx) {
+function smarty_function_mtcommentrepliesrecurse($args, &$ctx)
+{
     $localvars = array(array('comments', 'comment_order_num', 'comment','current_timestamp', 'commenter', 'blog', 'blog_id'), common_loop_vars());
     $token_fn = $ctx->stash('_comment_replies_tokens');
 
     $comment = $ctx->stash('comment');
-    if (!$comment) { $repeat = false; return ''; }
+    if (!$comment) {
+        $repeat = false;
+        return '';
+    }
     $args['comment_id'] = $comment->comment_id;
     $comments = $ctx->mt->db()->fetch_comment_replies($args);
-    if (!$comments) { $repeat = false; return ''; }
+    if (!$comments) {
+        $repeat = false;
+        return '';
+    }
     $ctx->stash('comments', $comments);
 
     $counter = 0;
@@ -55,4 +62,3 @@ function smarty_function_mtcommentrepliesrecurse($args, &$ctx) {
     $ctx->restore($localvars);
     return $content;
 }
-?>

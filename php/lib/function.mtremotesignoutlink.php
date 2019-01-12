@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtremotesignoutlink($args, &$ctx) {
+function smarty_function_mtremotesignoutlink($args, &$ctx)
+{
     // status: complete
     // parameters: none
     $entry = $ctx->stash('entry');
@@ -18,7 +19,7 @@ function smarty_function_mtremotesignoutlink($args, &$ctx) {
         $url = $args['static'];
         if (isset($url) && ($url != '1')) {
             $static_arg = "&amp;static=" . urlencode($url);
-        } else if (isset($url) && ($url == 1)) {
+        } elseif (isset($url) && ($url == 1)) {
             $static_arg = "&amp;static=1";
         } else {
             $static_arg = "&amp;static=0";
@@ -34,4 +35,3 @@ function smarty_function_mtremotesignoutlink($args, &$ctx) {
     }
     return $path;
 }
-?>

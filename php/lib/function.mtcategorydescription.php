@@ -5,9 +5,11 @@
 #
 # $Id$
 
-function smarty_function_mtcategorydescription($args, &$ctx) {
+function smarty_function_mtcategorydescription($args, &$ctx)
+{
     $cat = $ctx->stash('category');
-    if (!$cat) return '';
+    if (!$cat) {
+        return '';
+    }
     return $cat->category_description;
 }
-?>

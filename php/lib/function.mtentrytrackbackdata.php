@@ -6,13 +6,16 @@
 # $Id$
 
 require_once("archive_lib.php");
-function smarty_function_mtentrytrackbackdata($args, &$ctx) {
+function smarty_function_mtentrytrackbackdata($args, &$ctx)
+{
     $e = $ctx->stash('entry');
     $tb = $e->trackback();
-    if (empty($tb))
+    if (empty($tb)) {
         return '';
-    if ($tb->trackback_is_disabled)
+    }
+    if ($tb->trackback_is_disabled) {
         return '';
+    }
 
     $blog = $ctx->stash('blog');
     $entry = $ctx->stash('entry');
@@ -22,17 +25,19 @@ function smarty_function_mtentrytrackbackdata($args, &$ctx) {
     } else {
         $accepted = $blog_accepted;
     }
-    if (!$accepted)
+    if (!$accepted) {
         return '';
+    }
 
     require_once "function.mtcgipath.php";
     $path = smarty_function_mtcgipath($args, $ctx);
     $path .= $ctx->mt->config('TrackbackScript') . '/' . $tb->trackback_id;
 
     $at = $ctx->stash('current_archive_type');
-    if ($at)
+    if ($at) {
         $at = ArchiverFactory::get_archiver($at);
-    if ($at && !( $at instanceof IndividualArchiver )) {
+    }
+    if ($at && !($at instanceof IndividualArchiver)) {
         $url = $ctx->tag('ArchiveLink');
         $url .= '#entry-' . sprintf("%06d", $e->entry_id);
     } else {
@@ -74,4 +79,3 @@ RDF;
     }
     return $rdf;
 }
-?>

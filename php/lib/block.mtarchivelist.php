@@ -1,6 +1,7 @@
 <?php
 require_once "archive_lib.php";
-function smarty_block_mtarchivelist($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtarchivelist($args, $content, &$ctx, &$repeat)
+{
     $localvars = array(array('current_archive_type', 'current_timestamp', 'current_timestamp_end', 'entries', 'archive_count', '_archive_list_num', '_archive_list_results','entry','ArchiveListHeader', 'ArchiveListFooter', 'inside_archive_list', 'category', 'author'), common_loop_vars());
     if (!isset($content)) {
         $blog = $ctx->stash('blog');
@@ -46,7 +47,7 @@ function smarty_block_mtarchivelist($args, $content, &$ctx, &$repeat) {
         $ctx->stash('_archive_list_results', $archive_list_results);
         # allow <MTEntries> to load them
         $ctx->stash('entries', null);
-        $ctx->stash('inside_archive_list',true);
+        $ctx->stash('inside_archive_list', true);
         $i = 0;
     } else {
         $at = $ctx->stash('current_archive_type');
@@ -55,13 +56,15 @@ function smarty_block_mtarchivelist($args, $content, &$ctx, &$repeat) {
     }
     if ($at == 'Category') {
         $content = smarty_block_mtcategories($args, $content, $ctx, $repeat);
-        if (!$repeat)
+        if (!$repeat) {
             $ctx->restore($localvars);
+        }
         return $content;
     }
     if ($i < count($archive_list_results)) {
-        if (empty($ar))
+        if (empty($ar)) {
             $ar = ArchiverFactory::get_archiver($at);
+        }
 
         $grp = $archive_list_results[$i];
         $ar->prepare_list($grp);
@@ -70,7 +73,7 @@ function smarty_block_mtarchivelist($args, $content, &$ctx, &$repeat) {
         } else {
             $cnt = array_shift($grp);
         }
-        if ($at == 'Individual' || $at == 'Page' ) {
+        if ($at == 'Individual' || $at == 'Page') {
             $entry = $ctx->stash('entry');
             $start = $end = $entry->entry_authored_on;
         } else {
@@ -98,4 +101,3 @@ function smarty_block_mtarchivelist($args, $content, &$ctx, &$repeat) {
     }
     return $content;
 }
-?>

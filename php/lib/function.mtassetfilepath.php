@@ -5,9 +5,12 @@
 #
 # $Id$
 
-function smarty_function_mtassetfilepath($args, &$ctx) {
+function smarty_function_mtassetfilepath($args, &$ctx)
+{
     $asset = $ctx->stash('asset');
-    if (!$asset) return '';
+    if (!$asset) {
+        return '';
+    }
 
     $blog = $ctx->stash('blog');
 
@@ -19,10 +22,12 @@ function smarty_function_mtassetfilepath($args, &$ctx) {
 
     require_once('MTUtil.php');
     $static_path = static_file_path();
-    $asset_file = preg_replace('/^%s/', $static_path, $asset_file);    
+    $asset_file = preg_replace('/^%s/', $static_path, $asset_file);
 
     $blog_archive_path = $blog->archive_path();
-    if (!$blog_archive_path) $blog_archive_path = $blog_site_path;
+    if (!$blog_archive_path) {
+        $blog_archive_path = $blog_site_path;
+    }
     if ($blog_archive_path) {
         $blog_archive_path = preg_replace('/\/$/', '', $blog_archive_path);
         $asset_file = preg_replace('/^%r/', $blog_archive_path, $asset_file);
@@ -30,4 +35,3 @@ function smarty_function_mtassetfilepath($args, &$ctx) {
 
     return $asset_file;
 }
-?>

@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtcommentbody($args, &$ctx) {
+function smarty_function_mtcommentbody($args, &$ctx)
+{
     $comment = $ctx->stash('comment');
     $text = $comment->comment_text;
 
@@ -19,7 +20,7 @@ function smarty_function_mtcommentbody($args, &$ctx) {
     }
 
     require_once 'MTUtil.php';
-    if ( $cb != '0' ) {
+    if ($cb != '0') {
         $text = apply_text_filter($ctx, $text, $cb);
     }
 
@@ -33,4 +34,3 @@ function smarty_function_mtcommentbody($args, &$ctx) {
     }
     return $text;
 }
-?>

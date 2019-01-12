@@ -5,14 +5,15 @@
 #
 # $Id$
 
-function smarty_block_mtcommentifmoderated($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtcommentifmoderated($args, $content, &$ctx, &$repeat)
+{
     if (!isset($content)) {
         $comment = $ctx->stash('comment');
-        if ($comment)
+        if ($comment) {
             $ret = $comment->visible;
+        }
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat, $ret);
     } else {
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

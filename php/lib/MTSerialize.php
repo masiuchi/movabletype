@@ -8,16 +8,20 @@
 global $SERIALIZE_VERSION;
 $SERIALIZE_VERSION = 2;
 
-class MTSerialize {
-    function unserialize($frozen) {
+class MTSerialize
+{
+    public function unserialize($frozen)
+    {
         return $this->_thaw_mt_2($frozen);
     }
 
-    function serialize($data) {
+    public function serialize($data)
+    {
         return $this->_freeze_mt_2($data);
     }
 
-    function _freeze_mt_2($ref) {
+    public function _freeze_mt_2($ref)
+    {
         # version 2 signature: 'SERG' + packed long 0 + packed long protocol
         $freezer = function ($i, $v, $f) {
             if (is_array($v)) {
@@ -36,8 +40,9 @@ class MTSerialize {
         $ice_tray = array(
             'HASH' => function ($i, $v, $f) {
                 $cube = "H" . pack("N", count(array_keys($v)));
-                foreach ($v as $k => $kv)
+                foreach ($v as $k => $kv) {
                     $cube .= pack("N", strlen($k)) . $k . $f($i, $kv, $f);
+                }
                 return $cube;
             },
             'ARRAY' => function ($i, $v, $f) {
@@ -53,12 +58,13 @@ class MTSerialize {
             $freezer($ice_tray, $ref, $freezer);
     }
 
-    function _thaw_mt_2($frozen) {
+    public function _thaw_mt_2($frozen)
+    {
         if (substr($frozen, 0, 4) != 'SERG') {
-            return NULL;
+            return null;
         }
     
-        $thawed = NULL;
+        $thawed = null;
         $refs = array(&$thawed);
     
         # The microwave thaws and pops out an element
@@ -68,11 +74,11 @@ class MTSerialize {
                 $s["pos"] += 4;
                 $values = array();
                 $s["refs"][] = $values;
-                for ($k = 0; $k < $keys["len"]; $k++ ) {
+                for ($k = 0; $k < $keys["len"]; $k++) {
                     $key_name_len = unpack("Nlen", substr($s["frozen"], $s["pos"], 4));
                     $key_name = substr($s["frozen"], $s["pos"] + 4, $key_name_len["len"]);
                     $s["pos"] += 4 + $key_name_len["len"];
-                    if ( strlen($s["frozen"]) >= $s["pos"] + 4 ) {
+                    if (strlen($s["frozen"]) >= $s["pos"] + 4) {
                         $h = $s["heater"];
                         $values[$key_name] = $h($s);
                     } else {
@@ -100,7 +106,7 @@ class MTSerialize {
                 return $col_val;
             },
             'R' => function (&$s) {  # refref
-                $value = NULL;
+                $value = null;
                 $s["refs"][] = &$value;
                 $h = $s["heater"];
                 $value = $h($s);
@@ -113,7 +119,7 @@ class MTSerialize {
                 return $col_val;
             },
             'U' => function (&$s) {  # undef
-                return NULL;
+                return null;
             },
             'P' => function (&$s) {  # pointer to known ref
                 $ptr = unpack("Npos", substr($s["frozen"], $s["pos"], 4));
@@ -123,12 +129,13 @@ class MTSerialize {
         );
     
         $heater = function (&$s) {
-            $type = substr($s["frozen"], $s["pos"], 1); $s["pos"]++;
+            $type = substr($s["frozen"], $s["pos"], 1);
+            $s["pos"]++;
             if (array_key_exists($type, $s["microwave"])) {
                 $h = $s["microwave"][$type];
                 return $h($s);
             } else {
-                return NULL;
+                return null;
             }
         };
 
@@ -138,10 +145,13 @@ class MTSerialize {
     }
 }
 
-function perl_array_type(&$v) {
+function perl_array_type(&$v)
+{
     $keys = array_keys($v);
-    foreach ($keys as $i)
-        if (!is_int($i)) return 'HASH';
+    foreach ($keys as $i) {
+        if (!is_int($i)) {
+            return 'HASH';
+        }
+    }
     return 'ARRAY';
 }
-?>

@@ -16,24 +16,28 @@ define('PRODUCT_VERSION', '5.3.0');
 define('PRODUCT_NAME', 'MyMTOS');
 
 $RELEASE_NUMBER = '__RELEASE_NUMBER__';
-if ( $RELEASE_NUMBER == '__RELEASE_' . 'NUMBER__' )
+if ($RELEASE_NUMBER == '__RELEASE_' . 'NUMBER__') {
     $RELEASE_NUMBER = 13;
+}
 define('RELEASE_NUMBER', $RELEASE_NUMBER);
 
 $PRODUCT_VERSION_ID = '__PRODUCT_VERSION_ID__';
-if ( $PRODUCT_VERSION_ID == '__PRODUCT_' . 'VERSION_ID__' )
+if ($PRODUCT_VERSION_ID == '__PRODUCT_' . 'VERSION_ID__') {
     $PRODUCT_VERSION_ID = PRODUCT_VERSION;
+}
 $VERSION_STRING;
-if ( $RELEASE_NUMBER > 0 )
+if ($RELEASE_NUMBER > 0) {
     $VERSION_STRING = $PRODUCT_VERSION_ID . "." . $RELEASE_NUMBER;
-else
+} else {
     $VERSION_STRING = $PRODUCT_VERSION_ID;
+}
 define('VERSION_ID', $PRODUCT_VERSION_ID);
 
 global $Lexicon;
 $Lexicon = array();
 
-class MT {
+class MT
+{
     protected $mime_types = array(
         '__default__' => 'text/html',
         'css' => 'text/css',
@@ -55,7 +59,7 @@ class MT {
     protected $http_error;
     protected $cfg_file;
 
-    private  $cache_driver = null;
+    private $cache_driver = null;
     private static $_instance = null;
 
     /***
@@ -65,44 +69,50 @@ class MT {
      *
      * $mt = MT::get_instance();
      */
-    private function __construct($blog_id = null, $cfg_file = null) {
+    private function __construct($blog_id = null, $cfg_file = null)
+    {
         error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
         try {
-            $this->id = md5(uniqid('MT',true));
+            $this->id = md5(uniqid('MT', true));
             $this->init($blog_id, $cfg_file);
-        } catch (Exception $e ) {
-            throw new MTInitException( $e, $this->debugging );
+        } catch (Exception $e) {
+            throw new MTInitException($e, $this->debugging);
         }
     }
 
-    public static function get_instance($blog_id = null, $cfg_file = null) {
+    public static function get_instance($blog_id = null, $cfg_file = null)
+    {
         if (is_null(MT::$_instance)) {
             MT::$_instance = new MT($blog_id, $cfg_file);
         }
         return MT::$_instance;
     }
 
-    public function caching($val = null) {
-        if ( !is_null($val) ) {
+    public function caching($val = null)
+    {
+        if (!is_null($val)) {
             $this->caching = $val;
         }
 
         return $this->caching;
     }
 
-    public function conditional($val = null) {
-        if ( !is_null($val) ) {
+    public function conditional($val = null)
+    {
+        if (!is_null($val)) {
             $this->conditional = $val;
         }
 
         return $this->conditional;
     }
 
-    public function blog_id() {
+    public function blog_id()
+    {
         return $this->blog_id;
     }
 
-    function init($blog_id = null, $cfg_file = null) {
+    public function init($blog_id = null, $cfg_file = null)
+    {
         if (isset($blog_id)) {
             $this->blog_id = $blog_id;
         }
@@ -117,8 +127,9 @@ class MT {
         $this->configure_from_db();
 
         $lang = substr(strtolower($this->config('DefaultLanguage')), 0, 2);
-        if (!@include_once("l10n_$lang.php"))
+        if (!@include_once("l10n_$lang.php")) {
             include_once("l10n_en.php");
+        }
 
         if (extension_loaded('mbstring')) {
             $charset = $this->config('PublishCharset');
@@ -127,7 +138,8 @@ class MT {
         }
     }
 
-    function init_addons() {
+    public function init_addons()
+    {
         $mtdir = dirname(dirname(__FILE__));
         $path = $mtdir . DIRECTORY_SEPARATOR . "addons";
         if (is_dir($path)) {
@@ -139,47 +151,56 @@ class MT {
                     }
                     $plugin_dir = $path . DIRECTORY_SEPARATOR . $file
                         . DIRECTORY_SEPARATOR . 'php';
-                    if (is_dir($plugin_dir))
+                    if (is_dir($plugin_dir)) {
                         $ctx->add_plugin_dir($plugin_dir);
+                    }
                 }
                 closedir($dh);
             }
         }
     }
 
-    function init_plugins() {
+    public function init_plugins()
+    {
         $plugin_paths = $this->config('PluginPath');
         $ctx =& $this->context();
 
         foreach ($plugin_paths as $path) {
-            if ( !is_dir($path) )
+            if (!is_dir($path)) {
                 $path = $this->config('MTDir') . DIRECTORY_SEPARATOR . $path;
+            }
 
             if ($dh = @opendir($path)) {
-                 while (($file = readdir($dh)) !== false) {
-                     if ($file == "." || $file == "..")
-                         continue;
-                     $plugin_dir = $path . DIRECTORY_SEPARATOR . $file
+                while (($file = readdir($dh)) !== false) {
+                    if ($file == "." || $file == "..") {
+                        continue;
+                    }
+                    $plugin_dir = $path . DIRECTORY_SEPARATOR . $file
                          . DIRECTORY_SEPARATOR . 'php';
-                     if (is_dir($plugin_dir))
-                         $ctx->add_plugin_dir($plugin_dir);
-                 }
-                 closedir($dh);
+                    if (is_dir($plugin_dir)) {
+                        $ctx->add_plugin_dir($plugin_dir);
+                    }
+                }
+                closedir($dh);
             }
         }
 
         $plugin_dir = $this->config('PHPDir') . DIRECTORY_SEPARATOR
             . 'plugins';
-        if (is_dir($plugin_dir))
+        if (is_dir($plugin_dir)) {
             $ctx->add_plugin_dir($plugin_dir);
+        }
 
         # Load any php directories found during the 'init_addons' loop
-        foreach ($ctx->plugins_dir as $plugin_dir)
-            if (is_dir($plugin_dir))
+        foreach ($ctx->plugins_dir as $plugin_dir) {
+            if (is_dir($plugin_dir)) {
                 $this->load_plugin($plugin_dir);
+            }
+        }
     }
 
-    function load_plugin($plugin_dir) {
+    public function load_plugin($plugin_dir)
+    {
         $ctx =& $this->context();
         // global filters have to be handled differently from
         // tag attributes, so this causes them to be recognized
@@ -197,7 +218,8 @@ class MT {
         }
     }
 
-    public function cfg_file() {
+    public function cfg_file()
+    {
         return $this->cfg_file;
     }
 
@@ -205,16 +227,19 @@ class MT {
      * Retreives a handle to the database and assigns it to
      * the member variable 'db'.
      */
-    function &db() {
+    public function &db()
+    {
         if (!isset($this->db)) {
             require_once("mtdb.".$this->config('DBDriver').".php");
             $mtdbclass = 'MTDatabase'.$this->config('DBDriver');
-            $this->db = new $mtdbclass($this->config('DBUser'),
+            $this->db = new $mtdbclass(
+                $this->config('DBUser'),
                 $this->config('DBPassword'),
                 $this->config('Database'),
                 $this->config('DBHost'),
                 $this->config('DBPort'),
-                $this->config('DBSocket'));
+                $this->config('DBSocket')
+            );
         }
         return $this->db;
     }
@@ -222,17 +247,22 @@ class MT {
     /***
      * Retreives a handle to the cache driver.
      */
-    public function cache_driver() {
-        if (isset($this->cache_driver)) return $this->cache_driver;
+    public function cache_driver()
+    {
+        if (isset($this->cache_driver)) {
+            return $this->cache_driver;
+        }
         require_once("class.basecache.php");
         $this->cache_driver = CacheProviderFactory::get_provider('session');
         return $this->cache_driver;
     }
 
-    public function config($id, $value = null) {
+    public function config($id, $value = null)
+    {
         $id = strtolower($id);
-        if (isset($value))
+        if (isset($value)) {
             $this->config[$id] = $value;
+        }
         return isset($this->config[$id]) ? $this->config[$id] : null;
     }
 
@@ -240,8 +270,11 @@ class MT {
      * Loads configuration data from mt.cfg and mt-db-pass.cgi files.
      * Stores content in the 'config' member variable.
      */
-    function configure($file = null) {
-        if (isset($this->config)) return $config;
+    public function configure($file = null)
+    {
+        if (isset($this->config)) {
+            return $config;
+        }
 
         $this->cfg_file = $file;
 
@@ -251,15 +284,14 @@ class MT {
         if ($fp = file($file)) {
             foreach ($fp as $line) {
                 // search through the file
-                if (!preg_match('/^\s*\#/i',$line)) {
+                if (!preg_match('/^\s*\#/i', $line)) {
                     // ignore lines starting with the hash symbol
                     if (preg_match('/^\s*(\S+)\s+(.*)$/', $line, $regs)) {
                         $key = strtolower(trim($regs[1]));
                         $value = trim($regs[2]);
                         if (in_array($key, $type_array)) {
                             $cfg[$key][] = $value;
-                        }
-                        elseif (in_array($key, $type_hash)) {
+                        } elseif (in_array($key, $type_hash)) {
                             $hash = preg_split('/\=/', $value, 2);
                             $cfg[$key][strtolower(trim($hash[0]))] = trim($hash[1]);
                         } else {
@@ -290,7 +322,7 @@ class MT {
             }
         }
 
-        if ( !empty( $cfg['debugmode'] ) && intval($cfg['debugmode']) > 0 ) {
+        if (!empty($cfg['debugmode']) && intval($cfg['debugmode']) > 0) {
             $this->debugging = true;
         }
 
@@ -310,12 +342,13 @@ class MT {
         // set up include path
         // add MT-PHP 'plugins' and 'lib' directories to the front
         // of the existing PHP include path:
-        if (strtoupper(substr(PHP_OS, 0,3) == 'WIN')) {
+        if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
             $path_sep = ';';
         } else {
             $path_sep = ':';
         }
-        ini_set('include_path',
+        ini_set(
+            'include_path',
             $cfg['phpdir'] . DIRECTORY_SEPARATOR . "lib" . $path_sep .
             $cfg['phpdir'] . DIRECTORY_SEPARATOR . "extlib" . $path_sep .
             $cfg['phpdir'] . DIRECTORY_SEPARATOR . "extlib" . DIRECTORY_SEPARATOR . "smarty" . DIRECTORY_SEPARATOR . "libs" . $path_sep .
@@ -336,7 +369,8 @@ class MT {
         }
     }
 
-    function configure_from_db() {
+    public function configure_from_db()
+    {
         $cfg =& $this->config;
         $mtdb =& $this->db();
         $db_config = $mtdb->fetch_config();
@@ -348,18 +382,20 @@ class MT {
             $mtdb->set_names($this);
         }
 
-        if ( !empty( $cfg['debugmode'] ) && intval($cfg['debugmode']) > 0 ) {
+        if (!empty($cfg['debugmode']) && intval($cfg['debugmode']) > 0) {
             $this->debugging = true;
         }
     }
 
-    function config_defaults() {
+    public function config_defaults()
+    {
         $cfg =& $this->config;
         // assign defaults:
         isset($cfg['cgipath']) or
             $cfg['cgipath'] = '/cgi-bin/';
-        if (substr($cfg['cgipath'], strlen($cfg['cgipath']) - 1, 1) != '/')
-            $cfg['cgipath'] .= '/'; 
+        if (substr($cfg['cgipath'], strlen($cfg['cgipath']) - 1, 1) != '/') {
+            $cfg['cgipath'] .= '/';
+        }
         isset($cfg['staticwebpath']) or
             $cfg['staticwebpath'] = $cfg['cgipath'] . 'mt-static/';
         isset($cfg['trackbackscript']) or
@@ -426,7 +462,8 @@ class MT {
             $cfg['bulkloadmetaobjectslimit'] = 100;
     }
 
-    function configure_paths($blog_site_path) {
+    public function configure_paths($blog_site_path)
+    {
         if (preg_match('/^\./', $blog_site_path)) {
             // relative address, so tack on the MT dir in front
             $blog_site_path = $this->config('MTDir') .
@@ -448,30 +485,30 @@ class MT {
     /***
      * Mainline handler function.
      */
-    function view($blog_id = null) {
-
+    public function view($blog_id = null)
+    {
         set_error_handler(array(&$this, 'error_handler'));
 
         require_once("MTUtil.php");
 
         $blog_id or $blog_id = $this->blog_id;
 
-       try {
-           $ctx =& $this->context();
-           $this->init_plugins();
-           $ctx->caching = $this->caching;
+        try {
+            $ctx =& $this->context();
+            $this->init_plugins();
+            $ctx->caching = $this->caching;
 
-           // Some defaults...
+            // Some defaults...
             $mtdb =& $this->db();
             $ctx->mt->db =& $mtdb;
-       } catch (Exception $e ) {
-            if ( $this->debugging ) {
+        } catch (Exception $e) {
+            if ($this->debugging) {
                 $msg = "<b>Error:</b> ". $e->getMessage() ."<br>\n" .
                        "<pre>".$e->getTraceAsString()."</pre>";
 
-                return trigger_error( $msg, E_USER_ERROR);
+                return trigger_error($msg, E_USER_ERROR);
             }
-            header( "503 Service Unavailable" );
+            header("503 Service Unavailable");
             return false;
         }
 
@@ -501,7 +538,7 @@ class MT {
         }
 
         // now set the path so it may be queried
-        $path = preg_replace('/\\\\/', '\\\\\\\\', $path );
+        $path = preg_replace('/\\\\/', '\\\\\\\\', $path);
         $this->request = $path;
 
         $pathinfo = pathinfo($path);
@@ -560,8 +597,9 @@ class MT {
         $vars['page_columns'] = $columns;
         $vars['page_layout'] = $page_layout;
 
-        if (isset($tmpl->template_identifier))
+        if (isset($tmpl->template_identifier)) {
             $vars[$tmpl->template_identifier] = 1;
+        }
 
         $this->configure_paths($blog->site_path());
 
@@ -618,7 +656,7 @@ class MT {
             if (isset($entry_id) && ($entry_id) && ($at == 'Individual' || $at == 'Page')) {
                 if ($at == 'Individual') {
                     $entry = $mtdb->fetch_entry($entry_id);
-                } elseif($at == 'Page') {
+                } elseif ($at == 'Page') {
                     $entry = $mtdb->fetch_page($entry_id);
                 }
                 $ctx->stash('entry', $entry);
@@ -652,8 +690,9 @@ class MT {
         }
         $charset = $this->config('PublishCharset');
         if (isset($charset)) {
-            if (!preg_match('/charset=/', $content_type))
+            if (!preg_match('/charset=/', $content_type)) {
                 $content_type .= '; charset=' . $charset;
+            }
         }
         header("Content-Type: $content_type");
 
@@ -666,23 +705,23 @@ class MT {
             $this->_dump($this->warning);
         }
 
-#        if ($this->debugging) {
-#            $this->log("Queries: ".$mtdb->num_queries);
-#            $this->log("Queries executed:");
-#            $queries = $mtdb->savedqueries;
-#            foreach ($queries as $q) {
-#                $this->log($q);
-#            }
-#            $this->log_dump();
-#        }
+        #        if ($this->debugging) {
+        #            $this->log("Queries: ".$mtdb->num_queries);
+        #            $this->log("Queries executed:");
+        #            $queries = $mtdb->savedqueries;
+        #            foreach ($queries as $q) {
+        #                $this->log($q);
+        #            }
+        #            $this->log_dump();
+        #        }
         restore_error_handler();
     }
 
-    function set_canonical_url($ctx, $blog, $fileinfo) {
+    public function set_canonical_url($ctx, $blog, $fileinfo)
+    {
         if (preg_match('#(\A[^:]*://[^/]*)#', $blog->site_url(), $m)) {
             $url = $m[1] . $fileinfo->url;
-        }
-        else {
+        } else {
             $url = $fileinfo->url;
         }
         $ctx->stash('current_mapping_url', $url);
@@ -694,9 +733,10 @@ class MT {
         }
     }
 
-    function resolve_url($path, $build_type = 3) {
+    public function resolve_url($path, $build_type = 3)
+    {
         $data = $this->db->resolve_url($path, $this->blog_id, $build_type);
-        if ( isset($data)
+        if (isset($data)
             && isset($data->fileinfo_entry_id)
             && is_numeric($data->fileinfo_entry_id)
         ) {
@@ -706,16 +746,18 @@ class MT {
             } else {
                 $entry = $this->db->fetch_entry($data->fileinfo_entry_id);
             }
-            if (!isset($entry) || $entry->entry_status != 2)
+            if (!isset($entry) || $entry->entry_status != 2) {
                 return;
+            }
         }
         return $data;
     }
 
-    function doConditionalGet($last_modified) {
+    public function doConditionalGet($last_modified)
+    {
         // Thanks to Simon Willison...
         //   http://simon.incutio.com/archive/2003/04/23/conditionalGet
-        // A PHP implementation of conditional get, see 
+        // A PHP implementation of conditional get, see
         //   http://fishbowl.pastiche.org/archives/001132.html
         $etag = '"'.md5($last_modified).'"';
         // Send the headers
@@ -726,7 +768,7 @@ class MT {
             stripslashes($_SERVER['HTTP_IF_MODIFIED_SINCE']) :
             false;
         $if_none_match = isset($_SERVER['HTTP_IF_NONE_MATCH']) ?
-            stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) : 
+            stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) :
             false;
         if (!$if_modified_since && !$if_none_match) {
             return;
@@ -743,7 +785,8 @@ class MT {
         exit;
     }
 
-    function display($tpl, $cid = null) {
+    public function display($tpl, $cid = null)
+    {
         $ctx =& $this->context();
         $this->init_plugins();
         $blog =& $ctx->stash('blog');
@@ -759,7 +802,8 @@ class MT {
         return $ctx->display($tpl, $cid);
     }
 
-    function fetch($tpl, $cid = null) {
+    public function fetch($tpl, $cid = null)
+    {
         $ctx =& $this->context();
         $this->init_plugins();
         $blog =& $ctx->stash('blog');
@@ -775,7 +819,8 @@ class MT {
         return $ctx->fetch($tpl, $cid);
     }
 
-    function _dump($dump) {
+    public function _dump($dump)
+    {
         if ($_SERVER['REMOTE_ADDR']) {
             // web view...
             echo "<div class=\"debug\" style=\"border:1px solid red; margin:0.5em; padding: 0 1em; text-align:left; background-color:#ddd; color:#000\"><pre>";
@@ -783,20 +828,22 @@ class MT {
             echo "</pre></div>\n\n";
         } else {
             // console view...
-            $stderr = fopen('php://stderr', 'w'); 
-            fwrite($stderr,implode("\n", $dump)); 
-            echo (implode("\n", $dump)); 
+            $stderr = fopen('php://stderr', 'w');
+            fwrite($stderr, implode("\n", $dump));
+            echo(implode("\n", $dump));
             fclose($stderr);
         }
     }
 
-    function log_dump() {
+    public function log_dump()
+    {
         $this->_dump($this->log);
     }
 
-    function error_handler($errno, $errstr, $errfile, $errline) {
+    public function error_handler($errno, $errstr, $errfile, $errline)
+    {
         if ($errno & (E_ALL ^ E_NOTICE)) {
-            if ( !empty( $this->db ) ) {
+            if (!empty($this->db)) {
                 if (version_compare(phpversion(), '4.3.0', '>=')) {
                     $charset = $this->config('PublishCharset');
                     $errstr = htmlentities($errstr, ENT_COMPAT, $charset);
@@ -810,11 +857,11 @@ class MT {
                 $ctx->stash('blog_id', $this->blog_id);
                 $ctx->stash('local_blog_id', $this->blog_id);
                 $ctx->stash('blog', $this->db->fetch_blog($this->blog_id));
-                if ( $this->debugging ) {
+                if ($this->debugging) {
                     $ctx->stash('error_message', $errstr."<!-- file: $errfile; line: $errline; code: $errno -->");
                     $ctx->stash('error_code', $errno);
                 } else {
-                    if ( 404 == $this->http_error) {
+                    if (404 == $this->http_error) {
                         $ctx->stash('error_message', $errstr);
                     } else {
                         $ctx->stash('error_message', 'An error occurs.');
@@ -844,11 +891,11 @@ class MT {
                 }
                 exit;
             } else {
-                header( "HTTP/1.1 503 Service Unavailable" );
+                header("HTTP/1.1 503 Service Unavailable");
                 header("Content-type: text/plain");
                 echo "503 Service Unavailable\n\n";
 
-                if ( $this->debugging ) {
+                if ($this->debugging) {
                     echo "Errno: $errno\n";
                     echo "Error: $errstr\n";
                     echo "File: $errfile  Line: $errline\n";
@@ -862,9 +909,12 @@ class MT {
     /***
      * Retrieves a context and rendering object.
      */
-    public function &context() {
+    public function &context()
+    {
         static $ctx;
-        if (isset($ctx)) return $ctx;
+        if (isset($ctx)) {
+            return $ctx;
+        }
 
         require_once('MTViewer.php');
         $ctx = new MTViewer($this);
@@ -889,36 +939,44 @@ class MT {
         return $ctx;
     }
 
-    function log($msg = null) {
+    public function log($msg = null)
+    {
         $this->log[] = $msg;
     }
 
-    function translate($str, $params = null) {
-        if ( ( $params !== null ) && ( !is_array($params) ) )
+    public function translate($str, $params = null)
+    {
+        if (($params !== null) && (!is_array($params))) {
             $params = array( $params );
+        }
         return translate_phrase($str, $params);
     }
 
-    function translate_templatized_item($str) {
+    public function translate_templatized_item($str)
+    {
         return translate_phrase($str[1]);
     }
 
-    function translate_templatized($tmpl) {
+    public function translate_templatized($tmpl)
+    {
         $cb = array($this, 'translate_templatized_item');
         $out = preg_replace_callback('/<(?:_|mt)_trans phrase="(.+?)".*?>/i', $cb, $tmpl);
         return $out;
     }
 
-    function warning_log($str) {
+    public function warning_log($str)
+    {
         $this->warning[] = $str;
     }
 
-    function get_current_blog_id() {
+    public function get_current_blog_id()
+    {
         return $this->blog_id;
     }
 }
 
-function is_valid_email($addr) {
+function is_valid_email($addr)
+{
     if (preg_match('/[ |\t|\r|\n]*\"?([^\"]+\"?@[^ <>\t]+\.[^ <>\t][^ <>\t]+)[ |\t|\r|\n]*/', $addr, $matches)) {
         return $matches[1];
     } else {
@@ -927,12 +985,14 @@ function is_valid_email($addr) {
 }
 
 $spam_protect_map = array(':' => '&#58;', '@' => '&#64;', '.' => '&#46;');
-function spam_protect($str) {
+function spam_protect($str)
+{
     global $spam_protect_map;
     return strtr($str, $spam_protect_map);
 }
 
-function offset_time($ts, $blog = null, $dir = null) {
+function offset_time($ts, $blog = null, $dir = null)
+{
     if (isset($blog)) {
         if (!is_array($blog)) {
             global $mt;
@@ -956,7 +1016,8 @@ function offset_time($ts, $blog = null, $dir = null) {
     return $ts;
 }
 
-function translate_phrase_param($str, $params = null) {
+function translate_phrase_param($str, $params = null)
+{
     if (is_array($params)) {
         if (strpos($str, '[_') !== false) {
             for ($i = 1; $i <= count($params); $i++) {
@@ -967,14 +1028,12 @@ function translate_phrase_param($str, $params = null) {
         while (preg_match("/\\[quant,_(\d+),([^\\],]*)(?:,([^\\],]*))?(?:,([^\\],]*))?\\]/", $str, $matches, PREG_OFFSET_CAPTURE, $start)) {
             $id = $matches[1][0];
             $num = $params[$id-1];
-            if ( ($num === 0) && (count($matches) > 4) ) { 
+            if (($num === 0) && (count($matches) > 4)) {
                 $part = $matches[4][0];
-            } 
-            elseif ( $num === 1 ) {
+            } elseif ($num === 1) {
                 $part = $num . ' ' . $matches[2][0];
-            }
-            else {
-                $part = $num . ' ' . ( count($matches) > 3 ? $matches[3][0] : ( $matches[2][0] . 's' ) );
+            } else {
+                $part = $num . ' ' . (count($matches) > 3 ? $matches[3][0] : ($matches[2][0] . 's'));
             }
             $str = substr_replace($str, $part, $matches[0][1], strlen($matches[0][0]));
             $start = $matches[0][1] + strlen($part);
@@ -982,4 +1041,3 @@ function translate_phrase_param($str, $params = null) {
     }
     return $str;
 }
-?>

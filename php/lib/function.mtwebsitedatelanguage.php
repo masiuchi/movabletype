@@ -5,8 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitedatelanguage($args, &$ctx) {
+function smarty_function_mtwebsitedatelanguage($args, &$ctx)
+{
     require_once('function.mtblogdatelanguage.php');
     return smarty_function_mtblogdatelanguage($args, $ctx);
 }
-?>

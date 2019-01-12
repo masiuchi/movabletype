@@ -5,13 +5,15 @@
 #
 # $Id$
 
-function smarty_function_mtcommentparentid($args, &$ctx) {
+function smarty_function_mtcommentparentid($args, &$ctx)
+{
     $comment = $ctx->stash('comment');
     $id = $comment->comment_parent_id;
-    if (! $id) return '';
+    if (! $id) {
+        return '';
+    }
     if (isset($args['pad']) && $args['pad']) {
         $id = sprintf("%06d", $id);
     }
     return $id;
 }
-?>

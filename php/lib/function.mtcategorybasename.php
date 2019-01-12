@@ -5,9 +5,12 @@
 #
 # $Id$
 
-function smarty_function_mtcategorybasename($args, &$ctx) {
+function smarty_function_mtcategorybasename($args, &$ctx)
+{
     $cat = $ctx->stash('category');
-    if (!$cat) return '';
+    if (!$cat) {
+        return '';
+    }
     $basename = $cat->category_basename;
     if ($sep = $args['separator']) {
         if ($sep == '-') {
@@ -18,4 +21,3 @@ function smarty_function_mtcategorybasename($args, &$ctx) {
     }
     return $basename;
 }
-?>
