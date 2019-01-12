@@ -1,3 +1,7 @@
+2019-01-12  Masahiro IUCHI
+
+	* Check/Remove unused variables (#98)
+
 2018-09-08  Masahiro IUCHI
 
 	* Update ChangeLog for #96. (#97)
