@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 # Copyright (C) 2005-2013 Six Apart, Ltd.
-# Copyright (C) 2018 Masahiro IUCHI
+# Copyright (C) 2018-2019 Masahiro IUCHI
 # This program is distributed under the terms of the
 # GNU General Public License, version 2.
 #
