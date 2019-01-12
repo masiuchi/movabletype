@@ -458,7 +458,7 @@ sub on_upload {
     my $blog = $asset->blog or return;
     my $blog_id = $blog->id;
 
-    my ( $thumb, $thumb_width, $thumb_height );
+    my ( $thumb, $thumb_width );
     $thumb_width = $param->{thumb_width};
     $thumb       = $param->{thumb};
     if ($thumb) {

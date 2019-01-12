@@ -1028,7 +1028,6 @@ sub _query_parse_core {
         my @tmp;
         if ( ( 'TERM' eq $term->{query} ) || ( 'PHRASE' eq $term->{query} ) )
         {
-            my $test;
             if ( exists( $term->{field} ) ) {
                 if (   $filter_types
                     && %$filter_types

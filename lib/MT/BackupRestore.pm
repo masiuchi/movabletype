@@ -575,7 +575,6 @@ sub restore_directory {
         = @_;
 
     my $manifest;
-    my @files;
     opendir my $dh, $dir
         or push( @$errors,
         MT->translate( "Cannot open directory '[_1]': [_2]", $dir, "$!" ) ),
@@ -761,7 +760,6 @@ sub cb_restore_objects {
 
     my %entries;
     my %assets;
-    my %old_ids;
     for my $key ( keys %$all_objects ) {
         my $obj = $all_objects->{$key};
         if ( $obj->properties->{audit} ) {

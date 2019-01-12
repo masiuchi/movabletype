@@ -293,4 +293,5 @@ Dockerfile
 
 .DS_Store
 \.vs-code
+\.perlcriticrc
 

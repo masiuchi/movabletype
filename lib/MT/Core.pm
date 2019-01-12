@@ -469,7 +469,7 @@ BEGIN {
                         my $prop = shift;
                         my ( $app, $val ) = @_;
                         require MT::Util;
-                        my ( $mode, $from, $to );
+                        my ( $from, $to );
                         if ( $val =~ m/\-/ ) {
                             my ( $from, $to ) = split /-/, $val;
                             $from = undef unless $from =~ m/^\d{8}$/;

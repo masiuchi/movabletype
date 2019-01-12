@@ -4637,7 +4637,6 @@ sub _build_category_list {
     my $type            = $param{type};
 
     my @data;
-    my %authors;
 
     my $class = $app->model($type) or return;
 
