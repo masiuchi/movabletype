@@ -6,6 +6,9 @@
             "email": "masahiro.iuchi@gmail.com"
         }
     ],
+    "scripts": {
+        "php-cs-fixer": "php-cs-fixer fix"
+    },
     "require-dev": {
         "oomphinc/composer-installers-extender": "^1.1",
         "friendsofphp/php-cs-fixer": "^2.14"
