@@ -5,16 +5,19 @@
 #
 # $Id$
 
-function smarty_block_mtcomments($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtcomments($args, $content, &$ctx, &$repeat)
+{
     $localvars = array(array('comments', 'comment_order_num','comment','current_timestamp', 'commenter', 'blog', 'blog_id', 'conditional', 'else_content', '_comments_glue', '_comments_out'), common_loop_vars());
     if (!isset($content)) {
         $ctx->localize($localvars);
         $entry = $ctx->stash('entry');
-        if ($entry)
+        if ($entry) {
             $args['entry_id'] = $entry->entry_id;
+        }
         $blog = $ctx->stash('blog');
-        if ($blog)
+        if ($blog) {
             $args['blog_id'] = $blog->blog_id;
+        }
         $comments = $ctx->mt->db()->fetch_comments($args);
         $ctx->stash('comments', $comments);
         $counter = 0;
@@ -29,8 +32,9 @@ function smarty_block_mtcomments($args, $content, &$ctx, &$repeat) {
 
     if (empty($comments)) {
         $ret = $ctx->_hdlr_if($args, $content, $ctx, $repeat, 0);
-        if (!$repeat)
-              $ctx->restore($localvars);
+        if (!$repeat) {
+            $ctx->restore($localvars);
+        }
         return $ret;
     }
 
@@ -66,18 +70,19 @@ function smarty_block_mtcomments($args, $content, &$ctx, &$repeat) {
 
         $glue = $ctx->stash('_comments_glue');
         if (isset($glue) && !empty($content)) {
-            if ($out)
+            if ($out) {
                 $content = $glue . $content;
-            else
+            } else {
                 $ctx->stash('_comments_out', true);
+            }
         }
     } else {
         $glue = $ctx->stash('_comments_glue');
-        if (isset($glue) && $out && !empty($content))
+        if (isset($glue) && $out && !empty($content)) {
             $content = $glue . $content;
+        }
         $ctx->restore($localvars);
         $repeat = false;
     }
     return $content;
 }
-?>

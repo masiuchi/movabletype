@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtcategorynext($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtcategorynext($args, $content, &$ctx, &$repeat)
+{
     $localvars = array('category', 'entries');
     $tag = $ctx->this_tag();
     if (($tag == 'mtcategoryprevious') || $tag == 'mtfolderprevious' || $tag == 'mtarchiveprevious') {
@@ -16,10 +17,14 @@ function smarty_block_mtcategorynext($args, $content, &$ctx, &$repeat) {
 
     if (!isset($content)) {
         $e = $ctx->stash('entry');
-        if ($e) $cat = $e->category();
+        if ($e) {
+            $cat = $e->category();
+        }
         $cat or $cat = $ctx->stash('category');
         $cat or $cat = $ctx->stash('archive_category');
-        if (!$cat) return '';
+        if (!$cat) {
+            return '';
+        }
         $needs_entries = $args['entries'];
         $class = 'category';
         if (isset($args['class'])) {
@@ -43,7 +48,7 @@ function smarty_block_mtcategorynext($args, $content, &$ctx, &$repeat) {
         if (isset($pos)) {
             $pos += $step;
             while (($pos >= 0) && ($pos < count($cats))) {
-              if ($cats[$pos]->entry_count() == 0) {
+                if ($cats[$pos]->entry_count() == 0) {
                     if (isset($args['show_empty']) && $args['show_empty']) {
                     } else {
                         $pos += $step;
@@ -52,7 +57,9 @@ function smarty_block_mtcategorynext($args, $content, &$ctx, &$repeat) {
                 }
                 $ctx->localize($localvars);
                 $ctx->stash('category', $cats[$pos]);
-                if ($needs_entries) $ctx->stash('entries', null);
+                if ($needs_entries) {
+                    $ctx->stash('entries', null);
+                }
                 $repeat = true;
                 break;
             }
@@ -63,32 +70,33 @@ function smarty_block_mtcategorynext($args, $content, &$ctx, &$repeat) {
     return $content;
 }
 
-function _catx_load_categories(&$ctx, $cat, $class, $args) {
+function _catx_load_categories(&$ctx, $cat, $class, $args)
+{
     $blog_id = $cat->category_blog_id;
     $parent = $cat->category_parent;
     $parent or $parent = 0;
 
     $sort_method = null;
     $ctx_sort_method = $ctx->stash('subCatsSortMethod');
-    if ( isset($args['sort_method']) ) {
+    if (isset($args['sort_method'])) {
         $sort_method = $args['sort_method'];
-    } elseif ( !empty($ctx_sort_method) ) {
+    } elseif (!empty($ctx_sort_method)) {
         $sort_method = $ctx_sort_method;
     }
 
     $sort_order = 'ascend';
     $ctx_sort_order = $ctx->stash('subCatsSortOrder');
-    if ( isset($args['sort_order']) ) {
+    if (isset($args['sort_order'])) {
         $sort_order = $args['sort_order'];
-    } elseif ( !empty($ctx_sort_order) ) {
+    } elseif (!empty($ctx_sort_order)) {
         $sort_order = $ctx_sort_order;
     }
 
     $sort_by = "user_custom";
     $ctx_sort_by = $ctx->stash('subCatsSortBy');
-    if ( isset($args['sort_by']) ) {
+    if (isset($args['sort_by'])) {
         $sort_by = $args['sort_by'];
-    } elseif ( !empty($ctx_sort_by) ) {
+    } elseif (!empty($ctx_sort_by)) {
         $sort_by = $ctx_sort_by;
     }
     $cats = $ctx->stash('__cat_cache_'.$blog_id . '_' . $parent . ":".$sort_by);
@@ -104,4 +112,3 @@ function _catx_load_categories(&$ctx, $cat, $class, $args) {
     }
     return $cats;
 }
-?>

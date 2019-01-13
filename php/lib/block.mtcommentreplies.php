@@ -5,16 +5,23 @@
 #
 # $Id$
 
-function smarty_block_mtcommentreplies($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtcommentreplies($args, $content, &$ctx, &$repeat)
+{
     $localvars = array(array('comments', 'comment_order_num', 'comment','current_timestamp', 'commenter', 'blog', 'blog_id', '_comment_replies_tokens', 'conditional', 'else_content'), common_loop_vars());
     $token_fn = $ctx->stash('_comment_replies_tokens');
     if (!isset($content)) {
         $token_fn = $args['token_fn'];
         $comment = $ctx->stash('comment');
-        if (!$comment) { $repeat = false; return ''; }
+        if (!$comment) {
+            $repeat = false;
+            return '';
+        }
         $args['comment_id'] = $comment->comment_id;
         $comments = $ctx->mt->db()->fetch_comment_replies($args);
-        if (!$comments) { $repeat = false; return ''; }
+        if (!$comments) {
+            $repeat = false;
+            return '';
+        }
         $ctx->localize($localvars);
         $ctx->stash('comments', $comments);
         $ctx->stash('_comment_replies_tokens', $token_fn);
@@ -27,8 +34,9 @@ function smarty_block_mtcommentreplies($args, $content, &$ctx, &$repeat) {
     $ctx->stash('conditional', empty($comments) ? 0 : 1);
     if (empty($comments)) {
         $ret = $ctx->_hdlr_if($args, $content, $ctx, $repeat, 0);
-        if (!$repeat)
-              $ctx->restore($localvars);
+        if (!$repeat) {
+            $ctx->restore($localvars);
+        }
         return $ret;
     }
 
@@ -62,4 +70,3 @@ function smarty_block_mtcommentreplies($args, $content, &$ctx, &$repeat) {
     }
     return $content;
 }
-?>

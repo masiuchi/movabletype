@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtloop($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtloop($args, $content, &$ctx, &$repeat)
+{
     $localvars = array(array('__loop_keys', '__loop_values', '__out'), common_loop_vars());
 
     if (!isset($content)) {
@@ -14,11 +15,14 @@ function smarty_block_mtloop($args, $content, &$ctx, &$repeat) {
         $value = '';
         $name = $args['name'];
         $name or $name = $args['var'];
-        if (!$name) return '';
-        if (isset($vars[$name]))
+        if (!$name) {
+            return '';
+        }
+        if (isset($vars[$name])) {
             $value = $vars[$name];
-        if ( !is_array($value)
-          && preg_match('/^smarty_fun_[a-f0-9]+$/', $value) ) {
+        }
+        if (!is_array($value)
+          && preg_match('/^smarty_fun_[a-f0-9]+$/', $value)) {
             if (function_exists($value)) {
                 ob_start();
                 $value($ctx, array());
@@ -28,7 +32,7 @@ function smarty_block_mtloop($args, $content, &$ctx, &$repeat) {
                 $value = '';
             }
         }
-        if ( !is_array($value) || (0 == count($value)) ) {
+        if (!is_array($value) || (0 == count($value))) {
             $repeat = false;
             return '';
         }
@@ -59,8 +63,7 @@ function smarty_block_mtloop($args, $content, &$ctx, &$repeat) {
         $counter = 1;
         $ctx->stash('__loop_values', $value);
         $ctx->stash('__out', false);
-    }
-    else {
+    } else {
         $counter = $ctx->__stash['vars']['__counter__'] + 1;
         $keys = $ctx->stash('__loop_keys');
         $value = $ctx->stash('__loop_values');
@@ -68,8 +71,9 @@ function smarty_block_mtloop($args, $content, &$ctx, &$repeat) {
         if (!isset($keys) || $keys == 0) {
             $ctx->restore($localvars);
             $repeat = false;
-            if (isset($args['glue']) && $out && !empty($content))
+            if (isset($args['glue']) && $out && !empty($content)) {
                 $content = $args['glue'] . $content;
+            }
             return $content;
         }
     }
@@ -84,24 +88,25 @@ function smarty_block_mtloop($args, $content, &$ctx, &$repeat) {
     $ctx->__stash['vars']['__last__'] = count($value) == 0;
     $ctx->__stash['vars']['__key__'] = $key;
     $ctx->__stash['vars']['__value__'] = $this_value;
-    if ( is_array($this_value) && (0 < count($this_value)) ) {
+    if (is_array($this_value) && (0 < count($this_value))) {
         require_once("MTUtil.php");
-        if ( is_hash($this_value) ) {
+        if (is_hash($this_value)) {
             foreach (array_keys($this_value) as $inner_key) {
                 $ctx->__stash['vars'][strtolower($inner_key)] = $this_value[$inner_key];
             }
         }
     }
     if (isset($args['glue']) && !empty($content)) {
-        if ($out)
+        if ($out) {
             $content = $args['glue'] . $content;
-        else
+        } else {
             $ctx->stash('__out', true);
+        }
     }
-    if ( 0 === count($keys) )
+    if (0 === count($keys)) {
         $ctx->stash('__loop_keys', 0);
+    }
 
     $repeat = true;
     return $content;
 }
-?>

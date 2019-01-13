@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtifarchivetype($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtifarchivetype($args, $content, &$ctx, &$repeat)
+{
     # status: complete
     if (!isset($content)) {
         $at = $args['type'];
@@ -18,4 +19,3 @@ function smarty_block_mtifarchivetype($args, $content, &$ctx, &$repeat) {
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

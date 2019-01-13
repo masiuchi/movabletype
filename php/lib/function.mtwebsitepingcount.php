@@ -5,8 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitepingcount($args, &$ctx) {
+function smarty_function_mtwebsitepingcount($args, &$ctx)
+{
     require_once('function.mtblogpingcount.php');
     return smarty_function_mtblogpingcount($args, $ctx);
 }
-?>

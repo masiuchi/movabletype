@@ -5,10 +5,10 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitecclicenseimage($args, &$ctx) {
+function smarty_function_mtwebsitecclicenseimage($args, &$ctx)
+{
     // status: complete
     // parameters: none
     require_once('function.mtblogcclicenseimage.php');
     return smarty_function_mtblogcclicenseimage($args, $ctx);
 }
-?>

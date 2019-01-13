@@ -6,10 +6,10 @@
 # $Id$
 
 require_once('function.mtblogentrycount.php');
-function smarty_function_mtwebsitepagecount($args, &$ctx) {
+function smarty_function_mtwebsitepagecount($args, &$ctx)
+{
     // status: complete
     // parameters: none
     $args['class'] = 'page';
     return smarty_function_mtblogentrycount($args, $ctx);
 }
-?>

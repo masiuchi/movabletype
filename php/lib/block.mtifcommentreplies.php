@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtifcommentreplies($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtifcommentreplies($args, $content, &$ctx, &$repeat)
+{
     if (!isset($content)) {
         $comment = $ctx->stash('comment');
         $args['comment_id'] = $comment->comment_id;
@@ -15,4 +16,3 @@ function smarty_block_mtifcommentreplies($args, $content, &$ctx, &$repeat) {
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

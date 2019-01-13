@@ -5,9 +5,9 @@
 #
 # $Id$
 
-function smarty_function_mtentrytrackbackcount($args, &$ctx) {
+function smarty_function_mtentrytrackbackcount($args, &$ctx)
+{
     $entry = $ctx->stash('entry');
     $count = $entry->entry_ping_count;
     return $ctx->count_format($count, $args);
 }
-?>

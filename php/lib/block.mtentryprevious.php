@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtentryprevious($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtentryprevious($args, $content, &$ctx, &$repeat)
+{
     static $_prev_cache = array();
     if (!isset($content)) {
         $ctx->localize(array('entry', 'conditional', 'else_content'));
@@ -29,7 +30,9 @@ function smarty_block_mtentryprevious($args, $content, &$ctx, &$repeat) {
                               'blog_id' => $blog_id,
                               'class' => $class);
                 list($prev_entry) = $ctx->mt->db()->fetch_entries($args);
-                if ($prev_entry) $_prev_cache[$entry_id] = $prev_entry;
+                if ($prev_entry) {
+                    $_prev_cache[$entry_id] = $prev_entry;
+                }
             }
             $ctx->stash('entry', $prev_entry);
         }
@@ -43,4 +46,3 @@ function smarty_block_mtentryprevious($args, $content, &$ctx, &$repeat) {
     }
     return $content;
 }
-?>

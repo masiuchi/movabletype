@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtcommenterauthiconurl($args, &$ctx) {
+function smarty_function_mtcommenterauthiconurl($args, &$ctx)
+{
     $a =& $ctx->stash('commenter');
     if (!isset($a)) {
         return '';
@@ -15,4 +16,3 @@ function smarty_function_mtcommenterauthiconurl($args, &$ctx) {
     require_once "commenter_auth_lib.php";
     return _auth_icon_url($static_path, $a);
 }
-?>

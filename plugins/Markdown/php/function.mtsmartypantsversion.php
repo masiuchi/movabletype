@@ -6,9 +6,9 @@
 #
 # $Id$
 
-function smarty_function_mtsmartypantsversion($args, &$ctx) {
+function smarty_function_mtsmartypantsversion($args, &$ctx)
+{
     require_once('smartypants.php');
     global $SmartyPantsSyntaxVersion;
     return $SmartyPantsSyntaxVersion;
 }
-?>

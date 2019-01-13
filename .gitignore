@@ -63,3 +63,5 @@ node_modules/
 
 .vstags
 
+.php_cs.cache
+

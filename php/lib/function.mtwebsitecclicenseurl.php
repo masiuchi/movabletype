@@ -5,8 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitecclicenseurl($args, &$ctx) {
+function smarty_function_mtwebsitecclicenseurl($args, &$ctx)
+{
     require_once('function.mtblogcclicenseurl.php');
     return smarty_function_mtblogcclicenseurl($args, $ctx);
 }
-?>

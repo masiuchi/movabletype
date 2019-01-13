@@ -4,7 +4,8 @@
 # GNU General Public License, version 2.
 #
 # $Id$
-function smarty_function_mtcanonicalurl($args, &$ctx) {
+function smarty_function_mtcanonicalurl($args, &$ctx)
+{
     $blog = $ctx->stash('blog');
 
     if (empty($args['current_mapping'])) {

@@ -5,12 +5,12 @@
 #
 # $Id: function.mtblogname.php 4196 2009-09-04 07:46:50Z takayama $
 
-function smarty_function_mtblogthemeid($args, &$ctx) {
+function smarty_function_mtblogthemeid($args, &$ctx)
+{
     // status: complete
     // parameters: none
     $blog = $ctx->stash('blog');
     $id = $blog->blog_theme_id;
-    $id = str_replace ('_', '-', $id);
+    $id = str_replace('_', '-', $id);
     return $id;
 }
-?>
