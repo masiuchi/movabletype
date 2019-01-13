@@ -5,10 +5,10 @@
 #
 # $Id$
 
-function smarty_block_mtwebsiteifcclicense($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtwebsiteifcclicense($args, $content, &$ctx, &$repeat)
+{
     // status: complete
     // parameters: none
     require_once('block.mtblogifcclicense.php');
     return smarty_block_mtblogifcclicense($args, $content, $ctx, $repeat);
 }
-?>

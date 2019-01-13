@@ -5,9 +5,9 @@
 #
 # $Id$
 
-function smarty_function_mtcategorycount($args, &$ctx) {
+function smarty_function_mtcategorycount($args, &$ctx)
+{
     $category = $ctx->stash('category');
     $count = $category->entry_count();
     return $ctx->count_format($count, $args);
 }
-?>

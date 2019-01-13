@@ -5,11 +5,12 @@
 #
 # $Id$
 
-function smarty_block_mtifcommentsaccepted($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtifcommentsaccepted($args, $content, &$ctx, &$repeat)
+{
     # status: complete
     if (!isset($content)) {
         $blog = $ctx->stash('blog');
-        $blog_accepted = (($blog->blog_allow_unreg_comments || 
+        $blog_accepted = (($blog->blog_allow_unreg_comments ||
                    ($blog->blog_allow_reg_comments
                 && $blog->blog_commenter_authenticators))
                && $ctx->mt->config('AllowComments'));
@@ -24,4 +25,3 @@ function smarty_block_mtifcommentsaccepted($args, $content, &$ctx, &$repeat) {
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

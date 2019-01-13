@@ -5,10 +5,10 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitename($args, &$ctx) {
+function smarty_function_mtwebsitename($args, &$ctx)
+{
     // status: complete
     // parameters: none
     require_once('function.mtblogname.php');
     return smarty_function_mtblogname($args, $ctx);
 }
-?>

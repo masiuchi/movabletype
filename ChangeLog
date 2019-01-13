@@ -1,5 +1,11 @@
+2019-01-13  Masahiro IUCHI
+
+	* Use php-cs-fixer (#102)
+
 2019-01-12  Masahiro IUCHI
 
+	* Add/Update copyright for #98 (#101)
+	* Run tests with PHP 7.3 on Travis CI (#99)
 	* Check/Remove unused variables (#98)
 
 2018-09-08  Masahiro IUCHI

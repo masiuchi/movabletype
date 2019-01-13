@@ -5,10 +5,10 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitehost($args, &$ctx) {
+function smarty_function_mtwebsitehost($args, &$ctx)
+{
     // status: complete
     // parameters: exclude_port, signature
     require_once('function.mtbloghost.php');
     return smarty_function_mtbloghost($args, $ctx);
 }
-?>

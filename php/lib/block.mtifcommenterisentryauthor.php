@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtifcommenterisentryauthor($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtifcommenterisentryauthor($args, $content, &$ctx, &$repeat)
+{
     # status: complete
     if (!isset($content)) {
         $cmtr = $ctx->stash('commenter');
@@ -37,4 +38,3 @@ function smarty_block_mtifcommenterisentryauthor($args, $content, &$ctx, &$repea
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

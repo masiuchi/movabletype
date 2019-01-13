@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtcategorycommentcount($args, &$ctx) {
+function smarty_function_mtcategorycommentcount($args, &$ctx)
+{
     $mt = MT::get_instance();
     $db = $mt->db();
     $category = $ctx->stash('category');
@@ -16,4 +17,3 @@ function smarty_function_mtcategorycommentcount($args, &$ctx) {
     }
     return $ctx->count_format($count, $args);
 }
-?>

@@ -5,16 +5,19 @@
 #
 # $Id$
 
-function smarty_block_mtpings($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtpings($args, $content, &$ctx, &$repeat)
+{
     $localvars = array(array('ping', '_pings', '_pings_counter', 'current_timestamp', 'blog_id', 'blog'), common_loop_vars());
     if (!isset($content)) {
         $ctx->localize($localvars);
         $entry = $ctx->stash('entry');
-        if (isset($entry))
+        if (isset($entry)) {
             $args['entry_id'] = $entry->entry_id;
+        }
         $blog = $ctx->stash('blog');
-        if ($blog)
+        if ($blog) {
             $args['blog_id'] = $blog->blog_id;
+        }
         $pings = $ctx->mt->db()->fetch_pings($args);
         $ctx->stash('_pings', $pings);
         $counter = 0;
@@ -48,4 +51,3 @@ function smarty_block_mtpings($args, $content, &$ctx, &$repeat) {
     }
     return $content;
 }
-?>

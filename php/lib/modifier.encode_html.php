@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_modifier_encode_html($text) {
+function smarty_modifier_encode_html($text)
+{
     if (version_compare(phpversion(), '4.3.0', '>=')) {
         $mt = MT::get_instance();
         $charset = $mt->config('PublishCharset');
@@ -14,4 +15,3 @@ function smarty_modifier_encode_html($text) {
         return htmlentities($text, ENT_COMPAT);
     }
 }
-?>

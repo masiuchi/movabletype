@@ -5,14 +5,21 @@
 #
 # $Id$
 
-function smarty_block_mtpingentry($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtpingentry($args, $content, &$ctx, &$repeat)
+{
     $localvars = array('entry', 'current_timestamp', 'modification_timestamp');
     if (!isset($content)) {
         $ping = $ctx->stash('ping');
-        if (!$ping) { $repeat = false; return ''; }
+        if (!$ping) {
+            $repeat = false;
+            return '';
+        }
         $tb = $ping->trackback();
         $entry_id = $tb->trackback_entry_id;
-        if (!$entry_id) { $repeat = false; return ''; }
+        if (!$entry_id) {
+            $repeat = false;
+            return '';
+        }
         $entry = $tb->entry();
         if ($entry->class != 'entry') {
             $method = 'fetch_entry';
@@ -22,7 +29,10 @@ function smarty_block_mtpingentry($args, $content, &$ctx, &$repeat) {
             }
             $entry = $ctx->mt->db()->$method($entry_id);
         }
-        if (!$entry) { $repeat = false; return ''; }
+        if (!$entry) {
+            $repeat = false;
+            return '';
+        }
         $ctx->localize($localvars);
         $ctx->stash('entry', $entry);
         $ctx->stash('current_timestamp', $entry->entry_authored_on);
@@ -32,4 +42,3 @@ function smarty_block_mtpingentry($args, $content, &$ctx, &$repeat) {
     }
     return $content;
 }
-?>

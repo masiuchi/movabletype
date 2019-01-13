@@ -5,23 +5,25 @@
 #
 # $Id$
 
-function smarty_modifier_trim_to($text, $len) {
+function smarty_modifier_trim_to($text, $len)
+{
     $tail = '';
-    if ( strstr( $len, '+' ) ) {
-        $matches = explode( '+', $len );
+    if (strstr($len, '+')) {
+        $matches = explode('+', $len);
         $len  = $matches[0];
         $tail = $matches[1];
     }
     $len = intval($len);
-    if ( $len <= 0 ) return '';
+    if ($len <= 0) {
+        return '';
+    }
 
     require_once("MTUtil.php");
     if ($len < length_text($text)) {
         $text = substr_text($text, 0, $len);
-        if ( !empty( $tail ) ) {
+        if (!empty($tail)) {
             $text .= $tail;
         }
     }
     return $text;
 }
-?>

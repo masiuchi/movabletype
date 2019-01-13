@@ -5,9 +5,9 @@
 #
 # $Id$
 
-function smarty_function_mtentrytrackbackid($args, &$ctx) {
+function smarty_function_mtentrytrackbackid($args, &$ctx)
+{
     $entry = $ctx->stash('entry');
     $tb = $entry->trackback();
     return $tb->trackback_id;
 }
-?>

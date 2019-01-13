@@ -26,6 +26,8 @@ matrix:
 
     # Perl 5.18
     - language: php
+      php: "7.3"
+    - language: php
       php: "7.2"
     - language: php
       php: "7.0"
@@ -128,4 +130,5 @@ script:
   - find . -name "*.cgi" | grep -v 'mt-config.cgi' | xargs -IFILENAME perl -Ilocal/lib/perl5 -c FILENAME > /dev/null
   - find tools -type f | xargs -IFILENAME perl -Ilocal/lib/perl5 -It/lib -c FILENAME > /dev/null
   - find . -name "*.php" | xargs -n1 php -l
+  - if [ "$TRAVIS_PHP_VERSION" == '7.3' ]; then composer install && composer php-cs-fixer; fi
 

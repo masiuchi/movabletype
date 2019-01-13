@@ -295,3 +295,5 @@ Dockerfile
 \.vs-code
 \.perlcriticrc
 
+\.php_cs\.cache
+

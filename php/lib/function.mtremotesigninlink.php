@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtremotesigninlink($args, &$ctx) {
+function smarty_function_mtremotesigninlink($args, &$ctx)
+{
     // status: complete
     // parameters: none
     global $_typekeytoken_cache;
@@ -42,4 +43,3 @@ function smarty_function_mtremotesigninlink($args, &$ctx) {
         '&amp;v=' . $ctx->mt->config('TypeKeyVersion') .
         '&amp;_return=' . $return;
 }
-?>

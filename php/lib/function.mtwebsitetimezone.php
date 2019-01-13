@@ -5,10 +5,10 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitetimezone($args, &$ctx) {
+function smarty_function_mtwebsitetimezone($args, &$ctx)
+{
     // status: complete
     // parameters: no_colon
     require_once('function.mtblogtimezone.php');
     return smarty_function_mtblogtimezone($args, $ctx);
 }
-?>

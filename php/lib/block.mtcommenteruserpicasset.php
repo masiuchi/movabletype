@@ -5,19 +5,23 @@
 #
 # $Id$
 
-function smarty_block_mtcommenteruserpicasset($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtcommenteruserpicasset($args, $content, &$ctx, &$repeat)
+{
     $comment = $ctx->stash('comment');
     if (!$comment) {
         return $ctx->error("No comments available");
     }
     $cmntr = $ctx->stash('commenter');
-    if (!$cmntr) return '';
+    if (!$cmntr) {
+        return '';
+    }
 
     $asset = $cmntr->userpic();
-    if (!$asset) return '';
+    if (!$asset) {
+        return '';
+    }
 
-    $ctx->stash('asset',  $asset);
+    $ctx->stash('asset', $asset);
 
     return $content;
 }
-?>

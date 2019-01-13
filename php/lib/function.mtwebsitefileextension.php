@@ -5,10 +5,10 @@
 #
 # $Id$
 
-function smarty_function_mtwebsitefileextension($args, &$ctx) {
+function smarty_function_mtwebsitefileextension($args, &$ctx)
+{
     // status: complete
     // parameters: none
     require_once('function.mtblogfileextension.php');
     return smarty_function_mtblogfileextension($args, $ctx);
 }
-?>

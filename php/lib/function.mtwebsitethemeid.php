@@ -5,10 +5,10 @@
 #
 # $Id: function.mtwebsitelabel.php 4196 2009-09-04 07:46:50Z takayama $
 
-function smarty_function_mtwebsitethemeid($args, &$ctx) {
+function smarty_function_mtwebsitethemeid($args, &$ctx)
+{
     // status: complete
     // parameters: none
     require_once('function.mtblogthemeid.php');
     return smarty_function_mtblogthemeid($args, $ctx);
 }
-?>

@@ -5,9 +5,9 @@
 #
 # $Id$
 
-function smarty_function_mtblogpingcount($args, &$ctx) {
+function smarty_function_mtblogpingcount($args, &$ctx)
+{
     $args['blog_id'] = $ctx->stash('blog_id');
     $count = $ctx->mt->db()->blog_ping_count($args);
     return $ctx->count_format($count, $args);
 }
-?>

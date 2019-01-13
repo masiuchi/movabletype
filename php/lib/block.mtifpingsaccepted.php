@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtifpingsaccepted($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtifpingsaccepted($args, $content, &$ctx, &$repeat)
+{
     # status: complete
     if (!isset($content)) {
         $blog = $ctx->stash('blog');
@@ -21,4 +22,3 @@ function smarty_block_mtifpingsaccepted($args, $content, &$ctx, &$repeat) {
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

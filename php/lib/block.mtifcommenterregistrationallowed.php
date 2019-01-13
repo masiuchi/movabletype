@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_block_mtifcommenterregistrationallowed($args, $content, &$ctx, &$repeat) {
+function smarty_block_mtifcommenterregistrationallowed($args, $content, &$ctx, &$repeat)
+{
     $registration = $ctx->mt->config('commenterregistration');
     $blog = $ctx->stash('blog');
     $allow = $registration['allow'] && ($blog && $blog->blog_allow_commenter_regist);
@@ -15,4 +16,3 @@ function smarty_block_mtifcommenterregistrationallowed($args, $content, &$ctx, &
         return $ctx->_hdlr_if($args, $content, $ctx, $repeat);
     }
 }
-?>

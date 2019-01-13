@@ -5,7 +5,8 @@
 #
 # $Id$
 
-function smarty_function_mtsignoutlink($args, &$ctx) {
+function smarty_function_mtsignoutlink($args, &$ctx)
+{
     // status: complete
     // parameters: none
     $entry = $ctx->stash('entry');
@@ -17,7 +18,7 @@ function smarty_function_mtsignoutlink($args, &$ctx) {
         $url = $args['static'];
         if (isset($url) && ($url != '1')) {
             $static_arg = "&static=" . urlencode($url);
-        } else if (isset($url) && ($url == 1)) {
+        } elseif (isset($url) && ($url == 1)) {
             $static_arg = "&static=1";
         } else {
             $static_arg = "&static=0";
@@ -33,4 +34,3 @@ function smarty_function_mtsignoutlink($args, &$ctx) {
     }
     return $path;
 }
-?>
