@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "henriiik.vscode-perl",
+        "richterger.perl",
+        "hitode909.perl-outline",
+        "bmewburn.vscode-intelephense-client",
+        "junstyle.php-cs-fixer",
+        "crisward.riot-tag"
+    ]
+}

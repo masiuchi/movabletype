@@ -292,7 +292,7 @@ Dockerfile
 ^node_modules
 
 .DS_Store
-\.vs-code
+\.vscode
 \.perlcriticrc
 
 \.php_cs\.cache

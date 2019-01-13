@@ -6,27 +6,15 @@
         "*.tmpl": "html"
     },
     "perl.ctagsFile": ".vscode/.vstags",
-    "perlSyntax.includePaths": [
+    "perl.perlInc": [
         "lib",
         "extlib",
         "t/lib"
     ],
-    "perlSyntax.prependCode": [
-        "use strict;",
-        "use warnings;",
-        "use lib glob('plugins/*/lib');",
-        "use lib glob('addons/*/lib');"
+    "perl.perltidyArgs": [
+        "-pbp",
+        "-nst"
     ],
-    "cSpell.words": [
-        "datasource",
-        "errstr",
-        "iuchi",
-        "masahiro",
-        "mtos",
-        "revisioned",
-        "scorable",
-        "summarizable",
-        "taggable",
-        "tbping"
-    ]
+    "php.suggest.basic": false,
+    "php.validate.run": "onType"
 }

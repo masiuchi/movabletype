@@ -61,6 +61,7 @@ node_modules/
 
 *.sw?
 
+.vscode/perl-lang
 .vstags
 
 .php_cs.cache
