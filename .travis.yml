@@ -41,6 +41,7 @@ matrix:
       php: "5.4"
 
 services:
+  - mysql
   - memcached
 
 addons:
