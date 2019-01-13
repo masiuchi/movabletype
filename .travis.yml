@@ -81,7 +81,8 @@ install:
 
 before_script:
   - mysql -uroot -e "create database mt_test character set utf8;"
-  - mysql -uroot -e "grant all privileges on mt_test.* to mt@localhost;"
+  - mysql -uroot -e "grant all privileges on mt_test.* to mt@localhost identified by 'password';"
+  - mysql -uroot -e "set password for mt = password('');"
 
   # Some tests need mt-config.cgi.
   - cp ./t/mysql-test.cfg ./mt-config.cgi
