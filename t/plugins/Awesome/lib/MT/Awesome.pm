@@ -1,5 +1,6 @@
 
 package MT::Awesome;
+use strict;
 
 use base qw( MT::Object );
 

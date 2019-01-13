@@ -1,5 +1,6 @@
 2019-01-13  Masahiro IUCHI
 
+	* Check/Add "use strict" (#100)
 	* Use php-cs-fixer (#102)
 
 2019-01-12  Masahiro IUCHI

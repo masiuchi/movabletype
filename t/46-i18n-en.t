@@ -17,6 +17,8 @@
 #     convert_high_ascii
 #     const
 
+use strict;
+
 use lib 't/lib', 'extlib', 'lib', '../lib', '../extlib';
 #use Test::More tests => 16;
 use Test::More skip_all => 'MT::I18N functions were deprecated';

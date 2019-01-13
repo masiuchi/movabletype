@@ -5,6 +5,7 @@
 #
 
 package MT::Test;
+use strict;
 use base qw( Exporter );
 
 our $VERSION = 0.9;

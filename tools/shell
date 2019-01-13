@@ -1,4 +1,5 @@
 #!/usr/bin/env perl -d
+use strict;
 
 # This needs to load first on Centos for some reason
 use Term::ReadLine;

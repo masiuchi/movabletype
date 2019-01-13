@@ -19,6 +19,7 @@ use FindBin;
 use lib ("$FindBin::Bin/../lib", "$FindBin::Bin/../extlib");
 use base qw( MT::Tool );
 use Time::HiRes qw( tv_interval gettimeofday );
+use MT;
 
 my ($blog,
     $blog_name,
@@ -397,7 +398,6 @@ sub report {
     foreach my $tag ( sort { $PROFILES{$b}{time} <=> $PROFILES{$a}{time} } keys %PROFILES ) {
         my $queries = $PROFILES{$tag}{queries} || [];
         my $time_avg = sprintf("%0.3f", $PROFILES{$tag}{time} / $PROFILES{$tag}{calls});
-        my $queries = $PROFILES{$tag}->{queries};
         my $ramhit = map { $_ =~ m/RAMCACHE_GET/ } @$queries;
         my $ramadd = map { $_ =~ m/RAMCACHE_ADD/ } @$queries;
         my $query_count = scalar(@$queries) - ($ramhit + $ramadd);
